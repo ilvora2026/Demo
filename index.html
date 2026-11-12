@@ -1,264 +1,90 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#101f38">
-<title>ILVORA Workforce | Dashboard</title>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ILVORA Workforce | Attendance</title>
 <style>
-:root{--navy:#101f38;--navy2:#182d4a;--teal:#168c8c;--gold:#c9ad72;--bg:#f4f6f8;--ink:#182334;--muted:#738095;--line:#e6eaf0;--white:#fff;--shadow:0 8px 28px rgba(20,37,61,.07)}
-*{box-sizing:border-box}body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--bg);color:var(--ink)}
-button,select{font:inherit}.app{min-height:100vh;display:grid;grid-template-columns:258px 1fr}
-.sidebar{background:var(--navy);color:#fff;padding:24px 16px;display:flex;flex-direction:column;gap:26px}
-.brand{padding:0 12px}.brand-name{font-size:25px;letter-spacing:4px;font-weight:800;color:#e2c98f}.brand-sub{font-size:10px;letter-spacing:2px;color:#b9c7d8;margin-top:4px}
-.org{margin:0 10px;padding:12px;border:1px solid #344762;border-radius:12px;color:#c7d3e0;font-size:12px;line-height:1.5}
-.nav-label{font-size:10px;letter-spacing:1.6px;color:#8294aa;padding:0 12px;margin-bottom:8px}
-.nav{display:grid;gap:5px}.nav button{border:0;background:transparent;color:#c8d2df;text-align:left;padding:11px 12px;border-radius:9px;cursor:pointer;display:flex;gap:12px;align-items:center;font-size:13px}
-.nav button:hover,.nav button.active{background:#243a58;color:#fff}.nav button.active{box-shadow:inset 3px 0 var(--gold)}
-.nav-icon{width:19px;text-align:center;color:#d8c18d}.side-foot{margin-top:auto;padding:12px;color:#8294aa;font-size:11px;line-height:1.6}
-.main{min-width:0}.topbar{height:72px;background:#fff;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 32px;gap:16px}
-.crumb{font-size:13px;color:var(--muted)}.top-actions{display:flex;align-items:center;gap:12px}.role-select{border:1px solid var(--line);border-radius:9px;padding:9px 12px;background:#fff;color:var(--ink);max-width:245px}.avatar{width:36px;height:36px;border-radius:50%;background:#e9e1d0;color:#69552d;display:grid;place-items:center;font-weight:700;font-size:13px}
-.content{padding:30px 32px;max-width:1500px;margin:auto}.welcome{display:flex;justify-content:space-between;align-items:flex-start;gap:20px;margin-bottom:24px}.eyebrow{font-size:11px;text-transform:uppercase;letter-spacing:1.5px;color:var(--teal);font-weight:700}.welcome h1{font-size:27px;margin:7px 0 6px;letter-spacing:-.6px}.welcome p{margin:0;color:var(--muted);font-size:13px}.date{font-size:12px;color:var(--muted);background:#fff;border:1px solid var(--line);padding:10px 13px;border-radius:9px;white-space:nowrap}
-.notice{background:#fff9eb;border:1px solid #f0dfb8;color:#765d2c;padding:11px 14px;border-radius:10px;font-size:12px;margin-bottom:20px}
-.cards{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:15px;margin-bottom:22px}.card{background:#fff;border:1px solid var(--line);border-radius:13px;padding:18px;box-shadow:var(--shadow);min-width:0}.metric-head{display:flex;justify-content:space-between;align-items:center;color:var(--muted);font-size:12px}.metric-icon{width:34px;height:34px;border-radius:10px;background:#edf6f5;color:var(--teal);display:grid;place-items:center;font-size:16px}.metric-value{font-size:27px;font-weight:750;margin:12px 0 4px;letter-spacing:-.5px}.metric-foot{font-size:11px;color:var(--muted)}.positive{color:#17856e}
-.grid-two{display:grid;grid-template-columns:1.25fr .75fr;gap:16px;margin-bottom:18px}.section-title{font-size:14px;font-weight:700;margin:0 0 15px}.section-sub{font-size:11px;color:var(--muted);font-weight:400;margin-left:6px}
-.bar-list{display:grid;gap:15px}.bar-row{display:grid;grid-template-columns:130px 1fr 35px;gap:10px;align-items:center;font-size:12px}.bar-track{height:8px;background:#edf0f4;border-radius:20px;overflow:hidden}.bar-fill{height:100%;background:var(--teal);border-radius:20px}.bar-num{text-align:right;color:var(--muted)}
-.activity{display:grid;gap:14px}.activity-item{display:flex;gap:11px;align-items:flex-start;font-size:12px}.dot{width:8px;height:8px;border-radius:50%;background:var(--gold);margin-top:4px;flex:none}.activity-item strong{display:block;font-size:12px;margin-bottom:3px}.activity-item span{color:var(--muted);font-size:11px}
-.quick{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.quick button{background:#fff;border:1px solid var(--line);border-radius:11px;padding:15px;text-align:left;cursor:pointer;color:var(--ink);font-size:12px}.quick button:hover{border-color:var(--teal);transform:translateY(-1px)}.quick b{display:block;font-size:20px;color:var(--teal);margin-bottom:8px}
-.table-wrap{overflow:auto}table{border-collapse:collapse;width:100%;font-size:12px}th{text-align:left;color:var(--muted);font-weight:600;background:#fafbfc}th,td{padding:12px 10px;border-bottom:1px solid var(--line);white-space:nowrap}.status{padding:4px 8px;border-radius:20px;background:#eef6f3;color:#16745f;font-size:10px}.status.pending{background:#fff5df;color:#9b6a13}
-.footer-note{color:#98a2b1;font-size:10px;margin-top:22px;text-align:center}
-.mobile-menu{display:none;border:0;background:transparent;font-size:21px}
-@media(max-width:1050px){.cards{grid-template-columns:repeat(2,1fr)}.grid-two{grid-template-columns:1fr}.quick{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:720px){.app{grid-template-columns:1fr}.sidebar{display:none;position:fixed;z-index:10;inset:0 auto 0 0;width:270px}.sidebar.open{display:flex}.topbar{height:62px;padding:0 16px}.mobile-menu{display:block}.content{padding:22px 15px}.welcome{display:block}.date{display:inline-block;margin-top:14px}.welcome h1{font-size:23px}.cards{gap:10px}.card{padding:14px}.metric-value{font-size:23px}.bar-row{grid-template-columns:95px 1fr 28px}.quick{gap:9px}.role-select{max-width:175px;font-size:11px}.crumb{display:none}}
-
-.permission-panel{display:none;background:#fff;border:1px solid var(--line);border-radius:13px;padding:18px;box-shadow:var(--shadow);margin-bottom:18px}
-.permission-panel.visible{display:block}
-.matrix{overflow:auto} .matrix table{min-width:680px}
-.access-yes{color:#16745f;font-weight:700}.access-limited{color:#9b6a13;font-weight:700}.access-no{color:#b44b4b;font-weight:700}
-
-.md-controls{display:none;grid-template-columns:1fr 1fr;gap:12px;margin:0 0 18px}
-.md-controls.visible{display:grid}
-.md-control{background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px}
-.md-control label{display:block;font-size:11px;color:var(--muted);margin-bottom:8px;font-weight:700}
-.md-control select{width:100%;border:1px solid var(--line);border-radius:8px;padding:10px;background:#fff;color:var(--ink)}
-.financial-panel{display:none;margin:0 0 18px}
-.financial-panel.visible{display:block}
-.financial-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:12px}
-.financial-head button{border:1px solid var(--line);background:#fff;border-radius:8px;padding:8px 11px;font-size:11px;cursor:pointer}
-.financial-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
-.financial-tile{border:1px solid var(--line);border-radius:10px;padding:13px;background:#fbfcfd}
-.financial-tile span{font-size:11px;color:var(--muted)}.financial-tile strong{display:block;font-size:19px;margin-top:6px}
-@media(max-width:720px){.md-controls{grid-template-columns:1fr}.financial-grid{grid-template-columns:1fr}}
+:root{--navy:#10243a;--teal:#087f82;--gold:#c6a66b;--bg:#f4f7fa;--ink:#182638;--muted:#68788a;--line:#dce4eb;--green:#16834a;--red:#b83232;--amber:#a66b12}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);font-family:Inter,Segoe UI,Arial,sans-serif;color:var(--ink)}
+header{background:var(--navy);color:white;padding:18px 22px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.brand{font-weight:800;letter-spacing:.8px}.brand small{display:block;color:#c8d6e2;font-weight:400;letter-spacing:0;font-size:12px;margin-top:4px}
+main{max-width:1120px;margin:24px auto;padding:0 16px}.top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:16px}
+h1{font-size:23px;margin:0}h2{font-size:17px;margin:0 0 14px}p{line-height:1.5}.muted{color:var(--muted);font-size:13px}
+select,input,textarea{font:inherit;padding:10px 11px;border:1px solid var(--line);border-radius:8px;width:100%;background:white;color:var(--ink)}
+textarea{min-height:78px;resize:vertical}label{display:block;font-size:12px;font-weight:700;color:#45576a;margin:10px 0 5px}
+button{border:0;border-radius:8px;padding:10px 14px;font-weight:700;cursor:pointer;background:var(--teal);color:white}button.secondary{background:#e8eef3;color:var(--navy)}button.danger{background:#a93636}button:disabled{opacity:.5;cursor:not-allowed}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0}.tabs button{background:#e5ebf0;color:var(--navy)}.tabs button.active{background:var(--teal);color:white}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.card{background:white;border:1px solid var(--line);border-radius:13px;padding:18px;box-shadow:0 2px 8px #14283b0a}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:14px 0}.stat{background:#f6f9fb;border-radius:10px;padding:13px}.stat strong{font-size:23px;display:block}.stat span{font-size:12px;color:var(--muted)}
+.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.row>*{flex:1}.status{display:inline-block;padding:4px 8px;border-radius:20px;font-size:11px;font-weight:800;background:#eef2f5;color:#526171}.pending{background:#fff3d8;color:var(--amber)}.approved{background:#e4f5eb;color:var(--green)}.rejected{background:#fde8e8;color:var(--red)}.returned{background:#e9efff;color:#3e5b9a}
+table{width:100%;border-collapse:collapse;font-size:13px}th,td{text-align:left;padding:10px 8px;border-bottom:1px solid var(--line);vertical-align:top}th{color:#596a7a;font-size:11px;text-transform:uppercase;letter-spacing:.4px}
+.notice{padding:11px 13px;border-radius:9px;background:#eef6f7;border-left:4px solid var(--teal);font-size:13px;line-height:1.5;margin:12px 0}
+.alert{background:#fff6e7;border-left-color:var(--gold)}.hidden{display:none!important}.actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}.small{font-size:11px;color:var(--muted)}.request{border:1px solid var(--line);border-radius:10px;padding:13px;margin:10px 0}.request h3{font-size:14px;margin:0 0 7px}.fieldgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+footer{text-align:center;color:#8090a0;font-size:11px;padding:25px}
+@media(max-width:700px){.grid{grid-template-columns:1fr}.stats{grid-template-columns:repeat(2,1fr)}.fieldgrid{grid-template-columns:1fr}main{margin:15px auto}header{padding:15px}}
 </style>
 </head>
 <body>
-<div class="app">
-<aside class="sidebar" id="sidebar">
-  <div class="brand"><div class="brand-name">ILVORA</div><div class="brand-sub">WORKFORCE MANAGEMENT</div></div>
-  <div class="org"><strong>ILVORA HEALTHCARE GROUP</strong><br>Central workforce portal</div>
-  <div><div class="nav-label">WORKSPACE</div><nav class="nav">
-    <button class="active" data-page="Dashboard"><span class="nav-icon">▦</span>Dashboard</button>
-    <button data-page="Employees"><span class="nav-icon">♙</span>Employees</button>
-    <button data-page="Attendance"><span class="nav-icon">◷</span>Attendance</button>
-    <button data-page="Tasks"><span class="nav-icon">☷</span>Tasks & assignments</button>
-    <button data-page="Leave & approvals"><span class="nav-icon">✓</span>Leave & approvals</button>
-    <button data-page="Payroll"><span class="nav-icon">₹</span>Payroll</button>
-    <button data-page="Documents"><span class="nav-icon">▤</span>Documents</button>
-    <button data-page="Reports"><span class="nav-icon">▥</span>Reports & analytics</button>
-  </nav></div>
-  <div><div class="nav-label">ADMINISTRATION</div><nav class="nav">
-    <button data-page="Departments & branches"><span class="nav-icon">⌂</span>Departments & branches</button>
-    <button data-page="User access"><span class="nav-icon">⚙</span>User access & roles</button>
-    <button data-page="Notifications"><span class="nav-icon">♢</span>Notifications</button>
-    <button data-page="Audit log"><span class="nav-icon">◉</span>Audit log</button><button data-page="Role access matrix"><span class="nav-icon">▦</span>Role access matrix</button>
-  </nav></div>
-  <div class="side-foot">ILVORA Workforce<br>Managing Director module · v0.3</div>
-</aside>
-<main class="main">
-  <header class="topbar">
-    <div style="display:flex;align-items:center;gap:12px"><button class="mobile-menu" id="menuBtn">☰</button><div class="crumb">ILVORA / <strong id="crumbPage">Dashboard</strong></div></div>
-    <div class="top-actions">
-      <select class="role-select" id="roleSelect" aria-label="Preview dashboard role">
-        <option>Managing Director</option><option>Administrator</option><option>Head Office Admin Panel</option><option>Branch Admin / HR</option><option>Employee</option><option>Attendance Marker</option>
-      </select>
-      <div class="avatar" id="avatar">MD</div>
-    </div>
-  </header>
-  <section class="content" id="content">
-    <div class="welcome"><div><div class="eyebrow">Organisation overview</div><h1 id="greeting">Good morning, Managing Director</h1><p id="subheading">A consolidated view of workforce operations across all ILVORA branches.</p></div><div class="date" id="today"></div></div>
-    <div class="notice" id="notice">Demo dashboard: figures below are sample values for layout review. No live employee data is connected.</div>
-    <div class="md-controls" id="mdControls">
-      <div class="md-control"><label for="branchFilter">BRANCH VIEW</label>
-        <select id="branchFilter">
-          <option value="All branches">Combined overview — all branches</option>
-          <option value="Head Office">Head Office</option>
-          <option value="Neelambari Hospital">Neelambari Hospital, Thamarakulam</option>
-          <option value="ILVORA Health Clinic">ILVORA Health Clinic, Kottarakkara</option>
-        </select>
-      </div>
-      <div class="md-control"><label for="financeMode">FINANCIAL VISIBILITY</label>
-        <select id="financeMode"><option value="summary">Summary view — select details when needed</option><option value="details">Detailed report selected</option></select>
-      </div>
-    </div>
-    <div class="financial-panel" id="financialPanel">
-      <div class="card">
-        <div class="financial-head"><div><h2 class="section-title" style="margin:0">Detailed financial report</h2><div class="metric-foot" id="financeScope">All branches · Illustrative figures only</div></div><button id="closeFinance">Close details</button></div>
-        <div class="financial-grid" id="financialDetails"></div>
-        <div class="table-wrap" style="margin-top:14px"><table><thead><tr><th>Financial area</th><th>Current period</th><th>Previous period</th><th>Variance</th></tr></thead><tbody id="financeTable"></tbody></table></div>
-      </div>
-    </div>
-    <div class="permission-panel" id="permissionPanel">
-      <h2 class="section-title">Role access matrix <span class="section-sub">Proposed permissions for approval</span></h2>
-      <div class="matrix"><table>
-        <thead><tr><th>Module</th><th>Managing Director</th><th>Administrator</th><th>Head Office Admin</th><th>Branch Admin / HR</th><th>Employee</th><th>Attendance Marker</th></tr></thead>
-        <tbody id="permissionRows"></tbody>
-      </table></div>
-      <p class="metric-foot" style="margin-top:12px">This is the proposed policy matrix. Production access must be enforced by the backend for every request.</p>
-    </div>
-    <div class="cards" id="metrics"></div>
-    <div class="grid-two">
-      <div class="card"><h2 class="section-title" id="chartTitle">Branch workforce overview <span class="section-sub">Illustrative distribution</span></h2><div class="bar-list" id="bars"></div></div>
-      <div class="card"><h2 class="section-title">Recent activity</h2><div class="activity" id="activity"></div></div>
-    </div>
-    <div class="card" style="margin-bottom:18px"><h2 class="section-title">Quick access</h2><div class="quick" id="quick"></div></div>
-    <div class="card" id="financeSummaryCard" style="margin-bottom:18px">
-      <div class="financial-head"><div><h2 class="section-title" style="margin:0">Financial snapshot</h2><div class="metric-foot">Summary only · Detailed reports open on selection</div></div><button id="openFinance">View detailed financial report →</button></div>
-      <div class="financial-grid">
-        <div class="financial-tile"><span>Revenue overview</span><strong id="revSummary">₹ —</strong></div>
-        <div class="financial-tile"><span>Operating expenses</span><strong id="expenseSummary">₹ —</strong></div>
-        <div class="financial-tile"><span>Payroll overview</span><strong id="payrollSummary">₹ —</strong></div>
-      </div>
-    </div>
-    <div class="card"><h2 class="section-title">Items requiring attention</h2><div class="table-wrap"><table><thead><tr><th>Item</th><th>Department / Branch</th><th>Assigned to</th><th>Priority</th><th>Status</th></tr></thead><tbody id="attention"></tbody></table></div></div>
-    <div class="footer-note">Confidential workforce information · Access is controlled by assigned role and branch permissions.</div>
-  </section>
-</main>
+<header><div class="brand">ILVORA <span style="color:#62c7c1">WORKFORCE</span><small>Attendance marking & correction control</small></div><div class="muted" style="color:#d8e4ed">Prototype v1 · Sample data only</div></header>
+<main>
+<div class="top"><div><h1>Attendance Management</h1><div class="muted">Unified mobile, kiosk and centrally approved correction workflow</div></div>
+<div style="min-width:230px"><label for="role" style="color:#45576a;margin-top:0">Preview role</label><select id="role"><option value="employee">Employee</option><option value="marker">Attendance Marker</option><option value="branch">Branch Admin / HR</option><option value="head">Head Office Admin</option></select></div></div>
+<div class="tabs" id="tabs"></div>
+<section id="employee" class="role">
+<div class="grid">
+<div class="card"><h2>My attendance</h2><div class="stats"><div class="stat"><strong>21</strong><span>Present days</span></div><div class="stat"><strong>1</strong><span>Pending correction</span></div></div>
+<div class="notice">Employees can mark their own attendance using a registered personal phone or an authorised branch device. Employees cannot edit verified attendance records.</div>
+<div class="row"><button onclick="toast('Demo: mobile check-in verification started')">Check In</button><button class="secondary" onclick="toast('Demo: mobile check-out verification started')">Check Out</button></div>
+<p class="small">Verification concept: account + registered device + GPS + rotating branch QR + live face check. This prototype does not access camera or GPS.</p></div>
+<div class="card"><h2>Attendance history</h2><table><tr><th>Date</th><th>In</th><th>Out</th><th>Status</th></tr><tr><td>12 Nov 2026</td><td>08:02</td><td>16:05</td><td><span class="status approved">Verified</span></td></tr><tr><td>11 Nov 2026</td><td>08:00</td><td>16:00</td><td><span class="status approved">Verified</span></td></tr><tr><td>10 Nov 2026</td><td>09:15</td><td>16:00</td><td><span class="status approved">Corrected</span></td></tr></table></div>
 </div>
+<div class="card" style="margin-top:16px"><h2>My correction requests</h2><div id="employeeRequests"></div><p class="small">The employee may report a discrepancy to Branch Admin / HR. Only Branch Admin / HR can submit a formal correction request to Head Office.</p></div>
+</section>
+<section id="marker" class="role hidden">
+<div class="grid">
+<div class="card"><h2>Branch attendance device</h2><div class="stats"><div class="stat"><strong>64</strong><span>Checked in</span></div><div class="stat"><strong>86</strong><span>Expected</span></div></div>
+<div class="notice">Attendance Marker operates the shared kiosk and monitors punch activity. This role cannot edit attendance or submit correction requests.</div>
+<label>Device</label><select><option>NH-KIOSK-01 · Neelambari Hospital</option><option>HO-KIOSK-01 · Head Office</option></select>
+<label>Device status</label><p><span class="status approved">Authorised · Online</span></p><button onclick="toast('Demo: rotating QR refreshed')">Refresh rotating QR</button></div>
+<div class="card"><h2>Recent punch activity</h2><table><tr><th>Employee</th><th>Method</th><th>Time</th><th>Result</th></tr><tr><td>ILV-NH-001</td><td>Mobile</td><td>08:02</td><td><span class="status approved">Success</span></td></tr><tr><td>ILV-NH-014</td><td>Kiosk</td><td>08:06</td><td><span class="status approved">Success</span></td></tr><tr><td>ILV-NH-023</td><td>Mobile</td><td>08:09</td><td><span class="status pending">Review flag</span></td></tr></table></div>
+</div></section>
+<section id="branch" class="role hidden">
+<div class="grid">
+<div class="card"><h2>Submit attendance correction to Head Office</h2><div class="notice alert">Mandatory Head Office approval. Submitting this request does not change the employee's attendance record.</div>
+<form id="requestForm">
+<div class="fieldgrid"><div><label>Employee number *</label><input id="emp" required placeholder="e.g. ILV-NH-001"></div><div><label>Employee name</label><input id="empName" placeholder="Employee name"></div>
+<div><label>Branch *</label><select id="branchName"><option>Neelambari Hospital, Thamarakulam</option><option>Head Office, Kochi</option><option>ILVORA Health Clinic, Kottarakkara</option></select></div><div><label>Attendance date *</label><input id="attDate" type="date" required value="2026-11-10"></div>
+<div><label>Correction type *</label><select id="type"><option>Missing check-in</option><option>Missing check-out</option><option>Incorrect check-in time</option><option>Incorrect check-out time</option><option>Incorrect shift</option><option>Other attendance error</option></select></div><div><label>Requested check-in / status *</label><input id="requested" required placeholder="e.g. 08:00 AM"></div>
+<div><label>Existing attendance</label><input id="existing" placeholder="e.g. 09:15 AM"></div><div><label>Requested check-out (if applicable)</label><input id="requestedOut" placeholder="e.g. 04:00 PM"></div></div>
+<label>Reason for modification *</label><textarea id="reason" required placeholder="Explain the discrepancy and checks completed by Branch Admin / HR"></textarea>
+<label>Supporting evidence reference</label><input id="evidence" placeholder="Roster / duty record / document reference (demo field)">
+<div class="actions"><button type="submit">Submit to Head Office</button><button type="reset" class="secondary">Clear form</button></div></form></div>
+<div class="card"><h2>Branch request tracker</h2><div id="branchRequests"></div></div>
+</div></section>
+<section id="head" class="role hidden">
+<div class="stats"><div class="stat"><strong id="pendingCount">1</strong><span>Pending review</span></div><div class="stat"><strong id="approvedCount">0</strong><span>Approved</span></div><div class="stat"><strong id="rejectedCount">0</strong><span>Rejected</span></div><div class="stat"><strong id="returnedCount">0</strong><span>Returned</span></div></div>
+<div class="card"><h2>Head Office – attendance correction approval queue</h2><div class="notice">Review employee identity, original punch, requested change, reason and supporting evidence. Approval triggers an automatic attendance update and notifications to the employee and Branch Admin / HR.</div><div id="headRequests"></div></div>
+</section>
+<div class="card" style="margin-top:16px"><h2>Non-negotiable controls</h2><ul class="muted"><li>Only Branch Admin / HR can submit formal attendance correction requests.</li><li>Only authorised Head Office Admin can approve or reject.</li><li>No attendance change occurs before approval.</li><li>Original punch and complete audit history are preserved.</li><li>Approved correction updates employee attendance and relevant summaries.</li><li>Employee and Branch Admin / HR are both notified of the decision.</li><li>Payroll already closed must use a payroll adjustment workflow.</li></ul></div>
+</main>
+<footer>ILVORA Workforce · Front-end prototype only · Sample data · No live attendance, authentication, approval, database or notifications</footer>
+<div id="toast" style="position:fixed;bottom:18px;left:50%;transform:translateX(-50%);background:#10243a;color:white;padding:11px 16px;border-radius:8px;display:none;max-width:90%;font-size:13px"></div>
 <script>
-const roles={
-"Managing Director":{initials:"MD",sub:"A consolidated view of workforce operations across all ILVORA branches.",metrics:[["Total employees","248","Across all branches"],["Present today","216","87.1% attendance"],["Pending approvals","08","Across the organisation"],["Active branches","03","Current operating locations"]],bars:[["Head Office",92,248],["Neelambari Hospital",76,248],["ILVORA Health Clinic",80,248]],quick:["Organisation reports","Branch performance","Approval centre","System overview"],activity:[["Branch attendance submitted","Neelambari Hospital · 10:42 AM"],["Monthly payroll report prepared","Finance · 09:30 AM"],["Leave request escalated","Head Office · 09:12 AM"]]},
-"Administrator":{initials:"AD",sub:"System administration, access governance and platform configuration.",metrics:[["User accounts","248","Illustrative total"],["Active roles","06","Configured categories"],["Pending access reviews","03","Require review"],["System notices","02","Demo notifications"]],bars:[["MD accounts",1,6],["Admin accounts",5,6],["Branch / HR",3,6]],quick:["Manage user roles","Access policies","System configuration","Audit log"],activity:[["Role policy reviewed","Administration · 10:42 AM"],["New branch profile drafted","Administration · 09:30 AM"],["Access review pending","Security · 09:12 AM"]]},
-"Head Office Admin Panel":{initials:"HO",sub:"Central management of branches, employees, HR operations and approvals.",metrics:[["Total employees","248","All branches"],["Attendance submitted","03 / 03","Branch reports"],["Pending leave approvals","08","Awaiting action"],["Open tasks","24","Across branches"]],bars:[["Head Office",92,248],["Neelambari Hospital",76,248],["ILVORA Health Clinic",80,248]],quick:["Add employee","Review attendance","Approve leave","Assign task"],activity:[["Attendance register received","Branch HR · 10:42 AM"],["Employee profile updated","Head Office · 09:30 AM"],["Approval forwarded","HR · 09:12 AM"]]},
-"Branch Admin / HR":{initials:"HR",sub:"Branch-level workforce operations. Access is restricted to your assigned branch.",metrics:[["Branch employees","76","Illustrative branch total"],["Present today","68","89.5% attendance"],["Leave requests","04","Awaiting review"],["Open tasks","11","This branch"]],bars:[["Present",68,76],["On leave",4,76],["Not marked",4,76]],quick:["Register employee","Mark attendance review","Review leave","Assign branch task"],activity:[["Employee check-in recorded","Branch · 10:42 AM"],["Leave request submitted","Nursing · 09:30 AM"],["Task assigned to team","Operations · 09:12 AM"]]},
-"Employee":{initials:"EM",sub:"Your personal workforce space for attendance, leave, tasks and documents.",metrics:[["Attendance this month","21 days","Illustrative record"],["Leave balance","05 days","Subject to HR policy"],["Assigned tasks","03","1 due soon"],["Unread notices","02","For your attention"]],bars:[["Tasks completed",7,10],["Tasks in progress",2,10],["Tasks pending",1,10]],quick:["My attendance","Apply for leave","My tasks","My payslips"],activity:[["New task assigned","Operations · 10:42 AM"],["Leave policy notification","HR · 09:30 AM"],["Payslip available","Payroll · 09:12 AM"]]},
-"Attendance Marker":{initials:"AM",sub:"Restricted attendance-marking workspace. No access to payroll or employee administration.",metrics:[["Attendance device","Ready","Demo status"],["Today's check-ins","68","Illustrative count"],["Today's check-outs","12","Illustrative count"],["Sync status","Demo only","Not connected"]],bars:[["Check-in records",68,80],["Check-out records",12,80],["Pending sync",0,80]],quick:["Open attendance scanner","Device status","Today's attendance count","Help & instructions"],activity:[["Attendance station opened","Device · 10:42 AM"],["QR scan recorded","Attendance · 09:30 AM"],["Device sync check","Device · 09:12 AM"]]}
-};
-const sampleRows=[["Leave request · EMP0012","Nursing · Branch A","Branch HR","Normal","Pending"],["New employee verification","Administration · Head Office","HR Admin","High","Pending"],["Duty roster confirmation","Emergency · Branch B","Department Head","Normal","In review"]];
-
-const permissionData=[
-["Dashboard","Full","Full","Full","Branch","Personal","Attendance"],
-["Employees","Full","Full","Full","Branch","Own profile","No access"],
-["Attendance","Full","Full","Full","Branch","Own records","Mark only"],
-["Tasks & assignments","Full","Full","Full","Branch","Assigned tasks","No access"],
-["Leave & approvals","Full","Full","Full","Branch","Apply / own status","No access"],
-["Payroll","Full","Full","Full","Branch payroll*","Own payslip","No access"],
-["Documents","Full","Full","Full","Branch","Own documents","No access"],
-["Reports & analytics","Full","Full","Full","Branch reports","Personal","No access"],
-["Departments & branches","Full","Full","Full","View own branch","No access","No access"],
-["User access & roles","Full","Full","Full","Branch staff*","No access","No access"],
-["Notifications","Full","Full","Full","Branch","Personal","Device notices"],
-["Audit log","Full","Full","Full","Branch actions*","No access","Own scan events*"]
-];
-const roleNav={
-"Managing Director":["Dashboard","Employees","Attendance","Tasks & assignments","Leave & approvals","Payroll","Documents","Reports","Departments & branches","User access","Notifications","Audit log","Role access matrix"],
-"Administrator":["Dashboard","Employees","Attendance","Tasks & assignments","Leave & approvals","Payroll","Documents","Reports","Departments & branches","User access","Notifications","Audit log","Role access matrix"],
-"Head Office Admin Panel":["Dashboard","Employees","Attendance","Tasks & assignments","Leave & approvals","Payroll","Documents","Reports","Departments & branches","Notifications","Audit log"],
-"Branch Admin / HR":["Dashboard","Employees","Attendance","Tasks & assignments","Leave & approvals","Payroll","Documents","Reports","Notifications"],
-"Employee":["Dashboard","Attendance","Tasks & assignments","Leave & approvals","Payroll","Documents","Notifications"],
-"Attendance Marker":["Dashboard","Attendance","Notifications"]
-};
-function renderPermissions(){
- const body=document.getElementById("permissionRows");
- if(body) body.innerHTML=permissionData.map(row=>`<tr>${row.map((v,i)=>`<td class="${i===0?'':(v==='No access'?'access-no':(v==='Full'?'access-yes':'access-limited'))}">${v}</td>`).join("")}</tr>`).join("");
-}
-
-
-const mdBranchData={
-"All branches":{employees:248,present:216,approvals:8,revenue:"₹42.8 lakh",expenses:"₹28.4 lakh",payroll:"₹16.2 lakh",bars:[["Head Office",92,248],["Neelambari Hospital",76,248],["ILVORA Health Clinic",80,248]]},
-"Head Office":{employees:92,present:82,approvals:2,revenue:"₹12.4 lakh",expenses:"₹8.1 lakh",payroll:"₹5.8 lakh",bars:[["Present",82,92],["On leave",5,92],["Not marked",5,92]]},
-"Neelambari Hospital":{employees:76,present:68,approvals:4,revenue:"₹21.6 lakh",expenses:"₹14.8 lakh",payroll:"₹7.1 lakh",bars:[["Present",68,76],["On leave",4,76],["Not marked",4,76]]},
-"ILVORA Health Clinic":{employees:80,present:66,approvals:2,revenue:"₹8.8 lakh",expenses:"₹5.5 lakh",payroll:"₹3.3 lakh",bars:[["Present",66,80],["On leave",3,80],["Not marked",11,80]]}
-};
-function renderMDControls(){
- const isMD=document.getElementById("roleSelect").value==="Managing Director";
- document.getElementById("mdControls").classList.toggle("visible",isMD);
- document.getElementById("financeSummaryCard").style.display=isMD?"block":"none";
- if(isMD) updateMDBranch();
-}
-function updateMDBranch(){
- const branch=document.getElementById("branchFilter").value, d=mdBranchData[branch];
- document.getElementById("metrics").innerHTML=[
- ["Total employees",d.employees,"Selected view"],
- ["Present today",d.present,Math.round(d.present/d.employees*100)+"% attendance"],
- ["Pending approvals",String(d.approvals).padStart(2,"0"),"Selected view"],
- ["Branches in view",branch==="All branches"?"03":"01",branch]
- ].map((m,i)=>`<div class="card"><div class="metric-head"><span>${m[0]}</span><span class="metric-icon">${metricIcon(i)}</span></div><div class="metric-value">${m[1]}</div><div class="metric-foot">${m[2]}</div></div>`).join("");
- document.getElementById("bars").innerHTML=d.bars.map(b=>`<div class="bar-row"><span>${b[0]}</span><div class="bar-track"><div class="bar-fill" style="width:${Math.min(100,b[1]/b[2]*100)}%"></div></div><span class="bar-num">${b[1]}</span></div>`).join("");
- document.getElementById("chartTitle").innerHTML=(branch==="All branches"?"Branch workforce overview":branch+" workforce overview")+' <span class="section-sub">Illustrative distribution</span>';
- document.getElementById("revSummary").textContent=d.revenue;
- document.getElementById("expenseSummary").textContent=d.expenses;
- document.getElementById("payrollSummary").textContent=d.payroll;
- document.getElementById("financeScope").textContent=branch+" · Illustrative figures only";
- document.getElementById("financialDetails").innerHTML=[
- ["Revenue",d.revenue],["Operating expenses",d.expenses],["Payroll",d.payroll]
- ].map(x=>`<div class="financial-tile"><span>${x[0]}</span><strong>${x[1]}</strong></div>`).join("");
- document.getElementById("financeTable").innerHTML=[
- ["Revenue",d.revenue,"₹ —","—"],["Operating expenses",d.expenses,"₹ —","—"],["Payroll",d.payroll,"₹ —","—"],["Operating surplus (before other adjustments)","Illustrative only","—","—"]
- ].map(r=>`<tr>${r.map(x=>`<td>${x}</td>`).join("")}</tr>`).join("");
-}
-
-function metricIcon(i){return ["♙","◷","✓","⌂"][i%4]}
-function render(){
- const role=document.getElementById("roleSelect").value,d=roles[role];
- const allowed=roleNav[role]||[];
- document.querySelectorAll(".nav button").forEach(btn=>{
-   const permitted=allowed.includes(btn.dataset.page);
-   btn.style.display=permitted?"flex":"none";
-   if(!permitted) btn.classList.remove("active");
- });
- const matrix=role==="Administrator"||role==="Managing Director";
- document.getElementById("permissionPanel").classList.toggle("visible",document.getElementById("crumbPage").textContent==="Role access matrix");
- document.getElementById("greeting").textContent="Welcome, "+role;
- document.getElementById("subheading").textContent=d.sub;
- document.getElementById("avatar").textContent=d.initials;
- document.getElementById("today").textContent=new Date().toLocaleDateString("en-IN",{weekday:"short",day:"2-digit",month:"short",year:"numeric"});
- document.getElementById("metrics").innerHTML=d.metrics.map((m,i)=>`<div class="card"><div class="metric-head"><span>${m[0]}</span><span class="metric-icon">${metricIcon(i)}</span></div><div class="metric-value">${m[1]}</div><div class="metric-foot">${m[2]}</div></div>`).join("");
- document.getElementById("bars").innerHTML=d.bars.map(b=>`<div class="bar-row"><span>${b[0]}</span><div class="bar-track"><div class="bar-fill" style="width:${Math.min(100,b[1]/b[2]*100)}%"></div></div><span class="bar-num">${b[1]}</span></div>`).join("");
- document.getElementById("activity").innerHTML=d.activity.map(a=>`<div class="activity-item"><i class="dot"></i><div><strong>${a[0]}</strong><span>${a[1]}</span></div></div>`).join("");
- document.getElementById("quick").innerHTML=d.quick.map((q,i)=>`<button data-action="${q}"><b>${["＋","◷","✓","▤"][i]}</b>${q}</button>`).join("");
- const rows=role==="Employee"?[["Task · Complete induction","Operations","You","Normal","In review"],["Upload required document","HR","You","High","Pending"]]:role==="Attendance Marker"?[["Device sync check","Attendance station","Attendance Marker","Normal","Pending"],["Review scan exception","Attendance station","Attendance Marker","High","Pending"]]:sampleRows;
- document.getElementById("attention").innerHTML=rows.map(r=>`<tr>${r.slice(0,4).map(x=>`<td>${x}</td>`).join("")}<td><span class="status ${r[4]==="Pending"?"pending":""}">${r[4]}</span></td></tr>`).join("");
- document.getElementById("notice").textContent=role==="Managing Director"?"Managing Director access: full organisation-wide visibility across all branches and modules. Financial summaries are shown first; detailed reports open on selection. Sensitive actions should still be audit-logged.":"Role preview: the live application must enforce this role's permissions on the server, not only hide interface elements.";
- renderMDControls();
-}
-document.getElementById("roleSelect").addEventListener("change",render);
-
-document.getElementById("branchFilter").addEventListener("change",()=>{
- updateMDBranch();
- const b=document.getElementById("branchFilter").value;
- document.getElementById("subheading").textContent=b==="All branches"?"A consolidated view of workforce operations across all ILVORA branches.":"Viewing workforce operations for "+b+".";
-});
-document.getElementById("openFinance").addEventListener("click",()=>{
- document.getElementById("financialPanel").classList.add("visible");
- document.getElementById("financeMode").value="details";
-});
-document.getElementById("closeFinance").addEventListener("click",()=>{
- document.getElementById("financialPanel").classList.remove("visible");
- document.getElementById("financeMode").value="summary";
-});
-document.getElementById("financeMode").addEventListener("change",e=>{
- document.getElementById("financialPanel").classList.toggle("visible",e.target.value==="details");
-});
-
-document.querySelectorAll(".nav button").forEach(b=>b.addEventListener("click",()=>{document.querySelectorAll(".nav button").forEach(x=>x.classList.remove("active"));b.classList.add("active");document.getElementById("crumbPage").textContent=b.dataset.page;
- if(b.dataset.page==="Role access matrix"){document.getElementById("permissionPanel").classList.add("visible");document.getElementById("metrics").style.display="none";document.querySelector(".grid-two").style.display="none";document.querySelector(".card[style*='margin-bottom:18px']").style.display="none";document.querySelector(".card:last-of-type").style.display="none";}
- else {document.getElementById("permissionPanel").classList.remove("visible");document.getElementById("metrics").style.display="grid";document.querySelector(".grid-two").style.display="grid";document.querySelector(".card[style*='margin-bottom:18px']").style.display="block";document.querySelector(".card:last-of-type").style.display="block";}
- if(!["Dashboard","Role access matrix"].includes(b.dataset.page))alert(b.dataset.page+" is a planned module; this version implements the role-specific dashboard and access preview.");
- document.getElementById("sidebar").classList.remove("open")}));
-document.getElementById("menuBtn").addEventListener("click",()=>document.getElementById("sidebar").classList.toggle("open"));
-document.getElementById("quick").addEventListener("click",e=>{const b=e.target.closest("button");if(b)alert(b.dataset.action+" will be implemented in its dedicated module.")});
-renderPermissions();
-render();
-</script>
-</body>
-</html>
+let requests=[{id:'ATC-2026-0001',emp:'ILV-NH-001',name:'Sample Employee',branch:'Neelambari Hospital, Thamarakulam',date:'2026-11-10',type:'Incorrect check-in time',existing:'09:15 AM',requested:'08:00 AM',out:'',reason:'Duty roster and supervisor confirmation show employee commenced duty at 08:00 AM.',evidence:'November duty roster',status:'Pending',requester:'Branch Admin'}];
+let active='employee';
+function toast(t){let e=document.getElementById('toast');e.textContent=t;e.style.display='block';setTimeout(()=>e.style.display='none',2600)}
+function setRole(r){active=r;document.querySelectorAll('.role').forEach(x=>x.classList.add('hidden'));document.getElementById(r).classList.remove('hidden');document.querySelectorAll('.tabs button').forEach(b=>b.classList.toggle('active',b.dataset.role===r));render()}
+document.getElementById('role').addEventListener('change',e=>setRole(e.target.value));
+const tabs=[['employee','Employee'],['marker','Attendance Marker'],['branch','Branch Admin / HR'],['head','Head Office Admin']];
+document.getElementById('tabs').innerHTML=tabs.map(([v,l])=>`<button data-role="${v}" onclick="document.getElementById('role').value='${v}';setRole('${v}')">${l}</button>`).join('');
+function badge(s){let c=s==='Approved'?'approved':s==='Rejected'?'rejected':s==='Returned for clarification'?'returned':'pending';return `<span class="status ${c}">${s}</span>`}
+function card(r,head=false){return `<div class="request"><div class="row"><h3>${r.id} · ${r.emp}</h3>${badge(r.status)}</div><div class="muted">${r.name||'Employee'} · ${r.branch} · ${r.date}</div><p><b>${r.type}</b><br>Existing: ${r.existing||'Not recorded'} → Requested: ${r.requested||'Not specified'} ${r.out?' · Check-out: '+r.out:''}</p><p class="muted"><b>Reason:</b> ${r.reason}<br><b>Evidence:</b> ${r.evidence||'Not supplied'}<br><b>Submitted by:</b> ${r.requester}</p>${head&&r.status==='Pending'?`<div class="actions"><button onclick="decide('${r.id}','Approved')">Approve & update record</button><button class="danger" onclick="decide('${r.id}','Rejected')">Reject</button><button class="secondary" onclick="decide('${r.id}','Returned for clarification')">Return for clarification</button></div>`:''}${r.status==='Approved'?'<p class="small">✓ Attendance record updated · Notifications sent to employee and Branch Admin / HR · Original entry retained in audit history</p>':''}${r.status==='Rejected'?'<p class="small">No attendance change made. Decision notification sent to employee and Branch Admin / HR.</p>':''}${r.status==='Returned for clarification'?'<p class="small">No attendance change made. Branch Admin / HR must provide clarification.</p>':''}</div>`}
+function render(){let pending=requests.filter(r=>r.status==='Pending').length;document.getElementById('pendingCount').textContent=pending;document.getElementById('approvedCount').textContent=requests.filter(r=>r.status==='Approved').length;document.getElementById('rejectedCount').textContent=requests.filter(r=>r.status==='Rejected').length;document.getElementById('returnedCount').textContent=requests.filter(r=>r.status==='Returned for clarification').length;
+document.getElementById('headRequests').innerHTML=requests.length?requests.map(r=>card(r,true)).join(''):'<p class="muted">No requests submitted.</p>';
+document.getElementById('branchRequests').innerHTML=requests.map(r=>card(r)).join('');
+document.getElementById('employeeRequests').innerHTML=requests.map(r=>card(r)).join('')}
+document.getElementById('requestForm').addEventListener('submit',e=>{e.preventDefault();let id='ATC-2026-'+String(requests.length+1).padStart(4,'0');requests.unshift({id,emp:val('emp'),name:val('empName'),branch:val('branchName'),date:val('attDate'),type:val('type'),existing:val('existing'),requested:val('requested'),out:val('requestedOut'),reason:val('reason'),evidence:val('evidence'),status:'Pending',requester:'Branch Admin / HR'});e.target.reset();render();toast('Request submitted to Head Office. Attendance has not been changed.');});
+function val(id){return document.getElementById(id).value}
+function decide(id,status){let r=requests.find(x=>x.id===id);if(!r)return;if(status==='Rejected'&&!confirm('Reject this request? No attendance record will be changed.'))return;if(status==='Approved'&&!confirm('Approve and apply this attendance correction? The original record will be preserved in audit history.'))return;r.status=status;r.decisionBy='Head Office Admin';r.decisionAt=new Date().toLocaleString();render();toast(status==='Approved'?'Approved: employee attendance updated; employee and Branch Admin / HR notified.':status==='Rejected'?'Rejected: both parties notified; no attendance change.':'Returned: Branch Admin / HR notified; no attendance change.')}
+render();setRole('employee');
+</script></body></html>
