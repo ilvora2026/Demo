@@ -1,74 +1,93 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ILVORA Workforce – Employee Service 6 v2</title>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ILVORA Workforce | Branch Admin Dashboard</title>
 <style>
-:root{--navy:#10243a;--teal:#087f82;--gold:#c6a66b;--bg:#f4f7fa;--line:#dce4eb;--ink:#182638;--muted:#68788a;--green:#16834a}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);font:15px Arial,sans-serif;color:var(--ink)}header{background:var(--navy);color:white;padding:18px 22px;font-weight:800;letter-spacing:.6px}header small{display:block;color:#cbd8e2;font-weight:400;letter-spacing:0;margin-top:4px}
-main{max-width:1100px;margin:22px auto;padding:0 15px}.top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}h1{font-size:23px;margin:0}h2{font-size:18px;margin:0 0 13px}h3{font-size:15px;margin:0 0 6px}.muted,.small{color:var(--muted);font-size:12px}.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:16px 0}.tabs button{background:#e5ebf0;color:var(--navy)}.tabs button.active{background:var(--teal);color:white}
-button{border:0;border-radius:8px;padding:10px 14px;background:var(--teal);color:white;font-weight:700;cursor:pointer}button.secondary{background:#e7edf2;color:var(--navy)}button:disabled{opacity:.45;cursor:not-allowed}
-.card,.item{background:white;border:1px solid var(--line);border-radius:12px;padding:16px;margin:10px 0}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.row{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:13px 0}.stat{background:#f4f8fa;padding:12px;border-radius:9px}.stat b{display:block;font-size:22px}.pill{display:inline-block;padding:5px 9px;border-radius:20px;background:#e4f5eb;color:var(--green);font-size:11px;font-weight:800}.pending{background:#fff2d7;color:#9a6812}.notice{padding:12px;background:#edf6f6;border-left:4px solid var(--teal);border-radius:7px;font-size:13px;line-height:1.5;margin:12px 0}
-label{display:block;font-size:12px;font-weight:700;margin:10px 0 5px;color:#45576a}input,select,textarea{width:100%;padding:10px;border:1px solid var(--line);border-radius:8px;font:inherit}textarea{min-height:70px}.hidden{display:none!important}.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.checkrow{display:flex;gap:9px;align-items:flex-start;padding:12px;background:#f7f9fb;border:1px solid var(--line);border-radius:9px;margin:12px 0}.checkrow input{width:auto;margin-top:3px}.checkrow label{margin:0;font-size:13px;line-height:1.45}.modal{position:fixed;inset:0;background:#08172599;display:flex;align-items:center;justify-content:center;padding:16px;z-index:5}.modalbox{background:white;border-radius:14px;padding:20px;width:min(520px,100%);max-height:90vh;overflow:auto}.otp{font-size:22px;letter-spacing:7px;text-align:center}.policybody{white-space:pre-line;background:#f8fafb;border:1px solid var(--line);padding:14px;border-radius:9px;line-height:1.55;font-size:13px;margin:10px 0}.hide{display:none}footer{text-align:center;padding:25px;color:#8190a0;font-size:11px}
-@media(max-width:680px){.grid{grid-template-columns:1fr}.stats{grid-template-columns:repeat(3,1fr)}main{margin:14px auto}}
-@media print{header,.tabs,.top,.no-print,button,select{display:none!important}body{background:white}.card,.item{border:0;box-shadow:none}main{max-width:none;margin:0;padding:0}.print-only{display:block!important}}
-</style></head><body>
-<header>ILVORA WORKFORCE <small>Employee Service 6 · Documents, Certificates & Company Policies</small></header>
+:root{--navy:#10243a;--teal:#168b88;--gold:#c9a96e;--bg:#f3f6f8;--ink:#203244;--muted:#718096;--line:#e3eaf0;--red:#b94a48;--amber:#946c1d;--green:#28734f}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);font:14px/1.5 Inter,Segoe UI,Arial,sans-serif;color:var(--ink)}
+header{background:var(--navy);color:#fff;padding:17px max(18px,calc((100% - 1200px)/2));display:flex;justify-content:space-between;align-items:center;gap:15px}
+.brand{font-weight:850;letter-spacing:.08em}.brand span{color:var(--gold)}.brand small{display:block;color:#b8c8d5;font-weight:400;letter-spacing:0;margin-top:2px;font-size:11px}
+.user{font-size:12px;text-align:right;color:#dbe5ed}.user b{display:block;color:white;font-size:13px}
+main{max-width:1200px;margin:24px auto;padding:0 18px}.head{display:flex;justify-content:space-between;align-items:flex-start;gap:14px;flex-wrap:wrap}
+h1{margin:0;color:var(--navy);font-size:25px}.sub{color:var(--muted);margin:5px 0 0}.branch{background:#e5f3f2;color:#126c69;border:1px solid #c8e4e1;border-radius:10px;padding:9px 12px;font-weight:700;font-size:12px}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:18px 0}
+.card,.panel{background:white;border:1px solid var(--line);border-radius:14px}
+.kpi{padding:15px}.kpi .label{font-size:12px;color:var(--muted)}.kpi strong{display:block;color:var(--navy);font-size:27px;margin:3px 0}.kpi small{color:var(--muted);font-size:11px}
+.content{display:grid;grid-template-columns:1.35fr 1fr;gap:14px}.panel{padding:17px}.panel h2{margin:0 0 13px;color:var(--navy);font-size:16px}
+.actions{display:grid;grid-template-columns:repeat(2,1fr);gap:9px}.action{border:1px solid var(--line);border-radius:10px;padding:12px;background:#fff;text-align:left;cursor:pointer;color:var(--ink)}.action:hover{border-color:#9dcfcb;background:#f6fbfa}.action b{display:block;color:var(--navy);font-size:13px}.action span{display:block;color:var(--muted);font-size:11px;margin-top:3px}
+.row{display:flex;justify-content:space-between;align-items:center;gap:10px}.badge{font-size:10px;font-weight:750;border-radius:20px;padding:4px 8px;background:#edf2f7;color:#526477}.badge.warn{background:#fff4dc;color:var(--amber)}.badge.red{background:#fdebea;color:var(--red)}.badge.green{background:#e5f4eb;color:var(--green)}
+.item{padding:11px 0;border-bottom:1px solid var(--line)}.item:last-child{border:0}.item b{display:block;color:var(--navy);font-size:12px}.item p{margin:3px 0;color:var(--muted);font-size:11px}
+.tablewrap{overflow-x:auto}table{width:100%;border-collapse:collapse}th,td{text-align:left;padding:10px 8px;border-bottom:1px solid var(--line);font-size:11px;white-space:nowrap}th{color:var(--muted);font-weight:700}
+.meter{height:7px;background:#edf1f4;border-radius:9px;overflow:hidden;margin-top:8px}.meter i{display:block;height:100%;background:var(--teal);width:82%}
+.marker{margin-top:14px;background:#f2f9f8;border:1px solid #d0e8e5;border-radius:12px;padding:14px}.marker h3{margin:0;color:#126c69;font-size:14px}.marker p{margin:4px 0 10px;color:#56706f;font-size:11px}.marker button,.btn{border:1px solid var(--line);background:#fff;padding:8px 11px;border-radius:8px;cursor:pointer;font-weight:650;font-size:11px;color:var(--ink)}.marker button{background:var(--teal);border-color:var(--teal);color:#fff}
+.footer{margin:16px 0;color:var(--muted);font-size:11px}
+.modalback{position:fixed;inset:0;background:#10243a88;display:none;align-items:center;justify-content:center;padding:18px}.modal{background:#fff;border-radius:14px;padding:20px;max-width:480px;width:100%;box-shadow:0 15px 45px #0002}.modal h3{margin:0 0 8px;color:var(--navy)}.modal p{color:var(--muted);font-size:13px}.modal .close{float:right}
+@media(max-width:850px){.grid{grid-template-columns:repeat(2,1fr)}.content{grid-template-columns:1fr}}
+@media(max-width:520px){.grid{grid-template-columns:1fr 1fr}.actions{grid-template-columns:1fr}.kpi strong{font-size:23px}}
+</style></head>
+<body>
+<header>
+<div class="brand">ILVORA <span>WORKFORCE</span><small>WHERE CARE BECOMES CONFIDENCE.</small></div>
+<div class="user"><b>Branch Admin / HR</b>Demo account · Branch-scoped access</div>
+</header>
 <main>
-<div class="top"><div><h1>My Documents & Company Policies</h1><div class="muted">Secure document access, verified policy acknowledgement and HR records</div></div><div style="min-width:220px"><label for="role" style="margin-top:0">Preview role</label><select id="role"><option>Employee</option><option>Branch Admin / HR</option><option>Head Office Admin</option></select></div></div>
-<nav class="tabs no-print"><button class="active" onclick="showTab('docs',this)">My Documents</button><button onclick="showTab('policies',this)">Company Policies</button><button onclick="showTab('requests',this)">My Requests</button><button id="hrTab" onclick="showTab('hr',this)">HR Policy Records</button></nav>
-<section id="docs">
-<div class="stats"><div class="stat"><b>6</b><span class="muted">Available documents</span></div><div class="stat"><b>2</b><span class="muted">Certificates</span></div><div class="stat"><b>1</b><span class="muted">Pending request</span></div></div>
-<div class="notice">Employees can view and download authorised documents. Only authorised HR personnel can upload, replace or archive official employee records.</div><div class="grid" id="doclist"></div>
+<div class="head">
+<div><h1>Branch Dashboard</h1><p class="sub">Daily workforce overview, operational alerts and branch administration.</p></div>
+<div class="branch">NEELAMBARI HOSPITAL · THAMARAKULAM</div>
+</div>
+<section class="grid">
+<div class="card kpi"><div class="label">Active employees</div><strong>48</strong><small>Across this branch</small></div>
+<div class="card kpi"><div class="label">Present today</div><strong>36</strong><small>75% of active workforce</small><div class="meter"><i style="width:75%"></i></div></div>
+<div class="card kpi"><div class="label">On leave today</div><strong>5</strong><small>Approved leave</small></div>
+<div class="card kpi"><div class="label">Attendance exceptions</div><strong style="color:var(--red)">7</strong><small>Missed / unusual punches</small></div>
 </section>
-<section id="policies" class="hidden">
-<div class="stats"><div class="stat"><b id="total">8</b><span class="muted">Published policies</span></div><div class="stat"><b id="done">0</b><span class="muted">Acknowledged</span></div><div class="stat"><b id="due">0</b><span class="muted">Awaiting acknowledgement</span></div></div>
-<div class="notice">Read the complete policy. To acknowledge it, you must tick the agreement declaration and verify the OTP sent to both your registered mobile number and registered email address.</div><div id="policylist"></div>
+<div class="content">
+<section class="panel">
+<h2>Branch services & quick actions</h2>
+<div class="actions">
+<button class="action" data-info="Employee Management"><b>Employee Management</b><span>Add, update and manage branch employees</span></button>
+<button class="action" data-info="Attendance Management"><b>Attendance Management</b><span>Daily punches, exceptions and kiosk</span></button>
+<button class="action" data-info="Leave Management"><b>Leave Management</b><span>Review and decide requests up to 5 days</span></button>
+<button class="action" data-info="Duty Roster"><b>Duty Roster</b><span>Create and publish branch schedules</span></button>
+<button class="action" data-info="Documents & Certificates"><b>Documents & Certificates</b><span>Manage authorised employee records</span></button>
+<button class="action" data-info="Policies & Acknowledgements"><b>Policies & Acknowledgements</b><span>Track policy receipt and acknowledgement</span></button>
+<button class="action" data-info="Complaints Management"><b>Complaints Management</b><span>Restricted case access for authorised officers</span></button>
+<button class="action" data-info="Requests & Helpdesk"><b>Requests & Helpdesk</b><span>Route and resolve employee requests</span></button>
+<button class="action" data-info="Branch Reports"><b>Branch Reports</b><span>Attendance, leave and workforce reports</span></button>
+<button class="action" data-info="Attendance Correction Submission"><b>Attendance Correction Submission</b><span>Submit formal requests to Head Office</span></button>
+</div>
+<div class="marker">
+<h3>Attendance Marker · Integrated service</h3>
+<p>Operate the authorised branch kiosk, assist employee check-in/check-out, monitor punch events and view attendance exceptions. Attendance operators do not receive HR administration rights by default.</p>
+<button data-info="Attendance Marker / Kiosk">Open attendance kiosk demo</button>
+</div>
 </section>
-<section id="requests" class="hidden"><div class="grid"><div class="card"><h2>Request a document or letter</h2><form id="reqform"><label>Document requested</label><select id="reqtype"><option>Employment verification letter</option><option>Experience certificate</option><option>Service certificate</option><option>Copy of appointment letter</option><option>Other authorised HR document</option></select><label>Purpose / details</label><textarea id="reqreason" required></textarea><button>Submit request</button></form></div><div class="card"><h2>Request history</h2><div id="requestlist"></div></div></div></section>
-<section id="hr" class="hidden"><div class="notice">Branch Admin / HR can download and print a policy record after employee acknowledgement. Records include policy version and employee acknowledgement evidence. HR cannot create or alter the employee's acknowledgement on their behalf.</div><div class="card"><h2>Acknowledged policy register</h2><div class="muted">Filter and export acknowledged policies for HR filing.</div><label>Search employee / policy</label><input id="search" placeholder="Search name, employee number or policy title" oninput="renderHR()"><div id="hrrecords"></div></div>
-<div class="card"><h2>Policy acknowledgement record contents</h2><ul class="muted"><li>Employee name and employee number</li><li>Branch and registered contact verification (masked)</li><li>Policy title, version and effective date</li><li>Agreement declaration text and affirmative selection</li><li>OTP verification completion timestamp and delivery channels</li><li>Acknowledgement date/time and record reference</li><li>Policy document version retained with the record</li></ul></div></section>
+<section>
+<div class="panel">
+<div class="row"><h2>Action required</h2><span class="badge warn">5 pending</span></div>
+<div class="item"><div class="row"><b>Leave requests awaiting review</b><span class="badge warn">3</span></div><p>Review requests within Branch Admin authority (up to 5 days).</p></div>
+<div class="item"><div class="row"><b>Attendance exceptions</b><span class="badge red">7</span></div><p>Review missed punches and contact employees where necessary.</p></div>
+<div class="item"><div class="row"><b>Policy acknowledgements pending</b><span class="badge warn">4</span></div><p>Follow up on employees who have not completed acknowledgement.</p></div>
+<div class="item"><div class="row"><b>Helpdesk requests</b><span class="badge">2</span></div><p>Requests assigned to branch operations need an update.</p></div>
+</div>
+<div class="panel" style="margin-top:14px">
+<div class="row"><h2>Today's attendance snapshot</h2><span class="badge green">Demo data</span></div>
+<div class="tablewrap"><table><thead><tr><th>Metric</th><th>Count</th><th>Notes</th></tr></thead><tbody>
+<tr><td>Present</td><td>36</td><td>Recorded check-in</td></tr>
+<tr><td>On approved leave</td><td>5</td><td>Approved</td></tr>
+<tr><td>Absent / no punch</td><td>4</td><td>Needs review</td></tr>
+<tr><td>Late / early exception</td><td>3</td><td>Verify shift rules</td></tr>
+</tbody></table></div>
+</div>
+</section>
+</div>
+<p class="footer">Prototype dashboard uses illustrative sample data. Live employee records, attendance totals, permissions, alerts and reports require secure backend integration. Branch Admin access is limited to the assigned branch unless Head Office grants additional scope.</p>
 </main>
-<div id="ackModal" class="modal hidden"><div class="modalbox">
-<div class="row"><h2>Policy acknowledgement</h2><button class="secondary" onclick="closeModal()">Close</button></div>
-<div id="modalPolicy" class="policybody"></div>
-<div class="notice">A one-time verification code will be sent to your registered mobile number and registered email address. This is a demonstration; no real message is sent.</div>
-<div class="checkrow"><input type="checkbox" id="agree"><label for="agree">I confirm that I have read and understood this policy, and I agree to these terms and conditions, subject to applicable law and my statutory rights.</label></div>
-<label>One-time password (OTP)</label><input id="otp" class="otp" inputmode="numeric" maxlength="6" placeholder="••••••" autocomplete="one-time-code">
-<div class="small" id="otpInfo">Click “Send OTP” to generate a demonstration code.</div>
-<div class="actions"><button id="sendOtp" onclick="sendOtp()">Send OTP to registered mobile & email</button><button id="verifyOtp" onclick="verifyOtp()" disabled>Verify & acknowledge</button></div>
-<div class="small" style="margin-top:12px">Acknowledgement is recorded only after the agreement checkbox is ticked and OTP verification succeeds.</div>
-</div></div>
-<footer>ILVORA Workforce · Front-end prototype v2 · Sample data only · No real OTP, document storage or notifications</footer>
+<div class="modalback" id="modal"><div class="modal"><button class="close btn" id="close">Close</button><h3 id="modalTitle">Service</h3><p id="modalText"></p><p class="small">This dashboard tile is a navigation placeholder. The selected service will be designed and approved separately before integration.</p></div></div>
 <script>
-const docs=[['Appointment Letter','Employment','Official appointment and employment terms.'],['Employment Contract','Employment','Signed employment agreement.'],['Experience Certificate','Certificate','HR-issued experience certificate.'],['Professional Qualification','Qualification','Verified professional qualification record.'],['Identity Record','Restricted','HR-approved identity record; restricted access.'],['HR Letter','HR correspondence','Authorised employee correspondence.']];
-let policies=[
-{title:'Employee Code of Conduct',cat:'Workplace Conduct',version:'2.0',date:'01 Nov 2026',summary:'Professional behaviour, respectful conduct, reporting and disciplinary expectations.',body:'1. Treat colleagues, patients and visitors with dignity and respect.\\n2. Follow lawful workplace instructions and professional standards.\\n3. Protect confidential information.\\n4. Report misconduct and safety concerns through approved channels.\\n5. Follow applicable ILVORA policies and procedures.',ack:false},
-{title:'Attendance & Punctuality Policy',cat:'Attendance',version:'1.2',date:'01 Nov 2026',summary:'Duty attendance, check-in/check-out, correction and exception procedures.',body:'Employees must record their own attendance using an approved method. Attendance corrections require Branch Admin / HR submission and Head Office approval. Original punch records and audit history are retained.',ack:false},
-{title:'Leave Policy',cat:'Leave',version:'1.0',date:'01 Oct 2026',summary:'Leave categories, application, approval and supporting documentation.',body:'Leave must be requested through the approved ILVORA Workforce process and is subject to applicable policy and law.',ack:false},
-{title:'Payroll & Payslip Policy',cat:'Payroll',version:'1.0',date:'01 Oct 2026',summary:'Payroll schedule, payslip access, deductions and payroll queries.',body:'Payroll records and payslips are confidential. Employees should raise payroll queries through the authorised portal.',ack:false},
-{title:'Patient Confidentiality Policy',cat:'Privacy & Confidentiality',version:'1.0',date:'01 Oct 2026',summary:'Confidential handling of patient and employee information.',body:'Access, use and disclosure of patient information must follow applicable privacy law, professional duties and authorised clinical processes.',ack:false},
-{title:'IT & Password Security Policy',cat:'IT & Data Security',version:'1.0',date:'01 Oct 2026',summary:'Account security, password protection and device use.',body:'Protect credentials, use approved devices and promptly report suspected security incidents.',ack:false},
-{title:'Workplace Health & Safety Policy',cat:'Health & Safety',version:'1.0',date:'01 Oct 2026',summary:'Workplace hazards, incident reporting and safety responsibilities.',body:'Follow safety procedures, use required protective equipment and report hazards and incidents promptly.',ack:false},
-{title:'Clinical Safety Policy',cat:'Clinical & Patient Safety',version:'1.0',date:'01 Oct 2026',summary:'Applicable clinical safety and escalation requirements.',body:'Follow approved clinical protocols, escalation pathways and professional scope-of-practice requirements.',ack:false}
-];
-let requests=[{type:'Employment verification letter',reason:'Bank documentation',status:'Under HR review',date:'12 Nov 2026'}];
-let records=[];let currentPolicy=null;let demoOtp=null;let otpSent=false;let role='Employee';
-function showTab(id,b){document.querySelectorAll('main section').forEach(s=>s.classList.add('hidden'));document.getElementById(id).classList.remove('hidden');document.querySelectorAll('.tabs button').forEach(x=>x.classList.remove('active'));b.classList.add('active');render()}
-function render(){document.getElementById('doclist').innerHTML=docs.map(d=>`<div class="card"><div class="row"><b>${d[0]}</b><span class="pill">${d[1]}</span></div><p class="muted">${d[2]}</p><button class="secondary" onclick="alert('Demo secure document viewer')">View</button> <button onclick="downloadSample('${d[0]}')">Download sample</button></div>`).join('');
-let ack=policies.filter(p=>p.ack).length;document.getElementById('total').textContent=policies.length;document.getElementById('done').textContent=ack;document.getElementById('due').textContent=policies.length-ack;
-document.getElementById('policylist').innerHTML=policies.map((p,i)=>`<div class="item"><div class="row"><div><h3>${p.title}</h3><span class="small">${p.cat} · Version ${p.version} · Effective ${p.date}</span></div><span class="pill ${p.ack?'':'pending'}">${p.ack?'Acknowledged':'Action required'}</span></div><p>${p.summary}</p>${p.ack?'<span class="small">Acknowledgement verified and recorded.</span>':`<button onclick="openAck(${i})">Read policy & acknowledge</button>`}</div>`).join('');
-document.getElementById('requestlist').innerHTML=requests.map(r=>`<div class="item"><b>${r.type}</b><p class="muted">${r.reason}</p><span class="pill pending">${r.status}</span><p class="small">${r.date}</p></div>`).join('');renderHR()}
-function openAck(i){currentPolicy=policies[i];demoOtp=null;otpSent=false;document.getElementById('modalPolicy').textContent=currentPolicy.title+' · Version '+currentPolicy.version+'\\nEffective: '+currentPolicy.date+'\\n\\n'+currentPolicy.body;document.getElementById('agree').checked=false;document.getElementById('otp').value='';document.getElementById('otp').disabled=true;document.getElementById('verifyOtp').disabled=true;document.getElementById('otpInfo').textContent='Click “Send OTP” to generate a demonstration code.';document.getElementById('ackModal').classList.remove('hidden')}
-function closeModal(){document.getElementById('ackModal').classList.add('hidden')}
-function sendOtp(){if(!currentPolicy)return;demoOtp=String(Math.floor(100000+Math.random()*900000));otpSent=true;document.getElementById('otp').disabled=false;document.getElementById('otpInfo').textContent='Demo OTP generated and notionally sent to registered mobile •••• 4821 and email b••••@example.com. For testing only, your demo OTP is: '+demoOtp;document.getElementById('verifyOtp').disabled=false}
-function verifyOtp(){if(!document.getElementById('agree').checked){alert('Please tick the agreement checkbox before acknowledging.');return}if(!otpSent){alert('Please request an OTP first.');return}if(document.getElementById('otp').value!==demoOtp){alert('Incorrect OTP. Please try again.');return}
-let now=new Date().toLocaleString();currentPolicy.ack=true;let rec={ref:'ACK-'+String(records.length+1).padStart(4,'0'),employee:'Sample Employee',empid:'ILV-NH-001',branch:'Neelambari Hospital, Thamarakulam',policy:currentPolicy.title,version:currentPolicy.version,date:currentPolicy.date,ackAt:now,agreement:'I have read and understood this policy, and I agree to these terms and conditions, subject to applicable law and my statutory rights.',mobile:'•••• 4821',email:'b••••@example.com',channels:'Registered mobile + registered email',body:currentPolicy.body};records.unshift(rec);closeModal();render();alert('Policy acknowledgement verified and recorded in this demonstration.')}
-function renderHR(){let q=(document.getElementById('search')?.value||'').toLowerCase();let rs=records.filter(r=>(r.employee+' '+r.empid+' '+r.policy).toLowerCase().includes(q));document.getElementById('hrrecords').innerHTML=rs.length?rs.map(r=>`<div class="item"><div class="row"><div><b>${r.policy}</b><div class="small">${r.empid} · ${r.employee} · ${r.branch}</div></div><span class="pill">OTP verified</span></div><p class="muted">Version ${r.version} · Acknowledged ${r.ackAt}<br>OTP channels: ${r.channels} · Mobile ${r.mobile} · Email ${r.email}</p><div class="actions"><button onclick="downloadRecord('${r.ref}')">Download acknowledged policy</button><button class="secondary" onclick="printRecord('${r.ref}')">Print acknowledged policy</button></div></div>`).join(''):'<p class="muted">No matching acknowledged policy records yet. Complete a test acknowledgement as Employee to populate this register.</p>'}
-function getRec(ref){return records.find(r=>r.ref===ref)}
-function downloadRecord(ref){let r=getRec(ref);if(!r)return;let txt=recordText(r);let blob=new Blob([txt],{type:'text/plain'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=ref+'_Acknowledged_Policy.txt';a.click();URL.revokeObjectURL(a.href)}
-function printRecord(ref){let r=getRec(ref);if(!r)return;let w=window.open('','_blank');w.document.write('<html><head><title>Acknowledged Policy</title><style>body{font:14px Arial;margin:35px;line-height:1.5}h1{font-size:20px}pre{white-space:pre-wrap;font:14px Arial}</style></head><body><h1>ILVORA Workforce – Acknowledged Policy Record</h1><pre>'+escapeHtml(recordText(r))+'</pre><script>window.onload=()=>window.print()<\\/script></body></html>');w.document.close()}
-function recordText(r){return `ILVORA WORKFORCE – ACKNOWLEDGED POLICY RECORD\\nReference: ${r.ref}\\nEmployee: ${r.employee}\\nEmployee number: ${r.empid}\\nBranch: ${r.branch}\\nPolicy: ${r.policy}\\nVersion: ${r.version}\\nEffective date: ${r.date}\\nAcknowledged at: ${r.ackAt}\\nOTP verification channels: ${r.channels}\\nRegistered mobile: ${r.mobile}\\nRegistered email: ${r.email}\\nAgreement: ${r.agreement}\\n\\nPOLICY CONTENT\\n${r.body}\\n\\nPrototype record – production records must be generated and retained server-side.`}
-function escapeHtml(s){return s.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
-function downloadSample(t){let blob=new Blob(['ILVORA WORKFORCE\\nSAMPLE DOCUMENT PLACEHOLDER – NOT AN OFFICIAL DOCUMENT\\n'+t],{type:'text/plain'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='SAMPLE_'+t.replace(/\\W/g,'_')+'.txt';a.click();URL.revokeObjectURL(a.href)}
-document.getElementById('reqform').onsubmit=e=>{e.preventDefault();requests.unshift({type:reqtype.value,reason:reqreason.value,status:'Submitted – awaiting HR review',date:new Date().toLocaleDateString()});e.target.reset();render();alert('Demo document request submitted.')};
-document.getElementById('role').onchange=e=>{role=e.target.value;document.getElementById('hrTab').classList.toggle('hidden',role==='Employee');if(role==='Employee'&&!document.getElementById('hr').classList.contains('hidden'))document.querySelector('.tabs button').click()};
-render();
+const modal=document.getElementById('modal');
+document.querySelectorAll('[data-info]').forEach(b=>b.onclick=()=>{let name=b.dataset.info;document.getElementById('modalTitle').textContent=name;document.getElementById('modalText').textContent=name+' will open its dedicated service workspace. This is a navigation preview only; no live records are changed.';modal.style.display='flex'});
+document.getElementById('close').onclick=()=>modal.style.display='none';
+modal.onclick=e=>{if(e.target===modal)modal.style.display='none'};
 </script></body></html>
