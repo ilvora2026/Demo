@@ -1,93 +1,72 @@
-<!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>ILVORA Workforce | Branch Admin Dashboard</title>
+<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ILVORA Workforce | Employee Onboarding</title>
 <style>
-:root{--navy:#10243a;--teal:#168b88;--gold:#c9a96e;--bg:#f3f6f8;--ink:#203244;--muted:#718096;--line:#e3eaf0;--red:#b94a48;--amber:#946c1d;--green:#28734f}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);font:14px/1.5 Inter,Segoe UI,Arial,sans-serif;color:var(--ink)}
-header{background:var(--navy);color:#fff;padding:17px max(18px,calc((100% - 1200px)/2));display:flex;justify-content:space-between;align-items:center;gap:15px}
-.brand{font-weight:850;letter-spacing:.08em}.brand span{color:var(--gold)}.brand small{display:block;color:#b8c8d5;font-weight:400;letter-spacing:0;margin-top:2px;font-size:11px}
-.user{font-size:12px;text-align:right;color:#dbe5ed}.user b{display:block;color:white;font-size:13px}
-main{max-width:1200px;margin:24px auto;padding:0 18px}.head{display:flex;justify-content:space-between;align-items:flex-start;gap:14px;flex-wrap:wrap}
-h1{margin:0;color:var(--navy);font-size:25px}.sub{color:var(--muted);margin:5px 0 0}.branch{background:#e5f3f2;color:#126c69;border:1px solid #c8e4e1;border-radius:10px;padding:9px 12px;font-weight:700;font-size:12px}
-.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:18px 0}
-.card,.panel{background:white;border:1px solid var(--line);border-radius:14px}
-.kpi{padding:15px}.kpi .label{font-size:12px;color:var(--muted)}.kpi strong{display:block;color:var(--navy);font-size:27px;margin:3px 0}.kpi small{color:var(--muted);font-size:11px}
-.content{display:grid;grid-template-columns:1.35fr 1fr;gap:14px}.panel{padding:17px}.panel h2{margin:0 0 13px;color:var(--navy);font-size:16px}
-.actions{display:grid;grid-template-columns:repeat(2,1fr);gap:9px}.action{border:1px solid var(--line);border-radius:10px;padding:12px;background:#fff;text-align:left;cursor:pointer;color:var(--ink)}.action:hover{border-color:#9dcfcb;background:#f6fbfa}.action b{display:block;color:var(--navy);font-size:13px}.action span{display:block;color:var(--muted);font-size:11px;margin-top:3px}
-.row{display:flex;justify-content:space-between;align-items:center;gap:10px}.badge{font-size:10px;font-weight:750;border-radius:20px;padding:4px 8px;background:#edf2f7;color:#526477}.badge.warn{background:#fff4dc;color:var(--amber)}.badge.red{background:#fdebea;color:var(--red)}.badge.green{background:#e5f4eb;color:var(--green)}
-.item{padding:11px 0;border-bottom:1px solid var(--line)}.item:last-child{border:0}.item b{display:block;color:var(--navy);font-size:12px}.item p{margin:3px 0;color:var(--muted);font-size:11px}
-.tablewrap{overflow-x:auto}table{width:100%;border-collapse:collapse}th,td{text-align:left;padding:10px 8px;border-bottom:1px solid var(--line);font-size:11px;white-space:nowrap}th{color:var(--muted);font-weight:700}
-.meter{height:7px;background:#edf1f4;border-radius:9px;overflow:hidden;margin-top:8px}.meter i{display:block;height:100%;background:var(--teal);width:82%}
-.marker{margin-top:14px;background:#f2f9f8;border:1px solid #d0e8e5;border-radius:12px;padding:14px}.marker h3{margin:0;color:#126c69;font-size:14px}.marker p{margin:4px 0 10px;color:#56706f;font-size:11px}.marker button,.btn{border:1px solid var(--line);background:#fff;padding:8px 11px;border-radius:8px;cursor:pointer;font-weight:650;font-size:11px;color:var(--ink)}.marker button{background:var(--teal);border-color:var(--teal);color:#fff}
-.footer{margin:16px 0;color:var(--muted);font-size:11px}
-.modalback{position:fixed;inset:0;background:#10243a88;display:none;align-items:center;justify-content:center;padding:18px}.modal{background:#fff;border-radius:14px;padding:20px;max-width:480px;width:100%;box-shadow:0 15px 45px #0002}.modal h3{margin:0 0 8px;color:var(--navy)}.modal p{color:var(--muted);font-size:13px}.modal .close{float:right}
-@media(max-width:850px){.grid{grid-template-columns:repeat(2,1fr)}.content{grid-template-columns:1fr}}
-@media(max-width:520px){.grid{grid-template-columns:1fr 1fr}.actions{grid-template-columns:1fr}.kpi strong{font-size:23px}}
-</style></head>
-<body>
-<header>
-<div class="brand">ILVORA <span>WORKFORCE</span><small>WHERE CARE BECOMES CONFIDENCE.</small></div>
-<div class="user"><b>Branch Admin / HR</b>Demo account · Branch-scoped access</div>
-</header>
-<main>
-<div class="head">
-<div><h1>Branch Dashboard</h1><p class="sub">Daily workforce overview, operational alerts and branch administration.</p></div>
-<div class="branch">NEELAMBARI HOSPITAL · THAMARAKULAM</div>
+:root{--n:#10243a;--t:#168b88;--g:#c9a96e;--bg:#f3f6f8;--ink:#203244;--mut:#718096;--line:#e3eaf0}*{box-sizing:border-box}body{margin:0;background:var(--bg);font:14px/1.5 Arial,sans-serif;color:var(--ink)}header{background:var(--n);color:white;padding:18px max(18px,calc((100% - 1120px)/2));display:flex;justify-content:space-between}.brand{font-weight:bold;letter-spacing:2px}.brand span{color:var(--g)}small{color:var(--mut)}main{max-width:1120px;margin:24px auto;padding:0 16px}h1,h2{color:var(--n)}h1{font-size:25px;margin:0}.sub{color:var(--mut)}.notice,.panel,.step{background:white;border:1px solid var(--line);border-radius:12px;padding:15px;margin:12px 0}.notice{background:#fff8e9;color:#6e5728}.steps{display:grid;grid-template-columns:repeat(6,1fr);gap:6px}.step{text-align:center;font-size:11px;padding:9px 4px}.tabs{display:flex;gap:6px;flex-wrap:wrap;margin:14px 0}.tabs button,button{border:1px solid var(--line);background:white;border-radius:8px;padding:9px 12px;cursor:pointer}.tabs .active,button.primary{background:var(--t);color:white;border-color:var(--t)}.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.field{display:flex;flex-direction:column;gap:5px}.full{grid-column:1/-1}label{font-weight:bold;color:var(--n);font-size:12px}input,select,textarea{padding:10px;border:1px solid #d6e0e8;border-radius:7px;font:inherit;width:100%}input[readonly]{background:#f2f5f7}.uploads{display:grid;grid-template-columns:1fr 1fr;gap:8px}.upload{border:1px dashed #bdcbd6;border-radius:8px;padding:9px}.actions{display:flex;justify-content:flex-end;gap:8px;flex-wrap:wrap;margin-top:14px}.hidden{display:none!important}.box{background:#f2f8f7;border:1px solid #cde5e2;padding:12px;border-radius:9px;margin-top:12px}.ref{font-size:20px;font-weight:bold;color:#126c69}.hint,.foot{font-size:11px;color:var(--mut)}.status{display:inline-block;background:#fff0d4;color:#795b20;padding:4px 8px;border-radius:20px;font-size:11px}.good{background:#e4f4e9;color:#286c49}table{width:100%;border-collapse:collapse}td,th{text-align:left;border-bottom:1px solid var(--line);padding:8px;font-size:12px}@media(max-width:700px){.steps{grid-template-columns:repeat(3,1fr)}.grid,.uploads{grid-template-columns:1fr}.full{grid-column:auto}}@media print{header,.tabs,.steps,.notice,.actions,.foot{display:none!important}body{background:white}.panel{border:0}}
+</style></head><body>
+<header><div class="brand">ILVORA <span>WORKFORCE</span><br><small>WHERE CARE BECOMES CONFIDENCE.</small></div><div>Branch Admin / HR<br><small>Demo · Neelambari Hospital</small></div></header>
+<main><h1>Employee Onboarding & Management</h1><p class="sub">Branch application → Head Office approval → employee activation → final record verification.</p>
+<div class="notice"><b>Security:</b> Do not enter real Aadhaar, PAN, bank or employee information in this demo. Production must encrypt identifiers, mask ordinary views, restrict access and maintain audit logs.</div>
+<div class="steps"><div class="step">1 · Branch submission</div><div class="step">2 · Administrator salary setup</div><div class="step">3 · HO verification</div><div class="step">4 · Employee activation</div><div class="step">5 · Bank & emergency</div><div class="step">6 · Signed contract</div><div class="step">7 · Final HO check</div></div>
+<div class="tabs"><button class="active" data-tab="branch">1. Branch submission</button><button data-tab="salary">2. Administrator salary setup</button><button data-tab="ho">3. HO verification</button><button data-tab="activation">4. Activation</button><button data-tab="details">5. Enrolment details</button><button data-tab="contract">6. Contract upload</button><button data-tab="final">7. Final verification</button></div>
+<section class="panel" id="branch"><h2>Stage 1 – Branch Admin application</h2><p class="hint">All listed employee details are mandatory. Upload up to seven supporting documents.</p>
+<form id="appForm"><div class="grid">
+<div class="field"><label>Full name *</label><input id="name" required></div><div class="field"><label>Position / designation *</label><input id="position" required></div>
+<div class="field full"><label>Full address *</label><textarea id="address" required></textarea></div>
+<div class="field"><label>Mobile number *</label><input id="mobile" required type="tel"></div><div class="field"><label>Email address *</label><input id="email" required type="email"></div>
+<div class="field"><label>Aadhaar number *</label><input id="aadhaar" required pattern="[0-9]{12}" maxlength="12" inputmode="numeric"><span class="hint">12 digits. Handle under applicable UIDAI requirements.</span></div><div class="field"><label>PAN number (optional)</label><input id="pan" pattern="[A-Za-z]{5}[0-9]{4}[A-Za-z]" maxlength="10"></div>
+<div class="field"><label>Branch *</label><select id="branch"><option data-prefix="ILV-NH">Neelambari Hospital – Thamarakulam</option><option data-prefix="ILV-HO">Head Office – Kochi</option><option data-prefix="ILV-KK">ILVORA Health Clinic – Kottarakkara</option></select></div><div class="field"><label>Department *</label><input id="department" required></div>
+<div class="field full"><label>Supporting documents (up to 7; image or PDF)</label><div class="uploads" id="uploads"></div><span class="hint">Each file maximum 5 MB in this prototype. Configure position-specific required document checklist with HR.</span></div>
+<div class="field full"><label><input id="accuracy" type="checkbox" required style="width:auto"> I confirm details are accurate and the employee has been informed of the collection purpose.</label></div></div><div class="actions"><button type="reset">Clear</button><button class="primary">Submit to Head Office</button></div></form>
+<div id="appResult" class="box hidden"><span class="status">Submitted for verification</span><p class="ref">ONB-DEMO-0001</p><p id="appText" class="hint"></p></div></section>
+
+<section class="panel hidden" id="salary"><h2>Stage 2 – Administrator-only fixed salary setup</h2>
+<p class="hint">This stage becomes available after Branch Admin submits the application. Only an authorised Administrator may enter, review, change and save the employee’s fixed salary.</p>
+<div class="notice">Branch Admin and Head Office users have read-only/no access to salary editing. The salary is linked to the application and, after employee approval and onboarding completion, feeds the payroll calculation automatically.</div>
+<div class="grid">
+<div class="field"><label>Onboarding reference</label><input id="salaryRef" readonly value="Awaiting branch submission"></div>
+<div class="field"><label>Employee / applicant</label><input id="salaryEmployee" readonly value="Awaiting branch submission"></div>
+<div class="field"><label>Branch</label><input id="salaryBranch" readonly value="Awaiting branch submission"></div>
+<div class="field"><label>Department / position</label><input id="salaryRole" readonly value="Awaiting branch submission"></div>
+<div class="field"><label>Fixed monthly salary (₹) *</label><input id="fixedSalary" type="number" min="0" step="1" placeholder="Enter fixed monthly salary"></div>
+<div class="field"><label>Effective from *</label><input id="salaryEffective" type="date"></div>
+<div class="field full"><label>Administrator review / salary notes</label><textarea id="salaryNotes" placeholder="Record salary basis, approved revision or relevant notes"></textarea></div>
 </div>
-<section class="grid">
-<div class="card kpi"><div class="label">Active employees</div><strong>48</strong><small>Across this branch</small></div>
-<div class="card kpi"><div class="label">Present today</div><strong>36</strong><small>75% of active workforce</small><div class="meter"><i style="width:75%"></i></div></div>
-<div class="card kpi"><div class="label">On leave today</div><strong>5</strong><small>Approved leave</small></div>
-<div class="card kpi"><div class="label">Attendance exceptions</div><strong style="color:var(--red)">7</strong><small>Missed / unusual punches</small></div>
+<div class="actions"><button id="saveSalary" class="primary">Save / update fixed salary</button></div>
+<div id="salaryResult" class="box hidden"></div>
+<p class="hint">Production controls: enforce Administrator role on the server and API (not just by hiding the screen); keep previous salary versions, editor identity, timestamp, effective date and reason in an immutable audit log. Payroll should use the active approved salary version and apply configured attendance, unpaid leave, deductions and payroll-period rules.</p>
 </section>
-<div class="content">
-<section class="panel">
-<h2>Branch services & quick actions</h2>
-<div class="actions">
-<button class="action" data-info="Employee Management"><b>Employee Management</b><span>Add, update and manage branch employees</span></button>
-<button class="action" data-info="Attendance Management"><b>Attendance Management</b><span>Daily punches, exceptions and kiosk</span></button>
-<button class="action" data-info="Leave Management"><b>Leave Management</b><span>Review and decide requests up to 5 days</span></button>
-<button class="action" data-info="Duty Roster"><b>Duty Roster</b><span>Create and publish branch schedules</span></button>
-<button class="action" data-info="Documents & Certificates"><b>Documents & Certificates</b><span>Manage authorised employee records</span></button>
-<button class="action" data-info="Policies & Acknowledgements"><b>Policies & Acknowledgements</b><span>Track policy receipt and acknowledgement</span></button>
-<button class="action" data-info="Complaints Management"><b>Complaints Management</b><span>Restricted case access for authorised officers</span></button>
-<button class="action" data-info="Requests & Helpdesk"><b>Requests & Helpdesk</b><span>Route and resolve employee requests</span></button>
-<button class="action" data-info="Branch Reports"><b>Branch Reports</b><span>Attendance, leave and workforce reports</span></button>
-<button class="action" data-info="Attendance Correction Submission"><b>Attendance Correction Submission</b><span>Submit formal requests to Head Office</span></button>
-</div>
-<div class="marker">
-<h3>Attendance Marker · Integrated service</h3>
-<p>Operate the authorised branch kiosk, assist employee check-in/check-out, monitor punch events and view attendance exceptions. Attendance operators do not receive HR administration rights by default.</p>
-<button data-info="Attendance Marker / Kiosk">Open attendance kiosk demo</button>
-</div>
-</section>
-<section>
-<div class="panel">
-<div class="row"><h2>Action required</h2><span class="badge warn">5 pending</span></div>
-<div class="item"><div class="row"><b>Leave requests awaiting review</b><span class="badge warn">3</span></div><p>Review requests within Branch Admin authority (up to 5 days).</p></div>
-<div class="item"><div class="row"><b>Attendance exceptions</b><span class="badge red">7</span></div><p>Review missed punches and contact employees where necessary.</p></div>
-<div class="item"><div class="row"><b>Policy acknowledgements pending</b><span class="badge warn">4</span></div><p>Follow up on employees who have not completed acknowledgement.</p></div>
-<div class="item"><div class="row"><b>Helpdesk requests</b><span class="badge">2</span></div><p>Requests assigned to branch operations need an update.</p></div>
-</div>
-<div class="panel" style="margin-top:14px">
-<div class="row"><h2>Today's attendance snapshot</h2><span class="badge green">Demo data</span></div>
-<div class="tablewrap"><table><thead><tr><th>Metric</th><th>Count</th><th>Notes</th></tr></thead><tbody>
-<tr><td>Present</td><td>36</td><td>Recorded check-in</td></tr>
-<tr><td>On approved leave</td><td>5</td><td>Approved</td></tr>
-<tr><td>Absent / no punch</td><td>4</td><td>Needs review</td></tr>
-<tr><td>Late / early exception</td><td>3</td><td>Verify shift rules</td></tr>
-</tbody></table></div>
-</div>
-</section>
-</div>
-<p class="footer">Prototype dashboard uses illustrative sample data. Live employee records, attendance totals, permissions, alerts and reports require secure backend integration. Branch Admin access is limited to the assigned branch unless Head Office grants additional scope.</p>
-</main>
-<div class="modalback" id="modal"><div class="modal"><button class="close btn" id="close">Close</button><h3 id="modalTitle">Service</h3><p id="modalText"></p><p class="small">This dashboard tile is a navigation placeholder. The selected service will be designed and approved separately before integration.</p></div></div>
+<section class="panel hidden" id="ho"><h2>Stage 2 – Head Office credential verification</h2><p id="hoText" class="hint">No application submitted yet.</p><label>Verification notes</label><textarea id="hoNotes"></textarea><div class="actions"><button id="return">Return for correction</button><button id="reject">Reject</button><button class="primary" id="approve">Approve & generate Employee ID</button></div><p class="hint">Record verifier, timestamp, evidence checked and decision reason in production.</p><div id="hoResult" class="box hidden"></div></section>
+<section class="panel hidden" id="activation"><h2>Stage 3 – Employee app activation</h2><p class="hint">Username is always the generated Employee ID. Activation requires OTP and a mandatory password reset.</p><div class="box"><div class="hint">GENERATED EMPLOYEE ID / USERNAME</div><div id="empId" class="ref">Pending Head Office approval</div><p id="deliver" class="hint"></p></div><div class="grid"><div class="field"><label>OTP *</label><input id="otp" maxlength="6"></div><div class="field"><label>New password *</label><input id="newpw" type="password" minlength="10"></div><div class="field"><label>Confirm new password *</label><input id="confirmpw" type="password" minlength="10"></div></div><div class="actions"><button id="sendOtp">Send / resend OTP</button><button class="primary" id="activate">Verify OTP & activate</button></div><div id="demoOtp" class="box hidden"></div><div id="activated" class="box hidden"><span class="status good">Account activated</span></div></section>
+<section class="panel hidden" id="details"><h2>Stage 4 – Bank & emergency details</h2><p class="hint">Complete after account activation. Branch Admin can print the enrolment details for physical signature / file.</p><p id="detailEmployee" class="hint">Employee not yet approved.</p><div class="grid">
+<div class="field"><label>Bank account holder *</label><input id="holder"></div><div class="field"><label>Bank name *</label><input id="bank"></div><div class="field"><label>Account number *</label><input id="account"></div><div class="field"><label>IFSC *</label><input id="ifsc"></div>
+<div class="field"><label>Emergency contact name *</label><input id="emName"></div><div class="field"><label>Relationship *</label><input id="relation"></div><div class="field"><label>Emergency mobile *</label><input id="emMobile"></div><div class="field"><label>Emergency address *</label><input id="emAddress"></div></div><div class="actions"><button id="saveDetails">Save details</button><button class="primary" id="printEnrol">Print enrolment details</button></div></section>
+<section class="panel hidden" id="contract"><h2>Stage 5 – Upload physically signed employment contract</h2><p class="hint">After obtaining the employee's physical signature, upload the contract against the generated Employee ID.</p><div class="grid"><div class="field"><label>Employee ID</label><input id="contractEmp" readonly></div><div class="field"><label>Contract date *</label><input id="contractDate" type="date"></div><div class="field full"><label>Signed contract PDF / image *</label><input id="contractFile" type="file" accept=".pdf,.jpg,.jpeg,.png"></div><div class="field full"><label><input id="signedConfirm" type="checkbox" style="width:auto"> I confirm this file contains the physical signature and is linked to the correct employee.</label></div></div><div class="actions"><button class="primary" id="uploadContract">Upload signed contract</button></div><div id="contractResult" class="box hidden"></div></section>
+<section class="panel hidden" id="final"><h2>Stage 6 – Head Office final verification & print</h2><p id="finalSummary" class="hint">Awaiting completed employee record.</p><label>Final verification notes</label><textarea id="finalNotes"></textarea><div class="actions"><button id="returnFinal">Return to Branch for correction</button><button class="primary" id="finalApprove">Verify final record</button><button id="printFinal">Print final employee record</button></div><div id="finalResult" class="box hidden"><span class="status good">Final record verified</span></div></section>
+<p class="foot">Prototype only: no real authentication, OTP delivery, file transfer, database or approval authority. Demo data resets on refresh. Print controls open the browser print dialog.</p></main>
 <script>
-const modal=document.getElementById('modal');
-document.querySelectorAll('[data-info]').forEach(b=>b.onclick=()=>{let name=b.dataset.info;document.getElementById('modalTitle').textContent=name;document.getElementById('modalText').textContent=name+' will open its dedicated service workspace. This is a navigation preview only; no live records are changed.';modal.style.display='flex'});
-document.getElementById('close').onclick=()=>modal.style.display='none';
-modal.onclick=e=>{if(e.target===modal)modal.style.display='none'};
+const $=id=>document.getElementById(id);let application=null,empId=null,otpCode=null,activated=false,detailsSaved=false,contractSaved=false,finalDone=false,salarySaved=false,salaryAudit=[];
+for(let i=1;i<=7;i++){let d=document.createElement('div');d.className='upload';d.innerHTML=`<label>Document ${i}</label><input class="doc" type="file" accept=".pdf,.jpg,.jpeg,.png">`;$('uploads').appendChild(d)}
+document.querySelectorAll('.tabs button').forEach(b=>b.onclick=()=>{document.querySelectorAll('.tabs button').forEach(x=>x.classList.toggle('active',x===b));['branch','salary','ho','activation','details','contract','final'].forEach(id=>$(id).classList.toggle('hidden',id!==b.dataset.tab))});
+function sync(){if(!application)return;$('empId').textContent=empId||'Pending Head Office approval';$('deliver').textContent=empId?`Activation should be sent to ${application.mobile.slice(0,2)}******${application.mobile.slice(-2)} and ${application.email.replace(/^(.).+(@.+)$/,'$1***$2')}.`:'Awaiting approval.';$('detailEmployee').textContent=application.name+' · '+(empId||'Employee ID pending');$('contractEmp').value=empId||'Pending';$('finalSummary').textContent=`${application.name} | ${empId||'ID pending'} | Fixed salary: ${salarySaved?'₹'+Number($('fixedSalary').value).toLocaleString('en-IN')+'/month':'Pending Administrator setup'} | Activation: ${activated?'Complete':'Pending'} | Bank/emergency: ${detailsSaved?'Saved':'Pending'} | Contract: ${contractSaved?'Uploaded':'Pending'} | Final: ${finalDone?'Verified':'Pending'}`}
+$('appForm').onsubmit=e=>{e.preventDefault();let files=[...document.querySelectorAll('.doc')].map(x=>x.files[0]).filter(Boolean);if(files.length>7||files.some(f=>f.size>5*1024*1024)){alert('Maximum 7 documents, 5 MB each.');return}let opt=$('branch').selectedOptions[0];application={name:$('name').value,position:$('position').value,address:$('address').value,mobile:$('mobile').value,email:$('email').value,aadhaar:$('aadhaar').value,pan:$('pan').value,branch:$('branch').value,prefix:opt.dataset.prefix,department:$('department').value,docs:files.length};$('appText').textContent=`${application.name} · ${application.position} · ${application.branch} · ${files.length} file(s).`;$('appResult').classList.remove('hidden');$('salaryRef').value='ONB-DEMO-0001';$('salaryEmployee').value=application.name;$('salaryBranch').value=application.branch;$('salaryRole').value=application.department+' / '+application.position;$('hoText').textContent=`Application ONB-DEMO-0001: ${application.name}, ${application.position}, ${application.branch}. ${files.length} supporting document(s). Credentials awaiting review.`;sync()};
+
+$('saveSalary').onclick=()=>{
+ if(!application)return alert('Branch Admin must submit the employee application first.');
+ const amount=Number($('fixedSalary').value);
+ if(!Number.isFinite(amount)||amount<=0)return alert('Enter a valid fixed monthly salary greater than zero.');
+ if(!$('salaryEffective').value)return alert('Select the salary effective date.');
+ const previous=salarySaved?Number(salaryAudit[salaryAudit.length-1].amount):null;
+ salaryAudit.push({amount,effective:$('salaryEffective').value,notes:$('salaryNotes').value,previous,editor:'Administrator (demo)',at:new Date().toLocaleString()});
+ salarySaved=true;
+ $('salaryResult').innerHTML=`<span class="status good">Fixed salary saved</span><p class="ref">₹${amount.toLocaleString('en-IN')} / month</p><p class="hint">Effective ${$('salaryEffective').value}. Saved by Administrator (demo). ${previous!==null?'Previous saved salary: ₹'+previous.toLocaleString('en-IN')+'.':''}</p><p class="hint">Payroll link: this saved fixed salary will be the employee’s base salary input for automatic payroll calculation after onboarding is approved.</p><p class="hint">Audit versions saved in this demo: ${salaryAudit.length}</p>`;
+ $('salaryResult').classList.remove('hidden');sync();
+};
+$('approve').onclick=()=>{if(!application)return alert('Submit application first.');if(!salarySaved)return alert('Administrator must save the fixed salary before Head Office approval.');let next=String(Math.floor(100+Math.random()*899));empId=application.prefix+'-'+next;$('hoResult').innerHTML=`<span class="status good">Approved</span><p class="ref">${empId}</p><p class="hint">Branch-specific Employee ID generated after Head Office approval (simulated).</p>`;sync()};
+$('return').onclick=()=>alert('Demo: application returned for correction. No ID generated.');$('reject').onclick=()=>{empId=null;alert('Demo: application rejected. No Employee ID generated.')};
+$('sendOtp').onclick=()=>{if(!empId)return alert('Head Office approval required first.');otpCode=String(Math.floor(100000+Math.random()*900000));$('demoOtp').textContent='DEMO OTP: '+otpCode+' (production OTP is sent securely by SMS and email; never shown in app).';$('demoOtp').classList.remove('hidden')};
+$('activate').onclick=()=>{if(!empId||!otpCode)return alert('Generate activation OTP first.');if($('otp').value!==otpCode)return alert('Incorrect OTP.');if($('newpw').value.length<10||$('newpw').value!==$('confirmpw').value)return alert('Passwords must match and be at least 10 characters.');activated=true;otpCode=null;$('activated').classList.remove('hidden');$('demoOtp').classList.add('hidden');sync()};
+$('saveDetails').onclick=()=>{if(!activated)return alert('Employee account must be activated first.');let ids=['holder','bank','account','ifsc','emName','relation','emMobile','emAddress'];if(ids.some(x=>!$(x).value.trim()))return alert('Complete all bank and emergency fields.');detailsSaved=true;sync();alert('Details saved in demo.')};
+$('printEnrol').onclick=()=>{if(!detailsSaved)return alert('Save bank and emergency details first.');window.print()};
+$('uploadContract').onclick=()=>{if(!detailsSaved)return alert('Complete enrolment details first.');if(!$('contractDate').value||!$('contractFile').files[0]||!$('signedConfirm').checked)return alert('Contract date, signed file and confirmation are required.');contractSaved=true;$('contractResult').textContent='Signed contract linked to '+empId+' (demo only).';$('contractResult').classList.remove('hidden');sync()};
+$('finalApprove').onclick=()=>{if(!empId||!activated||!detailsSaved||!contractSaved)return alert('Complete all previous stages first.');finalDone=true;$('finalResult').classList.remove('hidden');sync();alert('Final Head Office verification completed in demo.')};
+$('returnFinal').onclick=()=>alert('Demo: final record returned to Branch Admin for correction.');$('printFinal').onclick=()=>{if(!empId)return alert('No approved record to print.');window.print()};
 </script></body></html>
