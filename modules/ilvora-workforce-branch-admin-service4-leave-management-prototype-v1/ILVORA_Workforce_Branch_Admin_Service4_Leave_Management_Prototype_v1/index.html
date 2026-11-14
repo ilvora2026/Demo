@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ILVORA Workforce | Leave Management</title>
+<style>
+:root{--navy:#10243a;--teal:#168b88;--gold:#c9a96e;--bg:#f3f6f8;--ink:#203244;--muted:#718096;--line:#e3eaf0;--red:#b94a48;--amber:#946c1d;--green:#28734f}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);font:14px/1.5 Inter,Segoe UI,Arial,sans-serif;color:var(--ink)}
+header{background:var(--navy);color:#fff;padding:17px max(18px,calc((100% - 1200px)/2));display:flex;justify-content:space-between;align-items:center;gap:15px}
+.brand{font-weight:850;letter-spacing:.08em}.brand span{color:var(--gold)}.brand small{display:block;color:#b8c8d5;font-weight:400;letter-spacing:0;margin-top:2px;font-size:11px}
+.user{font-size:12px;text-align:right;color:#dbe5ed}.user b{display:block;color:white;font-size:13px}
+main{max-width:1200px;margin:24px auto;padding:0 18px}.head{display:flex;justify-content:space-between;align-items:flex-start;gap:14px;flex-wrap:wrap}
+h1{margin:0;color:var(--navy);font-size:25px}.sub{color:var(--muted);margin:5px 0 0}.branch{background:#e5f3f2;color:#126c69;border:1px solid #c8e4e1;border-radius:10px;padding:9px 12px;font-weight:700;font-size:12px}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:18px 0}.card,.panel{background:white;border:1px solid var(--line);border-radius:14px}
+.kpi{padding:15px}.kpi .label{font-size:12px;color:var(--muted)}.kpi strong{display:block;color:var(--navy);font-size:27px;margin:3px 0}.kpi small{color:var(--muted);font-size:11px}
+.tabs{display:flex;gap:7px;flex-wrap:wrap;margin:18px 0}.tabs button{border:1px solid var(--line);background:#fff;border-radius:9px;padding:9px 12px;cursor:pointer;font-weight:700;color:var(--ink);font-size:12px}.tabs button.active{background:var(--navy);color:#fff;border-color:var(--navy)}
+.panel{padding:17px;margin-bottom:14px}.panel h2{margin:0 0 13px;color:var(--navy);font-size:17px}.panel h3{font-size:14px;color:var(--navy);margin:18px 0 8px}
+.hidden{display:none!important}.grid2{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.field{display:flex;flex-direction:column;gap:5px}.field label{font-size:11px;font-weight:750;color:#526477}.field input,.field select,.field textarea{border:1px solid #d7e0e8;border-radius:8px;padding:10px;font:inherit;font-size:12px;background:white;color:var(--ink)}.field textarea{min-height:75px;resize:vertical}
+.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:13px}.btn{border:1px solid var(--line);background:#fff;padding:9px 12px;border-radius:8px;cursor:pointer;font-weight:700;font-size:11px;color:var(--ink)}.btn.primary{background:var(--teal);border-color:var(--teal);color:#fff}.btn.dark{background:var(--navy);border-color:var(--navy);color:#fff}.btn:disabled{opacity:.4;cursor:not-allowed}
+.badge{font-size:10px;font-weight:750;border-radius:20px;padding:4px 8px;background:#edf2f7;color:#526477;display:inline-block}.badge.warn{background:#fff4dc;color:var(--amber)}.badge.red{background:#fdebea;color:var(--red)}.badge.green{background:#e5f4eb;color:var(--green)}
+.notice{background:#f2f9f8;border:1px solid #d0e8e5;border-radius:10px;padding:12px;color:#315e5c;font-size:12px;margin:10px 0}.warning{background:#fff8e9;border:1px solid #f0dfb7;border-radius:10px;padding:12px;color:#755b21;font-size:12px;margin:10px 0}
+.tablewrap{overflow-x:auto}table{width:100%;border-collapse:collapse}th,td{text-align:left;padding:10px 8px;border-bottom:1px solid var(--line);font-size:11px;white-space:nowrap}th{color:var(--muted);font-weight:750}
+.row{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}.muted{color:var(--muted);font-size:11px}.result{padding:12px;background:#f7fafb;border:1px solid var(--line);border-radius:10px;margin-top:12px;font-size:12px}
+.footer{margin:16px 0;color:var(--muted);font-size:11px}
+@media(max-width:850px){.grid{grid-template-columns:repeat(2,1fr)}}@media(max-width:600px){.grid{grid-template-columns:1fr 1fr}.grid2{grid-template-columns:1fr}header{align-items:flex-start}.user{max-width:45%}}
+</style></head>
+<body>
+<header><div class="brand">ILVORA <span>WORKFORCE</span><small>WHERE CARE BECOMES CONFIDENCE.</small></div><div class="user"><b>Branch Admin / HR</b>Leave Management · Demo</div></header>
+<main>
+<div class="head"><div><h1>Leave Management</h1><p class="sub">Review leave applications, route approvals to the correct authority and print approved applications for physical records.</p></div><div class="branch">Branch: Neelambari Hospital – Thamarakulam</div></div>
+<div class="grid">
+<div class="card kpi"><div class="label">Applications this month</div><strong>24</strong><small>Illustrative branch data</small></div>
+<div class="card kpi"><div class="label">Pending Branch review</div><strong>5</strong><small>Casual leave and verification</small></div>
+<div class="card kpi"><div class="label">Pending Head Office</div><strong>4</strong><small>All medical leave / long leave</small></div>
+<div class="card kpi"><div class="label">Approved this month</div><strong>15</strong><small>Eligible for printing</small></div>
+</div>
+<div class="tabs">
+<button class="active" data-tab="dashboard">Overview</button>
+<button data-tab="applications">Applications</button>
+<button data-tab="review">Review & Routing</button>
+<button data-tab="approved">Approved & Print</button>
+<button data-tab="policy">Leave Rules</button>
+</div>
+
+<section class="panel" id="dashboard">
+<div class="row"><h2>Leave management overview</h2><span class="badge green">Branch-scoped access</span></div>
+<div class="grid2">
+<div><h3>Approval queue</h3><div class="tablewrap"><table><tr><th>Category</th><th>Pending</th><th>Authority</th></tr><tr><td>Paid medical leave</td><td>3</td><td>Head Office only</td></tr><tr><td>Additional unpaid medical leave</td><td>1</td><td>Head Office</td></tr><tr><td>Casual leave ≤ 5 days</td><td>3</td><td>Branch Admin / HR</td></tr><tr><td>Any leave &gt; 5 days</td><td>2</td><td>Head Office</td></tr></table></div></div>
+<div><h3>Key controls</h3><div class="result"><b>Paid medical leave:</b> Head Office approval only.</div><div class="result"><b>Printing:</b> enabled only after final approval.</div><div class="result"><b>Payroll:</b> approved paid/unpaid status is passed to payroll rules.</div></div>
+</div>
+<div class="notice">Branch Admin/HR may check completeness, verify supporting documents and recommend an outcome. Branch Admin/HR cannot grant paid medical leave. Head Office is the sole approval authority for all paid medical leave.</div>
+</section>
+
+<section class="panel hidden" id="applications">
+<div class="row"><h2>Leave applications</h2><span class="badge">Sample records</span></div>
+<div class="tablewrap"><table><thead><tr><th>Application ID</th><th>Employee</th><th>Leave type</th><th>Dates</th><th>Days</th><th>Requested pay</th><th>Status</th></tr></thead><tbody id="applicationRows">
+<tr><td>LV-2026-041</td><td>ILV-NH-021 · Meera S.</td><td>Medical</td><td>12–13 Nov</td><td>2</td><td>Paid</td><td><span class="badge warn">Pending HO</span></td></tr>
+<tr><td>LV-2026-042</td><td>ILV-NH-032 · Faisal P.</td><td>Casual</td><td>16 Nov</td><td>1</td><td>Unpaid</td><td><span class="badge warn">Pending Branch</span></td></tr>
+<tr><td>LV-2026-043</td><td>ILV-NH-014 · Arun K.</td><td>Medical</td><td>18–24 Nov</td><td>7</td><td>Unpaid</td><td><span class="badge">Pending HO</span></td></tr>
+<tr><td>LV-2026-039</td><td>ILV-NH-055 · Rajan M.</td><td>Casual</td><td>04 Nov</td><td>1</td><td>Unpaid</td><td><span class="badge green">Approved</span></td></tr>
+</tbody></table></div>
+<p class="muted">Select an application in Review & Routing to record the Branch Admin/HR review or recommendation.</p>
+</section>
+
+<section class="panel hidden" id="review">
+<h2>Review and approval routing</h2>
+<div class="notice">This prototype simulates Branch Admin/HR review and routing. Head Office decisions are represented for demonstration; in production they must be completed by an authorised Head Office user.</div>
+<div class="grid2">
+<div class="field"><label>Application ID *</label><input id="appId" placeholder="e.g. LV-2026-044"></div>
+<div class="field"><label>Employee ID *</label><input id="employeeId" placeholder="e.g. ILV-NH-014"></div>
+<div class="field"><label>Leave type *</label><select id="leaveType"><option value="medical">Medical leave</option><option value="casual">Casual leave</option></select></div>
+<div class="field"><label>Number of leave days *</label><input id="leaveDays" type="number" min="1" max="365" placeholder="Number of calendar leave days"></div>
+<div class="field"><label>Requested payment status *</label><select id="payStatus"><option value="paid">Paid medical leave</option><option value="unpaid">Unpaid leave</option></select></div>
+<div class="field"><label>Medical leave used this year (days)</label><input id="medicalUsed" type="number" min="0" max="365" value="0"></div>
+<div class="field"><label>Supporting document / certificate reference</label><input id="certificateRef" placeholder="Certificate or attachment reference"></div>
+<div class="field"><label>Branch review result</label><select id="branchReview"><option>Documents checked – recommend approval</option><option>More information required</option><option>Recommend rejection</option></select></div>
+<div class="field"><label>Leave start date *</label><input id="leaveStart" type="date"></div>
+<div class="field"><label>Leave end date *</label><input id="leaveEnd" type="date"></div>
+<div class="field" style="grid-column:1/-1"><label>Branch Admin / HR review notes</label><textarea id="branchNotes" placeholder="Completeness check, roster impact and supporting evidence"></textarea></div>
+</div>
+<div class="actions"><button class="btn primary" id="routeLeave">Save review and route</button><button class="btn" id="simulateDecision">Demo: record approval decision</button></div>
+<div id="routingResult" class="result hidden"></div>
+<div class="warning">Authority rule: paid medical leave is always routed to Head Office. Branch Admin/HR cannot approve it, even when within the annual five-day paid allowance. Leave exceeding five days is routed to Head Office. Branch Admin/HR may approve casual leave up to five days under the configured policy.</div>
+</section>
+
+<section class="panel hidden" id="approved">
+<div class="row"><h2>Approved leave applications – physical record printing</h2><span class="badge green">Print after approval only</span></div>
+<div class="notice"><b>Printing restriction:</b> Only applications with a final approved decision can be printed as approved leave records. Pending, returned or rejected applications cannot be printed from this page.</div>
+<div class="tablewrap"><table><thead><tr><th>Application ID</th><th>Employee</th><th>Leave type</th><th>Dates</th><th>Pay status</th><th>Approved by</th><th>Print</th></tr></thead><tbody id="approvedRows">
+<tr><td>LV-2026-039</td><td>ILV-NH-055 · Rajan M.</td><td>Casual</td><td>04 Nov 2026</td><td>Unpaid</td><td>Branch Admin / HR</td><td><button class="btn" onclick="printExisting('LV-2026-039')">Print approved form</button></td></tr>
+</tbody></table></div>
+<h3>Print approved application</h3>
+<div class="grid2">
+<div class="field"><label>Approved application ID</label><select id="printAppId"><option value="LV-2026-039">LV-2026-039 – Rajan M.</option></select></div>
+<div class="field"><label>Physical filing reference</label><input id="filingRef" placeholder="Enter file/register reference after printing"></div>
+</div>
+<div class="actions"><button class="btn primary" id="printSelected">Print approved leave application</button><button class="btn" id="saveFiling">Save physical filing reference</button></div>
+<div id="printResult" class="result hidden"></div>
+<p class="muted">Printed form includes Employee ID, leave dates, leave type, paid/unpaid status, approval authority, approver name, decision date, reference number and signature spaces.</p>
+</section>
+
+<section class="panel hidden" id="policy">
+<h2>Leave policy and authority matrix</h2>
+<div class="tablewrap"><table><thead><tr><th>Leave category</th><th>Approval authority</th><th>Payment treatment</th><th>Branch Admin/HR role</th></tr></thead><tbody>
+<tr><td>Paid medical leave (within annual allowance)</td><td><b>Head Office only</b></td><td>Paid, maximum 5 approved days/year</td><td>Verify documents and recommend; cannot approve paid status</td></tr>
+<tr><td>Medical leave beyond paid allowance</td><td>Head Office</td><td>Unpaid</td><td>Verify documents and route</td></tr>
+<tr><td>Casual leave up to 5 days</td><td>Branch Admin / HR</td><td>Unpaid</td><td>Review and approve within delegated authority</td></tr>
+<tr><td>Any leave exceeding 5 days</td><td>Head Office</td><td>As per leave category and eligibility</td><td>Review and forward</td></tr>
+</tbody></table></div>
+<div class="notice">Paid medical leave is limited to five approved days per employee per year. Head Office must explicitly approve the paid status. If the allowance is exhausted, further medical leave is unpaid unless a revised policy is formally approved.</div>
+<h3>Payroll and attendance integration</h3>
+<ul><li>Only final approved leave records update attendance.</li><li>Approved paid medical leave is treated as paid absence within the annual allowance.</li><li>Approved unpaid medical and casual leave are passed to payroll as unpaid leave according to the configured salary rules.</li><li>Rejected or pending leave does not change attendance or payroll.</li><li>Every approval, rejection, return and payroll hand-off must be audited.</li></ul>
+</section>
+<p class="footer">ILVORA Workforce · Branch Admin / HR · Service 4 prototype v1 · Illustrative data only</p>
+</main>
+<script>
+const $=id=>document.getElementById(id);
+document.querySelectorAll('.tabs button').forEach(b=>b.onclick=()=>{
+ document.querySelectorAll('.tabs button').forEach(x=>x.classList.toggle('active',x===b));
+ ['dashboard','applications','review','approved','policy'].forEach(id=>$(id).classList.toggle('hidden',id!==b.dataset.tab));
+});
+function getDecisionData(){
+ const ids=['appId','employeeId','leaveDays','leaveStart','leaveEnd'];
+ if(ids.some(id=>!$(id).value.trim())){alert('Complete the application ID, Employee ID, leave days and dates.');return null;}
+ const type=$('leaveType').value,days=Number($('leaveDays').value),requested=$('payStatus').value;
+ if(days<1||!Number.isFinite(days))return alert('Enter valid leave days.'),null;
+ if(new Date($('leaveEnd').value)<new Date($('leaveStart').value))return alert('End date cannot be before start date.'),null;
+ if(type==='casual'&&requested==='paid')return alert('Casual leave is unpaid under the current policy.'),null;
+ if(type==='medical'&&requested==='paid'&&Number($('medicalUsed').value)>=5)return alert('The five-day paid medical-leave allowance has already been used. Route as unpaid medical leave.'),null;
+ return {id:$('appId').value.trim(),employee:$('employeeId').value.trim(),type,days,requested,start:$('leaveStart').value,end:$('leaveEnd').value};
+}
+let pendingDecision=null;
+$('routeLeave').onclick=()=>{
+ const d=getDecisionData();if(!d)return;
+ pendingDecision=d;
+ const toHO=d.days>5||d.type==='medical';
+ const authority=toHO?'Head Office':'Branch Admin / HR';
+ const pay=d.type==='medical'&&d.requested==='paid'?'Paid requested – Head Office approval required':'Unpaid';
+ $('routingResult').innerHTML=`<b>Review saved and routed (demo)</b><p>Application: ${d.id} · Employee: ${d.employee}</p><p>Routing authority: <b>${authority}</b></p><p>Payment: ${pay}</p><p>Branch review: ${$('branchReview').value}</p><p>Status: ${toHO?'Pending Head Office decision':'Eligible for Branch Admin / HR decision'}</p>`;
+ $('routingResult').classList.remove('hidden');
+};
+$('simulateDecision').onclick=()=>{
+ if(!pendingDecision)return alert('Save and route an application first.');
+ const d=pendingDecision,needsHO=d.days>5||d.type==='medical';
+ const authority=needsHO?'Head Office':'Branch Admin / HR';
+ const approved=confirm(`Demo decision by ${authority}: OK = Approve; Cancel = Reject. This is only a prototype simulation.`);
+ const pay=d.type==='medical'&&d.requested==='paid'?'Paid':'Unpaid';
+ if(approved){
+  const tr=document.createElement('tr');
+  [d.id,`${d.employee}`,d.type==='medical'?'Medical':'Casual',`${d.start} – ${d.end}`,pay,authority].forEach(v=>{const td=document.createElement('td');td.textContent=v;tr.appendChild(td);});
+  const td=document.createElement('td'),btn=document.createElement('button');btn.className='btn';btn.textContent='Print approved form';btn.onclick=()=>printLeave(d,authority,pay);td.appendChild(btn);tr.appendChild(td);$('approvedRows').appendChild(tr);
+  const opt=document.createElement('option');opt.value=d.id;opt.textContent=`${d.id} – ${d.employee}`;$('printAppId').appendChild(opt);
+  $('routingResult').innerHTML+=`<p><span class="badge green">Approved by ${authority} (demo)</span> · Print is now enabled.</p>`;
+ }else{
+  $('routingResult').innerHTML+=`<p><span class="badge red">Rejected by ${authority} (demo)</span> · Printing as an approved record is disabled.</p>`;
+ }
+};
+function printLeave(d,authority,pay){
+ const w=window.open('','_blank');if(!w)return alert('Allow pop-ups to print.');
+ const esc=s=>String(s||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+ w.document.write(`<html><head><title>Approved Leave Application ${esc(d.id)}</title><style>body{font:14px Arial;padding:30px;color:#172b3d}h1{font-size:21px}table{width:100%;border-collapse:collapse;margin-top:20px}td{padding:11px;border:1px solid #bbb}td:first-child{font-weight:bold;width:35%}.sign{display:flex;justify-content:space-between;margin-top:70px}</style></head><body><h1>ILVORA Workforce – Approved Leave Application</h1><p><b>Application reference:</b> ${esc(d.id)}</p><table>${[['Employee ID',d.employee],['Leave type',d.type==='medical'?'Medical leave':'Casual leave'],['Leave dates',d.start+' to '+d.end],['Number of days',d.days],['Payment status',pay],['Approval authority',authority],['Approver name','Authorised approver – demo'],['Approval date',new Date().toLocaleDateString()],['Branch','Neelambari Hospital – Thamarakulam']].map(x=>`<tr><td>${esc(x[0])}</td><td>${esc(x[1])}</td></tr>`).join('')}</table><div class="sign"><span>Employee acknowledgement: ______________</span><span>Branch Admin / HR: ______________</span></div><div class="sign"><span>Head Office signature (if applicable): ______________</span><span>Physical filing reference: ______________</span></div></body></html>`);
+ w.document.close();w.focus();w.print();
+}
+window.printExisting=id=>{
+ if(id==='LV-2026-039')printLeave({id,employee:'ILV-NH-055 · Rajan M.',type:'casual',start:'2026-11-04',end:'2026-11-04',days:1},'Branch Admin / HR','Unpaid');
+};
+$('printSelected').onclick=()=>{
+ const id=$('printAppId').value;
+ if(id==='LV-2026-039')return window.printExisting(id);
+ if(!pendingDecision||pendingDecision.id!==id)return alert('No final approved record is available for this application.');
+ const authority=pendingDecision.days>5||pendingDecision.type==='medical'?'Head Office':'Branch Admin / HR';
+ const pay=pendingDecision.type==='medical'&&pendingDecision.requested==='paid'?'Paid':'Unpaid';
+ printLeave(pendingDecision,authority,pay);
+};
+$('saveFiling').onclick=()=>{
+ if(!$('filingRef').value.trim())return alert('Enter the physical filing reference.');
+ $('printResult').textContent=`Physical filing reference saved (demo): ${$('filingRef').value}. Production must link this to the approved application and record the print custodian and date.`;
+ $('printResult').classList.remove('hidden');
+};
+</script></body></html>
