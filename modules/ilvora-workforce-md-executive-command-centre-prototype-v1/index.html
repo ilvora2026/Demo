@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ILVORA Workforce | Managing Director Command Centre</title>
+<style>
+:root{--navy:#10283f;--navy2:#183b55;--teal:#167d80;--teal2:#e6f2f1;--gold:#c5a66a;--bg:#f3f6f8;--ink:#1c2c39;--muted:#687987;--line:#dce4e9;--white:#fff;--red:#a43f38;--green:#28734e}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);font:14px/1.45 Inter,Segoe UI,Arial,sans-serif;color:var(--ink)}
+header{background:linear-gradient(110deg,var(--navy),var(--navy2));color:#fff;padding:17px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;position:sticky;top:0;z-index:5;box-shadow:0 2px 12px #10283f20}
+.brand{font-weight:850;letter-spacing:1.5px;font-size:18px}.brand span{color:#d8c18f}.sub{font-size:11px;color:#c8d6df;letter-spacing:.8px;margin-top:3px}.header-right{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.pilltop{border:1px solid #698397;border-radius:30px;padding:7px 11px;font-size:11px;color:#e3edf2}
+.shell{display:grid;grid-template-columns:258px minmax(0,1fr);min-height:calc(100vh - 70px)}
+aside{background:#fff;border-right:1px solid var(--line);padding:16px 12px;position:sticky;top:70px;height:calc(100vh - 70px);overflow:auto}
+.navgroup{font-size:10px;text-transform:uppercase;letter-spacing:1.1px;font-weight:800;color:#8a99a4;padding:14px 10px 6px}
+nav button{width:100%;border:0;background:transparent;color:#506474;text-align:left;padding:9px 10px;border-radius:8px;font-size:12px;cursor:pointer;margin:1px 0}
+nav button:hover,nav button.active{background:var(--teal2);color:var(--teal);font-weight:750}
+nav button .num{display:inline-block;width:23px;color:#93a1aa;font-size:10px}
+main{padding:24px;max-width:1500px;width:100%;margin:0 auto}
+h1{font-size:25px;color:var(--navy);margin:0 0 5px}h2{font-size:17px;color:var(--navy);margin:0 0 12px}h3{font-size:14px;color:var(--navy);margin:0 0 8px}p{color:var(--muted);margin:5px 0 12px}
+.page{display:none}.page.active{display:block}.intro{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;flex-wrap:wrap;margin-bottom:18px}
+.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:15px}.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.card{background:#fff;border:1px solid var(--line);border-radius:12px;padding:15px;box-shadow:0 2px 8px #10283f08;min-width:0}
+.metric{font-size:25px;font-weight:850;color:var(--navy);font-variant-numeric:tabular-nums}.metric-label{font-size:11px;color:var(--muted);margin-top:2px}
+.layout{display:grid;grid-template-columns:1.2fr .8fr;gap:14px}.layout.equal{grid-template-columns:1fr 1fr}
+table{width:100%;border-collapse:collapse;font-size:12px}th,td{text-align:left;padding:9px 7px;border-bottom:1px solid var(--line);vertical-align:top}th{font-size:10px;text-transform:uppercase;letter-spacing:.55px;color:#71818d}
+.pill{display:inline-block;padding:4px 8px;border-radius:30px;background:#edf3f5;color:#536876;font-size:10px;white-space:nowrap}.green{background:#e7f5ee;color:var(--green)}.amber{background:#fff4df;color:#93651b}.red{background:#fdeceb;color:var(--red)}.teal{background:#e5f2f2;color:var(--teal)}
+button,.btn{cursor:pointer;border:0;border-radius:8px;padding:9px 12px;background:var(--teal);color:white;font-weight:700;font-size:11px}
+button.secondary{background:#eaf0f3;color:#405563}button.gold{background:var(--gold);color:#172b3d}button.danger{background:#a94b43}
+.toolbar{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:12px}
+input,select,textarea{width:100%;padding:9px;border:1px solid var(--line);border-radius:7px;background:#fff;font:inherit;color:var(--ink)}
+label{display:block;font-size:11px;font-weight:750;color:#536575;margin:9px 0 5px}.formgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+.note{border-left:3px solid var(--gold);background:#fbf8f1;padding:11px 13px;border-radius:6px;color:#66583e;font-size:11px;margin:12px 0}
+.actionlist{display:grid;gap:8px}.actionitem{display:flex;justify-content:space-between;gap:10px;align-items:flex-start;padding:9px 0;border-bottom:1px solid var(--line)}
+.linkgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.modulecard{border:1px solid var(--line);border-radius:10px;padding:13px;background:#fff;cursor:pointer;text-align:left;color:var(--ink);width:100%}
+.modulecard:hover{border-color:#8ab9b8;box-shadow:0 3px 12px #167d8014}.modulecard strong{display:block;color:var(--navy);font-size:12px;margin-bottom:4px}.modulecard small{color:var(--muted);font-size:10px;line-height:1.4}
+.kicker{font-size:10px;color:var(--teal);font-weight:850;text-transform:uppercase;letter-spacing:1px;margin-bottom:5px}
+footer{text-align:center;color:#87949d;font-size:10px;padding:26px}
+@media(max-width:1000px){.shell{grid-template-columns:220px 1fr}.grid{grid-template-columns:repeat(2,1fr)}.linkgrid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:720px){header{position:static}.shell{display:block}aside{position:static;height:auto;max-height:290px;border-right:0;border-bottom:1px solid var(--line)}main{padding:16px}.layout,.layout.equal{grid-template-columns:1fr}.grid3{grid-template-columns:1fr 1fr}}
+@media(max-width:480px){.grid,.grid3,.linkgrid{grid-template-columns:1fr 1fr}.formgrid{grid-template-columns:1fr}h1{font-size:21px}}
+@media print{header,aside,.noprint,button{display:none!important}.shell{display:block}main{padding:0}.page{display:none!important}.page.active{display:block!important}.card{break-inside:avoid;box-shadow:none}}
+</style></head>
+<body>
+<header>
+ <div><div class="brand">ILVORA <span>HEALTHCARE GROUP</span></div><div class="sub">WORKFORCE · MANAGING DIRECTOR EXECUTIVE COMMAND CENTRE</div></div>
+ <div class="header-right"><span class="pilltop">ORGANISATION-WIDE ACCESS</span><span class="pilltop">3 BRANCHES</span><span class="pilltop">DEMO · V1</span></div>
+</header>
+<div class="shell">
+<aside><nav id="nav">
+ <div class="navgroup">Executive overview</div>
+ <button class="active" data-page="home"><span class="num">00</span> Executive Command Centre</button>
+ <button data-page="briefing"><span class="num">★</span> MD Daily Briefing</button>
+ <button data-page="scorecard"><span class="num">★</span> Group Performance Scorecard</button>
+ <button data-page="decisionregister"><span class="num">★</span> Executive Decision Register</button>
+ <div class="navgroup">Administrator services · full visibility</div>
+ <div id="adminNav"></div>
+ <div class="navgroup">Additional MD executive services</div>
+ <div id="mdNav"></div>
+</nav></aside>
+<main>
+<section class="page active" id="home">
+ <div class="intro"><div><div class="kicker">Executive overview</div><h1>Managing Director Command Centre</h1><p>One organisation-wide view of Head Office – Kochi, Neelambari Hospital – Thamarakulam and ILVORA Health Clinic – Kottarakkara.</p></div><div class="toolbar noprint"><select id="branchScope" onchange="setScope(this.value)" style="min-width:220px"><option value="all">All branches – consolidated</option><option>Head Office – Kochi</option><option>Neelambari Hospital – Thamarakulam</option><option>ILVORA Health Clinic – Kottarakkara</option></select><button class="gold" onclick="showPage('briefing')">Open daily briefing</button></div></div>
+ <div class="grid">
+  <div class="card"><div class="metric">₹42.8L</div><div class="metric-label">Illustrative monthly revenue</div></div>
+  <div class="card"><div class="metric">₹31.4L</div><div class="metric-label">Illustrative monthly expenditure</div></div>
+  <div class="card"><div class="metric">11.4L</div><div class="metric-label">Illustrative operating surplus</div></div>
+  <div class="card"><div class="metric">3</div><div class="metric-label">Branches in executive view</div></div>
+ </div>
+ <div class="layout">
+  <div class="card"><h2>Branch performance snapshot</h2><div style="overflow:auto"><table><thead><tr><th>Branch</th><th>Revenue</th><th>Expense</th><th>Open actions</th><th>Pulse</th></tr></thead><tbody>
+   <tr><td><b>Head Office – Kochi</b></td><td>₹8.2L</td><td>₹5.1L</td><td>4</td><td><span class="pill green">On track</span></td></tr>
+   <tr><td><b>Neelambari Hospital</b></td><td>₹27.6L</td><td>₹21.3L</td><td>9</td><td><span class="pill amber">Review</span></td></tr>
+   <tr><td><b>Kottarakkara Clinic</b></td><td>₹7.0L</td><td>₹5.0L</td><td>3</td><td><span class="pill green">On track</span></td></tr>
+  </tbody></table></div><div class="note">All financial figures, branch indicators, employee counts, incidents and pending actions in this prototype are fictional demonstration data. They are not ILVORA's actual records.</div></div>
+  <div class="card"><h2>Executive attention required</h2><div class="actionlist">
+   <div class="actionitem"><span>Above-limit procurement approval</span><span class="pill amber">Pending</span></div>
+   <div class="actionitem"><span>Disciplinary case final decision</span><span class="pill red">Restricted</span></div>
+   <div class="actionitem"><span>Critical compliance renewal review</span><span class="pill amber">Due soon</span></div>
+   <div class="actionitem"><span>Branch monthly performance review</span><span class="pill teal">Scheduled</span></div>
+   <div class="actionitem"><span>Business continuity action review</span><span class="pill amber">Open</span></div>
+  </div><div class="actions"><button onclick="showPage('approvals')">Open approval centre</button><button class="secondary" onclick="showPage('decisions')">Decision register</button></div></div>
+ </div>
+ <div class="card" style="margin-top:14px"><h2>Open any service</h2><div class="linkgrid" id="homeCards"></div></div>
+</section>
+
+<section class="page" id="briefing">
+ <div class="intro"><div><div class="kicker">Special executive feature</div><h1>MD Daily Briefing</h1><p>Daily organisation-wide operating summary and items requiring executive attention.</p></div><button onclick="window.print()">Print briefing</button></div>
+ <div class="grid">
+  <div class="card"><div class="metric">₹1.42L</div><div class="metric-label">Illustrative yesterday revenue</div></div><div class="card"><div class="metric">86</div><div class="metric-label">Illustrative patient visits</div></div><div class="card"><div class="metric">92%</div><div class="metric-label">Illustrative roster coverage</div></div><div class="card"><div class="metric">5</div><div class="metric-label">Items requiring review</div></div>
+ </div>
+ <div class="layout"><div class="card"><h2>Daily summary</h2><table><tbody>
+  <tr><td>Revenue versus daily target</td><td><b>94%</b> <span class="pill amber">Below target</span></td></tr>
+  <tr><td>Attendance exceptions</td><td><b>7</b></td></tr><tr><td>Unfilled duty slots</td><td><b>2</b></td></tr><tr><td>New employee / HR actions</td><td><b>3</b></td></tr><tr><td>Pending leave decisions</td><td><b>4</b></td></tr><tr><td>Compliance deadlines in 30 days</td><td><b>2</b></td></tr><tr><td>Open patient-safety incidents</td><td><b>1 restricted summary</b></td></tr>
+ </tbody></table></div><div class="card"><h2>MD action list</h2><div class="actionlist">
+  <div class="actionitem"><span>Review Neelambari branch revenue variance</span><span class="pill amber">Today</span></div><div class="actionitem"><span>Decide above-limit equipment purchase</span><span class="pill red">Approval</span></div><div class="actionitem"><span>Review open clinical incident escalation</span><span class="pill red">Priority</span></div><div class="actionitem"><span>Confirm next leadership review</span><span class="pill teal">This week</span></div>
+ </div><div class="note">Production daily briefing must be generated from verified live data, show its reporting period and data freshness, identify missing feeds, and respect restricted clinical/HR access.</div></div></div>
+</section>
+
+<section class="page" id="scorecard">
+ <div class="intro"><div><div class="kicker">Special executive feature</div><h1>Group Performance Scorecard</h1><p>Compare branch and group performance against targets using approved operational data.</p></div><button onclick="window.print()">Print scorecard</button></div>
+ <div class="toolbar"><select><option>Current month – demo</option><option>Previous month – demo</option><option>Current quarter – demo</option></select><select><option>All branches</option><option>Head Office – Kochi</option><option>Neelambari Hospital</option><option>Kottarakkara Clinic</option></select></div>
+ <div class="card"><h2>Executive KPI scorecard</h2><div style="overflow:auto"><table><thead><tr><th>KPI</th><th>Target</th><th>Head Office</th><th>Neelambari</th><th>Kottarakkara</th><th>Group status</th></tr></thead><tbody>
+  <tr><td>Revenue achievement</td><td>100%</td><td>102%</td><td>91%</td><td>98%</td><td><span class="pill amber">Attention</span></td></tr>
+  <tr><td>Operating expense control</td><td>≤ Budget</td><td>96%</td><td>108%</td><td>99%</td><td><span class="pill red">Above budget</span></td></tr>
+  <tr><td>Duty roster coverage</td><td>≥ 98%</td><td>99%</td><td>94%</td><td>98%</td><td><span class="pill amber">Attention</span></td></tr>
+  <tr><td>Mandatory policy acknowledgement</td><td>100%</td><td>100%</td><td>96%</td><td>100%</td><td><span class="pill amber">4% gap</span></td></tr>
+  <tr><td>Compliance renewals on time</td><td>100%</td><td>100%</td><td>92%</td><td>100%</td><td><span class="pill amber">Review</span></td></tr>
+  <tr><td>Helpdesk within target</td><td>≥ 95%</td><td>97%</td><td>89%</td><td>96%</td><td><span class="pill amber">Attention</span></td></tr>
+ </tbody></table></div></div>
+ <div class="note">MD should approve KPI definitions, data owners, calculation rules and target values. Do not use unvalidated or incomplete data to rank branches or individuals.</div>
+</section>
+
+<section class="page" id="decisionregister">
+ <div class="intro"><div><div class="kicker">Special executive feature</div><h1>Executive Decision Register</h1><p>Track strategic and reserved decisions from approval through implementation.</p></div><button onclick="window.print()">Print register</button></div>
+ <div class="layout">
+  <div class="card"><h2>Record executive decision</h2><div class="formgrid">
+   <div><label>Decision title</label><input id="decTitle" placeholder="Decision / approval subject"></div><div><label>Category</label><select id="decCat"><option>Financial</option><option>Strategic</option><option>HR / disciplinary</option><option>Clinical governance</option><option>Procurement</option><option>Contract / legal</option><option>Compliance / risk</option><option>Other</option></select></div>
+   <div><label>Branch / scope</label><select id="decBranch"><option>All branches / Group</option><option>Head Office – Kochi</option><option>Neelambari Hospital – Thamarakulam</option><option>ILVORA Health Clinic – Kottarakkara</option></select></div><div><label>Financial impact (₹)</label><input id="decValue" type="number" min="0" placeholder="Optional amount"></div>
+   <div><label>Responsible owner</label><input id="decOwner" placeholder="Person / role"></div><div><label>Target completion date</label><input id="decDue" type="date"></div>
+  </div><label>Decision and rationale</label><textarea id="decText" rows="3" placeholder="Record decision, reasons, conditions and authority"></textarea><div class="actions"><button onclick="addDecision()">Save decision</button></div></div>
+  <div class="card"><h2>Decision governance</h2><ul><li>Unique decision reference.</li><li>Decision date and approving authority.</li><li>Financial and operational impact.</li><li>Responsible owner and deadline.</li><li>Implementation evidence and status.</li><li>Review, variation and closure history.</li></ul><div class="note">The prototype records entries in the current browser session only. Production requires immutable, server-side decision history and secure approvals.</div></div>
+ </div>
+ <div class="card" style="margin-top:14px"><h2>Decision history</h2><div style="overflow:auto"><table><thead><tr><th>Reference</th><th>Decision</th><th>Scope</th><th>Owner</th><th>Due</th><th>Status</th></tr></thead><tbody id="decisionRows"></tbody></table></div></div>
+</section>
+
+<section class="page" id="approvals">
+ <div class="intro"><div><div class="kicker">Executive actions</div><h1>Executive Decisions & Approval Centre</h1><p>Consolidated MD approval queue for matters reserved to the Managing Director.</p></div></div>
+ <div class="grid"><div class="card"><div class="metric">7</div><div class="metric-label">Pending MD decisions</div></div><div class="card"><div class="metric">2</div><div class="metric-label">Critical / time-sensitive</div></div><div class="card"><div class="metric">₹8.4L</div><div class="metric-label">Illustrative value awaiting decision</div></div><div class="card"><div class="metric">3</div><div class="metric-label">Returned for clarification</div></div></div>
+ <div class="card"><h2>Approval queue</h2><table><thead><tr><th>Reference</th><th>Request</th><th>Origin</th><th>Value</th><th>Priority</th><th>Action</th></tr></thead><tbody id="approvalRows">
+  <tr><td>APR-DEMO-021</td><td>Purchase of patient monitor</td><td>Administrator</td><td>₹1,45,000</td><td><span class="pill red">High</span></td><td><button onclick="approvalAction(this)">Review</button></td></tr>
+  <tr><td>APR-DEMO-020</td><td>Employee advance above 25% salary</td><td>Administrator</td><td>₹42,000</td><td><span class="pill amber">Normal</span></td><td><button onclick="approvalAction(this)">Review</button></td></tr>
+  <tr><td>APR-DEMO-019</td><td>Disciplinary final decision</td><td>Administrator</td><td>Restricted</td><td><span class="pill red">Confidential</span></td><td><button onclick="approvalAction(this)">Review</button></td></tr>
+  <tr><td>APR-DEMO-018</td><td>Premises agreement commitment</td><td>Administrator</td><td>₹6,00,000</td><td><span class="pill amber">Normal</span></td><td><button onclick="approvalAction(this)">Review</button></td></tr>
+ </tbody></table><div class="note">Demo Review buttons only change the local presentation. No real approval, account action, payroll release or legal commitment is made.</div></div>
+</section>
+
+<section class="page" id="vault">
+ <div class="intro"><div><div class="kicker">Restricted executive access</div><h1>Executive Confidential Vault</h1><p>Proposed secure repository for high-sensitivity board, legal, financial and investigation material.</p></div></div>
+ <div class="grid3">
+  <div class="card"><h3>Board & shareholder papers</h3><p>Board packs, resolutions, ownership records and investor communications.</p><span class="pill red">Highly restricted</span></div>
+  <div class="card"><h3>Legal & strategic matters</h3><p>Material contracts, legal advice references, disputes and confidential transactions.</p><span class="pill red">Highly restricted</span></div>
+  <div class="card"><h3>Special investigations</h3><p>Restricted investigation summaries and authorised decision records.</p><span class="pill red">Need-to-know</span></div>
+ </div>
+ <div class="card" style="margin-top:14px"><h2>Vault access policy</h2><ul><li>MD-only or explicitly delegated access, with document-level permissions.</li><li>Encryption at rest and in transit; private object storage.</li><li>Watermarked downloads and access/download audit.</li><li>Version history, legal holds and retention schedule.</li><li>No public links, shared passwords or unlogged exports.</li><li>Conflicted persons must not access relevant investigation material.</li></ul><div class="note">No real files are stored in this demo. Production vault requires a secure document-management backend, strong authentication and legal review.</div></div>
+</section>
+
+<div id="dynamicPages"></div>
+</main></div>
+<footer>ILVORA WORKFORCE · MANAGING DIRECTOR EXECUTIVE COMMAND CENTRE · VERSION 1 · FRONT-END DEMONSTRATION</footer>
+
+<script>
+const adminServices = [
+["a1","Dashboard","Overall workforce, branch and system overview."],
+["a2","Employee Salary Management","Salary register, revisions, allowances and deductions."],
+["a3","Payroll Management","Payroll generation, review, approval and closure."],
+["a4","Employee Account Access & Deactivation","Account lifecycle, suspension, resignation and termination access."],
+["a5","Payslip Authorisation","Employee payslip requests, approval and secure delivery oversight."],
+["a6","Payroll Reports & Reconciliation","Payroll expenditure, payment register and reconciliation."],
+["a7","Employee Advances & Loans","Applications, 25% approval threshold and repayment monitoring."],
+["a8","Employee Compliance & Disciplinary","Case workflow and MD final disciplinary decision authority."],
+["a9","Records Retention & Audit","Retention, legal holds, print registers and destruction audit."],
+["a10","System Settings & Security","Authentication policy, security settings and role oversight."],
+["a11","System Monitoring & Technical Operations","Web/API/database, backups, incidents and technical operations."],
+["a12","Finance & Operational Expense Management","Branch expenses, budgets and MD-set approval limit."],
+["a13","Procurement, Inventory & Asset Management","Purchase requests, vendors, stock, assets and MD-set limits."],
+["a14","Contracts & Agreement Management","Agreements, obligations, amendments and renewals."],
+["a15","Licences & Statutory Compliance","Licences, registrations, inspections and renewals."]
+];
+const mdServices = [
+["m16","Executive Intelligence Dashboard","Group financial, operational and strategic intelligence."],
+["m17","Strategic Planning & Business Development","Annual plans, expansion proposals, new services and growth targets."],
+["m18","Investment & Capital Allocation","Capital expenditure, investment proposals, ROI and funding decisions."],
+["m19","Clinical Governance & Patient Safety","Patient safety indicators, clinical audit, quality and serious incidents."],
+["m20","Leadership & Management Performance","Branch leadership, department performance and management reviews."],
+["m21","Board, Shareholder & Investor Relations","Ownership, investor commitments, board packs and resolutions."],
+["m22","Enterprise Risk & Crisis Command","Enterprise risk register, crisis response and business continuity."],
+["m23","Group Marketing & Brand Management","Group brand, marketing budgets, patient acquisition and reputation."],
+["m24","Executive Decisions & Approval Centre","Reserved MD decisions, delegated authority and approval queue."],
+["m25","Executive Confidential Vault","Restricted board, legal, financial and investigation documents."]
+];
+const all = [...adminServices.map(x=>({...x,type:"Administrator service"})),...mdServices.map(x=>({...x,type:"MD executive service"}))];
+function navButton(id,n,title){return `<button data-page="${id}"><span class="num">${n}</span>${title}</button>`}
+document.getElementById("adminNav").innerHTML=adminServices.map((x,i)=>navButton(x[0],String(i+1).padStart(2,"0"),x[1])).join("");
+document.getElementById("mdNav").innerHTML=mdServices.map((x,i)=>navButton(x[0],String(i+16),x[1])).join("");
+document.getElementById("homeCards").innerHTML=all.map(x=>`<button class="modulecard" onclick="showPage('${x[0]}')"><strong>${x[1]}</strong><small>${x[2]}</small></button>`).join("");
+const pageRoot=document.getElementById("dynamicPages");
+const tableRows = {
+a1:[["Organisation overview","All branches","Executive visibility"],["Employee onboarding","Branch submissions","Review and oversight"],["Attendance exceptions","All branches","Monitor"],["Pending leave / corrections","All branches","Reserved approvals as configured"]],
+a2:[["Salary register","All branches","View / governance"],["Salary revisions","Administrator workflow","Review history"],["Allowances and deductions","Payroll-linked","Oversight"],["Effective dates","Employee records","Audit"]],
+a3:[["Payroll period","Monthly cycle","Review status"],["Payroll exceptions","All branches","Monitor"],["Payroll approval and closure","Administrator workflow","Executive oversight"],["Payroll history","All branches","Read / audit"]],
+a4:[["Active accounts","All branches","Access oversight"],["Resignation requests","Employee lifecycle","Monitor effective date"],["Termination requests","Administrator workflow","Reserved MD discipline authority applies"],["Session and access events","System-wide","Audit"]],
+a5:[["Payslip requests","All branches","View approval status"],["Payroll closure check","Monthly payroll","Oversight"],["Reissue history","Employee records","Audit"],["Secure delivery","Registered contact","Monitor"]],
+a6:[["Gross / net payroll","Branch / consolidated","Financial oversight"],["Bank payment register","Payroll period","Reconciliation oversight"],["Arrears / adjustments","All branches","Review"],["Variance report","Month / year","Executive review"]],
+a7:[["Advance requests","All branches","View"],["≤25% of monthly salary","Administrator authority","Administrator approval"],[">25% of monthly salary","MD reserved authority","MD approval"],["Outstanding balances","Employee-wise","Monitor"]],
+a8:[["Disciplinary cases","Restricted","Final MD decision"],["Show-cause / response","Case records","Review"],["Investigation findings","Need-to-know","Review"],["Appeal / acknowledgement","Case records","Monitor"]],
+a9:[["Retention schedule","All record classes","Oversight"],["Legal / audit holds","All branches","Review"],["Print and filing register","Physical records","Audit"],["Destruction authorisations","Eligible records","Governance"]],
+a10:[["Login / password policy","System-wide","Security oversight"],["OTP / recovery policy","System-wide","Security oversight"],["Role / permission register","System-wide","Review"],["Security events","System-wide","Escalation"]],
+a11:[["Application / API health","Infrastructure","Monitor"],["D1 / storage status","Infrastructure","Monitor"],["Backup and restore readiness","Infrastructure","Oversight"],["Technical incidents","System-wide","Escalation"]],
+a12:[["Expense register","All branches","View"],["Administrator approval limit","MD-controlled","Set / revise"],["Above-limit expenses","All branches","MD approval"],["Budget and variance","Branch / consolidated","Review"]],
+a13:[["Purchase requisitions","All branches","View / reserved approval"],["Procurement approval limit","MD-controlled","Set / revise"],["Above-limit purchases","All branches","MD approval"],["Inventory / fixed assets","All branches","Oversight"]],
+a14:[["Contract register","All branches","View"],["New / renewed commitments","All branches","Reserved / above-limit approval"],["Amendments and termination","Contract records","Review"],["Obligations / expiry","All branches","Monitor"]],
+a15:[["Licences and registrations","All branches","View"],["Renewals and expiry","All branches","Escalation"],["Inspections and notices","Restricted as needed","Review"],["Corrective actions","All branches","Monitor"]],
+m16:[["Revenue and expenditure","Group / branch","Intelligence"],["Operating surplus and cash","Group / branch","Intelligence"],["Patient and service activity","Where connected","Trend analysis"],["Target vs actual","All branches","Executive review"]],
+m17:[["Annual strategic plan","Group","Set objectives"],["Branch expansion proposals","New locations","Evaluate"],["New services / departments","Business proposals","Prioritise"],["Growth milestones","Group","Monitor"]],
+m18:[["Capital expenditure proposals","Group","Approve / prioritise"],["Investment cases","Projects","ROI review"],["Funding and debt commitments","Group","Oversight"],["Asset acquisition / disposal","Group","Reserved decisions"]],
+m19:[["Patient safety indicators","Facilities","Monitor"],["Serious incident escalations","Restricted","Executive oversight"],["Clinical audit summaries","Departments","Review"],["Quality improvement plans","Facilities","Monitor"]],
+m20:[["Branch leadership scorecards","All branches","Review"],["Department head objectives","Departments","Set / review"],["Management review meetings","Group","Chair / decisions"],["Succession and leadership continuity","Group","Strategic oversight"]],
+m21:[["Shareholder / ownership register","Company","Restricted oversight"],["Investor contributions / commitments","Company","Monitor"],["Board meetings and resolutions","Board","Governance"],["Investor and shareholder reports","Authorised audience","Approve / review"]],
+m22:[["Enterprise risk register","Group","Own / oversee"],["Critical clinical / financial risks","Group","Escalate"],["Business continuity plans","All branches","Approve strategy"],["Crisis command and recovery","Group","Activate / review"]],
+m23:[["Brand guidelines","Group","Approve"],["Marketing plans and budgets","All branches","Review"],["Patient acquisition / conversion","Campaigns","Monitor"],["Reputation and feedback","Public channels","Oversight"]],
+m24:[["Above-limit expenses","Administrator submission","MD approval"],["Above-limit procurement","Administrator submission","MD approval"],["Advances above 25% salary","Administrator submission","MD approval"],["Disciplinary final decisions","Administrator case workflow","MD final authority"],["Reserved strategic / legal matters","Authorised submissions","MD decision"]],
+m25:[["Board and shareholder papers","Executive only","Restricted"],["Legal and strategic documents","Need-to-know","Restricted"],["Special investigations","Independent access","Restricted"],["Confidential financial records","Executive only","Restricted"]]
+};
+function createModulePage(x){
+ const rows=tableRows[x[0]]||[];
+ const rowsHtml=rows.map(r=>`<tr><td>${r[0]}</td><td>${r[1]}</td><td><span class="pill teal">${r[2]}</span></td></tr>`).join("");
+ const description=x[2];
+ const page=document.createElement("section");page.className="page";page.id=x[0];
+ page.innerHTML=`<div class="intro"><div><div class="kicker">${x.type} · Executive visibility</div><h1>${x[1]}</h1><p>${description}</p></div><div class="toolbar noprint"><select aria-label="Branch scope"><option>All branches – consolidated</option><option>Head Office – Kochi</option><option>Neelambari Hospital – Thamarakulam</option><option>ILVORA Health Clinic – Kottarakkara</option></select><button onclick="window.print()">Print view</button></div></div>
+ <div class="grid"><div class="card"><div class="metric">All</div><div class="metric-label">Organisation-wide scope</div></div><div class="card"><div class="metric">View</div><div class="metric-label">Executive visibility</div></div><div class="card"><div class="metric">MD</div><div class="metric-label">Reserved decisions where applicable</div></div><div class="card"><div class="metric">Audit</div><div class="metric-label">Decision and activity oversight</div></div></div>
+ <div class="layout"><div class="card"><h2>Service coverage & permissions</h2><table><thead><tr><th>Function</th><th>Scope / source</th><th>MD role</th></tr></thead><tbody>${rowsHtml}</tbody></table></div>
+ <div class="card"><h2>Executive controls</h2><ul><li>Consolidated and branch-wise visibility.</li><li>Access to relevant reports, status and audit history.</li><li>Escalation of overdue, high-impact and critical items.</li><li>Reserved MD decisions remain separate from routine operational execution.</li><li>Confidential information is subject to need-to-know restrictions and applicable law.</li></ul><div class="note">This page is a unified navigation and governance prototype. It does not connect to live Administrator service databases or execute real transactions.</div></div></div>`;
+ pageRoot.appendChild(page);
+}
+all.forEach(createModulePage);
+document.querySelectorAll("nav button").forEach(b=>b.addEventListener("click",()=>showPage(b.dataset.page)));
+function showPage(id){document.querySelectorAll(".page").forEach(p=>p.classList.toggle("active",p.id===id));document.querySelectorAll("nav button").forEach(b=>b.classList.toggle("active",b.dataset.page===id));window.scrollTo({top:0,behavior:"smooth"})}
+function setScope(v){document.querySelectorAll(".branchScopeLabel").forEach(e=>e.textContent=v)}
+function approvalAction(btn){let tr=btn.closest("tr");let ref=tr.cells[0].textContent;let choice=prompt("Demo review for "+ref+". Enter: approve, reject, or return");if(!choice)return;choice=choice.toLowerCase();if(!["approve","reject","return"].includes(choice)){alert("Enter approve, reject or return.");return}tr.cells[5].innerHTML='<span class="pill teal">Demo: '+choice+'</span>';alert("Demo only. No real approval was executed. Production must record authorised identity, rationale, timestamp and audit trail.");}
+let decisions=[{ref:"MD-DEC-0001",title:"Quarterly branch performance review",scope:"All branches / Group",owner:"Administrator",due:"2026-11-30",status:"In progress"}];
+function renderDecisions(){document.getElementById("decisionRows").innerHTML=decisions.map(d=>`<tr><td><b>${d.ref}</b></td><td>${d.title}</td><td>${d.scope}</td><td>${d.owner}</td><td>${d.due||"—"}</td><td><span class="pill amber">${d.status}</span></td></tr>`).join("")}
+function addDecision(){let title=document.getElementById("decTitle").value.trim();if(!title){alert("Enter a decision title.");return}let ref="MD-DEC-"+String(decisions.length+1).padStart(4,"0");decisions.unshift({ref,title,scope:document.getElementById("decBranch").value,owner:document.getElementById("decOwner").value||"Not assigned",due:document.getElementById("decDue").value,status:"Recorded (demo)"});renderDecisions();["decTitle","decValue","decOwner","decDue","decText"].forEach(id=>document.getElementById(id).value="");alert("Decision "+ref+" added in this browser session only.");}
+renderDecisions();
+</script></body></html>
