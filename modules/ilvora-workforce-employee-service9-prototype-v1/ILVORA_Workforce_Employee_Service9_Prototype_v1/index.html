@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ILVORA Workforce | My Requests & Helpdesk</title>
+<style>
+:root{--navy:#10243a;--teal:#168b88;--gold:#c9a96e;--bg:#f3f6f8;--ink:#203244;--muted:#718096;--line:#e3eaf0}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);font:14px/1.5 Inter,Segoe UI,Arial,sans-serif;color:var(--ink)}
+header{background:var(--navy);color:#fff;padding:20px max(18px,calc((100% - 1120px)/2));display:flex;justify-content:space-between;align-items:center;gap:12px}
+.brand{font-weight:800;letter-spacing:.08em}.brand small{display:block;color:#b8c8d5;font-weight:400;letter-spacing:0;margin-top:3px}
+main{max-width:1120px;margin:26px auto;padding:0 18px}.head{display:flex;justify-content:space-between;align-items:flex-start;gap:15px;flex-wrap:wrap}
+h1{margin:0;color:var(--navy);font-size:25px}.muted{color:var(--muted)}.sub{margin:5px 0 0}
+.pill{background:#e4f4f2;color:#126c69;padding:6px 11px;border-radius:20px;font-size:11px;font-weight:700}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:16px 0}.stat,.panel{background:white;border:1px solid var(--line);border-radius:14px}
+.stat{padding:14px}.stat strong{display:block;font-size:24px;color:var(--navy)}.stat span{font-size:12px;color:var(--muted)}
+.tabs{display:flex;gap:8px;margin:18px 0;flex-wrap:wrap}.tabs button,.btn{border:1px solid var(--line);background:white;color:var(--ink);padding:10px 14px;border-radius:9px;cursor:pointer;font-weight:600}
+.tabs button.active,.btn.primary{background:var(--teal);color:white;border-color:var(--teal)}
+.panel{padding:18px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.field{display:flex;flex-direction:column;gap:6px}.full{grid-column:1/-1}
+label{font-weight:650;color:var(--navy);font-size:13px}input,select,textarea{font:inherit;padding:10px 11px;border:1px solid #d6e0e8;border-radius:8px;background:#fff;color:var(--ink);width:100%}textarea{min-height:95px;resize:vertical}
+.hint{font-size:11px;color:var(--muted)}.actions{display:flex;gap:9px;justify-content:flex-end;margin-top:16px;flex-wrap:wrap}
+.notice{margin:14px 0;padding:12px 14px;border:1px solid #cfe5e3;background:#f1faf9;border-radius:10px;color:#315d5b;font-size:12px}
+.listhead{display:flex;justify-content:space-between;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:12px}
+table{width:100%;border-collapse:collapse}th,td{text-align:left;padding:12px 9px;border-bottom:1px solid var(--line);font-size:12px;vertical-align:top}th{color:var(--muted);font-weight:700}
+.status{display:inline-block;padding:4px 8px;border-radius:20px;background:#edf2f7;color:#42566a;font-size:11px;font-weight:700}.status.progress{background:#e5f2ff;color:#245b88}.status.wait{background:#fff4dc;color:#805b13}.status.done{background:#e3f5ec;color:#216846}
+.hidden{display:none!important}.empty{text-align:center;color:var(--muted);padding:25px}.refbox{padding:14px;background:#eef8f7;border:1px solid #c7e7e4;border-radius:10px;margin-top:14px}.refbox strong{font-size:20px;color:#126c69}
+.small{font-size:11px}.foot{color:var(--muted);font-size:11px;margin-top:15px}
+@media(max-width:700px){.stats{grid-template-columns:1fr 1fr}.grid{grid-template-columns:1fr}.full{grid-column:auto}.tablewrap{overflow-x:auto}th,td{white-space:nowrap}}
+</style></head>
+<body>
+<header><div class="brand">ILVORA <span style="color:var(--gold)">WORKFORCE</span><small>WHERE CARE BECOMES CONFIDENCE.</small></div><div>Employee Portal　●</div></header>
+<main>
+<div class="head"><div><h1>My Requests & Helpdesk</h1><p class="sub muted">Submit workplace service requests and track their progress.</p></div><span class="pill">DEMO EMPLOYEE · ILV-NH-014</span></div>
+<div class="stats">
+<div class="stat"><strong id="total">3</strong><span>Total requests</span></div>
+<div class="stat"><strong id="open">2</strong><span>Open requests</span></div>
+<div class="stat"><strong id="resolved">1</strong><span>Resolved requests</span></div>
+</div>
+<div class="tabs"><button class="active" data-tab="new">Create a request</button><button data-tab="history">My request history</button></div>
+<section class="panel" id="newPanel">
+<h2 style="margin:0 0 4px;color:var(--navy)">New service request</h2>
+<p class="muted small" style="margin:0 0 16px">Your employee ID and branch are added automatically from your signed-in profile.</p>
+<form id="requestForm">
+<div class="grid">
+<div class="field"><label>Employee ID</label><input value="ILV-NH-014" readonly></div>
+<div class="field"><label>Branch</label><input value="Neelambari Hospital – Thamarakulam" readonly></div>
+<div class="field"><label for="category">Request category *</label><select id="category" required><option value="">Select category</option><option>HR / Employment</option><option>Employment letter / Certificate</option><option>ID card request</option><option>Profile correction</option><option>IT / System support</option><option>Facility / Maintenance</option><option>Equipment / Supplies</option><option>Other</option></select></div>
+<div class="field"><label for="priority">Priority *</label><select id="priority" required><option value="Normal">Normal</option><option value="High">High</option><option value="Urgent">Urgent</option></select><span class="hint">Urgent requests should be used only when there is an immediate operational impact. Emergencies require the normal emergency route.</span></div>
+<div class="field full"><label for="subject">Subject *</label><input id="subject" maxlength="120" placeholder="Briefly describe what you need" required></div>
+<div class="field full"><label for="description">Description *</label><textarea id="description" placeholder="Provide relevant details, dates and steps already taken." required></textarea></div>
+<div class="field"><label for="contact">Preferred contact method</label><select id="contact"><option>In-app update</option><option>Registered email</option><option>Registered mobile</option></select></div>
+<div class="field"><label for="attachment">Attachment reference (optional)</label><input id="attachment" placeholder="Describe supporting document"></div>
+</div>
+<div class="notice">Do not include passwords, patient-identifiable information or unnecessary sensitive personal details. A real deployment will provide secure file upload with access controls.</div>
+<div class="actions"><button type="reset" class="btn">Clear form</button><button type="submit" class="btn primary">Submit request</button></div>
+</form>
+<div id="created" class="refbox hidden"><div class="small">DEMO REQUEST CREATED</div><strong id="newRef"></strong><p id="createdText" class="small"></p><p class="small">Keep this reference number for follow-up.</p></div>
+</section>
+<section class="panel hidden" id="historyPanel">
+<div class="listhead"><div><h2 style="margin:0;color:var(--navy)">My request history</h2><span class="muted small">Only requests linked to your employee account are shown.</span></div><input id="search" placeholder="Search reference or subject…" style="max-width:260px"></div>
+<div class="tablewrap"><table><thead><tr><th>Reference</th><th>Submitted</th><th>Category</th><th>Subject</th><th>Priority</th><th>Status</th><th>Last update</th></tr></thead><tbody id="rows"></tbody></table></div>
+<div id="empty" class="empty hidden">No requests match your search.</div>
+<p class="foot">The employee view shows status and approved updates only. Internal staff notes and other employees' requests are not visible.</p>
+</section>
+<p class="foot">Prototype only. Sample records and request creation are simulated in the browser; no live HR, IT, email, SMS, file storage or ticketing system is connected.</p>
+</main>
+<script>
+let requests=[
+{ref:'ILV-REQ-2026-0031',date:'10 Nov 2026',category:'IT / System support',subject:'Workforce portal login assistance',priority:'Normal',status:'In progress',updated:'12 Nov 2026'},
+{ref:'ILV-REQ-2026-0024',date:'07 Nov 2026',category:'Employment letter / Certificate',subject:'Request for employment confirmation letter',priority:'Normal',status:'Awaiting review',updated:'08 Nov 2026'},
+{ref:'ILV-REQ-2026-0019',date:'02 Nov 2026',category:'Facility / Maintenance',subject:'Staff room lighting repair',priority:'High',status:'Resolved',updated:'05 Nov 2026'}
+];
+function updateCounts(){document.getElementById('total').textContent=requests.length;document.getElementById('open').textContent=requests.filter(x=>x.status!=='Resolved'&&x.status!=='Closed').length;document.getElementById('resolved').textContent=requests.filter(x=>x.status==='Resolved'||x.status==='Closed').length}
+function render(){let q=document.getElementById('search').value.toLowerCase();let arr=requests.filter(x=>(x.ref+' '+x.subject+' '+x.category).toLowerCase().includes(q));let body=document.getElementById('rows');body.innerHTML='';arr.forEach(x=>{let tr=document.createElement('tr');let cls=x.status==='Resolved'||x.status==='Closed'?'done':x.status==='In progress'?'progress':'wait';tr.innerHTML=`<td>${x.ref}</td><td>${x.date}</td><td>${x.category}</td><td>${x.subject}</td><td>${x.priority}</td><td><span class="status ${cls}">${x.status}</span></td><td>${x.updated}</td>`;body.appendChild(tr)});document.getElementById('empty').classList.toggle('hidden',arr.length>0);updateCounts()}
+document.querySelectorAll('.tabs button').forEach(b=>b.onclick=()=>{document.querySelectorAll('.tabs button').forEach(x=>x.classList.remove('active'));b.classList.add('active');document.getElementById('newPanel').classList.toggle('hidden',b.dataset.tab!=='new');document.getElementById('historyPanel').classList.toggle('hidden',b.dataset.tab!=='history')});
+document.getElementById('search').oninput=render;
+document.getElementById('requestForm').onsubmit=e=>{e.preventDefault();let seq=requests.length+32;let ref='ILV-REQ-2026-'+String(seq).padStart(4,'0');let date=new Date().toLocaleDateString('en-GB',{day:'2-digit',month:'short',year:'numeric'});requests.unshift({ref,date,category:document.getElementById('category').value,subject:document.getElementById('subject').value,priority:document.getElementById('priority').value,status:'Submitted',updated:date});document.getElementById('newRef').textContent=ref;document.getElementById('createdText').textContent='Your request has been linked to employee ID ILV-NH-014. Status: Submitted.';document.getElementById('created').classList.remove('hidden');e.target.reset();render()};
+render();
+</script></body></html>
