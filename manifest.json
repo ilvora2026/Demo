@@ -1,0 +1,13 @@
+{
+  "prototype": "ILVORA Workforce Final Integrated Prototype v1",
+  "roles": {
+    "employee": 11,
+    "branch": 11,
+    "ho": 12,
+    "admin": 17,
+    "md": 18
+  },
+  "unique_service_packages": 48,
+  "module_links": 69,
+  "notes": "Front-end aggregation; role dashboard links open separate service prototypes; no live backend/auth."
+}
