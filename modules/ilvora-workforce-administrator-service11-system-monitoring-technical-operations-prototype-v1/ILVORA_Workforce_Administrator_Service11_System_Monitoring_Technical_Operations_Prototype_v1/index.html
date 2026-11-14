@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ILVORA Workforce | System Monitoring & Technical Operations</title>
+<style>
+:root{--navy:#10283f;--teal:#167c80;--gold:#c7a66a;--bg:#f3f6f8;--ink:#243746;--muted:#6b7c88;--line:#dce4e9}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);font:14px/1.45 Arial,sans-serif;color:var(--ink)}
+header{background:var(--navy);color:white;padding:20px 26px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.brand{font-size:19px;font-weight:700;letter-spacing:.5px}.brand span{color:#d9bd88}.sub{color:#d4e0e8;font-size:12px;margin-top:3px}.role{background:#1b405b;border:1px solid #45637a;border-radius:20px;padding:8px 13px;font-size:12px}
+main{max-width:1280px;margin:24px auto;padding:0 18px}.notice{background:#fff8e9;border:1px solid #ead7ad;border-left:4px solid var(--gold);padding:12px 15px;border-radius:8px;margin-bottom:18px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:18px}.stat,.panel{background:white;border:1px solid var(--line);border-radius:10px;padding:16px}
+.stat small{color:var(--muted)}.stat strong{display:block;font-size:24px;margin-top:7px;color:var(--navy)}
+.layout{display:grid;grid-template-columns:1fr 1fr;gap:16px}.panel h2{font-size:16px;margin:0 0 14px;color:var(--navy)}
+.toolbar,.actions{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+input,select,textarea{font:inherit;border:1px solid #cbd6dd;border-radius:6px;padding:9px;background:white;color:var(--ink);min-width:0;max-width:100%}
+textarea{width:100%;min-height:65px}button{border:0;border-radius:6px;padding:9px 13px;background:var(--teal);color:white;font-weight:600;cursor:pointer}
+button.secondary{background:#eaf0f3;color:var(--navy)}button.gold{background:#9a773e}button.danger{background:#a44444}
+table{width:100%;border-collapse:collapse;font-size:12px}th,td{text-align:left;padding:10px 8px;border-bottom:1px solid var(--line);vertical-align:top}th{color:var(--muted);background:#f8fafb}
+.pill{display:inline-block;border-radius:20px;padding:3px 8px;font-size:11px;background:#edf2f5;color:#435767}.good{background:#e4f4ed;color:#216548}.warn{background:#fff3d9;color:#805d1d}.bad{background:#fae9e9;color:#8b3434}
+.field{display:grid;grid-template-columns:1fr 1fr;gap:10px}.field label{display:flex;flex-direction:column;gap:5px;color:#526573;font-size:12px;margin-bottom:10px}.full{grid-column:1/-1}
+.rule{background:#f4f8f8;border:1px solid #d7e7e6;padding:12px;border-radius:8px;margin:10px 0;font-size:13px}.muted,.small{color:var(--muted)}.small{font-size:11px}
+.fulltable{overflow-x:auto}.bar{height:8px;background:#e9eef1;border-radius:8px;overflow:hidden;min-width:80px}.bar i{display:block;height:100%;background:var(--teal)}
+@media(max-width:900px){.stats{grid-template-columns:repeat(2,1fr)}.layout{grid-template-columns:1fr}}@media(max-width:520px){.field{grid-template-columns:1fr}.stats{grid-template-columns:1fr 1fr}main{padding:0 10px}}
+</style></head><body>
+<header><div><div class="brand">ILVORA <span>WORKFORCE</span></div><div class="sub">Administrator Panel · System Monitoring & Technical Operations</div></div><div class="role">DEMO ROLE: ADMINISTRATOR</div></header>
+<main>
+<div class="notice"><b>Operations governance:</b> This dashboard displays illustrative system telemetry only. In production, monitoring must read from authenticated server-side health checks and logs. Database deletion, schema changes, secret rotation and other destructive infrastructure actions require restricted technical authorisation, approval and audit evidence.</div>
+<section class="stats">
+<div class="stat"><small>Overall service status</small><strong><span class="pill good">Operational · Demo</span></strong></div>
+<div class="stat"><small>Database status</small><strong>Healthy</strong></div>
+<div class="stat"><small>Open incidents</small><strong id="incidentCount">02</strong></div>
+<div class="stat"><small>Latest backup</small><strong>Today · 02:00</strong></div>
+</section>
+<div class="layout">
+<section class="panel"><h2>Infrastructure Health</h2>
+<div class="fulltable"><table><thead><tr><th>Component</th><th>Status</th><th>Usage / latency</th><th>Last check</th></tr></thead><tbody>
+<tr><td>Web application</td><td><span class="pill good">Operational</span></td><td><div class="bar"><i style="width:36%"></i></div><span class="small">36% CPU</span></td><td>Just now</td></tr>
+<tr><td>API / Worker service</td><td><span class="pill good">Operational</span></td><td>142 ms average</td><td>Just now</td></tr>
+<tr><td>Database (D1)</td><td><span class="pill good">Connected</span></td><td>68% storage quota</td><td>Just now</td></tr>
+<tr><td>Object / document storage</td><td><span class="pill warn">Review</span></td><td>78% quota</td><td>5 min ago</td></tr>
+<tr><td>Notification service</td><td><span class="pill warn">Degraded</span></td><td>4 delivery retries</td><td>2 min ago</td></tr>
+<tr><td>Backup service</td><td><span class="pill good">Completed</span></td><td>Last backup 02:00</td><td>Today</td></tr>
+</tbody></table></div>
+<p class="small">Values are fictional demonstration metrics, not readings from ILVORA production infrastructure.</p>
+</section>
+<section class="panel"><h2>Module Processing Status</h2>
+<div class="fulltable"><table><thead><tr><th>Workflow</th><th>Last run</th><th>Result</th><th>Pending / exceptions</th></tr></thead><tbody>
+<tr><td>Attendance synchronisation</td><td>10:00</td><td><span class="pill good">Complete</span></td><td>2 exceptions</td></tr>
+<tr><td>Payroll processing</td><td>12 Nov</td><td><span class="pill good">Complete</span></td><td>0 failed</td></tr>
+<tr><td>Payslip generation queue</td><td>12 Nov</td><td><span class="pill warn">Pending</span></td><td>3 requests</td></tr>
+<tr><td>Notification delivery</td><td>10:15</td><td><span class="pill warn">Retrying</span></td><td>4 retries</td></tr>
+<tr><td>Leave updates</td><td>10:05</td><td><span class="pill good">Complete</span></td><td>0 failed</td></tr>
+<tr><td>Branch data sync</td><td>10:00</td><td><span class="pill good">Complete</span></td><td>0 failed</td></tr>
+</tbody></table></div>
+</section>
+<section class="panel"><h2>System Errors & Failed Operations</h2>
+<div class="toolbar"><select id="severity"><option value="">All severity</option><option>High</option><option>Medium</option><option>Low</option></select><button class="secondary" onclick="renderErrors()">Filter</button></div>
+<div class="fulltable"><table><thead><tr><th>Time</th><th>Service</th><th>Error</th><th>Severity</th><th>Status</th></tr></thead><tbody id="errorRows"></tbody></table></div>
+</section>
+<section class="panel"><h2>Backup & Recovery Monitor</h2>
+<div class="fulltable"><table><thead><tr><th>Backup</th><th>Scope</th><th>Completed</th><th>Verification</th><th>Status</th></tr></thead><tbody>
+<tr><td>BKP-2026-1114-0200</td><td>Database snapshot</td><td>02:00</td><td>Checksum passed</td><td><span class="pill good">Verified</span></td></tr>
+<tr><td>BKP-2026-1113-0200</td><td>Database snapshot</td><td>Yesterday</td><td>Restore test pending</td><td><span class="pill warn">Review</span></td></tr>
+<tr><td>DOC-2026-1114</td><td>Document metadata</td><td>02:10</td><td>Checksum passed</td><td><span class="pill good">Verified</span></td></tr>
+</tbody></table></div>
+<div class="rule"><b>Recovery readiness:</b> Production should have encrypted backups stored separately, documented RPO/RTO targets, periodic restore tests and a protected recovery runbook.</div>
+<button class="secondary" onclick="alert('Demo only: no real backup or restore is triggered.')">Run backup verification (demo)</button>
+</section>
+<section class="panel"><h2>Incident Register</h2>
+<div class="toolbar"><input id="incidentSearch" placeholder="Search incident / service"><select id="incidentStatus"><option value="">All statuses</option><option>Open</option><option>Investigating</option><option>Resolved</option></select><button class="secondary" onclick="renderIncidents()">Filter</button></div>
+<div class="fulltable"><table><thead><tr><th>Incident</th><th>Service</th><th>Impact</th><th>Status</th><th>Action</th></tr></thead><tbody id="incidentRows"></tbody></table></div>
+</section>
+<section class="panel"><h2>Register Technical Incident</h2>
+<div class="field">
+<label>Service / component<select id="component"><option>Web application</option><option>API / Worker service</option><option>Database</option><option>Document storage</option><option>Notification service</option><option>Attendance sync</option><option>Payroll / payslip</option><option>Backup / recovery</option><option>Other</option></select></label>
+<label>Severity<select id="impact"><option>Low</option><option>Medium</option><option>High</option><option>Critical</option></select></label>
+<label class="full">Incident description<textarea id="incidentDesc" placeholder="Describe observed symptoms, time, affected service and reference IDs. Do not paste secrets or employee-sensitive data."></textarea></label>
+<label>Reported by<input id="reportedBy" placeholder="Role / authorised operator"></label>
+<label>Reference<input id="ref" placeholder="Monitoring alert / ticket reference"></label>
+</div><button onclick="addIncident()">Register incident</button>
+</section>
+</div>
+<section class="panel" style="margin-top:16px"><h2>Technical Actions & Authorisation</h2>
+<div class="field">
+<div><b>Routine operational actions</b><p class="muted">Review logs, retry safe failed jobs, verify service status and raise incidents where authorised. Each action should record actor, time, scope and result.</p></div>
+<div><b>Restricted infrastructure actions</b><p class="muted">Database deletion, schema migrations, production secret changes, storage purge, restore-overwrite and disabling critical services require restricted technical access, documented approval, backup/rollback plan and audit log.</p></div>
+<div><b>Administrator</b><p class="muted">Monitors service health, reviews operational exceptions and coordinates authorised support. No implicit unrestricted database or infrastructure access.</p></div>
+<div><b>Head Office Admin / Managing Director</b><p class="muted">Head Office Admin continues branch administration. Managing Director receives executive-level incident and availability reporting; neither role should bypass technical safeguards.</p></div>
+</div>
+<div class="rule"><b>Security reminder:</b> Never display or store API keys, database credentials, passwords, OTPs, access tokens or full sensitive employee records in monitoring logs. Apply redaction, retention limits and least-privilege access.</div>
+</section>
+<section class="panel" style="margin-top:16px"><h2>Technical Activity Audit</h2>
+<div class="toolbar"><button class="secondary" onclick="exportCSV()">Export audit CSV</button><button class="secondary" onclick="renderAudit()">Refresh</button></div>
+<div class="fulltable"><table><thead><tr><th>Date / time</th><th>Actor</th><th>Action</th><th>Reference / result</th></tr></thead><tbody id="auditRows"></tbody></table></div>
+</section>
+</main>
+<script>
+let errors=[
+{time:'10:12',service:'Notification service',error:'Delivery provider returned temporary error',severity:'Medium',status:'Retry scheduled'},
+{time:'09:58',service:'Document storage',error:'Storage quota approaching configured threshold',severity:'High',status:'Open'},
+{time:'09:44',service:'Attendance sync',error:'Two punch records require reconciliation',severity:'Low',status:'Under review'},
+{time:'Yesterday',service:'API / Worker service',error:'Transient request timeout',severity:'Low',status:'Resolved'}
+];
+let incidents=[
+{id:'INC-2026-011',service:'Notification service',impact:'Medium',status:'Open',desc:'Four notification retries awaiting provider response.'},
+{id:'INC-2026-010',service:'Document storage',impact:'High',status:'Investigating',desc:'Storage usage reached 78% of configured quota.'}
+];
+let audit=[
+{time:'2026-11-14 10:12',actor:'System monitor (demo)',action:'Alert generated',ref:'Notification delivery retries'},
+{time:'2026-11-14 09:58',actor:'System monitor (demo)',action:'Capacity warning',ref:'Document storage at 78%'},
+{time:'2026-11-14 09:44',actor:'Attendance service (demo)',action:'Exception raised',ref:'2 punch records'}
+];
+function renderErrors(){let f=severity.value;errorRows.innerHTML='';errors.filter(e=>!f||e.severity===f).forEach(e=>{let tr=document.createElement('tr');tr.innerHTML=`<td>${e.time}</td><td>${e.service}</td><td>${e.error}</td><td><span class="pill ${e.severity==='High'||e.severity==='Critical'?'bad':e.severity==='Medium'?'warn':'good'}">${e.severity}</span></td><td>${e.status}</td>`;errorRows.appendChild(tr)})}
+function renderIncidents(){let q=incidentSearch.value.toLowerCase(),f=incidentStatus.value;incidentRows.innerHTML='';incidents.filter(i=>(!q||(i.id+i.service).toLowerCase().includes(q))&&(!f||i.status===f)).forEach(i=>{let tr=document.createElement('tr');tr.innerHTML=`<td><b>${i.id}</b></td><td>${i.service}</td><td>${i.impact}</td><td><span class="pill ${i.status==='Resolved'?'good':'warn'}">${i.status}</span></td><td><button class="secondary" onclick="updateIncident('${i.id}')">Update</button></td>`;incidentRows.appendChild(tr)});incidentCount.textContent=incidents.filter(i=>i.status!=='Resolved').length}
+function addIncident(){if(!incidentDesc.value.trim()){alert('Enter an incident description.');return}let id='INC-'+Date.now();incidents.unshift({id,service:component.value,impact:impact.value,status:'Open',desc:incidentDesc.value});audit.push({time:new Date().toLocaleString(),actor:reportedBy.value||'Administrator (demo)',action:'Incident registered',ref:id+' · '+(ref.value||component.value)});incidentDesc.value=reportedBy.value=ref.value='';renderIncidents();renderAudit();alert('Incident added to this demonstration register.')}
+function updateIncident(id){let i=incidents.find(x=>x.id===id);if(!i)return;let s=prompt('Set status: Open, Investigating or Resolved',i.status);if(!['Open','Investigating','Resolved'].includes(s))return;i.status=s;audit.push({time:new Date().toLocaleString(),actor:'Administrator (demo)',action:'Incident status updated',ref:id+' → '+s});renderIncidents();renderAudit()}
+function renderAudit(){auditRows.innerHTML='';audit.slice().reverse().forEach(a=>{let tr=document.createElement('tr');tr.innerHTML=`<td>${a.time}</td><td>${a.actor}</td><td>${a.action}</td><td>${a.ref}</td>`;auditRows.appendChild(tr)})}
+function exportCSV(){let data=[['Date/time','Actor','Action','Reference / result'],...audit.map(a=>[a.time,a.actor,a.action,a.ref])];let csv=data.map(r=>r.map(v=>'"'+String(v).replaceAll('"','""')+'"').join(',')).join('\n');let a=document.createElement('a');a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv'}));a.download='ilvora-technical-operations-audit-demo.csv';a.click();URL.revokeObjectURL(a.href)}
+renderErrors();renderIncidents();renderAudit();
+</script></body></html>
