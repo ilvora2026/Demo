@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ILVORA Workforce | HR Compliance & Records Audit</title>
+<style>
+:root{--navy:#10283f;--teal:#167c80;--gold:#c7a66a;--bg:#f3f6f8;--ink:#243746;--muted:#6b7c88;--line:#dce4e9}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);font:14px/1.45 Arial,sans-serif;color:var(--ink)}
+header{background:var(--navy);color:white;padding:20px 26px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.brand{font-size:19px;font-weight:700;letter-spacing:.5px}.brand span{color:#d9bd88}.sub{color:#d4e0e8;font-size:12px;margin-top:3px}.role{background:#1b405b;border:1px solid #45637a;border-radius:20px;padding:8px 13px;font-size:12px}
+main{max-width:1280px;margin:24px auto;padding:0 18px}.notice{background:#fff8e9;border:1px solid #ead7ad;border-left:4px solid var(--gold);padding:12px 15px;border-radius:8px;margin-bottom:18px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:18px}.stat,.panel{background:white;border:1px solid var(--line);border-radius:10px;padding:16px}
+.stat small{color:var(--muted)}.stat strong{display:block;font-size:24px;margin-top:7px;color:var(--navy)}
+.layout{display:grid;grid-template-columns:1.2fr .8fr;gap:16px}.panel h2{font-size:16px;margin:0 0 14px;color:var(--navy)}
+.toolbar,.actions{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+input,select,textarea{font:inherit;border:1px solid #cbd6dd;border-radius:6px;padding:9px;background:white;color:var(--ink);min-width:0;max-width:100%}
+textarea{width:100%;min-height:68px}button{border:0;border-radius:6px;padding:9px 13px;background:var(--teal);color:white;font-weight:600;cursor:pointer}
+button.secondary{background:#eaf0f3;color:var(--navy)}button.gold{background:#9a773e}button.danger{background:#a44444}
+table{width:100%;border-collapse:collapse;font-size:12px}th,td{text-align:left;padding:10px 8px;border-bottom:1px solid var(--line);vertical-align:top}th{color:var(--muted);background:#f8fafb}
+.pill{display:inline-block;border-radius:20px;padding:3px 8px;font-size:11px;background:#edf2f5;color:#435767}.pending{background:#fff3d9;color:#805d1d}.hold{background:#f9e8e8;color:#8b3434}.ok{background:#e4f4ed;color:#216548}
+.field{display:grid;grid-template-columns:1fr 1fr;gap:10px}.field label{display:flex;flex-direction:column;gap:5px;color:#526573;font-size:12px;margin-bottom:10px}.full{grid-column:1/-1}
+.rule{background:#f4f8f8;border:1px solid #d7e7e6;padding:12px;border-radius:8px;margin:10px 0;font-size:13px}.muted,.small{color:var(--muted)}.small{font-size:11px}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}.tabs button{background:#eaf0f3;color:var(--navy)}.tabs button.active{background:var(--teal);color:white}
+.detail{background:#f8fafb;border:1px solid var(--line);border-radius:8px;padding:12px;margin-top:12px}
+@media(max-width:900px){.stats{grid-template-columns:repeat(2,1fr)}.layout{grid-template-columns:1fr}}@media(max-width:520px){.field{grid-template-columns:1fr}.stats{grid-template-columns:1fr 1fr}main{padding:0 10px}}
+</style></head><body>
+<header><div><div class="brand">ILVORA <span>WORKFORCE</span></div><div class="sub">Administrator Panel · HR Compliance, Records Retention & Audit Management</div></div><div class="role">DEMO ROLE: ADMINISTRATOR</div></header>
+<main>
+<div class="notice"><b>Records governance:</b> Retention and deletion must follow the approved HR/legal schedule. Legal, audit, investigation and regulatory holds pause destruction. Printing does not by itself authorise digital deletion. Medical certificates and legally required leave evidence are retained digitally for 5 years, subject to legal review.</div>
+<section class="stats">
+<div class="stat"><small>Records in register</small><strong id="recordCount">06</strong></div><div class="stat"><small>Upcoming retention actions</small><strong id="dueCount">02</strong></div><div class="stat"><small>Active holds</small><strong id="holdCount">02</strong></div><div class="stat"><small>Physical filing pending</small><strong id="printCount">02</strong></div>
+</section>
+<div class="layout">
+<section class="panel"><h2>Retention & Compliance Register</h2>
+<div class="toolbar"><input id="search" placeholder="Search record / employee / reference"><select id="typeFilter"><option value="">All record types</option><option>Attendance detail</option><option>Attendance summary</option><option>Medical certificate</option><option>Leave evidence</option><option>Duty roster detail</option><option>Payroll record</option></select><select id="holdFilter"><option value="">All hold states</option><option>On hold</option><option>Clear</option></select><button class="secondary" onclick="render()">Filter</button></div>
+<div style="overflow-x:auto"><table><thead><tr><th>Record reference</th><th>Branch</th><th>Record type</th><th>Retention / review date</th><th>Print filing</th><th>Hold</th><th>Action</th></tr></thead><tbody id="rows"></tbody></table></div><p class="small">Illustrative records only. Do not enter actual employee or medical information into this prototype.</p>
+</section>
+<section class="panel"><h2>Register a Record / Retention Rule</h2>
+<div class="field">
+<label>Record reference<input id="ref" placeholder="e.g. REC-2026-001"></label><label>Branch<select id="branch"><option>Head Office – Kochi</option><option>Neelambari Hospital – Thamarakulam</option><option>ILVORA Health Clinic – Kottarakkara</option><option>All branches</option></select></label>
+<label>Record type<select id="rtype"><option>Attendance detail</option><option>Attendance summary</option><option>Medical certificate</option><option>Leave evidence</option><option>Duty roster detail</option><option>Payroll record</option><option>Employee contract</option><option>Other HR record</option></select></label>
+<label>Retention / review date<input id="reviewDate" type="date"></label>
+<label>Physical print status<select id="printStatus"><option>Not printed</option><option>Printed – filing pending</option><option>Printed and filed</option><option>Not required – verify schedule</option></select></label>
+<label>Custodian<input id="custodian" placeholder="Records custodian / role"></label>
+<label class="full">Retention basis / notes<textarea id="basis" placeholder="Policy, legal basis, period and any special handling"></textarea></label>
+</div><button onclick="addRecord()">Add record</button>
+<div class="rule"><b>Before destruction:</b> verify retention expiry, active holds, legal requirements, approved destruction authority and physical-record schedule. Keep a destruction certificate and audit entry.</div>
+</section></div>
+<section class="panel" style="margin-top:16px"><h2>Hold Management</h2>
+<div class="field">
+<label>Record reference<select id="holdRef"></select></label>
+<label>Hold type<select id="holdType"><option>Legal hold</option><option>Audit hold</option><option>Investigation hold</option><option>Regulatory hold</option></select></label>
+<label class="full">Reason<textarea id="holdReason" placeholder="Reason for applying or releasing hold"></textarea></label>
+</div><div class="actions"><button onclick="setHold(true)">Apply hold</button><button class="secondary" onclick="setHold(false)">Release hold (authorised only)</button></div>
+<p class="small">A hold blocks scheduled digital deletion and physical destruction until formally released by an authorised custodian. Release must be supported by documented authority.</p>
+</section>
+<section class="panel" style="margin-top:16px"><h2>Print, Filing & Destruction Audit</h2>
+<div class="field">
+<label>Record reference<select id="auditRef"></select></label>
+<label>Action<select id="auditAction"><option>Printed</option><option>Filed physically</option><option>Digital deletion reviewed</option><option>Destruction authorised</option><option>Physical destruction completed</option></select></label>
+<label>Page count / quantity<input id="pages" type="number" min="0" placeholder="e.g. 12"></label>
+<label>Physical filing location<input id="location" placeholder="Cabinet / room / archive reference"></label>
+<label class="full">Action notes<textarea id="auditNotes" placeholder="Printed by, date, approval reference, witness or certificate reference"></textarea></label>
+</div><button onclick="logAudit()">Add audit entry</button>
+<div style="overflow-x:auto;margin-top:14px"><table><thead><tr><th>Date/time</th><th>Record</th><th>Action</th><th>Details</th></tr></thead><tbody id="auditRows"></tbody></table></div>
+</section>
+<section class="panel" style="margin-top:16px"><h2>Retention Rules – Current Design Baseline</h2>
+<div style="overflow-x:auto"><table><thead><tr><th>Record category</th><th>Digital handling rule</th><th>Important safeguard</th></tr></thead><tbody>
+<tr><td>Attendance detailed report</td><td>Print by 15th of following month; reminders from 10th. Eligible for digital deletion after 21st of following month; reminders from 16th.</td><td>Print/filing evidence; legal/audit holds pause deletion. Brief summary retained 3 years.</td></tr>
+<tr><td>Attendance brief summary</td><td>Retain 3 years from summary creation / period close.</td><td>Expiry reminders begin 5 days before each record expires.</td></tr>
+<tr><td>Duty roster detailed record</td><td>Eligible for digital deletion after 15th of following month.</td><td>Brief roster summary retained 3 years; holds pause deletion.</td></tr>
+<tr><td>Medical certificates / legally required leave evidence</td><td>Retain digitally for 5 years, subject to legal review.</td><td>Do not delete merely because a printout exists.</td></tr>
+<tr><td>Attendance photos</td><td>Delete after 2 days under the agreed policy.</td><td>Exception/hold process and privacy controls must be legally reviewed.</td></tr>
+<tr><td>Other employee, payroll, contract and statutory records</td><td>Use a separately approved HR/legal retention schedule; no generic deletion date.</td><td>Keep physical and digital retention rules distinct.</td></tr>
+</tbody></table></div>
+<div class="rule"><b>Important:</b> These are project design rules, not a legal determination. Before production, obtain India/Kerala employment, tax, privacy and sector-specific legal review, define custodians and destruction approvals, and configure exact periods only after approval.</div>
+</section>
+</main>
+<script>
+let records=[
+{ref:'ATT-D-2026-10-NH',branch:'Neelambari Hospital',type:'Attendance detail',date:'2026-11-21',print:'Printed and filed',hold:false,cust:'Branch Records Custodian',basis:'Print by 15th; eligible digital deletion after 21st following month; summary retained 3 years.'},
+{ref:'ATT-S-2026-10-NH',branch:'Neelambari Hospital',type:'Attendance summary',date:'2029-10-31',print:'Printed and filed',hold:false,cust:'Head Office Records Custodian',basis:'3 years from period close.'},
+{ref:'MED-LEAVE-014',branch:'Neelambari Hospital',type:'Medical certificate',date:'2031-11-05',print:'Printed – filing pending',hold:true,cust:'Head Office HR',basis:'5 years, subject to legal review.'},
+{ref:'ROSTER-D-2026-10-KK',branch:'ILVORA Health Clinic',type:'Duty roster detail',date:'2026-11-15',print:'Not printed',hold:false,cust:'Branch Records Custodian',basis:'Eligible for deletion after 15th of following month; summary retained 3 years.'},
+{ref:'PAY-2026-10-HO',branch:'Head Office',type:'Payroll record',date:'',print:'Printed and filed',hold:true,cust:'Administrator',basis:'Use approved payroll/statutory retention schedule; no automatic deletion date configured.'},
+{ref:'LEAVE-EV-026',branch:'ILVORA Health Clinic',type:'Leave evidence',date:'2031-11-12',print:'Printed and filed',hold:false,cust:'Head Office HR',basis:'5 years for medical/legal evidence, subject to legal review.'}
+];
+let audit=[
+{date:'2026-11-10 10:15',ref:'ATT-D-2026-10-NH',action:'Printed and filed',details:'12 pages · Archive NH/ATT/2026/10'},
+{date:'2026-11-11 14:20',ref:'MED-LEAVE-014',action:'Legal hold applied',details:'Pending legal review'}
+];
+function options(){let opts=records.map(r=>`<option value="${r.ref}">${r.ref}</option>`).join('');holdRef.innerHTML=opts;auditRef.innerHTML=opts}
+function render(){let q=search.value.toLowerCase(),t=typeFilter.value,h=holdFilter.value;rows.innerHTML='';records.filter(r=>(!q||(r.ref+r.branch+r.type).toLowerCase().includes(q))&&(!t||r.type===t)&&(!h||(h==='On hold'?r.hold:!r.hold))).forEach(r=>{let tr=document.createElement('tr');tr.innerHTML=`<td><b>${r.ref}</b></td><td>${r.branch}</td><td>${r.type}</td><td>${r.date||'Not configured'}</td><td>${r.print}</td><td><span class="pill ${r.hold?'hold':'ok'}">${r.hold?'On hold':'Clear'}</span></td><td><button class="secondary" onclick="review('${r.ref}')">Review</button></td>`;rows.appendChild(tr)});recordCount.textContent=records.length;holdCount.textContent=records.filter(r=>r.hold).length;dueCount.textContent=records.filter(r=>r.date&&r.date<='2026-11-30'&&!r.hold).length;printCount.textContent=records.filter(r=>r.print==='Not printed'||r.print==='Printed – filing pending').length;renderAudit()}
+function renderAudit(){auditRows.innerHTML='';audit.slice().reverse().forEach(a=>{let tr=document.createElement('tr');tr.innerHTML=`<td>${a.date}</td><td>${a.ref}</td><td>${a.action}</td><td>${a.details}</td>`;auditRows.appendChild(tr)})}
+function review(ref){let r=records.find(x=>x.ref===ref);if(!r)return;alert(`Record: ${r.ref}\nType: ${r.type}\nRetention basis: ${r.basis}\nCustodian: ${r.cust}\nHold: ${r.hold?'ACTIVE – destruction blocked':'No active hold'}\nPrint status: ${r.print}\n\nDemo only: review and verify approved schedule before any destruction.`)}
+function addRecord(){if(!ref.value.trim()||!rtype.value||!custodian.value.trim()){alert('Record reference, type and custodian are required.');return}if(records.some(r=>r.ref===ref.value.trim())){alert('That reference already exists.');return}records.unshift({ref:ref.value.trim(),branch:branch.value,type:rtype.value,date:reviewDate.value,print:printStatus.value,hold:false,cust:custodian.value.trim(),basis:basis.value||'Retention basis requires approval.'});ref.value=reviewDate.value=custodian.value=basis.value='';options();render();alert('Record added to the demo register.')}
+function setHold(on){let r=records.find(x=>x.ref===holdRef.value);if(!r)return;if(on&&!holdReason.value.trim()){alert('Enter a reason before applying a hold.');return}if(!on&&!holdReason.value.trim()){alert('Enter release authority/reference and reason before releasing a hold.');return}r.hold=on;audit.push({date:new Date().toLocaleString(),ref:r.ref,action:on?holdType.value+' applied':'Hold released',details:holdReason.value});holdReason.value='';render();alert(on?'Hold applied in demo.':'Hold released in demo. Production requires authorised approval.')}
+function logAudit(){let r=records.find(x=>x.ref===auditRef.value);if(!r)return;let detail=`${pages.value||'N/A'} quantity · ${location.value||'Location not supplied'} · ${auditNotes.value||'No notes'}`;if(auditAction.value.includes('destruction')&&r.hold){alert('Destruction is blocked while an active hold exists.');return}if(auditAction.value==='Printed')r.print='Printed – filing pending';if(auditAction.value==='Filed physically')r.print='Printed and filed';audit.push({date:new Date().toLocaleString(),ref:r.ref,action:auditAction.value,details:detail});pages.value=location.value=auditNotes.value='';render();alert('Audit entry added in this demo.')}
+options();render();
+</script></body></html>
