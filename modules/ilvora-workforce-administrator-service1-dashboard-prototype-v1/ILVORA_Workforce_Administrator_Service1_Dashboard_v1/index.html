@@ -2,7 +2,28 @@
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ILVORA Workforce – Administrator Dashboard</title>
 <style>
 :root{--navy:#10243a;--teal:#168b88;--gold:#c7a96b;--bg:#f3f6f7;--line:#e2e9ec;--muted:#687987;--ink:#263746}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.45 Arial,sans-serif}header{background:var(--navy);color:white;padding:18px 24px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}.brand{font-weight:800;letter-spacing:2px}.brand span{color:var(--gold)}.brand small{display:block;font-weight:400;letter-spacing:0;color:#cad5dd}.user{font-size:12px;color:#d6e0e6}main{max-width:1400px;margin:22px auto;padding:0 16px}.top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap}h1{margin:0;color:var(--navy);font-size:24px}.muted,.small{color:var(--muted);font-size:12px}.badge{display:inline-block;padding:4px 9px;border-radius:20px;background:#e8f3f1;color:#236d68;font-size:10px;font-weight:bold}.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:18px 0}.card,.panel{background:white;border:1px solid var(--line);border-radius:12px;padding:15px}.klabel{font-size:12px;color:var(--muted)}.kvalue{font-size:27px;font-weight:800;color:var(--navy);margin:3px 0}.grid2{display:grid;grid-template-columns:1.15fr .85fr;gap:14px}.panel h2{margin:0 0 12px;color:var(--navy);font-size:16px}.actions,.filters,.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0}button{border:0;border-radius:7px;padding:9px 12px;background:var(--teal);color:white;font-weight:700;cursor:pointer}.secondary{background:#e8eef0;color:var(--navy)}.tabs button{background:#e8eef0;color:var(--navy)}.tabs button.active{background:var(--navy);color:white}.page{display:none}.page.active{display:block}.tablewrap{overflow:auto}table{width:100%;border-collapse:collapse;font-size:12px}th,td{text-align:left;padding:10px 8px;border-bottom:1px solid var(--line);vertical-align:top}th{background:#f1f5f6;color:#526574}.status{display:inline-block;padding:4px 8px;border-radius:20px;background:#fff2d9;color:#865715;font-size:10px;font-weight:bold}.ok{background:#e5f3ec;color:#286d56}.alert{padding:10px;margin:8px 0;border-left:3px solid var(--gold);background:#fff8eb;border-radius:5px;font-size:12px}.alert.red{border-color:#b94d4d;background:#fff0f0}.alert.green{border-color:#318267;background:#eef8f4}.quick{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.quickitem{border:1px solid var(--line);border-radius:10px;padding:12px;background:#fbfcfc}.quickitem b{display:block;color:var(--navy);margin-bottom:4px}.quickitem span{font-size:11px;color:var(--muted)}.bararea{height:170px;display:flex;align-items:flex-end;gap:15px;padding:10px 8px 24px;border-bottom:1px solid var(--line)}.barcol{height:100%;flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:5px}.bar{width:min(42px,75%);border-radius:6px 6px 0 0;background:var(--teal)}.bar.gold{background:var(--gold)}.bar.navy{background:var(--navy)}.barlabel{font-size:10px;color:var(--muted);text-align:center}.barval{font-size:10px;color:var(--navy);font-weight:bold}.notice{background:#fff7e8;border-left:3px solid var(--gold);padding:10px;border-radius:5px;font-size:12px;margin:10px 0}.notice.red{background:#fff0f0;border-color:#b94d4d}.notice.green{background:#eef8f4;border-color:#318267}footer{text-align:center;color:var(--muted);font-size:11px;margin:25px}@media(max-width:900px){.kpis{grid-template-columns:repeat(2,1fr)}.grid2{grid-template-columns:1fr}.quick{grid-template-columns:repeat(2,1fr)}}@media(max-width:560px){.quick{grid-template-columns:1fr}}@media print{header,.tabs,.actions,footer{display:none!important}body{background:white}main{margin:0}.page{display:none!important}.page.active{display:block!important}}
-</style></head><body>
+</style>
+<style id="ilvora-page-watermark">
+/* ILVORA brand watermark: subtle, fixed behind page content on every screen */
+html { min-height:100%; }
+body { position:relative; isolation:isolate; }
+body::after {
+  content:"";
+  position:fixed;
+  inset:0;
+  z-index:-1;
+  pointer-events:none;
+  background-image:url("../../../assets/ilvora-healthcare-logo.png");
+  background-repeat:no-repeat;
+  background-position:center center;
+  background-size:min(68vw, 560px) auto;
+  opacity:.055;
+}
+@media(max-width:600px) {
+  body::after { background-size:82vw auto; opacity:.045; }
+}
+</style>
+\n</head><body>
 <header><div class="brand">ILVORA <span>WORKFORCE</span><small>WHERE CARE BECOMES CONFIDENCE.</small></div><div class="user">ROLE: ADMINISTRATOR · DEMO SESSION</div></header>
 <main>
 <div class="top"><div><h1>Administrator Dashboard</h1><div class="muted">Central administrative control for authorised employee, payroll and system operations.</div></div><div><span class="badge">Administrator role</span> <span class="small">Illustrative dashboard data</span></div></div>
