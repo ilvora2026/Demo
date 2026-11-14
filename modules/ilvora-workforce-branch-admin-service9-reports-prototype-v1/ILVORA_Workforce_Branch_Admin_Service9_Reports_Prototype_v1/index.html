@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ILVORA Workforce | Branch Reports & Analytics</title>
+<style>
+:root{--navy:#10243a;--teal:#168b88;--gold:#c8a96b;--bg:#f3f6f8;--ink:#203244;--muted:#6b7b89;--line:#dce4e9;--white:#fff}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);font:14px/1.45 Inter,Arial,sans-serif;color:var(--ink)}
+header{background:var(--navy);color:#fff;padding:18px 24px;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+.brand{font-size:19px;font-weight:800;letter-spacing:.5px}.brand span{color:var(--gold)}.sub{color:#c7d3dc;font-size:12px;margin-top:3px}
+.pill{border:1px solid #587080;border-radius:30px;padding:7px 12px;color:#e8f0f4;font-size:12px}
+main{max-width:1240px;margin:24px auto;padding:0 18px}.intro{display:flex;justify-content:space-between;align-items:end;gap:16px;flex-wrap:wrap;margin-bottom:18px}
+h1{font-size:25px;margin:0 0 5px;color:var(--navy)}.muted{color:var(--muted)}.card{background:#fff;border:1px solid var(--line);border-radius:13px;padding:17px;box-shadow:0 2px 8px #18344a08}
+.filters{display:grid;grid-template-columns:repeat(5,minmax(130px,1fr));gap:12px;margin-bottom:16px}
+label{display:block;font-size:11px;font-weight:700;color:var(--muted);margin-bottom:5px;text-transform:uppercase;letter-spacing:.45px}
+input,select{width:100%;padding:10px;border:1px solid var(--line);border-radius:8px;background:#fff;color:var(--ink)}
+button{border:0;border-radius:8px;padding:10px 14px;background:var(--teal);color:#fff;font-weight:700;cursor:pointer}
+button.secondary{background:#e9f1f3;color:var(--navy)}button.dark{background:var(--navy)}button.gold{background:var(--gold);color:#182b3b}
+.actions{display:flex;gap:8px;flex-wrap:wrap;align-items:end}.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:14px 0}
+.kpi small{color:var(--muted);font-weight:700}.kpi strong{display:block;font-size:27px;color:var(--navy);margin-top:7px}.kpi em{font-style:normal;color:var(--teal);font-size:11px}
+.grid{display:grid;grid-template-columns:1.25fr 1fr;gap:14px;margin:14px 0}
+h2{font-size:16px;color:var(--navy);margin:0 0 13px}.barrow{display:grid;grid-template-columns:150px 1fr 48px;gap:10px;align-items:center;margin:12px 0;font-size:12px}
+.track{height:9px;background:#edf1f3;border-radius:20px;overflow:hidden}.fill{height:100%;background:var(--teal);border-radius:20px}
+table{border-collapse:collapse;width:100%;font-size:12px}th,td{text-align:left;padding:10px 8px;border-bottom:1px solid var(--line)}th{color:var(--muted);font-size:10px;text-transform:uppercase;letter-spacing:.4px}
+.tag{display:inline-block;background:#eaf5f4;color:#11716e;padding:3px 7px;border-radius:20px;font-size:10px;font-weight:700}
+.report-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.report{border:1px solid var(--line);border-radius:10px;padding:12px}.report b{display:block;color:var(--navy);margin-bottom:4px}.report small{color:var(--muted)}
+footer{max-width:1240px;margin:0 auto 28px;padding:0 18px;color:var(--muted);font-size:11px}
+.notice{background:#fff8e9;border:1px solid #f0dfb9;border-radius:9px;padding:11px 13px;color:#705b2e;margin:14px 0;font-size:12px}
+@media(max-width:850px){.filters{grid-template-columns:repeat(2,1fr)}.kpis{grid-template-columns:repeat(2,1fr)}.grid{grid-template-columns:1fr}.report-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:480px){.filters,.report-grid{grid-template-columns:1fr}.barrow{grid-template-columns:105px 1fr 35px}}
+</style></head>
+<body>
+<header><div><div class="brand">ILVORA <span>WORKFORCE</span></div><div class="sub">WHERE CARE BECOMES CONFIDENCE.</div></div><div class="pill">BRANCH ADMIN / HR · REPORTS & ANALYTICS</div></header>
+<main>
+<div class="intro"><div><h1>Branch Reports & Analytics</h1><div class="muted">Review branch operations, workforce activity and compliance in one place.</div></div><div class="actions"><button class="secondary" onclick="window.print()">Print report</button><button onclick="exportCSV()">Export CSV</button><button class="dark" onclick="alert('PDF export is a production integration requirement. Use Print → Save as PDF in this prototype.')">Export PDF</button></div></div>
+<section class="card filters">
+<div><label>Branch</label><select id="branch"><option>Neelambari Hospital – Thamarakulam</option><option>ILVORA Health Clinic – Kottarakkara</option><option>Head Office – Kochi</option></select></div>
+<div><label>From date</label><input type="date" id="from" value="2026-11-01"></div>
+<div><label>To date</label><input type="date" id="to" value="2026-11-14"></div>
+<div><label>Department</label><select id="dept"><option>All departments</option><option>Emergency</option><option>Nursing</option><option>Administration</option><option>Pharmacy</option><option>Housekeeping</option></select></div>
+<div class="actions"><button onclick="applyFilters()">Apply filters</button><button class="secondary" onclick="resetFilters()">Reset</button></div>
+</section>
+<div class="kpis">
+<div class="card kpi"><small>ACTIVE EMPLOYEES</small><strong id="employees">86</strong><em>Across selected branch</em></div>
+<div class="card kpi"><small>ATTENDANCE RATE</small><strong id="attendance">92.4%</strong><em>Selected date range</em></div>
+<div class="card kpi"><small>LEAVE DAYS</small><strong id="leave">38</strong><em>Approved leave days</em></div>
+<div class="card kpi"><small>OPEN HELP DESK</small><strong id="tickets">7</strong><em>Requests awaiting closure</em></div>
+</div>
+<div class="grid">
+<section class="card"><h2>Attendance & shift coverage</h2>
+<div class="barrow"><span>Present</span><div class="track"><div class="fill" style="width:92.4%"></div></div><b>92.4%</b></div>
+<div class="barrow"><span>Late arrivals</span><div class="track"><div class="fill" style="width:7.6%;background:#c8a96b"></div></div><b>7.6%</b></div>
+<div class="barrow"><span>Missed punches</span><div class="track"><div class="fill" style="width:3.1%;background:#d58a70"></div></div><b>3.1%</b></div>
+<div class="barrow"><span>Roster coverage</span><div class="track"><div class="fill" style="width:96%"></div></div><b>96%</b></div>
+<p class="muted" style="font-size:11px;margin:16px 0 0">Illustrative demo metrics. Production values must be calculated from approved attendance and roster records.</p>
+</section>
+<section class="card"><h2>Department-wise employee strength</h2>
+<div class="barrow"><span>Emergency</span><div class="track"><div class="fill" style="width:72%"></div></div><b>18</b></div>
+<div class="barrow"><span>Nursing</span><div class="track"><div class="fill" style="width:100%"></div></div><b>25</b></div>
+<div class="barrow"><span>Pharmacy</span><div class="track"><div class="fill" style="width:36%"></div></div><b>9</b></div>
+<div class="barrow"><span>Administration</span><div class="track"><div class="fill" style="width:52%"></div></div><b>13</b></div>
+<div class="barrow"><span>Other</span><div class="track"><div class="fill" style="width:84%"></div></div><b>21</b></div>
+</section></div>
+<section class="card" style="margin:14px 0"><h2>Available branch reports</h2><div class="report-grid">
+<div class="report"><b>Daily / Weekly / Monthly Attendance</b><small>Present, absent, late, early checkout and missed-punch summaries.</small></div>
+<div class="report"><b>Employee Strength</b><small>Active staff, branch and department-wise headcount.</small></div>
+<div class="report"><b>Leave & Absenteeism</b><small>Approved, pending and unpaid leave summaries.</small></div>
+<div class="report"><b>Duty Roster & Shift Coverage</b><small>Planned shifts, uncovered shifts and roster exceptions.</small></div>
+<div class="report"><b>Documents & Verification</b><small>Pending Head Office verification and document expiry alerts.</small></div>
+<div class="report"><b>Complaints & Grievances</b><small>Counts by category, status and resolution time; no complaint details.</small></div>
+<div class="report"><b>Helpdesk Performance</b><small>Open, overdue, resolved tickets and resolution turnaround.</small></div>
+<div class="report"><b>Payroll Attendance Summary</b><small>Attendance totals for payroll review; no salary editing.</small></div>
+<div class="report"><b>Compliance & Records</b><small>Print register, retention due dates and record-hold summary.</small></div>
+</div></section>
+<div class="grid">
+<section class="card"><h2>Operational summary</h2><table><thead><tr><th>Indicator</th><th>Count</th><th>Status</th></tr></thead><tbody>
+<tr><td>Attendance exceptions awaiting review</td><td>6</td><td><span class="tag">Review</span></td></tr>
+<tr><td>Leave requests pending</td><td>4</td><td><span class="tag">Pending</span></td></tr>
+<tr><td>Documents awaiting HO verification</td><td>5</td><td><span class="tag">Pending</span></td></tr>
+<tr><td>Employee requests overdue</td><td>2</td><td><span class="tag">Follow up</span></td></tr>
+</tbody></table></section>
+<section class="card"><h2>Head Office reporting</h2><p class="muted">Head Office Admin can access consolidated reports across authorised branches, compare branch-level indicators and export a combined summary.</p><p class="muted">Branch Admin / HR can view and export only their assigned branch data. Payroll attendance summary is read-only and does not grant salary access.</p><span class="tag">Branch-scoped access</span></section>
+</div>
+<div class="notice"><b>Prototype and governance note:</b> All figures are sample data. This front-end does not connect to a live database, enforce real permissions, generate true PDF/Excel files, or run scheduled retention jobs. Production implementation requires role-based server authorisation, audited report queries, secure exports, data minimisation and legal-approved retention rules. Complaint reports must remain aggregate-only and must not expose confidential case details.</div>
+</main>
+<footer>ILVORA Workforce · Branch Admin / HR · Service 9 · Prototype v1</footer>
+<script>
+function applyFilters(){alert('Filters applied to the illustrative dashboard. Live filtering requires the production database.')}
+function resetFilters(){document.getElementById('branch').selectedIndex=0;document.getElementById('from').value='2026-11-01';document.getElementById('to').value='2026-11-14';document.getElementById('dept').selectedIndex=0;applyFilters()}
+function exportCSV(){
+ const rows=[['Report','Value'],['Active employees','86'],['Attendance rate','92.4%'],['Approved leave days','38'],['Open helpdesk tickets','7'],['Attendance exceptions awaiting review','6'],['Leave requests pending','4'],['Documents awaiting HO verification','5'],['Employee requests overdue','2']];
+ const csv=rows.map(r=>r.map(v=>'"'+String(v).replace(/"/g,'""')+'"').join(',')).join('\\n');
+ const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv'}));a.download='ILVORA_Branch_Report_Demo.csv';a.click();URL.revokeObjectURL(a.href);
+}
+</script></body></html>
