@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ILVORA Workforce | Procurement, Inventory & Assets</title>
+<style>
+:root{--navy:#10283f;--teal:#167d80;--gold:#c5a66a;--bg:#f3f6f8;--ink:#1c2c39;--muted:#687987;--line:#dce4e9;--white:#fff}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);font:14px/1.45 Inter,Segoe UI,Arial,sans-serif;color:var(--ink)}
+header{background:var(--navy);color:#fff;padding:20px 26px;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+.brand{font-weight:800;letter-spacing:1.2px}.brand span{color:#d8c18f}.sub{color:#c9d5dd;font-size:12px;margin-top:3px}
+.tag{border:1px solid #66808f;border-radius:30px;padding:7px 12px;font-size:12px}
+nav{display:flex;gap:6px;padding:12px 22px;background:#fff;border-bottom:1px solid var(--line);overflow:auto}
+nav button{border:0;background:transparent;padding:9px 12px;border-radius:8px;color:#526575;white-space:nowrap;cursor:pointer}
+nav button.active,nav button:hover{background:#e7f2f2;color:var(--teal);font-weight:700}
+main{max-width:1280px;margin:22px auto;padding:0 20px}
+h1{font-size:24px;margin:0 0 5px;color:var(--navy)}h2{font-size:17px;margin:0 0 12px;color:var(--navy)}
+p{color:var(--muted)}.intro{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;flex-wrap:wrap;margin-bottom:18px}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:18px}
+.card{background:#fff;border:1px solid var(--line);border-radius:12px;padding:16px;box-shadow:0 2px 8px #10283f08}
+.metric{font-size:26px;font-weight:800;color:var(--navy)}.metric-label{font-size:12px;color:var(--muted)}
+.layout{display:grid;grid-template-columns:1.3fr .9fr;gap:14px}
+table{width:100%;border-collapse:collapse;font-size:13px}th,td{text-align:left;padding:10px 8px;border-bottom:1px solid var(--line);vertical-align:top}th{color:#627482;font-size:11px;text-transform:uppercase;letter-spacing:.5px}
+.pill{display:inline-block;padding:4px 8px;border-radius:30px;background:#edf3f5;color:#536876;font-size:11px}.green{background:#e7f5ee;color:#28734e}.amber{background:#fff4df;color:#93651b}.red{background:#fdeceb;color:#a43f38}
+.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+button,.btn{cursor:pointer;border:0;border-radius:8px;padding:9px 12px;background:var(--teal);color:white;font-weight:650;font-size:12px}
+button.secondary{background:#eaf0f3;color:#405563}button.gold{background:var(--gold);color:#172b3d}
+input,select,textarea{width:100%;padding:9px;border:1px solid var(--line);border-radius:7px;background:#fff;font:inherit;color:var(--ink)}
+label{display:block;font-size:12px;font-weight:700;color:#536575;margin:10px 0 5px}
+.formgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+section.page{display:none}section.page.active{display:block}
+.note{border-left:3px solid var(--gold);background:#fbf8f1;padding:11px 13px;border-radius:6px;color:#66583e;font-size:12px;margin:12px 0}
+small{color:var(--muted)}.toolbar{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:12px}.toolbar input{max-width:260px}
+footer{text-align:center;color:#82909a;font-size:11px;padding:26px}
+@media(max-width:850px){.grid{grid-template-columns:repeat(2,1fr)}.layout{grid-template-columns:1fr}}
+@media(max-width:520px){main{padding:0 12px}.grid{grid-template-columns:1fr 1fr}.formgrid{grid-template-columns:1fr}header{padding:16px}}
+</style>
+<style id="ilvora-page-watermark">
+/* ILVORA brand watermark: subtle, fixed behind page content on every screen */
+html { min-height:100%; }
+body { position:relative; isolation:isolate; }
+body::after {
+  content:"";
+  position:fixed;
+  inset:0;
+  z-index:-1;
+  pointer-events:none;
+  background-image:url("../../assets/ilvora-healthcare-logo.png");
+  background-repeat:no-repeat;
+  background-position:center center;
+  background-size:min(68vw, 560px) auto;
+  opacity:.055;
+}
+@media(max-width:600px) {
+  body::after { background-size:82vw auto; opacity:.045; }
+}
+</style>
+\n</head>
+<body>
+<header><div><div class="brand">ILVORA <span>HEALTHCARE GROUP</span></div><div class="sub">WORKFORCE · ADMINISTRATOR PANEL</div></div><div class="tag">SERVICE 13 · PROCUREMENT, INVENTORY & ASSETS</div></header>
+<nav id="nav">
+<button class="active" data-page="overview">Overview</button><button data-page="requisitions">Purchase Requests</button><button data-page="procurement">Procurement & Vendors</button><button data-page="inventory">Inventory</button><button data-page="assets">Fixed Assets</button><button data-page="reports">Reports & Audit</button><button data-page="authority">Approval Rules</button>
+</nav>
+<main>
+<section id="overview" class="page active">
+<div class="intro"><div><h1>Procurement & Asset Control</h1><p>Central oversight of purchase requests, suppliers, stock and fixed assets across ILVORA branches.</p></div><button onclick="showPage('requisitions')">＋ New purchase request</button></div>
+<div class="grid">
+<div class="card"><div class="metric" id="mReq">08</div><div class="metric-label">Open purchase requests</div></div>
+<div class="card"><div class="metric" id="mPO">04</div><div class="metric-label">Purchase orders in progress</div></div>
+<div class="card"><div class="metric" id="mStock">06</div><div class="metric-label">Low-stock / reorder alerts</div></div>
+<div class="card"><div class="metric" id="mAssets">126</div><div class="metric-label">Registered fixed assets</div></div>
+</div>
+<div class="layout">
+<div class="card"><h2>Recent purchase requests</h2><table><thead><tr><th>Request</th><th>Branch</th><th>Category</th><th>Amount</th><th>Status</th></tr></thead><tbody id="recentRows"></tbody></table></div>
+<div class="card"><h2>Action required</h2><table><tbody>
+<tr><td>Quotation comparison pending</td><td><span class="pill amber">3 items</span></td></tr>
+<tr><td>Goods receipt verification</td><td><span class="pill amber">2 orders</span></td></tr>
+<tr><td>Near-expiry stock review</td><td><span class="pill red">1 alert</span></td></tr>
+<tr><td>Equipment maintenance due</td><td><span class="pill amber">4 assets</span></td></tr>
+</tbody></table><div class="note">Illustrative dashboard data only. Live stock quantities, vendor balances and purchase commitments require a connected backend.</div></div>
+</div>
+</section>
+<section id="requisitions" class="page">
+<div class="intro"><div><h1>Purchase Requests</h1><p>Branches raise requests; Administrator reviews within delegated authority.</p></div></div>
+<div class="layout">
+<div class="card"><h2>Create purchase requisition</h2>
+<div class="formgrid">
+<div><label>Requesting branch</label><select id="branch"><option>Head Office – Kochi</option><option>Neelambari Hospital – Thamarakulam</option><option>ILVORA Health Clinic – Kottarakkara</option></select></div>
+<div><label>Requesting department</label><input id="dept" placeholder="e.g. Emergency Department"></div>
+<div><label>Item / equipment</label><input id="item" placeholder="Item name"></div>
+<div><label>Category</label><select id="cat"><option>Medical equipment</option><option>Medical consumables</option><option>Medicines / pharmacy stock</option><option>IT equipment</option><option>Furniture</option><option>Facility / maintenance</option><option>Other</option></select></div>
+<div><label>Quantity</label><input id="qty" type="number" min="1" value="1"></div>
+<div><label>Estimated total (₹)</label><input id="amount" type="number" min="0" placeholder="Estimated amount"></div>
+</div>
+<label>Purpose / specification</label><textarea id="purpose" rows="3" placeholder="Clinical need, specifications, urgency and justification"></textarea>
+<div class="actions"><button onclick="addRequest()">Submit request</button><button class="secondary" onclick="clearRequest()">Clear</button></div>
+</div>
+<div class="card"><h2>Request register</h2><div class="toolbar"><input id="reqSearch" placeholder="Search request / item" oninput="renderRequests()"><select id="reqFilter" onchange="renderRequests()"><option value="">All statuses</option><option>Submitted</option><option>Under review</option><option>Awaiting MD approval</option><option>Approved</option><option>Rejected</option><option>Ordered</option><option>Received</option></select></div><div style="overflow:auto"><table><thead><tr><th>Ref / Item</th><th>Branch</th><th>Estimate</th><th>Status</th><th>Action</th></tr></thead><tbody id="requestRows"></tbody></table></div></div>
+</div>
+</section>
+<section id="procurement" class="page">
+<div class="intro"><div><h1>Procurement & Vendor Management</h1><p>Quotation review, vendor selection, purchase orders and receipt confirmation.</p></div><button onclick="alert('Demo: purchase order creation workflow opened. Production requires approved requisition, vendor quotation and authorised sign-off.')">＋ Create purchase order</button></div>
+<div class="layout">
+<div class="card"><h2>Vendor register</h2><table><thead><tr><th>Vendor</th><th>Category</th><th>Contact status</th><th>Rating</th></tr></thead><tbody>
+<tr><td>MedEquip Supplies</td><td>Medical equipment</td><td><span class="pill green">Verified demo</span></td><td>4.6 / 5</td></tr>
+<tr><td>CareMed Distributors</td><td>Consumables</td><td><span class="pill green">Verified demo</span></td><td>4.3 / 5</td></tr>
+<tr><td>TechBridge Systems</td><td>IT equipment</td><td><span class="pill amber">Review due</span></td><td>4.1 / 5</td></tr>
+</tbody></table><div class="actions"><button class="secondary" onclick="alert('Demo vendor form. Add legal name, GSTIN, address, bank verification and compliance documents in production.')">Add vendor</button></div></div>
+<div class="card"><h2>Procurement workflow</h2><ol><li>Approved purchase requisition</li><li>Obtain and compare quotations</li><li>Check budget and delegated limit</li><li>Generate purchase order</li><li>Confirm delivery and quality</li><li>Record invoice and payment reference</li></ol><div class="note">Do not split orders to avoid approval limits. Related purchases must be aggregated under the applicable procurement policy.</div></div>
+</div>
+<div class="card" style="margin-top:14px"><h2>Purchase order register (sample)</h2><table><thead><tr><th>PO number</th><th>Vendor</th><th>Branch</th><th>Value</th><th>Delivery</th><th>Status</th></tr></thead><tbody>
+<tr><td>PO-DEMO-026</td><td>MedEquip Supplies</td><td>Neelambari Hospital</td><td>₹1,45,000</td><td>18 Nov 2026</td><td><span class="pill amber">In transit</span></td></tr>
+<tr><td>PO-DEMO-025</td><td>CareMed Distributors</td><td>Kottarakkara Clinic</td><td>₹28,500</td><td>12 Nov 2026</td><td><span class="pill green">Received</span></td></tr>
+</tbody></table></div>
+</section>
+<section id="inventory" class="page">
+<div class="intro"><div><h1>Inventory & Stock Control</h1><p>Branch-wise stock, batch/expiry, reorder levels and stock movement.</p></div><button onclick="alert('Demo: stock receipt / issue form. Production should record batch, expiry, quantity, source and authorised user.')">＋ Record stock movement</button></div>
+<div class="card"><div class="toolbar"><input id="stockSearch" placeholder="Search stock item" oninput="filterTable('stockSearch','stockTable')"><select><option>All branches</option><option>Head Office – Kochi</option><option>Neelambari Hospital – Thamarakulam</option><option>ILVORA Health Clinic – Kottarakkara</option></select><select><option>All stock levels</option><option>Low stock</option><option>Near expiry</option></select></div>
+<div style="overflow:auto"><table id="stockTable"><thead><tr><th>Item</th><th>Branch</th><th>Batch</th><th>Available</th><th>Reorder level</th><th>Expiry</th><th>Status</th></tr></thead><tbody>
+<tr><td>Disposable gloves (M)</td><td>Neelambari Hospital</td><td>GL-M-1126</td><td>18 boxes</td><td>25 boxes</td><td>30 Jun 2028</td><td><span class="pill red">Reorder</span></td></tr>
+<tr><td>IV cannula 20G</td><td>Kottarakkara Clinic</td><td>IV-20-0826</td><td>12 packs</td><td>10 packs</td><td>31 Aug 2027</td><td><span class="pill green">Adequate</span></td></tr>
+<tr><td>ECG electrodes</td><td>Neelambari Hospital</td><td>ECG-0426</td><td>6 packs</td><td>8 packs</td><td>30 Nov 2026</td><td><span class="pill amber">Near expiry</span></td></tr>
+<tr><td>Printer toner</td><td>Head Office – Kochi</td><td>TN-0926</td><td>2 units</td><td>3 units</td><td>—</td><td><span class="pill red">Reorder</span></td></tr>
+</tbody></table></div></div>
+<div class="note">For medicines and regulated medical products, production inventory must capture applicable licence details, batch/lot, expiry, storage conditions, recall status and authorised stock handling. Apply FEFO (first-expiry, first-out) where appropriate.</div>
+</section>
+<section id="assets" class="page">
+<div class="intro"><div><h1>Fixed Asset Register</h1><p>Track ownership, location, condition, maintenance and inter-branch transfers.</p></div><button onclick="alert('Demo: asset registration form. Generate unique asset ID server-side after approval.')">＋ Register asset</button></div>
+<div class="card"><div class="toolbar"><input id="assetSearch" placeholder="Search asset / ID" oninput="filterTable('assetSearch','assetTable')"><select><option>All branches</option><option>Head Office – Kochi</option><option>Neelambari Hospital – Thamarakulam</option><option>ILVORA Health Clinic – Kottarakkara</option></select></div>
+<div style="overflow:auto"><table id="assetTable"><thead><tr><th>Asset ID</th><th>Asset</th><th>Branch / location</th><th>Purchase date</th><th>Condition</th><th>Next service</th><th>Status</th></tr></thead><tbody>
+<tr><td>ILV-NH-A001</td><td>Patient monitor</td><td>Neelambari Hospital – ICU</td><td>12 Mar 2025</td><td>Good</td><td>01 Dec 2026</td><td><span class="pill green">Active</span></td></tr>
+<tr><td>ILV-NH-A002</td><td>12-channel ECG</td><td>Neelambari Hospital – ED</td><td>22 Apr 2025</td><td>Service due</td><td>16 Nov 2026</td><td><span class="pill amber">Maintenance due</span></td></tr>
+<tr><td>ILV-KK-A014</td><td>Refrigerator</td><td>Kottarakkara Clinic – Pharmacy</td><td>08 Jan 2026</td><td>Good</td><td>08 Jan 2027</td><td><span class="pill green">Active</span></td></tr>
+</tbody></table></div></div>
+<div class="actions"><button class="secondary" onclick="alert('Transfer workflow: source branch, destination, reason, approvals, dispatch and receipt confirmation.')">Initiate asset transfer</button><button class="secondary" onclick="alert('Maintenance workflow: service request, vendor, quotation, approval, work completion and certificate.')">Record maintenance</button></div>
+</section>
+<section id="reports" class="page">
+<div class="intro"><div><h1>Reports & Audit History</h1><p>Branch-wise and consolidated procurement, inventory and asset reporting.</p></div><button onclick="window.print()">Print / Save PDF</button></div>
+<div class="grid">
+<div class="card"><div class="metric">₹4.8L</div><div class="metric-label">Illustrative monthly procurement</div></div><div class="card"><div class="metric">12</div><div class="metric-label">Open requisitions</div></div><div class="card"><div class="metric">06</div><div class="metric-label">Low-stock alerts</div></div><div class="card"><div class="metric">04</div><div class="metric-label">Maintenance due</div></div>
+</div>
+<div class="card"><h2>Report catalogue</h2><table><thead><tr><th>Report</th><th>Scope</th><th>Frequency</th><th>Action</th></tr></thead><tbody>
+<tr><td>Purchase requisition register</td><td>Branch / consolidated</td><td>Daily / monthly</td><td><button class="secondary" onclick="downloadCSV('requisitions')">Download CSV</button></td></tr>
+<tr><td>Purchase order & vendor spend</td><td>Branch / consolidated</td><td>Monthly</td><td><button class="secondary" onclick="downloadCSV('orders')">Download CSV</button></td></tr>
+<tr><td>Stock balance, batch & expiry</td><td>Branch / item</td><td>Daily</td><td><button class="secondary" onclick="downloadCSV('stock')">Download CSV</button></td></tr>
+<tr><td>Fixed asset & maintenance register</td><td>Branch / consolidated</td><td>Monthly</td><td><button class="secondary" onclick="downloadCSV('assets')">Download CSV</button></td></tr>
+<tr><td>Approval and audit history</td><td>Authorised access only</td><td>On demand</td><td><button class="secondary" onclick="alert('Audit export is illustrative. Production audit logs must be immutable and access-controlled.')">View log</button></td></tr>
+</tbody></table></div>
+<div class="note">Maintain records of requisition, quotations, conflict declarations, approvals, PO, goods receipt, inspection, invoice, payment reference, stock adjustments, asset transfers and disposal. Apply the organisation's approved financial and legal retention schedule.</div>
+</section>
+<section id="authority" class="page">
+<div class="intro"><div><h1>Approval Rules & Role Boundaries</h1><p>Procurement authority must be configured and enforced server-side.</p></div></div>
+<div class="card"><h2>Proposed responsibility matrix</h2><table><thead><tr><th>Role</th><th>Permitted actions</th><th>Not permitted</th></tr></thead><tbody>
+<tr><td>Branch Admin / HR</td><td>Raise requisitions; attach specifications/quotations; confirm physical receipt; report stock/asset issues.</td><td>Approve purchase expenditure; change approval limits; create payments.</td></tr>
+<tr><td>Administrator</td><td>Review requisitions, compare quotations, manage vendor/PO workflow, approve within MD-delegated limit, monitor stock/assets.</td><td>Change own delegated limit; approve above-limit purchases; bypass audit.</td></tr>
+<tr><td>Managing Director</td><td>Set/revise Administrator's procurement approval limit; approve purchases above limit; executive oversight.</td><td>—</td></tr>
+<tr><td>Head Office Admin</td><td>Branch and employee administration as separately authorised.</td><td>No automatic procurement approval authority.</td></tr>
+</tbody></table>
+<div class="note"><b>Important:</b> No numerical procurement approval limit has been supplied yet. Until the Managing Director formally sets an effective-dated limit, all purchase commitments must route to the Managing Director. Related purchases must not be split to circumvent the limit. Requester and approver must be different people.</div>
+<h2 style="margin-top:18px">Required controls before production</h2>
+<ul><li>Three-quote policy or documented exception for urgent/single-source purchases.</li><li>Vendor due diligence, GST and bank-account verification; independent bank-detail change checks.</li><li>Budget availability and purchase-limit checks before PO issuance.</li><li>Goods receipt and quality check by an authorised person independent of the requester where practical.</li><li>Stock adjustment reason, dual approval for material adjustments and complete audit trail.</li><li>Asset tagging, custody assignment, transfer acknowledgement and disposal approval.</li><li>Conflict-of-interest declaration and prohibition on order splitting.</li></ul>
+</div>
+</section>
+</main>
+<footer>ILVORA WORKFORCE · Administrator Service 13 · Front-end demonstration only · Version 1</footer>
+<script>
+const requests=[
+{ref:'PR-026',item:'Patient monitor',branch:'Neelambari Hospital – Thamarakulam',amount:145000,status:'Awaiting MD approval'},
+{ref:'PR-025',item:'Disposable gloves',branch:'Neelambari Hospital – Thamarakulam',amount:18500,status:'Under review'},
+{ref:'PR-024',item:'UPS battery',branch:'Head Office – Kochi',amount:22000,status:'Submitted'},
+{ref:'PR-023',item:'ECG electrodes',branch:'ILVORA Health Clinic – Kottarakkara',amount:9500,status:'Approved'}
+];
+function showPage(id){document.querySelectorAll('section.page').forEach(x=>x.classList.toggle('active',x.id===id));document.querySelectorAll('nav button').forEach(x=>x.classList.toggle('active',x.dataset.page===id));}
+document.querySelectorAll('nav button').forEach(b=>b.addEventListener('click',()=>showPage(b.dataset.page)));
+function renderRecent(){document.getElementById('recentRows').innerHTML=requests.slice(0,4).map(r=>`<tr><td><b>${r.ref}</b><br>${r.item}</td><td>${r.branch}</td><td>Purchase</td><td>₹${r.amount.toLocaleString('en-IN')}</td><td><span class="pill ${r.status.includes('MD')?'amber':'green'}">${r.status}</span></td></tr>`).join('')}
+function renderRequests(){let q=(document.getElementById('reqSearch').value||'').toLowerCase(),f=document.getElementById('reqFilter').value;document.getElementById('requestRows').innerHTML=requests.filter(r=>(!q||(r.ref+r.item+r.branch).toLowerCase().includes(q))&&(!f||r.status===f)).map(r=>`<tr><td><b>${r.ref}</b><br>${r.item}</td><td>${r.branch}</td><td>₹${r.amount.toLocaleString('en-IN')}</td><td><span class="pill">${r.status}</span></td><td><button class="secondary" onclick="alert('Demo request details: '+ '${r.ref}' )">View</button></td></tr>`).join('')||'<tr><td colspan="5">No matching requests</td></tr>'}
+function addRequest(){let item=document.getElementById('item').value.trim(),amount=Number(document.getElementById('amount').value),qty=Number(document.getElementById('qty').value);if(!item||!amount||amount<0||qty<1){alert('Enter item, valid quantity and estimated amount.');return}let ref='PR-'+String(27+requests.length-4).padStart(3,'0');requests.unshift({ref,item:item+' × '+qty,branch:document.getElementById('branch').value,amount,status:'Submitted'});renderRecent();renderRequests();alert('Demo requisition '+ref+' added. No live submission or approval occurred.');['item','amount','purpose','dept'].forEach(id=>document.getElementById(id).value='');}
+function clearRequest(){['item','amount','purpose','dept'].forEach(id=>document.getElementById(id).value='');}
+function filterTable(inputId,tableId){let q=document.getElementById(inputId).value.toLowerCase();document.querySelectorAll('#'+tableId+' tbody tr').forEach(r=>r.style.display=r.innerText.toLowerCase().includes(q)?'':'none')}
+function downloadCSV(type){let rows={requisitions:[['Ref','Item','Branch','Amount','Status'],...requests.map(r=>[r.ref,r.item,r.branch,r.amount,r.status])],orders:[['PO','Vendor','Branch','Value','Status'],['PO-DEMO-026','MedEquip Supplies','Neelambari Hospital',145000,'In transit']],stock:[['Item','Branch','Batch','Available','Reorder','Expiry'],['Disposable gloves M','Neelambari Hospital','GL-M-1126','18 boxes','25 boxes','30 Jun 2028']],assets:[['Asset ID','Asset','Branch','Condition','Next service'],['ILV-NH-A001','Patient monitor','Neelambari Hospital','Good','01 Dec 2026']]}[type];let csv=rows.map(r=>r.map(v=>'"'+String(v).replaceAll('"','""')+'"').join(',')).join('\\n');let a=document.createElement('a');a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv'}));a.download='ilvora_'+type+'_demo.csv';a.click();URL.revokeObjectURL(a.href)}
+renderRecent();renderRequests();
+</script></body></html>
