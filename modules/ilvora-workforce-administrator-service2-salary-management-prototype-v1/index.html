@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ILVORA Workforce | Administrator – Salary Management</title>
+<style>
+:root{--navy:#10243a;--teal:#168b89;--gold:#c8a96b;--ink:#233447;--muted:#718096;--line:#e4eaf0;--bg:#f4f7fa;--white:#fff;--red:#b54747;--green:#287a55}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);font:14px/1.45 Inter,Segoe UI,Arial,sans-serif;color:var(--ink)}
+header{background:var(--navy);color:white;padding:18px 26px;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+.brand{font-weight:800;letter-spacing:1.5px;font-size:18px}.brand small{display:block;color:#b8c8d5;font-size:10px;letter-spacing:2px;margin-top:2px}
+.role{background:#1d3b56;border:1px solid #49647a;padding:8px 12px;border-radius:20px;color:#e6edf3}
+main{max-width:1250px;margin:24px auto;padding:0 18px}.intro{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;flex-wrap:wrap;margin-bottom:18px}
+h1{font-size:25px;margin:0;color:var(--navy)}.sub{color:var(--muted);margin-top:5px}
+.notice{background:#fff8e9;border:1px solid #ead6aa;padding:11px 14px;border-radius:9px;margin:14px 0;color:#6d5425}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:16px 0}
+.stat,.panel{background:white;border:1px solid var(--line);border-radius:12px;padding:16px;box-shadow:0 2px 8px #10243a08}
+.stat span{color:var(--muted);font-size:12px}.stat strong{display:block;font-size:24px;color:var(--navy);margin-top:5px}
+.layout{display:grid;grid-template-columns:1.2fr .8fr;gap:14px}.panel h2{font-size:16px;margin:0 0 14px;color:var(--navy)}
+label{display:block;font-size:12px;color:#536477;font-weight:650;margin:10px 0 5px}
+input,select,textarea{width:100%;padding:10px 11px;border:1px solid #d7e0e8;border-radius:8px;background:white;color:var(--ink);font:inherit}
+input:focus,select:focus,textarea:focus{outline:2px solid #168b8933;border-color:var(--teal)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}.btn{border:0;border-radius:8px;padding:10px 14px;font-weight:700;cursor:pointer;background:var(--teal);color:white}.btn.secondary{background:#eaf1f5;color:var(--navy);border:1px solid #d9e3ea}.btn.gold{background:var(--gold);color:#172b40}.btn.danger{background:#fff0f0;color:var(--red);border:1px solid #efcaca}
+.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+table{width:100%;border-collapse:collapse;font-size:12px}th,td{text-align:left;padding:10px 8px;border-bottom:1px solid var(--line);vertical-align:top}th{color:#607184;background:#f8fafc;font-weight:700}
+.pill{display:inline-block;padding:3px 8px;border-radius:20px;background:#e8f5f1;color:var(--green);font-size:11px;font-weight:700}.pill.pending{background:#fff3dc;color:#93651a}
+.small{font-size:11px;color:var(--muted)}.money{font-variant-numeric:tabular-nums}.tabs{display:flex;gap:8px;margin:16px 0;flex-wrap:wrap}.tab{padding:9px 13px;border:1px solid var(--line);border-radius:8px;background:white;cursor:pointer;font-weight:650;color:#536477}.tab.active{background:var(--navy);color:white;border-color:var(--navy)}
+.hidden{display:none}.right{text-align:right}.empty{color:var(--muted);padding:18px;text-align:center}
+footer{max-width:1250px;margin:20px auto;padding:0 18px 30px;color:#8794a2;font-size:11px}
+@media(max-width:850px){.stats{grid-template-columns:repeat(2,1fr)}.layout{grid-template-columns:1fr}}
+@media(max-width:520px){.grid2{grid-template-columns:1fr}.stats{grid-template-columns:1fr 1fr}main{padding:0 12px}header{padding:16px}}
+</style></head>
+<body>
+<header><div class="brand">ILVORA <span style="color:var(--gold)">WORKFORCE</span><small>WHERE CARE BECOMES CONFIDENCE</small></div><div class="role">Administrator · Salary & Payroll Control</div></header>
+<main>
+<div class="intro"><div><h1>Employee Salary Management</h1><div class="sub">Manage fixed salary, effective dates, revisions and payroll-linked components.</div></div><button class="btn secondary" onclick="window.print()">Print current view</button></div>
+<div class="notice"><b>Prototype only:</b> Illustrative records are stored in this browser session. This is not connected to a live employee database or payroll system. Do not enter real employee, bank or salary information.</div>
+<div class="stats">
+ <div class="stat"><span>Employees with salary records</span><strong id="count">3</strong></div>
+ <div class="stat"><span>Pending salary changes</span><strong id="pending">1</strong></div>
+ <div class="stat"><span>Current monthly gross (sample)</span><strong id="gross">₹1.45L</strong></div>
+ <div class="stat"><span>Records requiring review</span><strong id="review">1</strong></div>
+</div>
+<div class="tabs">
+ <button class="tab active" data-tab="records">Salary register</button><button class="tab" data-tab="edit">Add / revise salary</button><button class="tab" data-tab="history">Revision history</button><button class="tab" data-tab="governance">Access & governance</button>
+</div>
+<section id="records" class="tabpane">
+ <div class="panel"><h2>Employee salary register</h2>
+ <div class="grid2"><div><label>Search by Employee ID or name</label><input id="search" placeholder="e.g. ILV-NH-001" oninput="render()"></div><div><label>Branch</label><select id="branchFilter" onchange="render()"><option value="">All branches</option><option>Head Office – Kochi</option><option>Neelambari Hospital – Thamarakulam</option><option>ILVORA Health Clinic – Kottarakkara</option></select></div></div>
+ <div style="overflow:auto;margin-top:14px"><table><thead><tr><th>Employee</th><th>Branch / Department</th><th>Fixed monthly salary</th><th>Effective from</th><th>Status</th><th></th></tr></thead><tbody id="rows"></tbody></table></div>
+ </div>
+</section>
+<section id="edit" class="tabpane hidden">
+ <div class="layout">
+  <div class="panel"><h2 id="formTitle">Add or revise salary</h2>
+   <label>Employee ID</label><input id="empId" placeholder="e.g. ILV-NH-001">
+   <div class="grid2"><div><label>Employee name (sample only)</label><input id="empName" placeholder="Employee name"></div><div><label>Branch</label><select id="empBranch"><option>Head Office – Kochi</option><option>Neelambari Hospital – Thamarakulam</option><option>ILVORA Health Clinic – Kottarakkara</option></select></div></div>
+   <label>Department / designation</label><input id="department" placeholder="e.g. Emergency Department · Staff Nurse">
+   <div class="grid2"><div><label>Fixed monthly basic / salary (₹)</label><input id="basic" type="number" min="0" step="1" placeholder="30000"></div><div><label>Effective date</label><input id="effective" type="date"></div></div>
+   <div class="grid2"><div><label>Monthly allowances (₹)</label><input id="allowance" type="number" min="0" step="1" value="0"></div><div><label>Monthly deductions (₹)</label><input id="deduction" type="number" min="0" step="1" value="0"></div></div>
+   <label>Revision reason / notes</label><textarea id="reason" rows="3" placeholder="New appointment, annual revision, role change, correction..."></textarea>
+   <div class="actions"><button class="btn" onclick="saveSalary()">Save salary change</button><button class="btn secondary" onclick="clearForm()">Clear</button></div>
+   <p class="small">Saving creates a pending change in this prototype. It does not update payroll until an authorised approval step is completed.</p>
+  </div>
+  <div class="panel"><h2>Salary calculation preview</h2><p class="small">Monthly illustration based on entered values.</p>
+   <div style="display:flex;justify-content:space-between;margin:18px 0"><span>Fixed salary</span><b class="money" id="pBasic">₹0</b></div>
+   <div style="display:flex;justify-content:space-between;margin:18px 0"><span>Allowances</span><b class="money" id="pAllowance">₹0</b></div>
+   <div style="display:flex;justify-content:space-between;margin:18px 0"><span>Deductions</span><b class="money" id="pDeduction">₹0</b></div><hr style="border:0;border-top:1px solid var(--line)">
+   <div style="display:flex;justify-content:space-between;margin:18px 0;font-size:17px"><b>Estimated net</b><b class="money" id="pNet">₹0</b></div>
+   <div class="notice">This is a simple preview, not a statutory payroll calculation. PF, ESI, TDS, professional tax, overtime, arrears and other applicable rules must be configured and validated before production.</div>
+  </div>
+ </div>
+</section>
+<section id="history" class="tabpane hidden"><div class="panel"><h2>Salary revision history</h2><div style="overflow:auto"><table><thead><tr><th>Date / Employee</th><th>Previous</th><th>Proposed</th><th>Reason</th><th>Workflow</th></tr></thead><tbody id="historyRows"></tbody></table></div></div></section>
+<section id="governance" class="tabpane hidden"><div class="layout">
+ <div class="panel"><h2>Role permissions</h2><table><tr><th>Role</th><th>Salary access</th></tr><tr><td>Administrator</td><td>Enter and revise salary; manage payroll linkage</td></tr><tr><td>Branch Admin / HR</td><td>Cannot view or change salary amounts</td></tr><tr><td>Head Office Admin</td><td>Cannot change salary; employee approval only</td></tr><tr><td>Managing Director</td><td>Executive oversight; approval authority only if separately assigned</td></tr></table></div>
+ <div class="panel"><h2>Production controls required</h2><ul><li>Server-side role-based access and least privilege.</li><li>Independent approval for salary changes; requester must not approve their own change.</li><li>Effective-dated salary history; never overwrite old salary records.</li><li>Payroll must use only approved salary versions effective for the pay period.</li><li>Encrypted storage, audit logs, access monitoring and masked exports.</li><li>Configure statutory deductions and legal review before go-live.</li></ul></div>
+ </div>
+</section>
+</main><footer>ILVORA Workforce · Administrator module · Front-end demonstration only · v1</footer>
+<script>
+let records=[
+{id:"ILV-HO-001",name:"Sample Employee A",branch:"Head Office – Kochi",dept:"Administration",basic:45000,allowance:5000,deduction:1500,effective:"2026-10-01",status:"Active"},
+{id:"ILV-NH-001",name:"Sample Employee B",branch:"Neelambari Hospital – Thamarakulam",dept:"Nursing",basic:38000,allowance:3000,deduction:1200,effective:"2026-10-01",status:"Active"},
+{id:"ILV-KK-001",name:"Sample Employee C",branch:"ILVORA Health Clinic – Kottarakkara",dept:"Clinical",basic:52000,allowance:6000,deduction:2500,effective:"2026-10-01",status:"Active"}];
+let history=[{id:"ILV-NH-001",name:"Sample Employee B",old:39000,next:41000,reason:"Annual salary review",date:"2026-11-10",status:"Pending approval"}];
+const fmt=n=>"₹"+Number(n||0).toLocaleString("en-IN");
+function render(){
+ let q=(document.getElementById("search").value||"").toLowerCase(),b=document.getElementById("branchFilter").value;
+ let list=records.filter(x=>(x.id+" "+x.name).toLowerCase().includes(q)&&(!b||x.branch===b));
+ document.getElementById("rows").innerHTML=list.map(x=>`<tr><td><b>${x.id}</b><br>${x.name}</td><td>${x.branch}<br><span class="small">${x.dept}</span></td><td class="money">${fmt(x.basic)}<br><span class="small">Gross: ${fmt(x.basic+x.allowance)}</span></td><td>${x.effective}</td><td><span class="pill">${x.status}</span></td><td><button class="btn secondary" onclick="editRecord('${x.id}')">Revise</button></td></tr>`).join("")||'<tr><td colspan="6" class="empty">No matching records</td></tr>';
+ document.getElementById("historyRows").innerHTML=history.map(x=>`<tr><td><b>${x.id}</b><br>${x.date}</td><td>${fmt(x.old)}</td><td>${fmt(x.next)}</td><td>${x.reason}</td><td><span class="pill pending">${x.status}</span></td></tr>`).join("");
+ document.getElementById("count").textContent=records.length;document.getElementById("pending").textContent=history.filter(x=>x.status==="Pending approval").length;
+ let total=records.reduce((s,x)=>s+x.basic+x.allowance,0);document.getElementById("gross").textContent="₹"+(total/100000).toFixed(2)+"L";document.getElementById("review").textContent=history.filter(x=>x.status==="Pending approval").length;
+}
+function editRecord(id){let x=records.find(r=>r.id===id);if(!x)return;document.querySelector('[data-tab="edit"]').click();document.getElementById("formTitle").textContent="Revise salary · "+id;document.getElementById("empId").value=x.id;document.getElementById("empName").value=x.name;document.getElementById("empBranch").value=x.branch;document.getElementById("department").value=x.dept;document.getElementById("basic").value=x.basic;document.getElementById("allowance").value=x.allowance;document.getElementById("deduction").value=x.deduction;document.getElementById("effective").value="";document.getElementById("reason").value="";preview();}
+function saveSalary(){
+ let id=empId.value.trim(),name=empName.value.trim(),basicN=Number(basic.value),eff=effective.value;
+ if(!id||!name||!basic.value||basicN<0||!eff||!reason.value.trim()){alert("Please enter Employee ID, name, valid salary, effective date and reason.");return;}
+ let old=records.find(x=>x.id===id),oldTotal=old?old.basic+old.allowance:0,next=basicN+Number(allowance.value||0);
+ history.unshift({id,name,old:oldTotal,next,reason:reason.value.trim(),date:new Date().toISOString().slice(0,10),status:"Pending approval"});
+ if(!old){records.push({id,name,branch:empBranch.value,dept:department.value,basic:basicN,allowance:Number(allowance.value||0),deduction:Number(deduction.value||0),effective:eff,status:"Pending approval"});}
+ alert("Salary change saved as PENDING in this demo. No payroll amount has been changed.");render();clearForm();document.querySelector('[data-tab="history"]').click();
+}
+function clearForm(){["empId","empName","department","basic","effective","reason"].forEach(id=>document.getElementById(id).value="");allowance.value=0;deduction.value=0;document.getElementById("formTitle").textContent="Add or revise salary";preview();}
+function preview(){let b=Number(basic.value||0),a=Number(allowance.value||0),d=Number(deduction.value||0);pBasic.textContent=fmt(b);pAllowance.textContent=fmt(a);pDeduction.textContent=fmt(d);pNet.textContent=fmt(b+a-d);}
+["basic","allowance","deduction"].forEach(id=>document.getElementById(id).addEventListener("input",preview));
+document.querySelectorAll(".tab").forEach(t=>t.addEventListener("click",()=>{document.querySelectorAll(".tab").forEach(x=>x.classList.toggle("active",x===t));document.querySelectorAll(".tabpane").forEach(x=>x.classList.toggle("hidden",x.id!==t.dataset.tab));}));
+render();preview();
+</script></body></html>
