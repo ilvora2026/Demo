@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ILVORA Workforce | Complaints & Grievances</title>
+<style>
+:root{--navy:#10243a;--teal:#168b88;--gold:#c9a96e;--bg:#f3f6f8;--ink:#203244;--muted:#718096;--line:#e3eaf0}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);font:14px/1.5 Inter,Segoe UI,Arial,sans-serif;color:var(--ink)}
+header{background:var(--navy);color:#fff;padding:20px max(18px,calc((100% - 1120px)/2));display:flex;justify-content:space-between;align-items:center;gap:12px}
+.brand{font-weight:800;letter-spacing:.08em}.brand small{display:block;color:#b8c8d5;font-weight:400;letter-spacing:0;margin-top:3px}
+main{max-width:1120px;margin:26px auto;padding:0 18px}.head{display:flex;justify-content:space-between;align-items:flex-start;gap:15px;flex-wrap:wrap}
+h1{margin:0;color:var(--navy);font-size:25px}.muted{color:var(--muted)}.sub{margin:5px 0 0}
+.pill{background:#e4f4f2;color:#126c69;padding:6px 11px;border-radius:20px;font-size:11px;font-weight:700}
+.notice{margin:18px 0;padding:13px 15px;border:1px solid #e9d9b8;background:#fffaf0;border-radius:12px;color:#65512e}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:16px 0}.stat,.panel{background:white;border:1px solid var(--line);border-radius:14px}
+.stat{padding:14px}.stat strong{display:block;font-size:24px;color:var(--navy)}.stat span{font-size:12px;color:var(--muted)}
+.tabs{display:flex;gap:8px;margin:18px 0;flex-wrap:wrap}.tabs button,.btn{border:1px solid var(--line);background:white;color:var(--ink);padding:10px 14px;border-radius:9px;cursor:pointer;font-weight:600}
+.tabs button.active,.btn.primary{background:var(--teal);color:white;border-color:var(--teal)}
+.panel{padding:18px}.formgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.field{display:flex;flex-direction:column;gap:6px}.field.full{grid-column:1/-1}label{font-weight:650;color:var(--navy);font-size:13px}
+input,select,textarea{font:inherit;padding:10px 11px;border:1px solid #d6e0e8;border-radius:8px;background:#fff;color:var(--ink);width:100%}textarea{min-height:110px;resize:vertical}
+.hint{font-size:11px;color:var(--muted)}.checkrow{display:flex;align-items:flex-start;gap:9px;font-size:12px;color:#526477}.checkrow input{width:auto;margin-top:3px}
+.actions{display:flex;gap:9px;justify-content:flex-end;margin-top:16px;flex-wrap:wrap}
+.listhead{display:flex;justify-content:space-between;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:12px}
+table{width:100%;border-collapse:collapse}th,td{text-align:left;padding:12px 9px;border-bottom:1px solid var(--line);font-size:12px;vertical-align:top}th{color:var(--muted);font-weight:700}
+.status{display:inline-block;padding:4px 8px;border-radius:20px;background:#edf2f7;color:#42566a;font-size:11px;font-weight:700}.status.review{background:#fff4dc;color:#805b13}.status.progress{background:#e5f2ff;color:#245b88}.status.resolved{background:#e3f5ec;color:#216846}
+.hidden{display:none!important}.empty{text-align:center;color:var(--muted);padding:25px}
+.refbox{padding:14px;background:#eef8f7;border:1px solid #c7e7e4;border-radius:10px;margin-top:14px}.refbox strong{font-size:20px;color:#126c69}
+.small{font-size:11px}.secure{font-size:12px;color:#536577;margin-top:15px;padding-top:12px;border-top:1px solid var(--line)}
+@media(max-width:700px){.stats{grid-template-columns:1fr 1fr}.formgrid{grid-template-columns:1fr}.field.full{grid-column:auto}.tablewrap{overflow-x:auto}th,td{white-space:nowrap}}
+</style></head>
+<body>
+<header><div class="brand">ILVORA <span style="color:var(--gold)">WORKFORCE</span><small>WHERE CARE BECOMES CONFIDENCE.</small></div><div>Employee Portal　●</div></header>
+<main>
+<div class="head"><div><h1>Complaints & Grievances</h1><p class="sub muted">Raise a workplace concern and securely follow its progress.</p></div><span class="pill">IDENTIFIED SUBMISSION · DEMO EMPLOYEE</span></div>
+<div class="notice"><b>Confidential handling:</b> Every complaint is linked to your employee ID. Access should be limited to authorised, impartial officers. Your Branch Admin should not receive access automatically, especially if named in the complaint.</div>
+<section class="stats">
+<div class="stat"><strong id="total">2</strong><span>My complaints</span></div>
+<div class="stat"><strong id="active">2</strong><span>Open / under review</span></div>
+<div class="stat"><strong id="closed">0</strong><span>Resolved / closed</span></div>
+</section>
+<div class="tabs"><button class="active" data-tab="new">Submit a complaint</button><button data-tab="history">My complaints & status</button></div>
+<section class="panel" id="newPanel">
+<h2 style="margin:0 0 4px;color:var(--navy)">New complaint</h2><p class="muted small" style="margin:0 0 16px">Your identity will be recorded so the authorised team can investigate and respond.</p>
+<form id="complaintForm">
+<div class="formgrid">
+<div class="field"><label>Employee ID</label><input value="ILV-NH-014" readonly><span class="hint">Automatically taken from your signed-in employee profile.</span></div>
+<div class="field"><label>Branch</label><input value="Neelambari Hospital – Thamarakulam" readonly></div>
+<div class="field"><label for="category">Complaint category *</label><select id="category" required><option value="">Select category</option><option>Workplace harassment or bullying</option><option>Staff behaviour or misconduct</option><option>Salary or payroll issue</option><option>Duty roster or working hours</option><option>Discrimination or unfair treatment</option><option>Workplace safety</option><option>Management-related concern</option><option>Other</option></select></div>
+<div class="field"><label for="incidentDate">Date of incident *</label><input id="incidentDate" type="date" required></div>
+<div class="field full"><label for="subject">Complaint subject *</label><input id="subject" maxlength="120" placeholder="Briefly describe the concern" required></div>
+<div class="field full"><label for="details">Detailed description *</label><textarea id="details" placeholder="Describe what happened, when and where. Include relevant facts and any steps already taken." required></textarea></div>
+<div class="field"><label for="persons">Persons involved (if known)</label><input id="persons" placeholder="Names / roles"></div>
+<div class="field"><label for="evidence">Evidence reference (optional)</label><input id="evidence" placeholder="Document or evidence description"></div>
+<div class="field full"><label class="checkrow"><input type="checkbox" id="confidential" checked><span>I request confidential handling of this complaint, with access restricted to authorised persons who need the information to review or investigate it.</span></label></div>
+<div class="field full"><label class="checkrow"><input type="checkbox" id="truth" required><span>I confirm that the information provided is accurate to the best of my knowledge. I understand that the complaint will be handled under the organisation's applicable policy and legal requirements.</span></label></div>
+</div>
+<div class="actions"><button type="reset" class="btn">Clear form</button><button type="submit" class="btn primary">Submit complaint</button></div>
+</form>
+<div id="submitted" class="refbox hidden"><div class="small">DEMO SUBMISSION CREATED</div><strong id="newRef"></strong><p id="newText" class="small"></p><p class="small">Keep this reference number for follow-up. A production system should send a secure acknowledgement to your registered contact details.</p></div>
+<div class="secure">Privacy note: do not include unnecessary patient-identifiable information or unrelated sensitive personal data. If there is immediate danger, use the organisation's urgent safety or emergency reporting route rather than waiting for this form.</div>
+</section>
+<section class="panel hidden" id="historyPanel">
+<div class="listhead"><div><h2 style="margin:0;color:var(--navy)">My complaint history</h2><span class="muted small">Only complaints linked to your employee account are shown.</span></div><input id="filter" placeholder="Search reference or subject…" style="max-width:250px"></div>
+<div class="tablewrap"><table><thead><tr><th>Reference</th><th>Submitted</th><th>Category</th><th>Subject</th><th>Status</th><th>Last update</th></tr></thead><tbody id="rows"></tbody></table></div>
+<div id="noRows" class="empty hidden">No complaints match your search.</div>
+<div class="secure">The employee view should not expose investigator notes, witness statements, restricted evidence or another employee's personal information. Provide only approved status updates and messages.</div>
+</section>
+</main>
+<script>
+let complaints=[
+{ref:'ILV-CMP-2026-0012',date:'08 Nov 2026',category:'Duty roster or working hours',subject:'Request to review roster allocation',status:'Under review',updated:'11 Nov 2026'},
+{ref:'ILV-CMP-2026-0008',date:'02 Nov 2026',category:'Salary or payroll issue',subject:'Clarification of salary deduction',status:'Investigation in progress',updated:'09 Nov 2026'}
+];
+function counts(){document.getElementById('total').textContent=complaints.length;document.getElementById('active').textContent=complaints.filter(x=>!['Resolved','Closed'].includes(x.status)).length;document.getElementById('closed').textContent=complaints.filter(x=>['Resolved','Closed'].includes(x.status)).length}
+function render(){let q=document.getElementById('filter').value.toLowerCase();let arr=complaints.filter(x=>(x.ref+' '+x.subject+' '+x.category).toLowerCase().includes(q));let body=document.getElementById('rows');body.innerHTML='';arr.forEach(x=>{let tr=document.createElement('tr');let cls=x.status==='Resolved'||x.status==='Closed'?'resolved':x.status==='Investigation in progress'?'progress':'review';tr.innerHTML=`<td>${x.ref}</td><td>${x.date}</td><td>${x.category}</td><td>${x.subject}</td><td><span class="status ${cls}">${x.status}</span></td><td>${x.updated}</td>`;body.appendChild(tr)});document.getElementById('noRows').classList.toggle('hidden',arr.length>0);counts()}
+document.querySelectorAll('.tabs button').forEach(b=>b.onclick=()=>{document.querySelectorAll('.tabs button').forEach(x=>x.classList.remove('active'));b.classList.add('active');document.getElementById('newPanel').classList.toggle('hidden',b.dataset.tab!=='new');document.getElementById('historyPanel').classList.toggle('hidden',b.dataset.tab!=='history')});
+document.getElementById('filter').oninput=render;
+document.getElementById('complaintForm').onsubmit=e=>{e.preventDefault();let n=complaints.length+13;let ref='ILV-CMP-2026-'+String(n).padStart(4,'0');let date=new Date().toLocaleDateString('en-GB',{day:'2-digit',month:'short',year:'numeric'});complaints.unshift({ref,date,category:document.getElementById('category').value,subject:document.getElementById('subject').value,status:'Submitted',updated:date});document.getElementById('newRef').textContent=ref;document.getElementById('newText').textContent='Your complaint has been linked to employee ID ILV-NH-014. Status: Submitted.';document.getElementById('submitted').classList.remove('hidden');e.target.reset();document.getElementById('confidential').checked=true;render();};
+render();
+</script></body></html>
