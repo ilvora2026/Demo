@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ILVORA Workforce | Contracts & Agreements</title>
+<style>
+:root{--navy:#10283f;--teal:#167d80;--gold:#c5a66a;--bg:#f3f6f8;--ink:#1c2c39;--muted:#687987;--line:#dce4e9}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);font:14px/1.45 Inter,Segoe UI,Arial,sans-serif;color:var(--ink)}
+header{background:var(--navy);color:white;padding:20px 26px;display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap}
+.brand{font-weight:800;letter-spacing:1.2px}.brand span{color:#d8c18f}.sub{font-size:12px;color:#c9d5dd;margin-top:3px}.tag{border:1px solid #66808f;border-radius:30px;padding:7px 12px;font-size:12px}
+nav{display:flex;gap:5px;padding:12px 20px;background:white;border-bottom:1px solid var(--line);overflow:auto}
+nav button{border:0;background:transparent;color:#526575;padding:9px 12px;border-radius:8px;white-space:nowrap;cursor:pointer}nav button.active,nav button:hover{background:#e7f2f2;color:var(--teal);font-weight:700}
+main{max-width:1280px;margin:22px auto;padding:0 20px}h1{font-size:24px;color:var(--navy);margin:0 0 5px}h2{font-size:17px;color:var(--navy);margin:0 0 12px}p{color:var(--muted)}
+.intro{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;flex-wrap:wrap;margin-bottom:18px}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:16px}.card{background:#fff;border:1px solid var(--line);border-radius:12px;padding:16px;box-shadow:0 2px 8px #10283f08}
+.metric{font-size:26px;font-weight:800;color:var(--navy)}.metric-label{font-size:12px;color:var(--muted)}
+.layout{display:grid;grid-template-columns:1.15fr .85fr;gap:14px}section.page{display:none}section.page.active{display:block}
+table{width:100%;border-collapse:collapse;font-size:13px}th,td{text-align:left;padding:10px 8px;border-bottom:1px solid var(--line);vertical-align:top}th{font-size:11px;text-transform:uppercase;letter-spacing:.5px;color:#627482}
+.pill{display:inline-block;padding:4px 8px;border-radius:30px;background:#edf3f5;color:#536876;font-size:11px}.green{background:#e7f5ee;color:#28734e}.amber{background:#fff4df;color:#93651b}.red{background:#fdeceb;color:#a43f38}
+button{cursor:pointer;border:0;border-radius:8px;padding:9px 12px;background:var(--teal);color:white;font-weight:650;font-size:12px}button.secondary{background:#eaf0f3;color:#405563}button.gold{background:var(--gold);color:#172b3d}
+.actions,.toolbar{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:12px}.toolbar{margin:0 0 12px}
+input,select,textarea{width:100%;padding:9px;border:1px solid var(--line);border-radius:7px;background:#fff;font:inherit;color:var(--ink)}label{display:block;font-size:12px;font-weight:700;color:#536575;margin:10px 0 5px}
+.formgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}.toolbar input{max-width:270px}
+.note{border-left:3px solid var(--gold);background:#fbf8f1;padding:11px 13px;border-radius:6px;color:#66583e;font-size:12px;margin:12px 0}
+footer{text-align:center;color:#82909a;font-size:11px;padding:26px}
+@media(max-width:850px){.grid{grid-template-columns:repeat(2,1fr)}.layout{grid-template-columns:1fr}}@media(max-width:520px){main{padding:0 12px}.formgrid{grid-template-columns:1fr}header{padding:16px}}
+</style>
+<style id="ilvora-page-watermark">
+/* ILVORA brand watermark: subtle, fixed behind page content on every screen */
+html { min-height:100%; }
+body { position:relative; isolation:isolate; }
+body::after {
+  content:"";
+  position:fixed;
+  inset:0;
+  z-index:-1;
+  pointer-events:none;
+  background-image:url("../../assets/ilvora-healthcare-logo.png");
+  background-repeat:no-repeat;
+  background-position:center center;
+  background-size:min(68vw, 560px) auto;
+  opacity:.055;
+}
+@media(max-width:600px) {
+  body::after { background-size:82vw auto; opacity:.045; }
+}
+</style>
+\n</head>
+<body>
+<header><div><div class="brand">ILVORA <span>HEALTHCARE GROUP</span></div><div class="sub">WORKFORCE · ADMINISTRATOR PANEL</div></div><div class="tag">SERVICE 14 · CONTRACTS & AGREEMENTS</div></header>
+<nav><button class="active" data-page="overview">Overview</button><button data-page="register">Contract Register</button><button data-page="obligations">Obligations & Renewals</button><button data-page="workflow">Approvals & Amendments</button><button data-page="reports">Reports & Audit</button><button data-page="rules">Authority & Controls</button></nav>
+<main>
+<section id="overview" class="page active">
+<div class="intro"><div><h1>Contracts & Agreement Control</h1><p>Central visibility of agreements, commitments, expiry dates and renewal actions across ILVORA branches.</p></div><button onclick="show('register')">＋ Add contract</button></div>
+<div class="grid">
+<div class="card"><div class="metric" id="total">42</div><div class="metric-label">Registered agreements</div></div>
+<div class="card"><div class="metric">05</div><div class="metric-label">Expiring within 90 days</div></div>
+<div class="card"><div class="metric">03</div><div class="metric-label">Pending approval / review</div></div>
+<div class="card"><div class="metric">₹18.6L</div><div class="metric-label">Illustrative annual commitments</div></div>
+</div>
+<div class="layout">
+<div class="card"><h2>Upcoming expiry and renewal actions</h2><table><thead><tr><th>Agreement</th><th>Branch</th><th>Expiry</th><th>Action</th></tr></thead><tbody id="expiryRows"></tbody></table></div>
+<div class="card"><h2>Contract categories</h2><table><tbody><tr><td>Building / premises lease</td><td>08</td></tr><tr><td>Vendor / supplier</td><td>14</td></tr><tr><td>Equipment maintenance</td><td>09</td></tr><tr><td>Software / IT subscriptions</td><td>06</td></tr><tr><td>Other service agreements</td><td>05</td></tr></tbody></table><div class="note">Sample figures are illustrative only. No real contract documents or financial commitments are included.</div></div>
+</div>
+</section>
+<section id="register" class="page">
+<div class="intro"><div><h1>Contract Register</h1><p>Record agreements with parties, branch, term, financial obligations and responsible owner.</p></div></div>
+<div class="layout">
+<div class="card"><h2>Register an agreement</h2>
+<div class="formgrid">
+<div><label>Agreement title</label><input id="title" placeholder="e.g. Building lease agreement"></div>
+<div><label>Contract category</label><select id="category"><option>Building / premises lease</option><option>Vendor / supplier agreement</option><option>Equipment maintenance</option><option>Software / IT subscription</option><option>Employment / consultancy</option><option>Professional service</option><option>Other</option></select></div>
+<div><label>Branch / scope</label><select id="branch"><option>Head Office – Kochi</option><option>Neelambari Hospital – Thamarakulam</option><option>ILVORA Health Clinic – Kottarakkara</option><option>All branches / Central</option></select></div>
+<div><label>Counterparty / vendor</label><input id="party" placeholder="Legal entity / person"></div>
+<div><label>Start date</label><input id="start" type="date"></div>
+<div><label>Expiry / end date</label><input id="end" type="date"></div>
+<div><label>Contract value (₹)</label><input id="value" type="number" min="0" placeholder="Total / annual value"></div>
+<div><label>Payment frequency</label><select id="frequency"><option>One-time</option><option>Monthly</option><option>Quarterly</option><option>Half-yearly</option><option>Annually</option><option>Milestone-based</option><option>As per invoice</option></select></div>
+<div><label>Responsible officer / department</label><input id="owner" placeholder="Name / role / department"></div>
+<div><label>Notice period</label><input id="notice" placeholder="e.g. 90 days"></div>
+</div>
+<label>Key terms, obligations and renewal conditions</label><textarea id="terms" rows="3" placeholder="Summarise critical clauses, deposit, escalation, service levels, notice and renewal conditions"></textarea>
+<label>Document reference / filename</label><input id="doc" placeholder="Agreement PDF filename or document reference">
+<div class="actions"><button onclick="addContract()">Save draft record</button><button class="secondary" onclick="clearForm()">Clear</button></div>
+<div class="note">Prototype stores a document reference/filename only. It does not upload or securely store contract files.</div>
+</div>
+<div class="card"><h2>Agreement register</h2><div class="toolbar"><input id="search" placeholder="Search title / party / reference" oninput="render()"><select id="statusFilter" onchange="render()"><option value="">All statuses</option><option>Active</option><option>Draft</option><option>Pending approval</option><option>Expired</option><option>Terminated</option></select></div>
+<div style="overflow:auto"><table><thead><tr><th>Reference / Agreement</th><th>Branch</th><th>Expiry</th><th>Status</th></tr></thead><tbody id="contractRows"></tbody></table></div></div>
+</div>
+</section>
+<section id="obligations" class="page">
+<div class="intro"><div><h1>Obligations & Renewals</h1><p>Monitor payment dates, deposits, insurance, deliverables, notice periods and renewal decisions.</p></div><button onclick="alert('Demo obligation entry. Production should link each obligation to a contract, owner, due date, evidence and completion approval.')">＋ Add obligation</button></div>
+<div class="card"><h2>Obligation tracker</h2><div class="toolbar"><select><option>All branches</option><option>Head Office – Kochi</option><option>Neelambari Hospital – Thamarakulam</option><option>ILVORA Health Clinic – Kottarakkara</option></select><select><option>All due dates</option><option>Overdue</option><option>Next 30 days</option><option>Next 90 days</option></select></div>
+<table><thead><tr><th>Contract / obligation</th><th>Due date</th><th>Owner</th><th>Value</th><th>Status</th></tr></thead><tbody>
+<tr><td>Premises lease – quarterly rent</td><td>01 Dec 2026</td><td>Branch Admin / HR</td><td>₹2,25,000</td><td><span class="pill amber">Upcoming</span></td></tr>
+<tr><td>Medical equipment AMC – renewal decision</td><td>16 Nov 2026</td><td>Administrator</td><td>₹85,000</td><td><span class="pill red">Action due</span></td></tr>
+<tr><td>Software subscription – annual renewal</td><td>05 Jan 2027</td><td>IT / Administrator</td><td>₹36,000</td><td><span class="pill green">Scheduled</span></td></tr>
+<tr><td>Security deposit – refund / reconciliation review</td><td>On termination</td><td>Finance</td><td>₹1,00,000</td><td><span class="pill">Conditional</span></td></tr>
+</tbody></table></div>
+<div class="card" style="margin-top:14px"><h2>Renewal reminder schedule</h2><div class="grid" style="grid-template-columns:repeat(3,1fr)"><div><div class="metric">90</div><div class="metric-label">Days before expiry</div></div><div><div class="metric">60</div><div class="metric-label">Days before expiry</div></div><div><div class="metric">30</div><div class="metric-label">Days before expiry</div></div></div><p>Suggested reminders to contract owner, Administrator and authorised approver. Configure escalation for overdue decisions and notice-period deadlines.</p></div>
+</section>
+<section id="workflow" class="page">
+<div class="intro"><div><h1>Approvals, Amendments & Termination</h1><p>Keep a documented decision trail for new contracts, renewals, variations and closure.</p></div></div>
+<div class="layout">
+<div class="card"><h2>Approval queue (sample)</h2><table><thead><tr><th>Reference</th><th>Request</th><th>Value</th><th>Status</th></tr></thead><tbody>
+<tr><td>CTR-2026-041</td><td>Equipment maintenance renewal</td><td>₹85,000</td><td><span class="pill amber">Administrator review</span></td></tr>
+<tr><td>CTR-2026-040</td><td>New premises agreement</td><td>₹6,00,000</td><td><span class="pill red">MD approval</span></td></tr>
+<tr><td>CTR-2026-039</td><td>Software subscription renewal</td><td>₹36,000</td><td><span class="pill green">Approved</span></td></tr>
+</tbody></table><div class="actions"><button onclick="alert('Demo only: approve/reject/return action. Production approval must enforce role, authority limit and conflict-of-interest checks on the server.')">Review selected</button><button class="secondary" onclick="alert('Demo: amendment request form. Record old clause, proposed clause, rationale, impact and approvals.')">Create amendment</button></div></div>
+<div class="card"><h2>Contract lifecycle checklist</h2><ol><li>Request and business justification</li><li>Counterparty due diligence and conflict declaration</li><li>Legal / finance / operational review as applicable</li><li>Approval under delegated authority</li><li>Execution by authorised signatory</li><li>Register signed version and obligations</li><li>Monitor, amend, renew or terminate</li><li>Close obligations, deposits and archive records</li></ol></div>
+</div>
+<div class="card" style="margin-top:14px"><h2>Amendment and closure controls</h2><table><thead><tr><th>Event</th><th>Required evidence</th><th>Control</th></tr></thead><tbody>
+<tr><td>Amendment / variation</td><td>Original clause, revised clause, rationale, financial and term impact</td><td>Same or higher approval authority as applicable; preserve prior version</td></tr>
+<tr><td>Renewal</td><td>Performance review, price comparison, budget and notice deadline</td><td>Renewal approval before commitment or expiry</td></tr>
+<tr><td>Termination / cancellation</td><td>Notice, grounds, approvals, final settlement and handover</td><td>Confirm deposits, liabilities, access and property/equipment return</td></tr>
+<tr><td>Dispute / breach</td><td>Notices, correspondence, evidence and legal advice reference</td><td>Restricted access; escalate to MD and legal counsel</td></tr>
+</tbody></table></div>
+</section>
+<section id="reports" class="page">
+<div class="intro"><div><h1>Reports & Audit History</h1><p>Branch-wise and consolidated views of agreements and obligations.</p></div><button onclick="window.print()">Print / Save PDF</button></div>
+<div class="card"><h2>Report catalogue</h2><table><thead><tr><th>Report</th><th>Scope</th><th>Useful for</th><th>Action</th></tr></thead><tbody>
+<tr><td>Contract master register</td><td>Branch / consolidated</td><td>Agreement inventory</td><td><button class="secondary" onclick="csv('contracts')">Download CSV</button></td></tr>
+<tr><td>Expiry and renewal calendar</td><td>Branch / consolidated</td><td>Upcoming decisions</td><td><button class="secondary" onclick="csv('expiry')">Download CSV</button></td></tr>
+<tr><td>Financial obligations</td><td>Branch / consolidated</td><td>Rent, AMC, deposits and recurring commitments</td><td><button class="secondary" onclick="csv('obligations')">Download CSV</button></td></tr>
+<tr><td>Approval and amendment history</td><td>Restricted</td><td>Governance and audit</td><td><button class="secondary" onclick="alert('Illustrative only. Production audit records must be immutable and access-controlled.')">View audit</button></td></tr>
+</tbody></table></div>
+<div class="note">Retain executed contracts, amendments, approvals, notices, payment evidence and closure records under a formally approved India/Kerala legal, tax, financial and sector-specific retention schedule. Apply legal holds where required.</div>
+</section>
+<section id="rules" class="page">
+<div class="intro"><div><h1>Authority & Access Controls</h1><p>Role boundaries and approval rules for contract lifecycle management.</p></div></div>
+<div class="card"><table><thead><tr><th>Role</th><th>Permitted actions</th><th>Restrictions</th></tr></thead><tbody>
+<tr><td>Branch Admin / HR</td><td>Submit contract details, supporting documents, branch obligations and renewal alerts.</td><td>Cannot approve legal commitments or sign agreements unless separately authorised in writing.</td></tr>
+<tr><td>Administrator</td><td>Maintain central register, monitor obligations, coordinate due diligence and approve within MD-delegated authority.</td><td>Cannot change own approval limit or approve above-limit commitments.</td></tr>
+<tr><td>Managing Director</td><td>Approve new agreements, major amendments, exceptional commitments and matters above delegated authority; define limits and signatory delegations.</td><td>Ensure conflicts are declared and independent review is obtained where appropriate.</td></tr>
+<tr><td>Head Office Admin</td><td>View authorised branch agreements and assist document coordination.</td><td>No automatic contract approval or signing authority.</td></tr>
+</tbody></table>
+<div class="note"><b>Approval limit:</b> No numerical contract approval limit has been provided. Until the MD formally sets an effective-dated limit and authorised signatory matrix, route all new agreements, renewals involving financial commitment, material amendments and termination settlements to the MD for approval.</div>
+<h2 style="margin-top:18px">Production safeguards</h2><ul>
+<li>Use least-privilege access; restrict legal, employment, lease and dispute documents to need-to-know users.</li>
+<li>Store signed files in private encrypted object storage; malware-scan uploads and maintain version history.</li>
+<li>Record counterparty legal identity, GST/tax details where applicable, signatories and verification.</li>
+<li>Require legal review for leases, employment, high-value, regulated, data-processing and dispute-sensitive agreements.</li>
+<li>Use effective-dated approval limits and signatory delegations; requester cannot approve own request.</li>
+<li>Keep immutable audit events for viewing, upload, download, approval, amendment, renewal and termination.</li>
+<li>Send expiry alerts with delivery logs; provide escalation and backup contract owner.</li>
+<li>Do not auto-renew or terminate solely from a reminder; require authorised human decision.</li>
+</ul></div>
+</section>
+</main>
+<footer>ILVORA WORKFORCE · Administrator Service 14 · Front-end demonstration only · Version 1</footer>
+<script>
+const contracts=[
+{ref:'CTR-2026-041',title:'Medical equipment maintenance agreement',party:'MedEquip Supplies',branch:'Neelambari Hospital – Thamarakulam',end:'2026-11-16',status:'Pending approval',value:85000},
+{ref:'CTR-2026-040',title:'Premises lease agreement',party:'Property owner',branch:'ILVORA Health Clinic – Kottarakkara',end:'2027-02-28',status:'Pending approval',value:600000},
+{ref:'CTR-2026-039',title:'Workforce software subscription',party:'TechBridge Systems',branch:'All branches / Central',end:'2027-01-05',status:'Active',value:36000},
+{ref:'CTR-2026-038',title:'Medical consumables supply agreement',party:'CareMed Distributors',branch:'Neelambari Hospital – Thamarakulam',end:'2026-12-20',status:'Active',value:240000},
+{ref:'CTR-2026-037',title:'Office premises lease',party:'Property owner',branch:'Head Office – Kochi',end:'2026-10-31',status:'Expired',value:180000}
+];
+function show(id){document.querySelectorAll('.page').forEach(p=>p.classList.toggle('active',p.id===id));document.querySelectorAll('nav button').forEach(b=>b.classList.toggle('active',b.dataset.page===id))}
+document.querySelectorAll('nav button').forEach(b=>b.addEventListener('click',()=>show(b.dataset.page)));
+function render(){let q=(document.getElementById('search')?.value||'').toLowerCase(),f=document.getElementById('statusFilter')?.value||'';let list=contracts.filter(c=>(!q||(c.ref+c.title+c.party+c.branch).toLowerCase().includes(q))&&(!f||c.status===f));document.getElementById('contractRows').innerHTML=list.map(c=>`<tr><td><b>${c.ref}</b><br>${c.title}<br><small>${c.party}</small></td><td>${c.branch}</td><td>${c.end}</td><td><span class="pill ${c.status==='Active'?'green':c.status==='Expired'?'red':'amber'}">${c.status}</span></td></tr>`).join('')||'<tr><td colspan="4">No matching agreements</td></tr>';document.getElementById('total').textContent=String(contracts.length).padStart(2,'0')}
+function renderExpiry(){document.getElementById('expiryRows').innerHTML=contracts.slice(0,4).map(c=>`<tr><td><b>${c.ref}</b><br>${c.title}</td><td>${c.branch}</td><td>${c.end}</td><td><span class="pill amber">Review</span></td></tr>`).join('')}
+function addContract(){let title=document.getElementById('title').value.trim(),party=document.getElementById('party').value.trim(),end=document.getElementById('end').value;if(!title||!party||!end){alert('Enter agreement title, counterparty and expiry date.');return}let ref='CTR-2026-'+String(42+contracts.length-5).padStart(3,'0');contracts.unshift({ref,title,party,branch:document.getElementById('branch').value,end,status:'Draft',value:Number(document.getElementById('value').value)||0});render();renderExpiry();alert('Draft record '+ref+' added in this browser session only. No contract file was uploaded and no approval was requested.');clearForm()}
+function clearForm(){['title','party','start','end','value','owner','notice','terms','doc'].forEach(id=>document.getElementById(id).value='')}
+function csv(type){let rows=type==='contracts'?[['Ref','Title','Counterparty','Branch','Expiry','Status','Value'],...contracts.map(c=>[c.ref,c.title,c.party,c.branch,c.end,c.status,c.value])]:type==='expiry'?[['Ref','Agreement','Branch','Expiry','Status'],...contracts.map(c=>[c.ref,c.title,c.branch,c.end,c.status])]:[['Agreement','Obligation','Due date','Owner','Value'],['Premises lease','Quarterly rent','2026-12-01','Branch Admin / HR',225000],['Equipment AMC','Renewal decision','2026-11-16','Administrator',85000]];let data=rows.map(r=>r.map(v=>'"'+String(v).replaceAll('"','""')+'"').join(',')).join('\n');let a=document.createElement('a');a.href=URL.createObjectURL(new Blob([data],{type:'text/csv'}));a.download='ilvora_contract_'+type+'_demo.csv';a.click();URL.revokeObjectURL(a.href)}
+render();renderExpiry();
+</script></body></html>
