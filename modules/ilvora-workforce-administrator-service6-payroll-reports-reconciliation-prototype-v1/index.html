@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ILVORA Workforce | Payroll Reports & Reconciliation</title>
+<style>
+:root{--navy:#10243a;--teal:#168b89;--gold:#c8a96b;--ink:#233447;--muted:#718096;--line:#e4eaf0;--bg:#f4f7fa;--red:#b54747;--green:#287a55}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);font:14px/1.45 Segoe UI,Arial,sans-serif;color:var(--ink)}
+header{background:var(--navy);color:white;padding:18px 26px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}.brand{font-size:18px;font-weight:800;letter-spacing:1.5px}.brand small{display:block;color:#b8c8d5;font-size:10px;letter-spacing:2px}.role{background:#1d3b56;border:1px solid #49647a;padding:8px 12px;border-radius:20px}
+main{max-width:1280px;margin:24px auto;padding:0 18px}.intro{display:flex;justify-content:space-between;align-items:end;gap:12px;flex-wrap:wrap}h1{font-size:25px;color:var(--navy);margin:0}.sub{color:var(--muted);margin-top:5px}.notice{background:#fff8e9;border:1px solid #ead6aa;border-radius:9px;padding:11px 14px;margin:15px 0;color:#6d5425}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:16px 0}.stat,.panel{background:white;border:1px solid var(--line);border-radius:12px;padding:16px;box-shadow:0 2px 8px #10243a08}.stat span{font-size:12px;color:var(--muted)}.stat strong{display:block;font-size:24px;color:var(--navy);margin-top:5px}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:16px 0}.tab{padding:9px 13px;border:1px solid var(--line);border-radius:8px;background:white;color:#536477;font-weight:650;cursor:pointer}.tab.active{background:var(--navy);color:white}
+.panel h2{font-size:16px;color:var(--navy);margin:0 0 14px}label{display:block;font-size:12px;color:#536477;font-weight:650;margin:10px 0 5px}input,select{width:100%;padding:10px;border:1px solid #d7e0e8;border-radius:8px;background:white;color:var(--ink);font:inherit}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.layout{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.btn{border:0;border-radius:8px;padding:10px 14px;font-weight:700;cursor:pointer;background:var(--teal);color:white}.btn.secondary{background:#eaf1f5;color:var(--navy);border:1px solid #d9e3ea}.btn.gold{background:var(--gold);color:#172b40}.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+table{width:100%;border-collapse:collapse;font-size:12px}th,td{text-align:left;padding:10px 8px;border-bottom:1px solid var(--line);vertical-align:top}th{background:#f8fafc;color:#607184}.pill{display:inline-block;padding:3px 8px;border-radius:20px;background:#e8f5f1;color:var(--green);font-size:11px;font-weight:700}.pending{background:#fff3dc;color:#93651a}.bad{background:#fce8e8;color:#a13f3f}.small{font-size:11px;color:var(--muted)}.hidden{display:none}.metric{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--line)}.empty{text-align:center;color:var(--muted);padding:18px}.right{text-align:right}
+footer{max-width:1280px;margin:20px auto;padding:0 18px 30px;color:#8794a2;font-size:11px}
+@media(max-width:850px){.stats{grid-template-columns:repeat(2,1fr)}.layout{grid-template-columns:1fr}}@media(max-width:520px){.grid2,.grid3{grid-template-columns:1fr}main{padding:0 12px}}
+</style></head><body>
+<header><div class="brand">ILVORA <span style="color:var(--gold)">WORKFORCE</span><small>WHERE CARE BECOMES CONFIDENCE</small></div><div class="role">Administrator · Payroll Finance</div></header>
+<main>
+<div class="intro"><div><h1>Payroll Reports & Financial Reconciliation</h1><div class="sub">Review payroll expenditure, payment execution and bank reconciliation across branches.</div></div><button class="btn secondary" onclick="window.print()">Print current view</button></div>
+<div class="notice"><b>Prototype only:</b> All employees, values and payment references are fictional. No bank connection, payment initiation, accounting integration or live payroll data is connected. Do not enter real financial or employee information.</div>
+<div class="stats">
+<div class="stat"><span>Payroll gross · sample month</span><strong id="grossKpi">₹2.64L</strong></div>
+<div class="stat"><span>Net payroll due</span><strong id="netKpi">₹2.36L</strong></div>
+<div class="stat"><span>Bank payments matched</span><strong id="matchedKpi">4 / 6</strong></div>
+<div class="stat"><span>Exceptions to reconcile</span><strong id="exceptionKpi">2</strong></div>
+</div>
+<div class="tabs">
+<button class="tab active" data-tab="overview">Financial overview</button>
+<button class="tab" data-tab="branch">Branch reports</button>
+<button class="tab" data-tab="payments">Payment register</button>
+<button class="tab" data-tab="reconcile">Bank reconciliation</button>
+<button class="tab" data-tab="adjustments">Arrears & adjustments</button>
+<button class="tab" data-tab="history">Reports & audit history</button>
+<button class="tab" data-tab="access">Access controls</button>
+</div>
+
+<section id="overview" class="pane"><div class="layout">
+<div class="panel"><h2>Payroll period summary</h2>
+<div class="grid2"><div><label>Payroll month</label><input type="month" id="period" value="2026-11" onchange="updateSummary()"></div><div><label>Report scope</label><select id="scope" onchange="updateSummary()"><option>All branches</option><option>Head Office – Kochi</option><option>Neelambari Hospital – Thamarakulam</option><option>ILVORA Health Clinic – Kottarakkara</option></select></div></div>
+<div class="metric"><span>Employee count</span><b id="employeeTotal">6</b></div><div class="metric"><span>Gross salary</span><b id="grossTotal">₹2,64,000</b></div><div class="metric"><span>Allowances (included in gross)</span><b>₹18,000</b></div><div class="metric"><span>Attendance / leave adjustments</span><b>−₹8,000</b></div><div class="metric"><span>Other deductions</span><b>−₹38,000</b></div><div class="metric"><b>Net payroll payable</b><b id="netTotal">₹2,36,000</b></div>
+<div class="actions"><button class="btn secondary" onclick="exportCSV('all')">Export payroll summary CSV</button><button class="btn secondary" onclick="window.print()">Print / Save as PDF</button></div>
+</div>
+<div class="panel"><h2>Branch-wise expenditure</h2><div id="branchSummary"></div><p class="small">Amounts are illustrative and should reconcile to approved, locked payroll before use.</p></div>
+</div></section>
+
+<section id="branch" class="pane hidden"><div class="panel"><h2>Branch and department payroll report</h2>
+<div class="grid3"><div><label>Branch</label><select id="branchFilter" onchange="renderBranch()"><option value="">All branches</option><option>Head Office – Kochi</option><option>Neelambari Hospital – Thamarakulam</option><option>ILVORA Health Clinic – Kottarakkara</option></select></div><div><label>Department</label><select id="deptFilter" onchange="renderBranch()"><option value="">All departments</option><option>Administration</option><option>Accounts</option><option>Nursing</option><option>Clinical</option><option>Support</option></select></div><div><label>Payroll month</label><input type="month" value="2026-11"></div></div>
+<div style="overflow:auto;margin-top:12px"><table><thead><tr><th>Branch / department</th><th>Employees</th><th>Gross</th><th>Adjustments</th><th>Deductions</th><th>Net payable</th></tr></thead><tbody id="branchRows"></tbody></table></div>
+<div class="actions"><button class="btn secondary" onclick="exportCSV('branch')">Export branch report CSV</button><button class="btn secondary" onclick="window.print()">Print report</button></div></div></section>
+
+<section id="payments" class="pane hidden"><div class="panel"><h2>Salary bank payment register</h2><p class="small">Tracks illustrative payment references and outcomes. It does not initiate bank transfers.</p>
+<div class="grid2"><div><label>Search Employee ID / payment reference</label><input id="paySearch" placeholder="Search..." oninput="renderPayments()"></div><div><label>Payment status</label><select id="payStatus" onchange="renderPayments()"><option value="">All statuses</option><option>Matched</option><option>Pending</option><option>Failed</option><option>Returned</option></select></div></div>
+<div style="overflow:auto;margin-top:12px"><table><thead><tr><th>Employee</th><th>Branch</th><th>Net due</th><th>Payment reference</th><th>Bank payment</th><th>Date</th><th>Status</th></tr></thead><tbody id="paymentRows"></tbody></table></div>
+<div class="actions"><button class="btn secondary" onclick="exportCSV('payments')">Export payment register CSV</button></div></div></section>
+
+<section id="reconcile" class="pane hidden"><div class="layout"><div class="panel"><h2>Bank reconciliation workspace</h2>
+<label>Select employee payment</label><select id="reconEmployee" onchange="showRecon()"></select>
+<div id="reconDetail" class="empty">Select a payment to review.</div>
+<label>Bank statement reference / note</label><input id="bankRef" placeholder="Enter sample statement reference">
+<label>Reconciliation note</label><input id="reconNote" placeholder="e.g. Amount and beneficiary verified">
+<div class="actions"><button class="btn" onclick="markMatched()">Mark matched</button><button class="btn secondary" onclick="markException()">Flag exception</button></div>
+<p class="small">A production reconciliation must use secure bank statement import/API and maker-checker controls. Do not manually mark a payment as matched without evidence.</p></div>
+<div class="panel"><h2>Reconciliation totals</h2><div class="metric"><span>Net payroll due</span><b>₹2,36,000</b></div><div class="metric"><span>Matched bank payments</span><b id="matchedAmount">₹1,46,300</b></div><div class="metric"><span>Pending / exceptions</span><b id="pendingAmount">₹89,700</b></div><div class="metric"><span>Matched transactions</span><b id="matchedCount">4</b></div><div class="metric"><span>Unmatched transactions</span><b id="unmatchedCount">2</b></div></div></div></section>
+
+<section id="adjustments" class="pane hidden"><div class="panel"><h2>Arrears, deductions and payroll adjustments</h2><div style="overflow:auto"><table><thead><tr><th>Reference</th><th>Employee ID</th><th>Type</th><th>Payroll month</th><th>Amount</th><th>Reason</th><th>Status</th></tr></thead><tbody id="adjustRows"></tbody></table></div>
+<div class="notice">Post-payroll corrections should be recorded as approved adjustment entries in a later payroll period. Never silently edit a closed payroll run.</div>
+<div class="actions"><button class="btn secondary" onclick="exportCSV('adjustments')">Export adjustments CSV</button></div></div></section>
+
+<section id="history" class="pane hidden"><div class="layout">
+<div class="panel"><h2>Saved report history</h2><table><thead><tr><th>Report reference</th><th>Period</th><th>Scope</th><th>Created</th><th>Created by</th></tr></thead><tbody id="reportHistory"></tbody></table><div class="actions"><button class="btn" onclick="saveReport()">Save current report record</button></div></div>
+<div class="panel"><h2>Audit history</h2><div style="overflow:auto"><table><thead><tr><th>Timestamp</th><th>Action</th><th>Actor</th><th>Reference / note</th></tr></thead><tbody id="auditRows"></tbody></table></div></div>
+</div></section>
+
+<section id="access" class="pane hidden"><div class="layout">
+<div class="panel"><h2>Role-based report access</h2><table><tr><th>Role</th><th>Permitted visibility</th></tr><tr><td>Administrator</td><td>Full payroll reports, employee-level financial details and reconciliation.</td></tr><tr><td>Branch Admin / HR</td><td>No salary amounts, payslip contents or bank payment details.</td></tr><tr><td>Head Office Admin</td><td>Approved workforce summaries only; no individual salary details.</td></tr><tr><td>Managing Director</td><td>Executive-level consolidated financial overview, subject to assigned access.</td></tr></table></div>
+<div class="panel"><h2>Production controls</h2><ul><li>Read only from approved, locked payroll snapshots.</li><li>Bank payment status must be supported by verified bank evidence.</li><li>Use maker-checker approval for payment files and reconciliation exceptions.</li><li>Mask bank account details and restrict exports.</li><li>Maintain immutable logs of report generation, exports and reconciliation decisions.</li><li>Encrypt payroll and payment data in transit and at rest.</li><li>Apply retention, legal hold and physical print/filing register requirements.</li><li>Do not treat a generated bank file as proof of payment.</li></ul></div>
+</div></section>
+</main><footer>ILVORA Workforce · Administrator module · Payroll Reports & Reconciliation Prototype v1 · Demo only</footer>
+<script>
+const people=[
+{id:"ILV-HO-001",name:"Sample Employee A",branch:"Head Office – Kochi",dept:"Administration",gross:50000,adjust:0,ded:6500,net:43500,ref:"BNK-001",paid:43500,date:"2026-11-11",status:"Matched"},
+{id:"ILV-HO-002",name:"Sample Employee D",branch:"Head Office – Kochi",dept:"Accounts",gross:42000,adjust:0,ded:5000,net:37000,ref:"BNK-002",paid:37000,date:"2026-11-11",status:"Matched"},
+{id:"ILV-NH-001",name:"Sample Employee B",branch:"Neelambari Hospital – Thamarakulam",dept:"Nursing",gross:41000,adjust:-4000,ded:5200,net:31800,ref:"BNK-003",paid:31800,date:"2026-11-11",status:"Matched"},
+{id:"ILV-NH-002",name:"Sample Employee E",branch:"Neelambari Hospital – Thamarakulam",dept:"Clinical",gross:46000,adjust:0,ded:6000,net:40000,ref:"BNK-004",paid:0,date:"—",status:"Pending"},
+{id:"ILV-KK-001",name:"Sample Employee C",branch:"ILVORA Health Clinic – Kottarakkara",dept:"Clinical",gross:58000,adjust:0,ded:8000,net:50000,ref:"BNK-005",paid:0,date:"2026-11-12",status:"Failed"},
+{id:"ILV-KK-002",name:"Sample Employee F",branch:"ILVORA Health Clinic – Kottarakkara",dept:"Support",gross:27000,adjust:-4000,ded:3300,net:19700,ref:"BNK-006",paid:0,date:"—",status:"Returned"}
+];
+const adjustments=[
+{ref:"ADJ-2026-021",id:"ILV-NH-001",type:"Unpaid leave adjustment",month:"2026-11",amount:-4000,reason:"Approved unpaid leave",status:"Applied"},
+{ref:"ADJ-2026-022",id:"ILV-KK-002",type:"Attendance correction",month:"2026-11",amount:-4000,reason:"Pending attendance review",status:"Review required"},
+{ref:"ARR-2026-006",id:"ILV-HO-001",type:"Arrears",month:"2026-11",amount:2500,reason:"Prior-period salary revision",status:"Approved"}
+];
+let reports=[{ref:"RPT-PAY-2026-10-001",period:"Oct 2026",scope:"All branches",date:"2026-11-12",by:"Administrator"}];
+let audit=[{time:"2026-11-12 09:20",action:"Payroll summary viewed",actor:"Administrator",note:"PAY-2026-11 sample"},{time:"2026-11-12 10:05",action:"Bank reconciliation review",actor:"Administrator",note:"2 exceptions remain"}];
+const $=id=>document.getElementById(id), money=n=>"₹"+Number(n).toLocaleString("en-IN");
+function scopePeople(){let s=$("scope").value;return people.filter(p=>s==="All branches"||p.branch===s)}
+function updateSummary(){let a=scopePeople(),gross=a.reduce((s,p)=>s+p.gross,0),net=a.reduce((s,p)=>s+p.net,0);$("employeeTotal").textContent=a.length;$("grossTotal").textContent=money(gross);$("netTotal").textContent=money(net);$("grossKpi").textContent="₹"+(gross/100000).toFixed(2)+"L";$("netKpi").textContent="₹"+(net/100000).toFixed(2)+"L";renderBranchSummary()}
+function renderBranchSummary(){let groups=[...new Set(people.map(p=>p.branch))];$("branchSummary").innerHTML=groups.map(b=>{let a=people.filter(p=>p.branch===b),n=a.reduce((s,p)=>s+p.net,0);return `<div class="metric"><span>${b}<br><small>${a.length} employees</small></span><b>${money(n)}</b></div>`}).join("")}
+function renderBranch(){let b=$("branchFilter").value,d=$("deptFilter").value,a=people.filter(p=>(!b||p.branch===b)&&(!d||p.dept===d));let branches=[...new Set(a.map(p=>p.branch+" / "+p.dept))];$("branchRows").innerHTML=branches.map(k=>{let x=a.filter(p=>p.branch+" / "+p.dept===k);return `<tr><td>${k}</td><td>${x.length}</td><td>${money(x.reduce((s,p)=>s+p.gross,0))}</td><td>${money(x.reduce((s,p)=>s+p.adjust,0))}</td><td>${money(x.reduce((s,p)=>s+p.ded,0))}</td><td><b>${money(x.reduce((s,p)=>s+p.net,0))}</b></td></tr>`}).join("")||'<tr><td colspan="6" class="empty">No records</td></tr>'}
+function renderPayments(){let q=$("paySearch").value.toLowerCase(),s=$("payStatus").value,a=people.filter(p=>(p.id+" "+p.name+" "+p.ref).toLowerCase().includes(q)&&(!s||p.status===s));$("paymentRows").innerHTML=a.map(p=>`<tr><td><b>${p.id}</b><br>${p.name}</td><td>${p.branch}</td><td>${money(p.net)}</td><td>${p.ref}</td><td>${money(p.paid)}</td><td>${p.date}</td><td><span class="pill ${p.status==="Matched"?"":p.status==="Pending"?"pending":"bad"}">${p.status}</span></td></tr>`).join("")||'<tr><td colspan="7" class="empty">No matching payments</td></tr>'}
+function showRecon(){let p=people.find(x=>x.id===$("reconEmployee").value);if(!p)return;$("reconDetail").innerHTML=`<div style="text-align:left"><b>${p.id} · ${p.name}</b><div class="metric"><span>Net due</span><b>${money(p.net)}</b></div><div class="metric"><span>Bank paid</span><b>${money(p.paid)}</b></div><div class="metric"><span>Payment reference</span><b>${p.ref}</b></div><div class="metric"><span>Status</span><b>${p.status}</b></div></div>`}
+function updateReconTotals(){let matched=people.filter(p=>p.status==="Matched"),un=people.filter(p=>p.status!=="Matched");let m=matched.reduce((s,p)=>s+p.paid,0),u=un.reduce((s,p)=>s+p.net,0);$("matchedAmount").textContent=money(m);$("pendingAmount").textContent=money(u);$("matchedCount").textContent=matched.length;$("unmatchedCount").textContent=un.length;$("matchedKpi").textContent=matched.length+" / "+people.length;$("exceptionKpi").textContent=un.length}
+function markMatched(){let p=people.find(x=>x.id===$("reconEmployee").value);if(!p)return;if(!$("bankRef").value.trim()||!$("reconNote").value.trim()){alert("Enter a bank statement reference and reconciliation note.");return}if(p.status==="Failed"||p.status==="Returned"||p.status==="Pending"){alert("This payment has no confirmed matching bank credit. Record an exception instead of marking it matched.");return}p.status="Matched";p.paid=p.net;audit.unshift({time:new Date().toLocaleString("en-IN"),action:"Payment marked matched (demo)",actor:"Administrator",note:p.id+" · "+$("bankRef").value});renderAll();alert("Reconciliation status updated in this demo only. No bank data was verified.");}
+function markException(){let p=people.find(x=>x.id===$("reconEmployee").value);if(!p)return;if(!$("reconNote").value.trim()){alert("Enter an exception note.");return}p.status="Pending";p.paid=0;audit.unshift({time:new Date().toLocaleString("en-IN"),action:"Payment exception recorded (demo)",actor:"Administrator",note:p.id+" · "+$("reconNote").value});renderAll();alert("Exception recorded in this demo only.");}
+function renderAdjust(){ $("adjustRows").innerHTML=adjustments.map(a=>`<tr><td>${a.ref}</td><td>${a.id}</td><td>${a.type}</td><td>${a.month}</td><td>${money(a.amount)}</td><td>${a.reason}</td><td><span class="pill ${a.status==="Review required"?"pending":""}">${a.status}</span></td></tr>`).join("")}
+function renderHistory(){$("reportHistory").innerHTML=reports.map(r=>`<tr><td>${r.ref}</td><td>${r.period}</td><td>${r.scope}</td><td>${r.date}</td><td>${r.by}</td></tr>`).join("");$("auditRows").innerHTML=audit.map(a=>`<tr><td>${a.time}</td><td>${a.action}</td><td>${a.actor}</td><td>${a.note}</td></tr>`).join("")}
+function saveReport(){let ref="RPT-PAY-"+$("period").value+"-"+String(reports.length+1).padStart(3,"0");reports.unshift({ref,period:$("period").value,scope:$("scope").value,date:new Date().toISOString().slice(0,10),by:"Administrator"});audit.unshift({time:new Date().toLocaleString("en-IN"),action:"Report saved to history",actor:"Administrator",note:ref});renderHistory();alert("Report history record saved in this demo. No report file is stored.");}
+function exportCSV(type){let rows=[];if(type==="payments")rows=[["Employee ID","Name","Branch","Net Due","Bank Paid","Payment Reference","Payment Date","Status"],...people.map(p=>[p.id,p.name,p.branch,p.net,p.paid,p.ref,p.date,p.status])];else if(type==="adjustments")rows=[["Reference","Employee ID","Type","Month","Amount","Reason","Status"],...adjustments.map(a=>[a.ref,a.id,a.type,a.month,a.amount,a.reason,a.status])];else{let a=type==="branch"?people.filter(p=>(!$("branchFilter").value||p.branch===$("branchFilter").value)&&(!$("deptFilter").value||p.dept===$("deptFilter").value)):scopePeople();rows=[["Employee ID","Name","Branch","Department","Gross","Adjustment","Deduction","Net"],...a.map(p=>[p.id,p.name,p.branch,p.dept,p.gross,p.adjust,p.ded,p.net])];}let csv=rows.map(r=>r.map(v=>'"'+String(v).replaceAll('"','""')+'"').join(",")).join("\n");let a=document.createElement("a");a.href=URL.createObjectURL(new Blob([csv],{type:"text/csv"}));a.download="ILVORA_Payroll_"+type+"_Demo.csv";a.click();URL.revokeObjectURL(a.href);audit.unshift({time:new Date().toLocaleString("en-IN"),action:"CSV export generated",actor:"Administrator",note:type+" report"});renderHistory()}
+function renderAll(){updateSummary();renderBranch();renderPayments();renderAdjust();renderHistory();$("reconEmployee").innerHTML=people.map(p=>`<option value="${p.id}">${p.id} · ${p.name}</option>`).join("");showRecon();updateReconTotals()}
+document.querySelectorAll(".tab").forEach(t=>t.addEventListener("click",()=>{document.querySelectorAll(".tab").forEach(x=>x.classList.toggle("active",x===t));document.querySelectorAll(".pane").forEach(x=>x.classList.toggle("hidden",x.id!==t.dataset.tab))}));
+renderAll();
+</script></body></html>
