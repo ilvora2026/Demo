@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ILVORA Workforce | Requests & Helpdesk</title>
+<style>
+:root{--navy:#10263f;--teal:#167c70;--gold:#c6a76a;--bg:#f4f7fa;--line:#dce4eb;--muted:#657589}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:#172b42;font:14px/1.45 Inter,system-ui,Arial}
+header{background:var(--navy);color:white;padding:18px 24px;display:flex;justify-content:space-between;gap:14px;align-items:center;flex-wrap:wrap}.brand{font-weight:800;letter-spacing:.08em}.brand small{display:block;color:#d7c394;font-weight:500;letter-spacing:0}
+main{max-width:1400px;margin:22px auto;padding:0 18px}h1{margin:0;color:var(--navy);font-size:23px}h2{font-size:16px;color:var(--navy);margin:0 0 12px}.small{font-size:12px;color:var(--muted)}
+.top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:16px}.panel{background:white;border:1px solid var(--line);border-radius:14px;padding:16px}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:14px}.stat{background:white;border:1px solid var(--line);border-radius:12px;padding:14px}.stat b{font-size:23px;color:var(--navy);display:block}
+.tabs{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:14px}.tabs button,.btn{border:1px solid #cbd6df;border-radius:8px;background:white;padding:9px 12px;font:inherit;font-weight:650;cursor:pointer}.tabs button.active{background:var(--navy);color:white}.primary{background:var(--teal)!important;color:white!important;border-color:var(--teal)!important}.dark{background:var(--navy)!important;color:white!important;border-color:var(--navy)!important}
+input,select,textarea{font:inherit;border:1px solid #cbd6df;border-radius:8px;padding:9px 10px;width:100%;background:white;color:#172b42}label{display:block;font-size:12px;font-weight:700;color:#526477;margin:9px 0 5px}.field{margin-bottom:8px}
+.row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.row>*{flex:1}.layout{display:grid;grid-template-columns:1fr 1fr;gap:14px}.formgrid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+table{border-collapse:collapse;width:100%;font-size:12px}th,td{text-align:left;padding:10px 8px;border-bottom:1px solid var(--line);vertical-align:top}th{color:#526477;background:#f7f9fb}
+.pill{display:inline-block;border-radius:30px;padding:3px 8px;font-size:11px;font-weight:700}.open{background:#fff3d9;color:#805d13}.assigned{background:#eaf0fa;color:#315b86}.progress{background:#e9f1fb;color:#315b86}.resolved{background:#e4f4ed;color:#176448}.closed{background:#edf0f3;color:#526477}.high{background:#fde9e8;color:#a23d37}.medium{background:#fff3d9;color:#805d13}.low{background:#eaf0f5;color:#526477}
+.notice{background:#f0f7f5;border:1px solid #cfe4de;border-radius:9px;padding:12px;font-size:12px;color:#315d55;margin-top:10px}
+.actions{display:flex;gap:5px;flex-wrap:wrap}.actions button{padding:6px 8px;font-size:11px}
+.hidden{display:none}.list{display:flex;flex-direction:column;gap:8px}.item{border:1px solid var(--line);border-radius:9px;padding:10px;display:flex;justify-content:space-between;gap:10px;align-items:center}
+footer{text-align:center;color:var(--muted);font-size:11px;margin:18px}
+@media(max-width:900px){.layout{grid-template-columns:1fr}.grid{grid-template-columns:repeat(2,1fr)}}@media(max-width:560px){main{padding:0 9px}.panel{padding:12px}.grid{gap:7px}.stat{padding:10px}table{font-size:11px}th,td{padding:7px 5px}}
+</style></head><body>
+<header><div class="brand">ILVORA <span style="color:#d7c394">WORKFORCE</span><small>WHERE CARE BECOMES CONFIDENCE.</small></div><div>Branch Admin / HR · Requests & Helpdesk</div></header>
+<main>
+<div class="top"><div><h1>Requests & Helpdesk Management</h1><div class="small">Receive employee requests, assign responsible teams and track resolution.</div></div><div class="row" style="max-width:470px"><select id="branch"><option>Neelambari Hospital – Thamarakkulam</option><option>ILVORA Health Clinic – Kottarakkara</option><option>Head Office – Kochi</option></select><button class="btn" id="print">Print current view</button></div></div>
+<div class="grid">
+ <div class="stat"><span class="small">Total tickets</span><b id="total">0</b><span class="small">Registered requests</span></div>
+ <div class="stat"><span class="small">Open / unassigned</span><b id="open">0</b><span class="small">Needs allocation</span></div>
+ <div class="stat"><span class="small">In progress</span><b id="progress">0</b><span class="small">Being handled</span></div>
+ <div class="stat"><span class="small">Resolved</span><b id="resolved">0</b><span class="small">Completed tickets</span></div>
+</div>
+<div class="tabs"><button class="active" data-tab="register">Request Register</button><button data-tab="new">Create Request</button><button data-tab="manage">Assignment & Resolution</button><button data-tab="reports">Reports & Filing</button></div>
+<section id="register" class="panel">
+ <div class="top"><div><h2>Employee request register</h2><div class="small">Search by ticket reference, employee ID or category.</div></div><div class="row" style="max-width:470px"><input id="search" placeholder="Search tickets"><select id="statusFilter"><option value="">All statuses</option><option>Open</option><option>Assigned</option><option>In progress</option><option>Resolved</option><option>Closed</option></select></div></div>
+ <div style="overflow:auto"><table><thead><tr><th>Ticket</th><th>Employee</th><th>Category</th><th>Priority</th><th>Assigned team</th><th>Status</th><th>Due / SLA</th><th>Action</th></tr></thead><tbody id="ticketRows"></tbody></table></div>
+</section>
+<section id="new" class="panel hidden">
+ <h2>Create employee request</h2><div class="small">Requests should be linked to a permanent Employee ID.</div>
+ <div class="layout" style="margin-top:12px">
+  <div>
+   <div class="formgrid"><div class="field"><label>Employee ID *</label><select id="employee"><option value="ILV-NH-001">Anjali S · ILV-NH-001</option><option value="ILV-NH-002">Rahul K · ILV-NH-002</option><option value="ILV-NH-003">Meera P · ILV-NH-003</option><option value="ILV-NH-004">Arun M · ILV-NH-004</option><option value="ILV-NH-005">Jisha R · ILV-NH-005</option></select></div><div class="field"><label>Request date *</label><input type="date" id="date"></div></div>
+   <div class="field"><label>Request category *</label><select id="category"><option>HR / Employment</option><option>Salary / Payslip query</option><option>Certificate / Experience letter</option><option>ID card</option><option>Profile / Personal details correction</option><option>IT / Technical support</option><option>Equipment request</option><option>Facilities / Maintenance</option><option>Other</option></select></div>
+   <div class="formgrid"><div class="field"><label>Priority *</label><select id="priority"><option>Low</option><option selected>Medium</option><option>High</option><option>Urgent</option></select></div><div class="field"><label>Preferred responsible team</label><select id="team"><option>Branch HR</option><option>Head Office HR</option><option>Payroll / Accounts</option><option>IT Support</option><option>Facilities</option><option>Administration</option></select></div></div>
+   <div class="field"><label>Subject *</label><input id="subject" placeholder="Short description of the request"></div>
+   <div class="field"><label>Details *</label><textarea id="details" rows="4" placeholder="Explain the request and relevant details"></textarea></div>
+   <div class="field"><label>Attachment (optional)</label><input type="file" id="attachment" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx"></div>
+   <button class="btn primary" id="submit">Create ticket</button><div id="formMsg" class="notice hidden"></div>
+  </div>
+  <div class="notice"><b>Ticket workflow</b><ol><li>Employee request is registered with a unique ticket reference.</li><li>Branch Admin / HR reviews and assigns the responsible team.</li><li>Assigned team updates progress and requests clarification if needed.</li><li>Resolution details are recorded before closure.</li><li>Employee is notified of status changes in the production system.</li></ol><b>Access:</b> Only authorised staff should see personal, payroll or employment attachments.</div>
+ </div>
+</section>
+<section id="manage" class="panel hidden">
+ <h2>Assignment & resolution</h2><div class="small">Select a ticket to assign an owner, update status and record resolution.</div>
+ <div class="field" style="max-width:500px"><label>Select ticket</label><select id="ticketSelect"></select></div>
+ <div class="layout">
+  <div id="ticketDetail" class="notice">Select a ticket to view its details.</div>
+  <div>
+   <div class="field"><label>Responsible team</label><select id="assignTeam"><option>Branch HR</option><option>Head Office HR</option><option>Payroll / Accounts</option><option>IT Support</option><option>Facilities</option><option>Administration</option></select></div>
+   <div class="field"><label>Assigned officer</label><input id="officer" placeholder="Officer / team member"></div>
+   <div class="field"><label>Status</label><select id="ticketStatus"><option>Open</option><option>Assigned</option><option>In progress</option><option>Resolved</option><option>Closed</option></select></div>
+   <div class="field"><label>Progress / resolution note</label><textarea id="updateNote" rows="4" placeholder="Action taken, pending information or resolution"></textarea></div>
+   <div class="field"><label>Resolution reference (optional)</label><input id="resolutionRef" placeholder="Document / approval reference"></div>
+   <button class="btn primary" id="saveUpdate">Save update</button>
+  </div>
+ </div>
+</section>
+<section id="reports" class="panel hidden">
+ <h2>Reports & physical filing register</h2>
+ <div class="row" style="margin:12px 0"><div class="stat"><span class="small">High / urgent tickets</span><b id="highCount">0</b></div><div class="stat"><span class="small">Overdue tickets</span><b id="overdueCount">0</b></div><div class="stat"><span class="small">Filing records</span><b id="fileCount">0</b></div></div>
+ <div style="overflow:auto"><table><thead><tr><th>Ticket</th><th>Employee ID</th><th>Print date</th><th>Physical filing reference</th><th>Custodian</th></tr></thead><tbody id="filingRows"></tbody></table></div>
+ <div class="row" style="margin-top:12px"><button class="btn" id="fileRecord">Record printed ticket</button><button class="btn" id="export">Export CSV</button></div>
+ <div class="notice">Print only necessary records. Maintain access-controlled physical files and a filing register. Retention and secure destruction must follow the approved HR/legal records schedule.</div>
+</section>
+<footer>Prototype v1 · Fictional sample tickets · No live ticketing, notifications, secure attachment storage or backend integration</footer>
+</main>
+<script>
+let tickets=[
+ {ref:"HD-2026-001",employee:"ILV-NH-001",date:"2026-11-06",category:"Certificate / Experience letter",priority:"Medium",team:"Branch HR",officer:"",status:"Open",subject:"Request for employment certificate",details:"Needs employment certificate for official submission.",due:"2026-11-20",notes:[],attachment:""},
+ {ref:"HD-2026-002",employee:"ILV-NH-002",date:"2026-11-08",category:"IT / Technical support",priority:"High",team:"IT Support",officer:"IT Desk",status:"In progress",subject:"Workforce login issue",details:"Unable to access the employee portal from mobile.",due:"2026-11-15",notes:["Initial troubleshooting started."],attachment:""},
+ {ref:"HD-2026-003",employee:"ILV-NH-003",date:"2026-11-10",category:"Salary / Payslip query",priority:"Low",team:"Payroll / Accounts",officer:"Payroll Desk",status:"Resolved",subject:"Payslip clarification",details:"Clarification requested on a payslip line item.",due:"2026-11-18",notes:["Explained the line item to employee."],attachment:""}
+],filings=[],selected="";
+const $=id=>document.getElementById(id);
+function cls(s){return s==="Resolved"?"resolved":s==="Closed"?"closed":s==="In progress"?"progress":s==="Assigned"?"assigned":"open"}
+function pcls(p){return p==="High"||p==="Urgent"?"high":p==="Medium"?"medium":"low"}
+function render(){
+ $("total").textContent=tickets.length;$("open").textContent=tickets.filter(t=>t.status==="Open").length;$("progress").textContent=tickets.filter(t=>t.status==="In progress"||t.status==="Assigned").length;$("resolved").textContent=tickets.filter(t=>t.status==="Resolved"||t.status==="Closed").length;
+ let q=$("search").value.toLowerCase(),f=$("statusFilter").value;
+ $("ticketRows").innerHTML=tickets.filter(t=>(!f||t.status===f)&&(t.ref+t.employee+t.category+t.subject).toLowerCase().includes(q)).map(t=>`<tr><td><b>${t.ref}</b><div class="small">${t.date}</div></td><td>${t.employee}</td><td>${t.category}<div class="small">${t.subject}</div></td><td><span class="pill ${pcls(t.priority)}">${t.priority}</span></td><td>${t.team}${t.officer?'<div class="small">'+t.officer+'</div>':''}</td><td><span class="pill ${cls(t.status)}">${t.status}</span></td><td>${t.due||"—"}</td><td><button class="btn" onclick="manage('${t.ref}')">Manage</button></td></tr>`).join("");
+ $("ticketSelect").innerHTML=tickets.map(t=>`<option value="${t.ref}">${t.ref} · ${t.employee}</option>`).join("");
+ if(!selected&&tickets.length)selected=tickets[0].ref;$("ticketSelect").value=selected;detail();
+ let today=new Date("2026-11-14");$("highCount").textContent=tickets.filter(t=>t.priority==="High"||t.priority==="Urgent").length;$("overdueCount").textContent=tickets.filter(t=>t.due&&new Date(t.due)<today&&!["Resolved","Closed"].includes(t.status)).length;$("fileCount").textContent=filings.length;
+ $("filingRows").innerHTML=filings.map(f=>`<tr><td>${f.ref}</td><td>${f.employee}</td><td>${f.date}</td><td>${f.filing}</td><td>${f.custodian}</td></tr>`).join("");
+}
+function detail(){let t=tickets.find(x=>x.ref===selected);if(!t)return;$("ticketSelect").value=t.ref;$("assignTeam").value=t.team;$("officer").value=t.officer;$("ticketStatus").value=t.status;
+ $("ticketDetail").innerHTML=`<b>${t.ref}</b><p><b>Employee:</b> ${t.employee}<br><b>Category:</b> ${t.category}<br><b>Priority:</b> ${t.priority}<br><b>Subject:</b> ${t.subject}<br><b>Requested team:</b> ${t.team}<br><b>Target date:</b> ${t.due||"Not set"}</p><b>Request details</b><p>${t.details}</p><b>History</b><ul>${t.notes.map(n=>`<li>${n}</li>`).join("")||"<li>No updates yet</li>"}</ul>`}
+function tab(id){document.querySelectorAll("[data-tab]").forEach(b=>b.classList.toggle("active",b.dataset.tab===id));["register","new","manage","reports"].forEach(x=>$(x).classList.toggle("hidden",x!==id))}
+function manage(ref){selected=ref;tab("manage");render()}
+document.querySelectorAll("[data-tab]").forEach(b=>b.onclick=()=>tab(b.dataset.tab));
+$("ticketSelect").onchange=e=>{selected=e.target.value;detail()};
+$("search").oninput=render;$("statusFilter").onchange=render;
+$("submit").onclick=()=>{let date=$("date").value,subject=$("subject").value.trim(),details=$("details").value.trim();if(!date||!subject||!details)return alert("Please complete the date, subject and details.");
+ let emp=$("employee").value,file=$("attachment").files[0],ref="HD-2026-"+String(tickets.length+1).padStart(3,"0");
+ tickets.unshift({ref,employee:emp,date,category:$("category").value,priority:$("priority").value,team:$("team").value,officer:"",status:"Open",subject,details,due:"",notes:["Request registered."],attachment:file?file.name:""});
+ $("formMsg").classList.remove("hidden");$("formMsg").textContent=`Ticket ${ref} created. Attachment filename: ${file?file.name:"None"}. Demo record only; file bytes are not uploaded.`;selected=ref;render();
+};
+$("saveUpdate").onclick=()=>{let t=tickets.find(x=>x.ref===selected);if(!t)return;t.team=$("assignTeam").value;t.officer=$("officer").value.trim();t.status=$("ticketStatus").value;let note=$("updateNote").value.trim();if(note){t.notes.push(new Date().toLocaleString()+" — "+note);$("updateNote").value=""}let rr=$("resolutionRef").value.trim();if(rr)t.notes.push("Resolution reference: "+rr);render();alert("Demo ticket update saved.");};
+$("fileRecord").onclick=()=>{let t=tickets.find(x=>x.ref===selected);if(!t)return;let ref=prompt("Enter physical filing reference");if(!ref)return;filings.push({ref:t.ref,employee:t.employee,date:new Date().toISOString().slice(0,10),filing:ref,custodian:"Branch HR"});render();};
+$("print").onclick=()=>window.print();
+$("export").onclick=()=>{let rows=[["Ticket","Employee ID","Category","Priority","Team","Officer","Status","Subject"],...tickets.map(t=>[t.ref,t.employee,t.category,t.priority,t.team,t.officer,t.status,t.subject])];let csv=rows.map(r=>r.map(x=>'"'+String(x).replaceAll('"','""')+'"').join(",")).join("\n");let a=document.createElement("a");a.href=URL.createObjectURL(new Blob([csv],{type:"text/csv"}));a.download="ilvora-helpdesk-register.csv";a.click();URL.revokeObjectURL(a.href)};
+$("date").value=new Date().toISOString().slice(0,10);render();
+</script></body></html>
