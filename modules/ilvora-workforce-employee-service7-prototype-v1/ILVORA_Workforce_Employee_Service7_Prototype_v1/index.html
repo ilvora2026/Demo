@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ILVORA Workforce | My Notifications</title>
+<style>
+:root{--navy:#10243a;--teal:#168b88;--gold:#c9a96e;--bg:#f3f6f8;--ink:#203244;--muted:#718096;--line:#e4eaf0}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);font:15px/1.45 Inter,Segoe UI,Arial,sans-serif;color:var(--ink)}
+header{background:var(--navy);color:white;padding:22px max(20px,calc((100% - 1120px)/2));display:flex;justify-content:space-between;align-items:center;gap:12px}
+.brand{font-weight:800;letter-spacing:.08em}.brand small{display:block;color:#b8c8d5;font-weight:400;letter-spacing:.02em;margin-top:3px}
+main{max-width:1120px;margin:26px auto;padding:0 18px}.welcome{display:flex;justify-content:space-between;align-items:end;gap:12px;flex-wrap:wrap}
+h1{margin:0;font-size:26px;color:var(--navy)}.sub{color:var(--muted);margin:5px 0 0}
+.pill{border-radius:30px;background:#e4f4f2;color:#126c69;padding:7px 12px;font-size:12px;font-weight:700}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:20px 0}
+.stat,.panel,.notice{background:white;border:1px solid var(--line);border-radius:14px}
+.stat{padding:16px}.stat strong{font-size:25px;color:var(--navy);display:block}.stat span{color:var(--muted);font-size:13px}
+.layout{display:grid;grid-template-columns:250px 1fr;gap:16px}.panel{padding:16px}
+h2{font-size:16px;color:var(--navy);margin:0 0 12px}
+.filters button,.actions button,.top-actions button{border:1px solid var(--line);background:white;color:var(--ink);padding:9px 12px;border-radius:9px;cursor:pointer}
+.filters{display:grid;gap:8px}.filters button{text-align:left}.filters button.active{background:#e8f5f4;border-color:#b7ddda;color:#126c69;font-weight:700}
+.top-actions{display:flex;gap:8px;flex-wrap:wrap}.top-actions button.primary,.actions button.primary{background:var(--teal);color:white;border-color:var(--teal)}
+.search{width:100%;padding:11px;border:1px solid var(--line);border-radius:9px;margin-bottom:12px;font-size:14px}
+.notice{padding:15px;margin-bottom:10px;display:grid;grid-template-columns:10px 1fr auto;gap:12px;align-items:start}
+.dot{width:9px;height:9px;border-radius:50%;background:var(--teal);margin-top:7px}.notice.read .dot{background:#cbd5df}
+.meta{display:flex;gap:8px;align-items:center;flex-wrap:wrap;color:var(--muted);font-size:12px;margin-bottom:5px}
+.tag{font-size:11px;background:#f0f3f6;border-radius:20px;padding:3px 8px;color:#526477}
+.notice h3{margin:0 0 5px;font-size:15px;color:var(--navy)}.notice p{margin:0;color:#536577;font-size:13px}
+.notice .actions{display:flex;gap:6px;align-items:center}.actions button{font-size:12px;padding:7px 9px}
+.empty{padding:30px;text-align:center;color:var(--muted);display:none}
+.detail{display:none;margin-top:14px;padding:16px;background:#f8fafb;border:1px solid var(--line);border-radius:12px}
+.detail h3{margin:0 0 8px;color:var(--navy)}.detail p{color:#536577}
+.foot{color:var(--muted);font-size:12px;margin-top:18px}
+@media(max-width:720px){.layout{grid-template-columns:1fr}.stats{grid-template-columns:1fr 1fr}.notice{grid-template-columns:10px 1fr}.notice .actions{grid-column:2}.welcome{align-items:start}}
+</style></head>
+<body>
+<header><div class="brand">ILVORA <span style="color:var(--gold)">WORKFORCE</span><small>WHERE CARE BECOMES CONFIDENCE.</small></div><div>Employee Portal　●</div></header>
+<main>
+<div class="welcome"><div><h1>My Notifications & Announcements</h1><p class="sub">Your personal updates, workplace notices and important reminders.</p></div><span class="pill">DEMO EMPLOYEE · ILV-NH-014</span></div>
+<section class="stats">
+<div class="stat"><strong id="unreadCount">4</strong><span>Unread notifications</span></div>
+<div class="stat"><strong>2</strong><span>Important announcements</span></div>
+<div class="stat"><strong>3</strong><span>Action reminders</span></div>
+</section>
+<div class="layout">
+<aside class="panel">
+<h2>Notification centre</h2>
+<div class="filters">
+<button class="active" data-filter="all">All notifications</button>
+<button data-filter="unread">Unread</button>
+<button data-filter="attendance">Attendance</button>
+<button data-filter="leave">Leave & approvals</button>
+<button data-filter="payroll">Payroll</button>
+<button data-filter="roster">Duty roster</button>
+<button data-filter="announcement">Company announcements</button>
+<button data-filter="action">Requires my action</button>
+</div>
+<p class="foot">Notifications are personal to your employee account. Branch-wide and organisation-wide notices are labelled.</p>
+</aside>
+<section class="panel">
+<div class="top-actions" style="justify-content:space-between;margin-bottom:12px">
+<input class="search" id="search" placeholder="Search notifications…" style="max-width:340px;margin:0">
+<div><button id="markAll">Mark all as read</button></div>
+</div>
+<div id="list"></div><div class="empty" id="empty">No notifications match this filter.</div>
+<div class="detail" id="detail"><h3 id="detailTitle"></h3><div class="meta" id="detailMeta"></div><p id="detailBody"></p><div class="actions"><button id="closeDetail">Close</button></div></div>
+</section>
+</div>
+<p class="foot">Prototype only. Sample notices and actions are simulated; no real push notification, email, SMS or HR system is connected.</p>
+</main>
+<script>
+const items=[
+{id:1,type:'attendance',title:'Attendance correction request updated',body:'Your attendance discrepancy for 10 November 2026 has been approved by Head Office. The attendance record has been updated. Please review your attendance history.',date:'12 Nov 2026 · 10:35 AM',scope:'Personal',unread:true,action:true},
+{id:2,type:'leave',title:'Leave request approved',body:'Your casual leave request for 18 November 2026 has been approved by Branch Admin / HR.',date:'12 Nov 2026 · 9:10 AM',scope:'Personal',unread:true,action:false},
+{id:3,type:'payroll',title:'Payslip request received',body:'Your request for the October 2026 payslip is awaiting Administrator approval. You will be notified when a decision is recorded.',date:'11 Nov 2026 · 4:20 PM',scope:'Personal',unread:true,action:false},
+{id:4,type:'roster',title:'November duty roster published',body:'Your November duty roster is available. Please review your assigned shifts and report any discrepancy to Branch Admin / HR.',date:'11 Nov 2026 · 11:00 AM',scope:'Branch',unread:true,action:true},
+{id:5,type:'announcement',title:'Updated patient-safety policy',body:'A revised patient-safety policy has been published. Open My Documents & Company Policies to read the current version and complete the required acknowledgement.',date:'10 Nov 2026 · 2:00 PM',scope:'Organisation',unread:false,action:true},
+{id:6,type:'announcement',title:'Staff meeting notice',body:'The monthly staff meeting is scheduled for 20 November 2026 at 3:00 PM in the branch conference room. Please coordinate with your supervisor.',date:'9 Nov 2026 · 1:30 PM',scope:'Branch',unread:false,action:false},
+{id:7,type:'attendance',title:'Missed punch reminder',body:'A check-out punch appears to be missing for 8 November 2026. If this is incorrect, contact Branch Admin / HR to request a formal correction.',date:'9 Nov 2026 · 8:15 AM',scope:'Personal',unread:false,action:true},
+{id:8,type:'payroll',title:'Payroll calendar reminder',body:'The monthly attendance register is scheduled to close after the 20th. Submit any attendance discrepancy to Branch Admin / HR before payroll processing.',date:'8 Nov 2026 · 9:00 AM',scope:'Organisation',unread:false,action:false}
+];
+let filter='all', selected=null;
+const list=document.getElementById('list'), empty=document.getElementById('empty'), detail=document.getElementById('detail');
+function render(){
+ const q=document.getElementById('search').value.toLowerCase();
+ const filtered=items.filter(x=>(filter==='all'||(filter==='unread'?x.unread:filter==='action'?x.action:x.type===filter)) && (x.title+' '+x.body+' '+x.scope).toLowerCase().includes(q));
+ list.innerHTML=''; empty.style.display=filtered.length?'none':'block';
+ filtered.forEach(x=>{
+  const el=document.createElement('article');el.className='notice '+(x.unread?'':'read');
+  el.innerHTML=`<span class="dot"></span><div><div class="meta"><span>${x.date}</span><span class="tag">${x.scope}</span><span class="tag">${x.type==='announcement'?'Announcement':x.type[0].toUpperCase()+x.type.slice(1)}</span>${x.action?'<span class="tag">Action required</span>':''}</div><h3>${x.title}</h3><p>${x.body}</p></div><div class="actions"><button data-open="${x.id}">View</button>${x.unread?`<button data-read="${x.id}">Mark read</button>`:''}</div>`;
+  list.appendChild(el);
+ });
+ document.getElementById('unreadCount').textContent=items.filter(x=>x.unread).length;
+ list.querySelectorAll('[data-open]').forEach(b=>b.onclick=()=>openDetail(+b.dataset.open));
+ list.querySelectorAll('[data-read]').forEach(b=>b.onclick=()=>{items.find(x=>x.id===+b.dataset.read).unread=false;render()});
+}
+function openDetail(id){selected=items.find(x=>x.id===id);selected.unread=false;document.getElementById('detailTitle').textContent=selected.title;document.getElementById('detailMeta').textContent=selected.date+' · '+selected.scope;document.getElementById('detailBody').textContent=selected.body;detail.style.display='block';render()}
+document.querySelectorAll('.filters button').forEach(b=>b.onclick=()=>{document.querySelectorAll('.filters button').forEach(x=>x.classList.remove('active'));b.classList.add('active');filter=b.dataset.filter;detail.style.display='none';render()});
+document.getElementById('search').oninput=render;
+document.getElementById('markAll').onclick=()=>{items.forEach(x=>x.unread=false);render()};
+document.getElementById('closeDetail').onclick=()=>detail.style.display='none';
+render();
+</script></body></html>
