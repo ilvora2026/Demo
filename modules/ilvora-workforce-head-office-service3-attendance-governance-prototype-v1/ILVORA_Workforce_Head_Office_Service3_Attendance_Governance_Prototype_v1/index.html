@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ILVORA Workforce | Attendance Governance</title>
+<style>
+:root{--navy:#10243a;--teal:#168b88;--gold:#c8a96b;--bg:#f3f6f8;--ink:#203244;--muted:#6b7b89;--line:#dce4e9}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);font:14px/1.45 Arial,sans-serif;color:var(--ink)}
+header{background:var(--navy);color:white;padding:18px 24px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}.brand{font-size:19px;font-weight:800;letter-spacing:.5px}.brand span{color:var(--gold)}.sub{font-size:12px;color:#c7d3dc;margin-top:3px}.role{border:1px solid #607889;padding:7px 12px;border-radius:30px;font-size:12px}
+main{max-width:1250px;margin:24px auto;padding:0 18px}.top{display:flex;justify-content:space-between;align-items:end;gap:12px;flex-wrap:wrap;margin-bottom:18px}h1{margin:0;color:var(--navy);font-size:25px}.muted{color:var(--muted)}.card{background:#fff;border:1px solid var(--line);border-radius:13px;padding:16px;box-shadow:0 2px 8px #18344a08}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:14px 0}.kpi small{font-size:11px;color:var(--muted);font-weight:bold}.kpi strong{display:block;font-size:27px;color:var(--navy);margin:7px 0}
+.filters{display:flex;gap:10px;align-items:end;flex-wrap:wrap;margin-bottom:14px}.filters label,label{display:block;font-size:10px;font-weight:bold;color:var(--muted);margin-bottom:5px;text-transform:uppercase;letter-spacing:.4px}
+select,input,textarea{padding:10px;border:1px solid var(--line);border-radius:8px;background:white;color:var(--ink);font:inherit}button{border:0;border-radius:8px;padding:9px 12px;background:var(--teal);color:#fff;font-weight:700;cursor:pointer}button.alt{background:#e9f1f3;color:var(--navy)}button.dark{background:var(--navy)}button.gold{background:var(--gold);color:#172b3b}button.red{background:#a64e42}
+table{width:100%;border-collapse:collapse;font-size:12px}th,td{text-align:left;padding:11px 8px;border-bottom:1px solid var(--line);vertical-align:middle}th{font-size:10px;color:var(--muted);text-transform:uppercase}.tag{display:inline-block;border-radius:20px;padding:3px 8px;background:#eaf5f4;color:#11716e;font-size:10px;font-weight:bold}.pending{background:#fff4df;color:#87601b}.rejected{background:#fcece8;color:#a44c3c}.actions{display:flex;gap:6px;flex-wrap:wrap}
+.grid{display:grid;grid-template-columns:1.2fr 1fr;gap:14px;margin:14px 0}h2{font-size:16px;color:var(--navy);margin:0 0 13px}
+.modal{display:none;position:fixed;inset:0;background:#0d1d2dcc;z-index:5;overflow:auto;padding:22px}.modalbox{max-width:760px;margin:20px auto;background:white;border-radius:14px;padding:20px}.modalhead{display:flex;justify-content:space-between;align-items:center;gap:12px}.details{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin:15px 0}.field{background:#f7f9fa;padding:10px;border-radius:8px}.field small{display:block;color:var(--muted);font-size:10px;text-transform:uppercase}.field b{display:block;margin-top:4px}.modalfoot{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;margin-top:16px}
+.note{background:#fff8e9;border:1px solid #f0dfb9;border-radius:9px;padding:11px 13px;color:#705b2e;margin:14px 0;font-size:12px}.oknote{background:#eaf5f4;border-color:#cde7e5;color:#276b69}
+footer{max-width:1250px;margin:0 auto 25px;padding:0 18px;color:var(--muted);font-size:11px}
+@media(max-width:850px){.kpis{grid-template-columns:repeat(2,1fr)}.grid{grid-template-columns:1fr}.tablewrap{overflow-x:auto}}@media(max-width:520px){.details{grid-template-columns:1fr}.modal{padding:8px}.modalbox{padding:14px}}
+</style></head>
+<body>
+<header><div><div class="brand">ILVORA <span>WORKFORCE</span></div><div class="sub">WHERE CARE BECOMES CONFIDENCE.</div></div><div class="role">HEAD OFFICE ADMIN PANEL · ATTENDANCE GOVERNANCE</div></header>
+<main>
+<div class="top"><div><h1>Attendance Governance & Correction Approval</h1><div class="muted">Central review of branch attendance exceptions and formal correction requests.</div></div><button class="alt" onclick="window.print()">Print view</button></div>
+<div class="kpis">
+<div class="card kpi"><small>BRANCHES IN SCOPE</small><strong>3</strong><span class="muted">Authorised branches</span></div>
+<div class="card kpi"><small>CORRECTIONS PENDING</small><strong id="pendingCount">3</strong><span class="tag pending">Head Office decision</span></div>
+<div class="card kpi"><small>APPROVED THIS MONTH</small><strong>11</strong><span class="muted">Sample figure</span></div>
+<div class="card kpi"><small>PAYROLL ADJUSTMENTS</small><strong>2</strong><span class="tag">After closure</span></div>
+</div>
+<section class="card filters">
+<div><label>Branch</label><select id="branch"><option value="All">All branches</option><option>Head Office – Kochi</option><option>Neelambari Hospital – Thamarakulam</option><option>ILVORA Health Clinic – Kottarakkara</option></select></div>
+<div><label>Request status</label><select id="status"><option value="All">All statuses</option><option>Pending Review</option><option>Returned</option><option>Approved</option><option>Rejected</option></select></div>
+<div><label>Search</label><input id="search" placeholder="Request ID / employee ID"></div>
+<button onclick="render()">Apply filters</button><button class="alt" onclick="resetFilters()">Reset</button>
+</section>
+<section class="card tablewrap"><h2>Formal attendance correction requests</h2>
+<table><thead><tr><th>Request ID</th><th>Employee ID</th><th>Branch</th><th>Date</th><th>Requested correction</th><th>Payroll status</th><th>Status</th><th>Action</th></tr></thead><tbody id="rows"></tbody></table>
+</section>
+<div class="grid">
+<section class="card"><h2>Attendance exception overview</h2>
+<table><thead><tr><th>Branch</th><th>Late</th><th>Early checkout</th><th>Missed punch</th><th>No punch</th></tr></thead><tbody>
+<tr><td>Head Office – Kochi</td><td>3</td><td>1</td><td>1</td><td>0</td></tr>
+<tr><td>Neelambari Hospital</td><td>12</td><td>4</td><td>5</td><td>2</td></tr>
+<tr><td>ILVORA Health Clinic</td><td>5</td><td>2</td><td>2</td><td>1</td></tr>
+</tbody></table><p class="muted" style="font-size:11px">Illustrative exception counts. An exception flag alone does not authorise a punch edit.</p></section>
+<section class="card"><h2>Approval safeguards</h2>
+<ul class="muted" style="padding-left:18px;font-size:12px;line-height:1.9">
+<li>Only Branch Admin / HR submits formal requests.</li><li>Attendance Operators cannot edit or submit formal corrections.</li><li>Requester cannot approve their own request.</li><li>Original punch and full audit history remain preserved.</li><li>Payroll-closed changes create adjustment workflow.</li></ul></section>
+</div>
+<div class="note"><b>Decision flow:</b> Employee reports discrepancy → Branch Admin / HR checks evidence and submits formal request → Head Office reviews → approve, reject or return → approved change updates attendance while preserving original punch → employee and Branch Admin / HR are notified.</div>
+<div class="note"><b>Payroll closure:</b> If the attendance period is already closed, approval must not silently rewrite a finalised payroll run. The system should create a traceable payroll adjustment item for authorised payroll processing.</div>
+<div class="note"><b>Prototype limitation:</b> Sample data and decisions are browser-only. No live attendance records, notifications, payroll linkage, authentication or backend audit store is connected. Production requires server-side authorisation, immutable audit logs, evidence storage and transaction-safe correction processing.</div>
+</main>
+<div class="modal" id="modal"><div class="modalbox">
+<div class="modalhead"><div><h2 style="margin:0">Review correction request</h2><div class="muted" id="sub"></div></div><button class="alt" onclick="closeModal()">Close</button></div>
+<div class="details" id="details"></div>
+<div class="field"><small>Evidence supplied</small><b id="evidence"></b></div>
+<div class="field" style="margin-top:10px"><small>Payroll handling</small><b id="payroll"></b></div>
+<div style="margin-top:12px"><label for="decisionNote">Decision note / reason</label><textarea id="decisionNote" rows="3" style="width:100%" placeholder="Enter approval rationale or reason for return/rejection"></textarea></div>
+<div class="modalfoot"><div class="actions"><button class="gold" onclick="decide('Returned')">Return for clarification</button><button class="red" onclick="decide('Rejected')">Reject</button></div><button onclick="decide('Approved')">Approve correction</button></div>
+<p class="muted" style="font-size:11px">Approval is simulated. In production, attendance changes only after server-side approval and audit recording.</p>
+</div></div>
+<footer>ILVORA Workforce · Head Office Admin Panel · Service 3 · Prototype v1</footer>
+<script>
+const requests=[
+{id:'ATT-COR-026',emp:'ILV-NH-014',name:'Nikhil R',branch:'Neelambari Hospital – Thamarakulam',date:'2026-11-08',current:'No checkout punch recorded',requested:'Checkout 20:05',reason:'Kiosk device was offline at shift end.',evidence:'Supervisor confirmation and kiosk incident reference (demo)',payroll:'Closed – create payroll adjustment if approved',status:'Pending Review',note:''},
+{id:'ATT-COR-025',emp:'ILV-KK-008',name:'Riyas K',branch:'ILVORA Health Clinic – Kottarakkara',date:'2026-11-10',current:'Check-in 09:42',requested:'Check-in 09:00',reason:'Employee states device clock was incorrect.',evidence:'Branch incident note (demo)',payroll:'Open – approved change can update current attendance period',status:'Pending Review',note:''},
+{id:'ATT-COR-024',emp:'ILV-HO-006',name:'Meera S',branch:'Head Office – Kochi',date:'2026-11-07',current:'Check-out 16:00',requested:'Check-out 16:30',reason:'Approved extension recorded by supervisor.',evidence:'Supervisor approval note (demo)',payroll:'Open – current period',status:'Pending Review',note:''},
+{id:'ATT-COR-023',emp:'ILV-NH-009',name:'Anjali M',branch:'Neelambari Hospital – Thamarakulam',date:'2026-11-05',current:'Check-in 08:20',requested:'Check-in 08:00',reason:'Correction request lacks supporting proof.',evidence:'No supporting evidence attached',payroll:'Open – current period',status:'Returned',note:'Please attach supervisor confirmation.'},
+{id:'ATT-COR-022',emp:'ILV-KK-004',name:'Fathima P',branch:'ILVORA Health Clinic – Kottarakkara',date:'2026-11-02',current:'Check-out 18:00',requested:'Check-out 18:30',reason:'Approved by Head Office after review.',evidence:'Verified supervisor note (demo)',payroll:'Closed – adjustment reference PA-2026-018',status:'Approved',note:'Approved; payroll adjustment raised.'}
+];
+let current=null;
+function render(){const b=document.getElementById('branch').value,s=document.getElementById('status').value,q=document.getElementById('search').value.toLowerCase();const list=requests.filter(r=>(b==='All'||r.branch===b)&&(s==='All'||r.status===s)&&(`${r.id} ${r.emp}`.toLowerCase().includes(q)));
+document.getElementById('rows').innerHTML=list.map(r=>`<tr><td>${r.id}</td><td><b>${r.emp}</b><br>${r.name}</td><td>${r.branch}</td><td>${r.date}</td><td>${r.requested}</td><td>${r.payroll.startsWith('Closed')?'<span class="tag pending">Closed</span>':'<span class="tag">Open</span>'}</td><td><span class="tag ${r.status==='Pending Review'?'pending':r.status==='Rejected'?'rejected':''}">${r.status}</span></td><td>${r.status==='Pending Review'?`<button onclick="openReview('${r.id}')">Review</button>`:`<button class="alt" onclick="viewRecord('${r.id}')">View</button>`}</td></tr>`).join('')||'<tr><td colspan="8">No matching requests.</td></tr>';
+document.getElementById('pendingCount').textContent=requests.filter(r=>r.status==='Pending Review').length}
+function resetFilters(){['branch','status'].forEach(id=>document.getElementById(id).value='All');document.getElementById('search').value='';render()}
+function openReview(id){current=requests.find(r=>r.id===id);document.getElementById('sub').textContent=current.id+' · '+current.emp+' · '+current.name;document.getElementById('details').innerHTML=[['Branch',current.branch],['Date',current.date],['Current attendance',current.current],['Requested attendance',current.requested],['Branch reason',current.reason],['Employee',current.name+' ('+current.emp+')']].map(x=>`<div class="field"><small>${x[0]}</small><b>${x[1]}</b></div>`).join('');document.getElementById('evidence').textContent=current.evidence;document.getElementById('payroll').textContent=current.payroll;document.getElementById('decisionNote').value=current.note||'';document.getElementById('modal').style.display='block'}
+function closeModal(){document.getElementById('modal').style.display='none';current=null}
+function decide(status){if(!current)return;let note=document.getElementById('decisionNote').value.trim();if(status!=='Approved'&&!note){alert('Please enter a reason for returning or rejecting.');return}if(status==='Approved'&&!note)note='Approved after Head Office verification.';current.status=status;current.note=note;if(status==='Approved'&&current.payroll.startsWith('Closed'))current.payroll='Closed – payroll adjustment created (demo reference PA-DEMO-'+current.id.slice(-3)+')';alert(status==='Approved'?(current.payroll.startsWith('Closed')?'Approved. Payroll adjustment created in this demo.':'Approved. Attendance update authorised in this demo.'):'Request '+status.toLowerCase()+'.');closeModal();render()}
+function viewRecord(id){let r=requests.find(x=>x.id===id);alert(`${r.id}\\nStatus: ${r.status}\\nDecision note: ${r.note||'No decision note'}\\nPayroll: ${r.payroll}`)}
+render();
+</script></body></html>
