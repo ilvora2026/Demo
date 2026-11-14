@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ILVORA Workforce | Duty Roster</title>
+<style>
+:root{--navy:#10263f;--teal:#167c70;--gold:#c6a76a;--bg:#f4f7fa;--line:#dce4eb;--muted:#657589}
+*{box-sizing:border-box}body{margin:0;font:14px/1.45 Inter,system-ui,Arial;color:#172b42;background:var(--bg)}
+header{background:var(--navy);color:white;padding:18px 24px;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+.brand{font-weight:800;letter-spacing:.08em}.brand small{display:block;color:#d7c394;font-weight:500;letter-spacing:.02em}
+main{max-width:1440px;margin:22px auto;padding:0 18px}.top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:16px}
+h1{font-size:23px;margin:0;color:var(--navy)}h2{font-size:16px;margin:0 0 12px;color:var(--navy)}
+.controls,.panel{background:white;border:1px solid var(--line);border-radius:14px;padding:16px}
+button,select,input{font:inherit;border:1px solid #cbd6df;border-radius:8px;padding:9px 11px;background:white;color:#172b42}
+button{cursor:pointer;font-weight:650}button.primary{background:var(--teal);color:white;border-color:var(--teal)}button.dark{background:var(--navy);color:white;border-color:var(--navy)}button:disabled{opacity:.45;cursor:not-allowed}
+.row{display:flex;gap:9px;align-items:center;flex-wrap:wrap}.layout{display:grid;grid-template-columns:minmax(0,1fr) 330px;gap:16px}
+.tabs{display:flex;gap:7px;flex-wrap:wrap}.tabs button.active{background:var(--navy);color:white}
+.legend{display:flex;gap:12px;flex-wrap:wrap;color:var(--muted);font-size:12px;margin:12px 0}
+.dot{display:inline-block;width:9px;height:9px;border-radius:3px;margin-right:5px}
+.calendar{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));border-left:1px solid var(--line);border-top:1px solid var(--line);border-radius:8px;overflow:hidden}
+.dayhead{background:#edf2f6;padding:9px;text-align:center;font-size:12px;font-weight:700;color:#526477;border-right:1px solid var(--line);border-bottom:1px solid var(--line)}
+.day{background:white;min-height:112px;padding:7px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);cursor:pointer}
+.day:hover,.day.selected{background:#eef8f6;outline:2px solid var(--teal);outline-offset:-2px}.day.muted{background:#f8fafb;color:#a0acb8}
+.daynum{font-weight:750;font-size:12px;margin-bottom:6px}.event{color:white;border-radius:5px;padding:3px 5px;font-size:10px;margin:3px 0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.morning{background:#167c70}.evening{background:#315b86}.night{background:#735b91}.other{background:#9a7540}
+.side{display:flex;flex-direction:column;gap:14px}.small{font-size:12px;color:var(--muted)}.staff-list{display:flex;flex-direction:column;gap:8px;max-height:220px;overflow:auto}
+.staff{display:flex;justify-content:space-between;gap:8px;padding:8px;border:1px solid var(--line);border-radius:8px;font-size:13px}
+label{display:block;font-size:12px;font-weight:700;color:#526477;margin:10px 0 5px}
+input,select{width:100%}.field{margin-bottom:9px}.formgrid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.notice{padding:10px;border-radius:8px;background:#fff7e8;color:#76561d;font-size:12px;margin-top:10px}
+.policy{background:#f0f7f5;border:1px solid #cfe4de;border-radius:9px;padding:12px;font-size:12px;line-height:1.55}
+.timeline{border:1px solid var(--line);border-radius:9px;overflow:auto;background:white}.timehead,.time-row{display:grid;grid-template-columns:150px repeat(24,minmax(34px,1fr));min-width:970px}
+.timehead div{background:#edf2f6;padding:7px 3px;text-align:center;font-size:10px;border-right:1px solid var(--line)}
+.time-row>div{height:44px;border-top:1px solid var(--line);border-right:1px solid #eef1f4;position:relative}
+.time-row .person{padding:12px 8px;font-size:12px;font-weight:700;position:sticky;left:0;background:white;z-index:1}
+.slot{position:absolute;top:5px;height:32px;border-radius:5px;color:white;font-size:10px;padding:7px 5px;white-space:nowrap;overflow:hidden}
+.table{width:100%;border-collapse:collapse;font-size:12px}.table th,.table td{text-align:left;padding:9px;border-bottom:1px solid var(--line)}
+footer{color:var(--muted);font-size:11px;text-align:center;margin:18px}
+@media(max-width:950px){.layout{grid-template-columns:1fr}.day{min-height:90px}.event{font-size:9px}}
+@media(max-width:560px){main{padding:0 9px}.day{min-height:80px;padding:4px}.dayhead{padding:6px 2px;font-size:10px}.event{font-size:8px;padding:2px}.controls{padding:10px}}
+</style>
+</head>
+<body>
+<header><div class="brand">ILVORA <span style="color:#d7c394">WORKFORCE</span><small>WHERE CARE BECOMES CONFIDENCE.</small></div><div>Branch Admin / HR · Duty Roster</div></header>
+<main>
+<div class="top"><div><h1>Duty Roster & Shift Management</h1><div class="small">Select staff, choose a date and allocate exact duty times.</div></div><div class="row"><select id="branch"><option>Neelambari Hospital – Thamarakulam</option><option>ILVORA Health Clinic – Kottarakkara</option><option>Head Office – Kochi</option></select><button id="print">Print roster</button></div></div>
+<section class="controls row" style="justify-content:space-between">
+ <div class="row"><button id="prev">‹</button><strong id="monthLabel"></strong><button id="next">›</button><button id="today">Today</button></div>
+ <div class="tabs"><button class="active" data-view="month">Month</button><button data-view="week">Week</button><button data-view="day">Day</button><button data-view="staff">Staff view</button></div>
+</section>
+<div class="legend"><span><i class="dot" style="background:#167c70"></i>Morning</span><span><i class="dot" style="background:#315b86"></i>Evening</span><span><i class="dot" style="background:#735b91"></i>Night</span><span><i class="dot" style="background:#9a7540"></i>Custom</span><span>30-minute time intervals in day timeline</span></div>
+<div class="layout">
+<section class="panel">
+ <div id="calendar" class="calendar"></div>
+ <div id="timelineWrap" style="display:none;margin-top:12px"><h2 id="timelineTitle">Daily staff timeline</h2><div class="timeline" id="timeline"></div></div>
+ <div id="staffView" style="display:none;margin-top:12px"><h2>Staff-wise roster</h2><div id="staffTable"></div></div>
+</section>
+<aside class="side">
+ <section class="panel"><h2>Allocate a duty</h2>
+  <div class="field"><label>Selected date</label><input id="dutyDate" type="date"></div>
+  <div class="field"><label>Select staff member</label><select id="staffSelect"></select></div>
+  <div class="field"><label>Shift type</label><select id="shiftType"><option value="morning">Morning</option><option value="evening">Evening</option><option value="night">Night</option><option value="other">Custom shift</option><option value="off">Weekly off</option></select></div>
+  <div class="formgrid"><div class="field"><label>Start time</label><input id="startTime" type="time" value="08:00" step="1800"></div><div class="field"><label>End time</label><input id="endTime" type="time" value="16:00" step="1800"></div></div>
+  <div class="field"><label>Department / unit</label><select id="department"><option>Emergency</option><option>OPD</option><option>IP</option><option>Nursing</option><option>Pharmacy</option><option>Administration</option><option>Other</option></select></div>
+  <div class="field"><label>Notes (optional)</label><input id="notes" placeholder="e.g. ICU cover"></div>
+  <button class="primary" id="allocate" style="width:100%">Allocate shift</button>
+  <div id="validation" class="notice" style="display:none"></div>
+  <div class="small" style="margin-top:9px">Select a date on the calendar to populate the date field. Custom shifts support any start/end time in 30-minute increments.</div>
+ </section>
+ <section class="panel"><h2>Staff available for allocation</h2><div class="staff-list" id="staffList"></div><div class="small" style="margin-top:8px">Demo staff list. Production version will load approved employees for the selected branch.</div></section>
+ <section class="panel"><h2>Roster records & retention</h2>
+  <div class="policy"><b>Detailed roster:</b> Print and file the detailed roster for the month. The detailed digital roster is scheduled for automatic deletion after the 15th of the following month.<br><br><b>Brief roster summary:</b> Retain only the brief summary for 3 years, then automatically delete it when its retention period expires.<br><br><b>Safeguards:</b> Legal, audit, investigation or regulatory holds pause deletion. Physical printed records follow a separate approved retention and secure-destruction schedule. Printing does not itself authorise digital deletion.</div>
+  <p class="small">Production requires scheduled server-side deletion, reminders, a print/filing register, retention timestamps and immutable audit logs.</p>
+ </section>
+ <section class="panel"><h2>Roster actions</h2><div class="row"><button id="publish" class="dark">Publish roster</button><button id="export">Export CSV</button></div><p class="small">Publishing and notifications are simulated in this prototype.</p><div id="status" class="small"></div></section>
+</aside>
+</div>
+<footer>Prototype v2 · Sample data only · Retention policy included as a design requirement, not an active deletion service</footer>
+</main>
+<script>
+const staff=[
+ {id:"ILV-NH-001",name:"Anjali S",dept:"Nursing"},{id:"ILV-NH-002",name:"Rahul K",dept:"Emergency"},
+ {id:"ILV-NH-003",name:"Meera P",dept:"OPD"},{id:"ILV-NH-004",name:"Arun M",dept:"Emergency"},
+ {id:"ILV-NH-005",name:"Jisha R",dept:"Nursing"},{id:"ILV-NH-006",name:"Anas V",dept:"Emergency"},
+ {id:"ILV-NH-007",name:"Priya T",dept:"Pharmacy"},{id:"ILV-NH-008",name:"Sanjay B",dept:"Administration"}
+];
+let shifts=[
+ {date:"2026-11-14",staff:"ILV-NH-001",type:"morning",start:"08:00",end:"16:00",dept:"Nursing"},
+ {date:"2026-11-14",staff:"ILV-NH-002",type:"evening",start:"16:00",end:"22:00",dept:"Emergency"},
+ {date:"2026-11-15",staff:"ILV-NH-003",type:"night",start:"20:00",end:"08:00",dept:"OPD"},
+ {date:"2026-11-16",staff:"ILV-NH-004",type:"other",start:"09:30",end:"14:30",dept:"Emergency"}
+];
+let current=new Date(2026,10,14), selected="2026-11-14", view="month";
+const $=id=>document.getElementById(id), pad=n=>String(n).padStart(2,"0"), iso=d=>`${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
+const name=id=>staff.find(s=>s.id===id)?.name||id;
+function fillStaff(){ $("staffSelect").innerHTML=staff.map(s=>`<option value="${s.id}">${s.name} · ${s.id}</option>`).join(""); $("staffList").innerHTML=staff.map(s=>`<div class="staff"><span><b>${s.name}</b><br><span class="small">${s.dept}</span></span><span class="small">${s.id}</span></div>`).join("");}
+function eventLabel(s){return `${s.start}–${s.end} ${name(s.staff)}`;}
+function render(){
+ $("monthLabel").textContent=current.toLocaleDateString("en-IN",{month:"long",year:"numeric"});
+ $("dutyDate").value=selected; const cal=$("calendar");cal.innerHTML="";
+ if(view==="month"||view==="week"||view==="day"){
+  if(view==="month"){
+   ["Mon","Tue","Wed","Thu","Fri","Sat","Sun"].forEach(x=>{let h=document.createElement("div");h.className="dayhead";h.textContent=x;cal.append(h)});
+   let first=new Date(current.getFullYear(),current.getMonth(),1), offset=(first.getDay()+6)%7,start=new Date(first);start.setDate(first.getDate()-offset);
+   for(let i=0;i<42;i++){let d=new Date(start);d.setDate(start.getDate()+i);let key=iso(d),cell=document.createElement("div");cell.className="day"+(d.getMonth()!==current.getMonth()?" muted":"")+(key===selected?" selected":"");cell.innerHTML=`<div class="daynum">${d.getDate()}</div>`;
+    shifts.filter(s=>s.date===key).slice(0,3).forEach(s=>{let e=document.createElement("div");e.className="event "+s.type;e.textContent=eventLabel(s);cell.append(e)});
+    if(shifts.filter(s=>s.date===key).length>3){let more=document.createElement("div");more.className="small";more.textContent="+"+(shifts.filter(s=>s.date===key).length-3)+" more";cell.append(more)}
+    cell.onclick=()=>{selected=key;render()};cal.append(cell);
+   }
+  } else {
+   let days=view==="day"?1:7,start=new Date(current);if(view==="week")start.setDate(current.getDate()-((current.getDay()+6)%7));
+   for(let i=0;i<days;i++){let d=new Date(start);d.setDate(start.getDate()+i);let key=iso(d),h=document.createElement("div");h.className="dayhead";h.textContent=d.toLocaleDateString("en-IN",{weekday:"short",day:"numeric",month:"short"});cal.append(h);
+    let cell=document.createElement("div");cell.className="day";cell.innerHTML=`<div class="daynum">${key}</div>`;
+    shifts.filter(s=>s.date===key).forEach(s=>{let e=document.createElement("div");e.className="event "+s.type;e.textContent=eventLabel(s);cell.append(e)});cell.onclick=()=>{selected=key;render()};cal.append(cell);
+   }
+  }
+ }
+ $("timelineWrap").style.display=view==="day"?"block":"none";$("staffView").style.display=view==="staff"?"block":"none";
+ if(view==="day")renderTimeline();if(view==="staff")renderStaffTable();
+}
+function renderTimeline(){
+ $("timelineTitle").textContent="Daily timeline · "+selected;let t=$("timeline");t.innerHTML='<div class="timehead"><div>Employee</div>'+Array.from({length:24},(_,i)=>`<div>${pad(i)}:00</div>`).join("")+'</div>';
+ staff.forEach(p=>{let row=document.createElement("div");row.className="time-row";let who=document.createElement("div");who.className="person";who.textContent=p.name;row.append(who);for(let i=0;i<24;i++)row.append(document.createElement("div"));
+  shifts.filter(s=>s.date===selected&&s.staff===p.id).forEach(s=>{let a=+s.start.slice(0,2)+(+s.start.slice(3)/60),b=+s.end.slice(0,2)+(+s.end.slice(3)/60);if(b<=a)b+=24;let slot=document.createElement("div");slot.className="slot "+s.type;slot.style.left=`calc(150px + ${(a/24)*100}% )`;slot.style.width=`${((b-a)/24)*100}%`;slot.textContent=`${s.start}–${s.end}`;row.append(slot)});t.append(row);
+ });
+}
+function renderStaffTable(){let out='<table class="table"><tr><th>Employee</th><th>Date</th><th>Time</th><th>Shift</th><th>Department</th></tr>';shifts.forEach(s=>out+=`<tr><td>${name(s.staff)}</td><td>${s.date}</td><td>${s.start}–${s.end}</td><td>${s.type}</td><td>${s.dept}</td></tr>`);$("staffTable").innerHTML=out+'</table>'}
+function times(t){let [h,m]=t.split(":").map(Number);return h*60+m}
+function allocate(){
+ let date=$("dutyDate").value,id=$("staffSelect").value,type=$("shiftType").value,start=$("startTime").value,end=$("endTime").value,dept=$("department").value,msg="";
+ if(!date)msg="Choose a date.";else if(type!=="off"&&(!start||!end||times(start)===times(end)))msg="Enter valid start and end times.";
+ else if(type!=="off"&&(times(start)%30||times(end)%30))msg="Please use 30-minute time intervals.";
+ else if(type!=="off"){let a=times(start),b=times(end);if(b<=a)b+=1440;let clash=shifts.find(s=>s.date===date&&s.staff===id&&(()=>{let x=times(s.start),y=times(s.end);if(y<=x)y+=1440;return a<y&&x<b})());if(clash)msg=`Conflict: ${name(id)} already has ${clash.start}–${clash.end} on this date.`;}
+ if(msg){$("validation").style.display="block";$("validation").textContent=msg;return}
+ if(type==="off")shifts=shifts.filter(s=>!(s.date===date&&s.staff===id));else shifts.push({date,staff:id,type,start,end,dept,notes:$("notes").value});
+ $("validation").style.display="none";selected=date;view="month";document.querySelectorAll(".tabs button").forEach(b=>b.classList.toggle("active",b.dataset.view===view));render();$("status").textContent="Shift allocation saved in this local demo.";
+}
+$("allocate").onclick=allocate;
+$("shiftType").onchange=()=>{let v=$("shiftType").value,defaults={morning:["08:00","16:00"],evening:["16:00","22:00"],night:["20:00","08:00"],other:["09:00","17:00"],off:["",""]};$("startTime").value=defaults[v][0];$("endTime").value=defaults[v][1];$("startTime").disabled=v==="off";$("endTime").disabled=v==="off"};
+$("dutyDate").onchange=e=>{selected=e.target.value;render()};
+$("prev").onclick=()=>{current.setMonth(current.getMonth()-1);render()};$("next").onclick=()=>{current.setMonth(current.getMonth()+1);render()};
+$("today").onclick=()=>{current=new Date();selected=iso(current);render()};
+document.querySelectorAll(".tabs button").forEach(b=>b.onclick=()=>{view=b.dataset.view;document.querySelectorAll(".tabs button").forEach(x=>x.classList.toggle("active",x===b));render()});
+$("publish").onclick=()=>{$("status").textContent="Demo: roster marked as published. Real employee notifications require backend integration."};
+$("print").onclick=()=>window.print();
+$("export").onclick=()=>{let csv="Date,Employee ID,Employee,Shift,Start,End,Department\n"+shifts.map(s=>[s.date,s.staff,name(s.staff),s.type,s.start,s.end,s.dept].join(",")).join("\n");let a=document.createElement("a");a.href=URL.createObjectURL(new Blob([csv],{type:"text/csv"}));a.download="ilvora-duty-roster.csv";a.click();URL.revokeObjectURL(a.href)};
+fillStaff();render();
+</script>
+</body></html>
