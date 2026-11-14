@@ -21,7 +21,28 @@ table{width:100%;border-collapse:collapse;font-size:12px}th,td{text-align:left;p
 .tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}.tabs button{background:#eaf0f3;color:var(--navy)}.tabs button.active{background:var(--teal);color:white}
 .check{display:flex;align-items:center;gap:8px;margin:8px 0}.check input{width:auto}.fulltable{overflow-x:auto}
 @media(max-width:900px){.stats{grid-template-columns:repeat(2,1fr)}.layout{grid-template-columns:1fr}}@media(max-width:520px){.field{grid-template-columns:1fr}.stats{grid-template-columns:1fr 1fr}main{padding:0 10px}}
-</style></head><body>
+</style>
+<style id="ilvora-page-watermark">
+/* ILVORA brand watermark: subtle, fixed behind page content on every screen */
+html { min-height:100%; }
+body { position:relative; isolation:isolate; }
+body::after {
+  content:"";
+  position:fixed;
+  inset:0;
+  z-index:-1;
+  pointer-events:none;
+  background-image:url("../../../assets/ilvora-healthcare-logo.png");
+  background-repeat:no-repeat;
+  background-position:center center;
+  background-size:min(68vw, 560px) auto;
+  opacity:.055;
+}
+@media(max-width:600px) {
+  body::after { background-size:82vw auto; opacity:.045; }
+}
+</style>
+\n</head><body>
 <header><div><div class="brand">ILVORA <span>WORKFORCE</span></div><div class="sub">Administrator Panel · System Settings & Security Management</div></div><div class="role">DEMO ROLE: ADMINISTRATOR</div></header>
 <main>
 <div class="notice"><b>Security governance:</b> This prototype demonstrates configuration and audit workflows only. Production security settings must be enforced server-side. Administrator manages operational settings; Head Office Admin controls branch-level authorisations; Managing Director has executive oversight.</div>
