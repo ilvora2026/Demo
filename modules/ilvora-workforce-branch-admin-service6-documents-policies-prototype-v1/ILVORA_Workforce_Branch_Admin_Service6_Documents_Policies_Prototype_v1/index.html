@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ILVORA Workforce | Documents & Policies</title>
+<style>
+:root{--navy:#10263f;--teal:#167c70;--gold:#c6a76a;--bg:#f4f7fa;--line:#dce4eb;--muted:#657589}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:#172b42;font:14px/1.45 Inter,system-ui,Arial}
+header{background:var(--navy);color:white;padding:18px 24px;display:flex;justify-content:space-between;gap:14px;align-items:center;flex-wrap:wrap}.brand{font-weight:800;letter-spacing:.08em}.brand small{display:block;color:#d7c394;font-weight:500;letter-spacing:0}
+main{max-width:1380px;margin:22px auto;padding:0 18px}h1{margin:0;color:var(--navy);font-size:23px}h2{font-size:16px;color:var(--navy);margin:0 0 12px}
+.small{font-size:12px;color:var(--muted)}.top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:16px}
+.panel{background:white;border:1px solid var(--line);border-radius:14px;padding:16px}.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:14px}.stat{background:white;border:1px solid var(--line);border-radius:12px;padding:14px}.stat b{font-size:23px;color:var(--navy);display:block}.layout{display:grid;grid-template-columns:1.15fr .85fr;gap:14px}
+.tabs{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:14px}.tabs button,.btn{border:1px solid #cbd6df;border-radius:8px;background:white;padding:9px 12px;font:inherit;font-weight:650;cursor:pointer}.tabs button.active{background:var(--navy);color:white}.primary{background:var(--teal)!important;color:white!important;border-color:var(--teal)!important}.dark{background:var(--navy)!important;color:white!important;border-color:var(--navy)!important}
+input,select,textarea{font:inherit;border:1px solid #cbd6df;border-radius:8px;padding:9px 10px;width:100%;background:white;color:#172b42}label{display:block;font-size:12px;font-weight:700;color:#526477;margin:9px 0 5px}.field{margin-bottom:8px}.row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.row>*{flex:1}.formgrid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+table{border-collapse:collapse;width:100%;font-size:12px}th,td{text-align:left;padding:10px 8px;border-bottom:1px solid var(--line);vertical-align:middle}th{color:#526477;background:#f7f9fb}
+.pill{display:inline-block;border-radius:30px;padding:3px 8px;font-size:11px;font-weight:700}.verified{background:#e4f4ed;color:#176448}.pending{background:#fff3d9;color:#805d13}.expired{background:#fde9e8;color:#a23d37}.neutral{background:#eaf0f5;color:#526477}
+.actions{display:flex;gap:6px;flex-wrap:wrap}.actions button{padding:6px 8px;font-size:11px}
+.notice{background:#f0f7f5;border:1px solid #cfe4de;border-radius:9px;padding:12px;font-size:12px;color:#315d55;margin-top:10px}
+.list{display:flex;flex-direction:column;gap:8px}.item{border:1px solid var(--line);border-radius:9px;padding:10px;display:flex;justify-content:space-between;gap:10px;align-items:center}
+.hidden{display:none}.empty{padding:22px;text-align:center;color:var(--muted)}
+footer{text-align:center;color:var(--muted);font-size:11px;margin:18px}
+@media(max-width:900px){.layout{grid-template-columns:1fr}.grid{grid-template-columns:repeat(2,1fr)}}@media(max-width:560px){main{padding:0 9px}.grid{gap:7px}.stat{padding:10px}.panel{padding:12px}table{font-size:11px}th,td{padding:7px 5px}}
+</style></head>
+<body>
+<header><div class="brand">ILVORA <span style="color:#d7c394">WORKFORCE</span><small>WHERE CARE BECOMES CONFIDENCE.</small></div><div>Branch Admin / HR · Documents & Policies</div></header>
+<main>
+<div class="top"><div><h1>Documents & Policy Management</h1><div class="small">Manage employee records, verify documents, monitor expiry and track policy acknowledgements.</div></div><div class="row" style="max-width:460px"><select id="branch"><option>Neelambari Hospital – Thamarakulam</option><option>ILVORA Health Clinic – Kottarakkara</option><option>Head Office – Kochi</option></select><button class="btn" id="print">Print current view</button></div></div>
+<div class="grid">
+ <div class="stat"><span class="small">Employee documents</span><b id="docCount">0</b><span class="small">Records in this demo</span></div>
+ <div class="stat"><span class="small">Pending verification</span><b id="pendingCount">0</b><span class="small">Awaiting Head Office</span></div>
+ <div class="stat"><span class="small">Expiring in 60 days</span><b id="expiryCount">0</b><span class="small">Renewal follow-up</span></div>
+ <div class="stat"><span class="small">Policy acknowledgements</span><b id="ackCount">0%</b><span class="small">Demo completion</span></div>
+</div>
+<div class="tabs"><button class="active" data-tab="documents">Employee Documents</button><button data-tab="upload">Upload / Submit</button><button data-tab="expiry">Expiry Tracker</button><button data-tab="policies">Policies & Circulars</button><button data-tab="reports">Reports & Filing</button></div>
+<section id="documents" class="panel">
+ <div class="top"><div><h2>Employee document register</h2><div class="small">Branch Admin can upload and submit records; Head Office performs final verification.</div></div><div class="row" style="max-width:390px"><input id="search" placeholder="Search employee / ID / document"></div></div>
+ <div style="overflow:auto"><table id="docTable"><thead><tr><th>Employee</th><th>Employee ID</th><th>Document</th><th>Uploaded</th><th>Expiry</th><th>Status</th><th>Action</th></tr></thead><tbody></tbody></table></div>
+</section>
+<section id="upload" class="panel hidden">
+ <h2>Upload and submit employee document</h2><div class="small">Choose an existing employee. Upload a PDF or image and route it to Head Office for verification.</div>
+ <div class="layout" style="margin-top:12px">
+  <div>
+   <div class="field"><label>Employee</label><select id="employee"><option value="ILV-NH-001">Anjali S · ILV-NH-001</option><option value="ILV-NH-002">Rahul K · ILV-NH-002</option><option value="ILV-NH-003">Meera P · ILV-NH-003</option><option value="ILV-NH-004">Arun M · ILV-NH-004</option></select></div>
+   <div class="field"><label>Document category</label><select id="doctype"><option>Identity proof</option><option>Address proof</option><option>Educational certificate</option><option>Professional registration</option><option>Experience certificate</option><option>Medical fitness certificate</option><option>Signed employment contract</option><option>Bank proof</option><option>Other</option></select></div>
+   <div class="formgrid"><div class="field"><label>Document issue date</label><input type="date" id="issued"></div><div class="field"><label>Expiry date (if applicable)</label><input type="date" id="expiry"></div></div>
+   <div class="field"><label>Upload file (PDF, JPG, PNG)</label><input type="file" id="file" accept=".pdf,.jpg,.jpeg,.png"></div>
+   <div class="field"><label>Notes</label><textarea id="notes" rows="3" placeholder="Optional details for Head Office reviewer"></textarea></div>
+   <button class="btn primary" id="submitDoc">Submit for Head Office verification</button><div id="uploadMsg" class="notice hidden"></div>
+  </div>
+  <div class="notice"><b>Workflow</b><ol><li>Branch Admin selects employee and document category.</li><li>Uploads document and submits for verification.</li><li>Head Office checks authenticity and completeness.</li><li>Head Office verifies, rejects or requests clarification.</li><li>Decision and reviewer details are recorded in audit history.</li></ol><b>Privacy:</b> Store only necessary documents, restrict access by role and encrypt files at rest and in transit.</div>
+ </div>
+</section>
+<section id="expiry" class="panel hidden">
+ <h2>Document expiry tracker</h2><div class="small">Monitor certificates and documents requiring renewal. Sample data uses illustrative dates.</div>
+ <div style="overflow:auto;margin-top:10px"><table><thead><tr><th>Employee</th><th>Document</th><th>Expiry date</th><th>Days remaining</th><th>Action</th></tr></thead><tbody id="expiryTable"></tbody></table></div>
+ <div class="notice">Recommended production alerts: 60, 30 and 7 days before expiry, sent to the employee and authorised Branch Admin / HR. Escalate overdue items to Head Office.</div>
+</section>
+<section id="policies" class="panel hidden">
+ <div class="top"><div><h2>Policies & circulars</h2><div class="small">Publish branch-visible policies and monitor employee acknowledgements.</div></div><button class="btn primary" id="addPolicy">Add policy (demo)</button></div>
+ <div class="list" id="policyList"></div>
+ <div class="notice"><b>Acknowledgement workflow:</b> Employee reads the current policy version, confirms the mandatory acknowledgement statement and completes OTP verification to the registered mobile/email. Save policy version, employee ID, date/time, acknowledgement result and OTP verification evidence. OTP is not implemented in this demo.</div>
+</section>
+<section id="reports" class="panel hidden">
+ <h2>Reports & physical filing register</h2>
+ <div class="row" style="margin:12px 0"><div class="stat"><span class="small">Documents filed</span><b id="filedCount">0</b></div><div class="stat"><span class="small">Policies published</span><b id="policyCount">0</b></div></div>
+ <div style="overflow:auto"><table><thead><tr><th>Record</th><th>Employee / Scope</th><th>Print date</th><th>Filing reference</th><th>Custodian</th></tr></thead><tbody id="filingTable"></tbody></table></div>
+ <div class="row" style="margin-top:12px"><button class="btn" id="addFiling">Record a printed file</button><button class="btn" id="export">Export CSV</button></div>
+ <div class="notice">Printing does not itself authorise deletion of digital records. Retention periods, physical storage access, custodians and secure destruction must follow the approved HR/legal records schedule.</div>
+</section>
+<footer>Prototype v1 · Fictional sample records · No live document storage, OTP, employee database or Head Office connection</footer>
+</main>
+<script>
+let docs=[
+ {employee:"Anjali S",id:"ILV-NH-001",type:"Professional registration",uploaded:"2026-11-03",expiry:"2027-05-10",status:"Pending verification",file:"registration_sample.pdf"},
+ {employee:"Rahul K",id:"ILV-NH-002",type:"Educational certificate",uploaded:"2026-10-28",expiry:"",status:"Verified",file:"degree_sample.pdf"},
+ {employee:"Meera P",id:"ILV-NH-003",type:"Medical fitness certificate",uploaded:"2026-11-01",expiry:"2026-12-15",status:"Verified",file:"fitness_sample.pdf"},
+ {employee:"Arun M",id:"ILV-NH-004",type:"Signed employment contract",uploaded:"2026-11-04",expiry:"",status:"Pending verification",file:"contract_sample.pdf"}
+];
+let policies=[
+ {title:"Employee Code of Conduct",version:"v1.2",date:"2026-10-01",ack:"6 / 8 acknowledged"},
+ {title:"Attendance & Leave Policy",version:"v2.0",date:"2026-10-15",ack:"7 / 8 acknowledged"},
+ {title:"Information Security Policy",version:"v1.0",date:"2026-11-01",ack:"4 / 8 acknowledged"}
+];
+let filings=[{record:"Employee document bundle",scope:"ILV-NH-001",date:"2026-11-05",ref:"NH/HR/2026/014",custodian:"Branch HR"}];
+const $=id=>document.getElementById(id);
+function badge(s){return s==="Verified"?'verified':s==="Rejected"?'expired':'pending'}
+function render(){
+ $("docCount").textContent=docs.length;$("pendingCount").textContent=docs.filter(d=>d.status==="Pending verification").length;
+ let today=new Date("2026-11-14");$("expiryCount").textContent=docs.filter(d=>d.expiry&&((new Date(d.expiry)-today)/86400000)<=60&&new Date(d.expiry)>=today).length;
+ $("ackCount").textContent="71%";$("filedCount").textContent=filings.length;$("policyCount").textContent=policies.length;
+ let q=$("search").value.toLowerCase();
+ $("docTable").querySelector("tbody").innerHTML=docs.filter(d=>(d.employee+d.id+d.type).toLowerCase().includes(q)).map((d,i)=>`<tr><td>${d.employee}</td><td>${d.id}</td><td>${d.type}<div class="small">${d.file}</div></td><td>${d.uploaded}</td><td>${d.expiry||"—"}</td><td><span class="pill ${badge(d.status)}">${d.status}</span></td><td><div class="actions"><button class="btn" onclick="verify(${i})">HO decision</button><button class="btn" onclick="recordPrint(${i})">Print</button></div></td></tr>`).join("");
+ $("expiryTable").innerHTML=docs.filter(d=>d.expiry).map(d=>{let days=Math.ceil((new Date(d.expiry)-today)/86400000);return `<tr><td>${d.employee} · ${d.id}</td><td>${d.type}</td><td>${d.expiry}</td><td>${days}</td><td><span class="pill ${days<0?'expired':days<=60?'pending':'neutral'}">${days<0?'Expired':days+' days'}</span></td></tr>`}).join("");
+ $("policyList").innerHTML=policies.map((p,i)=>`<div class="item"><div><b>${p.title}</b><div class="small">${p.version} · Published ${p.date} · ${p.ack}</div></div><div class="actions"><button class="btn" onclick="policyPrint(${i})">Print</button><button class="btn" onclick="alert('Demo: policy version details and acknowledgement register')">Acknowledgements</button></div></div>`).join("");
+ $("filingTable").innerHTML=filings.map(f=>`<tr><td>${f.record}</td><td>${f.scope}</td><td>${f.date}</td><td>${f.ref}</td><td>${f.custodian}</td></tr>`).join("");
+}
+window.verify=i=>{let choice=prompt("Head Office decision: enter V to verify, R to reject, or C to request clarification");if(!choice)return;choice=choice.toUpperCase();if(choice==="V")docs[i].status="Verified";else if(choice==="R")docs[i].status="Rejected";else if(choice==="C")docs[i].status="Clarification requested";else return alert("Invalid choice");render();alert("Demo decision recorded. Production must capture reviewer identity, timestamp and reason.");};
+window.recordPrint=i=>{let d=docs[i],ref=prompt("Enter physical filing reference (required):");if(!ref)return;filings.push({record:d.type,scope:d.id,date:new Date().toISOString().slice(0,10),ref,custodian:"Branch HR"});render();window.print();};
+window.policyPrint=i=>{alert("Demo: printing policy "+policies[i].title);window.print()};
+$("search").oninput=render;
+document.querySelectorAll("[data-tab]").forEach(b=>b.onclick=()=>{document.querySelectorAll("[data-tab]").forEach(x=>x.classList.toggle("active",x===b));["documents","upload","expiry","policies","reports"].forEach(id=>$(id).classList.toggle("hidden",id!==b.dataset.tab));});
+$("submitDoc").onclick=()=>{let f=$("file").files[0];if(!f)return alert("Please select a document file.");if(!/\.(pdf|jpg|jpeg|png)$/i.test(f.name))return alert("Only PDF or image files are allowed.");let id=$("employee").value,emp=$("employee").selectedOptions[0].text.split(" · ")[0];docs.push({employee:emp,id,type:$("doctype").value,uploaded:new Date().toISOString().slice(0,10),expiry:$("expiry").value,status:"Pending verification",file:f.name});$("uploadMsg").classList.remove("hidden");$("uploadMsg").textContent="Demo upload recorded in this page session and queued for Head Office verification. File bytes are not uploaded to a server.";render();};
+$("addPolicy").onclick=()=>{let title=prompt("Policy / circular title");if(!title)return;policies.push({title,version:"v1.0",date:new Date().toISOString().slice(0,10),ack:"0 / 8 acknowledged"});render()};
+$("addFiling").onclick=()=>{let record=prompt("Record / document bundle name"),scope=prompt("Employee ID or policy scope"),ref=prompt("Physical filing reference");if(!record||!scope||!ref)return;filings.push({record,scope,date:new Date().toISOString().slice(0,10),ref,custodian:"Branch HR"});render()};
+$("print").onclick=()=>window.print();
+$("export").onclick=()=>{let rows=[["Record","Employee / Scope","Print date","Filing reference","Custodian"],...filings.map(f=>[f.record,f.scope,f.date,f.ref,f.custodian])];let csv=rows.map(r=>r.map(x=>'"'+String(x).replaceAll('"','""')+'"').join(",")).join("\n");let a=document.createElement("a");a.href=URL.createObjectURL(new Blob([csv],{type:"text/csv"}));a.download="ilvora-physical-filing-register.csv";a.click();URL.revokeObjectURL(a.href)};
+render();
+</script></body></html>
