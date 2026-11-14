@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ILVORA Workforce | Signatories & Documents</title>
+<style>
+:root{--navy:#10243a;--teal:#087e87;--gold:#c8a45d;--bg:#f3f6f8;--ink:#203243;--muted:#647786;--line:#dce4e9}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);font:14px/1.5 Segoe UI,Arial,sans-serif;color:var(--ink)}
+header{background:linear-gradient(110deg,var(--navy),#1b4058);color:white;padding:22px max(18px,calc((100% - 1180px)/2));border-bottom:4px solid var(--gold)}
+.brand{font-size:11px;letter-spacing:2px;color:#dfc98f}h1{font-size:24px;margin:4px 0}.sub{color:#d7e2e8;font-size:13px}
+main{max-width:1180px;margin:22px auto;padding:0 16px}.tabs{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:16px}.tab{padding:10px 13px;border:1px solid var(--line);border-radius:8px;background:white;color:var(--ink);cursor:pointer}.tab.active{background:var(--navy);color:white}
+.panel{background:white;border:1px solid var(--line);border-radius:12px;padding:17px;margin-bottom:15px}.panel h2{font-size:17px;color:var(--navy);margin:0 0 12px}.panel h3{font-size:14px;color:var(--navy);margin:15px 0 8px}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.field label{display:block;font-size:12px;font-weight:700;color:#536777;margin-bottom:5px}input,select,textarea{width:100%;padding:9px;border:1px solid #cbd6de;border-radius:7px;font:inherit;background:#fff;color:var(--ink)}input[type=file]{padding:7px}textarea{min-height:70px}.full{grid-column:1/-1}
+button{border:0;border-radius:8px;background:var(--teal);color:white;padding:10px 14px;font-weight:700;cursor:pointer}button.secondary{background:#eaf0f3;color:var(--navy)}.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:13px}
+.hidden{display:none!important}.note{background:#fff8e8;border:1px solid #ecdcb5;padding:11px 13px;border-radius:8px;color:#705722;margin-bottom:14px;font-size:12px}.good{background:#eaf6ef;border:1px solid #cce6d6;color:#276447;padding:10px;border-radius:8px;margin-top:10px;font-size:12px}
+.preview{border:1px solid #ccd5db;background:#fff;padding:26px;max-width:800px;margin:12px auto;min-height:390px;color:#1c2c3b}.previewhead{text-align:center;border-bottom:2px solid var(--gold);padding-bottom:12px}.previewhead h2{font-size:22px;margin:0;color:var(--navy)}.previewhead p{margin:3px}.preview h3{text-align:center;margin:18px 0;text-decoration:underline}.preview table{width:100%;border-collapse:collapse;margin:12px 0}.preview td,.preview th{border:1px solid #d5dde2;padding:7px;text-align:left;font-size:12px}.signrow{display:flex;justify-content:space-between;gap:20px;margin-top:38px;align-items:end}.sig{width:44%;min-height:95px;text-align:center}.sig img{max-width:170px;max-height:65px;object-fit:contain;display:block;margin:0 auto 4px}.seal{max-width:90px;max-height:90px;object-fit:contain}.tiny{font-size:11px;color:var(--muted)}.status{display:inline-block;padding:3px 8px;border-radius:20px;background:#e7f4ec;color:#276447;font-size:11px;font-weight:700}
+@media(max-width:650px){.grid{grid-template-columns:1fr}.full{grid-column:auto}.signrow{flex-direction:column;align-items:stretch}.sig{width:100%}.preview{padding:15px}}
+@media print{body{background:white}.no-print,header,.tabs{display:none!important}main{margin:0;max-width:none;padding:0}.panel{border:0;padding:0}.preview{border:0;margin:0;max-width:none}}
+</style>
+</head>
+<body>
+<header><div class="brand">ILVORA HEALTHCARE GROUP</div><h1>Signatory, Payroll & Experience Certificate</h1><div class="sub">Authorised company signatories and controlled employee document generation</div></header>
+<main>
+<div class="note"><b>Important governance:</b> Only the configured Managing Director name(s), corresponding signature image(s), and company seal may appear on auto-generated payslips and experience certificates. These assets must not be reused in other documents or general correspondence.</div>
+<div class="tabs no-print">
+<button class="tab active" data-tab="setup">Administrator – Signatory Setup</button>
+<button class="tab" data-tab="payroll">Payroll – Payslip</button>
+<button class="tab" data-tab="experience">Employee Portal – Experience Certificate</button>
+</div>
+
+<section id="setup" class="page">
+<div class="panel">
+<h2>Managing Director signatory configuration</h2>
+<p class="tiny">Add one or two authorised MD signatories. Each name must be paired with its own signature image. If only one MD is configured, documents show only that MD. If two are configured, both names and signatures appear.</p>
+<div class="grid">
+<div class="field"><label>Managing Director 1 – Full name</label><input id="md1name" placeholder="Enter MD 1 full name"></div>
+<div class="field"><label>Managing Director 1 – Signature image</label><input id="md1sig" type="file" accept="image/png,image/jpeg,image/webp"></div>
+<div class="field"><label>Managing Director 2 – Full name (optional)</label><input id="md2name" placeholder="Enter MD 2 full name"></div>
+<div class="field"><label>Managing Director 2 – Signature image (optional)</label><input id="md2sig" type="file" accept="image/png,image/jpeg,image/webp"></div>
+<div class="field full"><label>Company seal image</label><input id="sealfile" type="file" accept="image/png,image/jpeg,image/webp"></div>
+</div>
+<div class="actions"><button onclick="saveSignatories()">Save signatory and seal settings</button><button class="secondary" onclick="clearSetup()">Clear setup</button></div>
+<div id="setupMsg"></div>
+</div>
+<div class="panel"><h2>Configured document signatories</h2><div id="configured"></div></div>
+</section>
+
+<section id="payroll" class="page hidden">
+<div class="panel">
+<h2>Generate employee payslip</h2>
+<div class="grid">
+<div class="field"><label>Employee ID</label><input id="pEmpId" value="ILV-NH-014"></div>
+<div class="field"><label>Employee name</label><input id="pName" value="Demo Employee"></div>
+<div class="field"><label>Position</label><input id="pPosition" value="Staff Nurse"></div>
+<div class="field"><label>Department</label><input id="pDept" value="Nursing"></div>
+<div class="field"><label>Payroll month</label><input id="pMonth" type="month" value="2026-11"></div>
+<div class="field"><label>Basic salary (₹)</label><input id="pBasic" type="number" value="25000"></div>
+<div class="field"><label>Allowances (₹)</label><input id="pAllow" type="number" value="5000"></div>
+<div class="field"><label>Deductions (₹)</label><input id="pDeduct" type="number" value="1500"></div>
+</div>
+<div class="actions"><button onclick="generatePayslip()">Generate payslip preview</button></div>
+<p class="tiny">This preview uses the configured MD signatory image(s) and company seal. Production payroll must generate from approved payroll records and the established payroll cycle.</p>
+</div>
+<div class="panel hidden" id="pPreviewPanel"><div id="pPreview" class="preview"></div><div class="actions no-print"><button onclick="window.print()">Print / Save as PDF</button></div></div>
+</section>
+
+<section id="experience" class="page hidden">
+<div class="panel">
+<h2>Employee portal – Request experience certificate</h2>
+<p class="tiny">Employees may request an experience certificate through their portal from 5 calendar days before the approved last working day. A reminder is sent 7 calendar days before. Automatic generation is permitted only after the approved last working day has passed and all company exit-clearance requirements are completed.</p>
+<div class="grid">
+<div class="field"><label>Employee ID</label><input id="eEmpId" value="ILV-NH-014"></div>
+<div class="field"><label>Employee full name</label><input id="eName" value="Demo Employee"></div>
+<div class="field"><label>Position</label><input id="ePosition" value="Staff Nurse"></div>
+<div class="field"><label>Department</label><input id="eDept" value="Nursing"></div>
+<div class="field"><label>Employment start date</label><input id="eStart" type="date" value="2022-04-18"></div>
+<div class="field"><label>Approved last working day / end date</label><input id="eEnd" type="date" value="2026-11-14"></div>
+<div class="field"><label>MD-approved resignation?</label><select id="eApproved"><option value="yes">Yes</option><option value="no">No</option></select></div>
+<div class="field"><label>All company clearance completed?</label><select id="eClear"><option value="yes">Yes</option><option value="no">No</option></select></div>
+<div class="field"><label>Last working day has passed?</label><select id="ePassed"><option value="yes">Yes</option><option value="no">No</option></select></div>
+<div class="field"><label>Employee request reference</label><input id="eRequest" placeholder="Optional request reference"></div>
+</div>
+<div class="actions"><button onclick="requestExperience()">Submit employee portal request</button><button class="secondary" onclick="generateExperience()">Check eligibility / generate certificate</button></div>
+<div id="eMsg"></div>
+</div>
+<div class="panel hidden" id="ePreviewPanel"><div id="ePreview" class="preview"></div><div class="actions no-print"><button onclick="window.print()">Print / Save as PDF</button></div></div>
+</section>
+</main>
+<script>
+let settings={mds:[],seal:null},requests=[];
+function readImage(file){return new Promise((resolve,reject)=>{if(!file){resolve(null);return}if(!file.type.startsWith("image/")){reject("Please upload an image file.");return}let r=new FileReader();r.onload=()=>resolve(r.result);r.onerror=()=>reject("Unable to read image.");r.readAsDataURL(file)})}
+async function saveSignatories(){
+ try{
+ let n1=$("md1name").value.trim(),n2=$("md2name").value.trim(),f1=$("md1sig").files[0],f2=$("md2sig").files[0],sf=$("sealfile").files[0];
+ if(!n1&&!n2){$("setupMsg").innerHTML='<div class="note">Enter at least one MD name and upload the matching signature image.</div>';return}
+ if(n1&&!f1){$("setupMsg").innerHTML='<div class="note">Upload the signature image for MD 1.</div>';return}
+ if(n2&&!f2){$("setupMsg").innerHTML='<div class="note">Upload the separate signature image for MD 2.</div>';return}
+ if(!n1&&f1||!n2&&f2){$("setupMsg").innerHTML='<div class="note">Each uploaded signature must have its corresponding MD name.</div>';return}
+ if(!sf&&!settings.seal){$("setupMsg").innerHTML='<div class="note">Upload the company seal image.</div>';return}
+ let mds=[];if(n1)mds.push({name:n1,signature:await readImage(f1)});if(n2)mds.push({name:n2,signature:await readImage(f2)});
+ settings={mds,seal:sf?await readImage(sf):settings.seal};
+ $("setupMsg").innerHTML='<div class="good">Signatory configuration saved in this demo session. Document output will use '+mds.length+' MD signatory/signatories.</div>';renderSetup();
+ }catch(e){$("setupMsg").innerHTML='<div class="note">'+e+'</div>'}
+}
+function renderSetup(){
+ let box=$("configured");if(!settings.mds.length){box.innerHTML='<span class="tiny">No MD signatory configured yet.</span>';return}
+ box.innerHTML=settings.mds.map((m,i)=>`<div style="display:inline-block;vertical-align:top;margin:8px 18px 8px 0;text-align:center"><img src="${m.signature}" style="max-width:150px;max-height:65px;display:block;object-fit:contain"><b>${m.name}</b><div class="tiny">Managing Director ${i+1}</div></div>`).join("")+(settings.seal?`<div style="display:inline-block;vertical-align:top;text-align:center"><img src="${settings.seal}" class="seal"><div class="tiny">Company seal</div></div>`:"");
+}
+function clearSetup(){settings={mds:[],seal:null};["md1name","md2name","md1sig","md2sig","sealfile"].forEach(x=>$(x).value="");$("setupMsg").innerHTML="";renderSetup()}
+function requireConfig(){if(!settings.mds.length||!settings.seal){alert("Configure at least one MD name/signature and upload the company seal first.");return false}return true}
+function signatureMarkup(){return settings.mds.map(m=>`<div class="sig"><img src="${m.signature}"><b>${m.name}</b><div>Managing Director</div></div>`).join("")}
+function headerMarkup(){return `<div class="previewhead"><h2>ILVORA HEALTHCARE GROUP</h2><p>WHERE CARE BECOMES CONFIDENCE</p></div>`}
+function generatePayslip(){
+ if(!requireConfig())return;
+ let basic=Number($("pBasic").value)||0,allow=Number($("pAllow").value)||0,ded=Number($("pDeduct").value)||0,gross=basic+allow,net=gross-ded;
+ $("pPreview").innerHTML=headerMarkup()+`<h3>PAYSLIP</h3><p><b>Employee ID:</b> ${esc($("pEmpId").value)} &nbsp; <b>Name:</b> ${esc($("pName").value)}</p><p><b>Position:</b> ${esc($("pPosition").value)} &nbsp; <b>Department:</b> ${esc($("pDept").value)}</p><p><b>Payroll period:</b> ${esc($("pMonth").value)}</p><table><tr><th>Earnings</th><th>Amount (₹)</th><th>Deductions</th><th>Amount (₹)</th></tr><tr><td>Basic salary</td><td>${basic.toFixed(2)}</td><td>Deductions</td><td>${ded.toFixed(2)}</td></tr><tr><td>Allowances</td><td>${allow.toFixed(2)}</td><td></td><td></td></tr><tr><th>Gross earnings</th><th>${gross.toFixed(2)}</th><th>Net pay</th><th>${net.toFixed(2)}</th></tr></table><p><b>Net salary payable: ₹${net.toFixed(2)}</b></p><div class="signrow">${signatureMarkup()}<div class="sig"><img class="seal" src="${settings.seal}"><b>Company Seal</b></div></div><p class="tiny">System-generated payslip. Signatory assets are reserved for payslips and experience certificates only.</p>`;
+ $("pPreviewPanel").classList.remove("hidden");
+}
+function duration(start,end){
+ let s=new Date(start+"T00:00:00"),e=new Date(end+"T00:00:00");if(e<s)return null;
+ let y=e.getFullYear()-s.getFullYear(),m=e.getMonth()-s.getMonth(),d=e.getDate()-s.getDate();
+ if(d<0){m--;let prev=new Date(e.getFullYear(),e.getMonth(),0);d+=prev.getDate()}
+ if(m<0){y--;m+=12}
+ return {y,m,d};
+}
+function esc(v){return String(v||"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+function requestExperience(){
+ let end=$("eEnd").value;
+ if($("eApproved").value!=="yes"||!end){
+  $("eMsg").innerHTML='<div class="note">A certificate request can be made only after the resignation and proposed last working day have been approved by the Managing Director.</div>';return;
+ }
+ let today=new Date();today.setHours(0,0,0,0);let last=new Date(end+"T00:00:00");
+ let days=Math.ceil((last-today)/86400000);
+ if(days>5){
+  $("eMsg").innerHTML='<div class="note">The experience certificate request window opens 5 calendar days before the approved last working day. Please apply when you are within 5 days of that date.</div>';return;
+ }
+ let ref="EXP-"+Date.now().toString().slice(-7);requests.push({ref,emp:$("eEmpId").value,date:new Date().toLocaleString(),status:"Submitted"});
+ $("eMsg").innerHTML=`<div class="good">Experience certificate request submitted. Reference: <b>${ref}</b>. The certificate will be generated only after the approved last working day has passed and all company exit clearances are complete.</div>`;
+}
+function generateExperience(){
+ if(!requireConfig())return;
+ let start=$("eStart").value,end=$("eEnd").value;
+ if(!start||!end){$("eMsg").innerHTML='<div class="note">Enter the employment start date and approved end date.</div>';return}
+ if($("eApproved").value!=="yes"||$("eClear").value!=="yes"||$("ePassed").value!=="yes"){ $("eMsg").innerHTML='<div class="note">Not eligible for generation. MD-approved resignation, passed last working day and completed company clearance are all required.</div>';return}
+ let dur=duration(start,end);if(!dur){$("eMsg").innerHTML='<div class="note">End date cannot be earlier than start date.</div>';return}
+ let dtext=`${dur.y} year(s), ${dur.m} month(s) and ${dur.d} day(s)`;
+ $("ePreview").innerHTML=headerMarkup()+`<h3>EXPERIENCE CERTIFICATE</h3><p>This is to certify that <b>${esc($("eName").value)}</b> (Employee ID: ${esc($("eEmpId").value)}) was employed with ILVORA Healthcare Group as <b>${esc($("ePosition").value)}</b> in the <b>${esc($("eDept").value)}</b> department.</p><p>The employee worked with the organisation from <b>${fmt(start)}</b> to <b>${fmt(end)}</b>, completing a total service period of <b>${dtext}</b>.</p><p>This certificate is issued upon completion of the employee's exit formalities and at the employee's request.</p><p>We thank the employee for their service and wish them success in future endeavours.</p><div class="signrow">${signatureMarkup()}<div class="sig"><img class="seal" src="${settings.seal}"><b>Company Seal</b></div></div><p class="tiny">Generated after MD-approved resignation, completion of clearance and passage of the approved last working day.</p>`;
+ $("ePreviewPanel").classList.remove("hidden");$("eMsg").innerHTML='<div class="good">Eligibility checks passed in this demo. Certificate preview generated.</div>';
+}
+function fmt(v){return new Date(v+"T00:00:00").toLocaleDateString("en-IN",{day:"2-digit",month:"long",year:"numeric"})}
+document.querySelectorAll(".tab").forEach(b=>b.onclick=()=>{document.querySelectorAll(".tab").forEach(x=>x.classList.toggle("active",x===b));document.querySelectorAll(".page").forEach(x=>x.classList.toggle("hidden",x.id!==b.dataset.tab))});
+renderSetup();
+</script>
+</body></html>
