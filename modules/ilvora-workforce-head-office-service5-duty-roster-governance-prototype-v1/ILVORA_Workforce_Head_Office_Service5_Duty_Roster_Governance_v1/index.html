@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ILVORA Workforce | Head Office – Duty Roster Governance</title>
+<style>
+:root{--navy:#10243a;--teal:#168b88;--gold:#c7a96b;--ink:#243447;--muted:#6d7b88;--line:#e3e9ed;--bg:#f4f7f8;--white:#fff;--red:#b64b4b;--green:#2e8066;--amber:#a66b1d}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.45 Inter,Segoe UI,Arial,sans-serif}
+header{background:var(--navy);color:#fff;padding:18px 24px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.brand{font-weight:800;letter-spacing:.08em}.brand small{display:block;color:#c9d5df;font-weight:400;letter-spacing:.02em;margin-top:3px}
+.pill{border:1px solid #ffffff50;border-radius:30px;padding:7px 12px;color:#eaf0f3;font-size:12px}
+main{max-width:1400px;margin:22px auto;padding:0 18px}.intro{display:flex;justify-content:space-between;align-items:end;gap:12px;flex-wrap:wrap;margin-bottom:18px}
+h1{font-size:24px;margin:0;color:var(--navy)}.sub{color:var(--muted);margin-top:5px}
+button,select,input{font:inherit}button{border:0;border-radius:8px;padding:9px 13px;background:var(--teal);color:#fff;cursor:pointer;font-weight:650}button.secondary{background:#e9eff1;color:var(--navy)}button.dark{background:var(--navy)}button:disabled{opacity:.45;cursor:not-allowed}
+.kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:16px 0}
+.card,.panel{background:var(--white);border:1px solid var(--line);border-radius:12px;padding:15px;box-shadow:0 2px 8px #10243a08}
+.kpi-label{font-size:12px;color:var(--muted)}.kpi-value{font-size:25px;font-weight:800;color:var(--navy);margin-top:4px}.kpi-note{font-size:11px;color:var(--muted)}
+.tabs{display:flex;gap:7px;flex-wrap:wrap;margin:18px 0}.tab{background:#e8eef0;color:var(--navy)}.tab.active{background:var(--navy);color:white}
+.layout{display:grid;grid-template-columns:1.4fr .9fr;gap:14px}.panel h2{font-size:16px;margin:0 0 12px;color:var(--navy)}
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}.filters select,.filters input{border:1px solid var(--line);border-radius:7px;padding:8px;background:#fff;color:var(--ink)}
+table{border-collapse:collapse;width:100%;font-size:12px}th{text-align:left;background:#f2f6f7;color:#536575;font-weight:700}th,td{padding:10px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+.status{display:inline-block;border-radius:30px;padding:4px 8px;font-size:10px;font-weight:700;white-space:nowrap}.pending{background:#fff2d9;color:#865715}.returned{background:#fbe7e7;color:#9c3f3f}.approved{background:#e3f3ed;color:#286d56}.published{background:#e6edf8;color:#345d91}
+.tag{font-size:10px;padding:3px 6px;border-radius:5px;background:#eef2f4;color:#586977}.alert{border-left:3px solid var(--amber);background:#fff8eb;padding:10px;margin:8px 0;border-radius:5px;font-size:12px}.alert.red{border-color:var(--red);background:#fff1f1}.alert.green{border-color:var(--green);background:#eff8f4}
+.small{font-size:11px;color:var(--muted)}.actions{display:flex;gap:6px;flex-wrap:wrap}.actions button{padding:6px 9px;font-size:11px}
+.monthgrid{display:grid;grid-template-columns:repeat(7,1fr);gap:5px}.day{min-height:78px;border:1px solid var(--line);border-radius:7px;padding:6px;font-size:11px;background:#fff}.day b{display:block;color:var(--navy);margin-bottom:4px}.shift{display:block;background:#e4f3f1;color:#176b68;border-radius:4px;padding:2px 4px;margin:2px 0;font-size:9px}.shift.night{background:#e9eafa;color:#4b4d8c}.shift.warn{background:#fde8e8;color:#9c3f3f}
+.history{border-left:2px solid #d8e2e6;margin-left:5px;padding-left:13px}.history div{margin:0 0 12px;position:relative}.history div:before{content:"";position:absolute;left:-18px;top:4px;width:8px;height:8px;border-radius:50%;background:var(--teal)}
+.modal{display:none;position:fixed;inset:0;background:#10243a80;align-items:center;justify-content:center;padding:16px;z-index:5}.modal.open{display:flex}.dialog{background:white;border-radius:12px;padding:20px;max-width:520px;width:100%;max-height:90vh;overflow:auto}.dialog h2{margin-top:0}.dialog label{display:block;font-size:12px;font-weight:700;margin:10px 0 4px}.dialog input,.dialog textarea,.dialog select{width:100%;padding:9px;border:1px solid var(--line);border-radius:7px}.dialog textarea{min-height:75px}
+footer{margin:18px 0 28px;color:var(--muted);font-size:11px;text-align:center}
+@media(max-width:900px){.kpis{grid-template-columns:repeat(2,1fr)}.layout{grid-template-columns:1fr}main{padding:0 12px}table{min-width:720px}.tablewrap{overflow:auto}}
+@media print{header,.tabs,.filters,button,.no-print,footer{display:none!important}body{background:white}.panel,.card{box-shadow:none;break-inside:avoid}main{max-width:none;margin:0;padding:0}.layout{display:block}.panel{margin-bottom:12px}}
+</style>
+</head>
+<body>
+<header><div class="brand">ILVORA <span style="color:var(--gold)">WORKFORCE</span><small>WHERE CARE BECOMES CONFIDENCE.</small></div><div class="pill">HEAD OFFICE ADMIN PANEL · DEMO PROTOTYPE</div></header>
+<main>
+<div class="intro"><div><h1>Duty Roster & Shift Governance</h1><div class="sub">Central review, approval, publication and retention oversight across all branches.</div></div><div class="actions no-print"><button class="secondary" onclick="window.print()">Print / Save PDF</button><button onclick="downloadCSV()">Download CSV</button></div></div>
+<section class="kpis">
+<div class="card"><div class="kpi-label">Branches in scope</div><div class="kpi-value">3</div><div class="kpi-note">Kochi · Thamarakulam · Kottarakkara</div></div>
+<div class="card"><div class="kpi-label">Pending HO review</div><div class="kpi-value" id="pendingCount">2</div><div class="kpi-note">Awaiting central decision</div></div>
+<div class="card"><div class="kpi-label">Roster exceptions</div><div class="kpi-value" id="exceptionCount">3</div><div class="kpi-note">Overlap or uncovered duty flags</div></div>
+<div class="card"><div class="kpi-label">Approved / published</div><div class="kpi-value" id="approvedCount">2</div><div class="kpi-note">Official roster versions</div></div>
+</section>
+<div class="tabs no-print">
+<button class="tab active" data-tab="overview" onclick="showTab('overview',this)">Overview & submissions</button>
+<button class="tab" data-tab="calendar" onclick="showTab('calendar',this)">Roster calendar</button>
+<button class="tab" data-tab="reports" onclick="showTab('reports',this)">Reports & retention</button>
+<button class="tab" data-tab="history" onclick="showTab('history',this)">Revision history</button>
+</div>
+<section id="overview" class="tabpage">
+<div class="layout">
+<div class="panel"><h2>Branch roster submissions</h2>
+<div class="filters no-print"><select id="branchFilter" onchange="renderQueue()"><option value="All">All branches</option><option>Head Office – Kochi</option><option>Neelambari Hospital – Thamarakulam</option><option>ILVORA Health Clinic – Kottarakkara</option></select><select id="statusFilter" onchange="renderQueue()"><option value="All">All statuses</option><option>Pending HO Review</option><option>Returned</option><option>Approved</option><option>Published</option></select></div>
+<div class="tablewrap"><table><thead><tr><th>Branch / Period</th><th>Submitted by</th><th>Coverage</th><th>Exceptions</th><th>Status</th><th class="no-print">Action</th></tr></thead><tbody id="queueBody"></tbody></table></div>
+<p class="small">Branch Admin / HR prepares and submits rosters. Head Office reviews and approves or returns them. Central reviewers do not silently change shift assignments.</p>
+</div>
+<div class="panel"><h2>Governance alerts</h2>
+<div class="alert red"><b>Overlap detected:</b> Neelambari Hospital – two assignments overlap for one employee on 18 Nov.</div>
+<div class="alert"><b>Uncovered duty:</b> Kottarakkara clinic – evening coverage gap on 20 Nov.</div>
+<div class="alert"><b>Review required:</b> Kochi roster includes a custom shift needing confirmation.</div>
+<div class="alert green"><b>Control:</b> Approval is recorded against a specific roster version. Any branch revision requires resubmission.</div>
+</div></div>
+</section>
+<section id="calendar" class="tabpage" style="display:none">
+<div class="panel"><div style="display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap"><h2>Monthly roster preview · November 2026</h2><select id="calendarBranch" onchange="renderCalendar()"><option>Head Office – Kochi</option><option>Neelambari Hospital – Thamarakulam</option><option>ILVORA Health Clinic – Kottarakkara</option></select></div>
+<div class="small">Illustrative roster preview. Red shift markers indicate a sample exception and are not validated live assignments.</div><div class="monthgrid" id="monthGrid" style="margin-top:12px"></div>
+</div></section>
+<section id="reports" class="tabpage" style="display:none">
+<div class="layout"><div class="panel"><h2>Roster reports</h2>
+<div class="filters no-print"><select id="reportBranch"><option value="All">All branches – consolidated</option><option>Head Office – Kochi</option><option>Neelambari Hospital – Thamarakulam</option><option>ILVORA Health Clinic – Kottarakkara</option></select><select id="reportType"><option>Detailed roster report</option><option>Brief roster summary</option></select><input id="reportFrom" type="date" value="2026-11-01"><input id="reportTo" type="date" value="2026-11-30"></div>
+<div class="actions no-print"><button onclick="generateReport()">Generate report</button><button class="secondary" onclick="window.print()">Print / Save PDF</button><button class="secondary" onclick="downloadCSV()">CSV / Excel</button></div>
+<div id="reportOutput" style="margin-top:14px"><p class="small">Choose branch and report type, then generate. Reports can be branch-wise or consolidated.</p></div>
+</div>
+<div class="panel"><h2>Digital retention schedule</h2>
+<ul><li><b>Detailed roster:</b> retain until the 15th of the following month, then eligible for deletion under the approved schedule.</li><li><b>Brief summary:</b> retain for 3 years.</li><li><b>Reminder:</b> notify custodians before the deletion date.</li><li><b>Legal hold:</b> pause deletion for audit, investigation, litigation or regulatory requirements.</li></ul>
+<div class="alert">Printing does not itself authorise digital deletion. Physical printed records follow a separate approved retention and secure-destruction schedule.</div>
+<h3 style="font-size:14px">Print / filing register</h3>
+<label class="small">Print reference</label><input id="printRef" placeholder="e.g. ROSTER-NOV26-HO-001" style="padding:8px;border:1px solid var(--line);border-radius:7px;width:100%">
+<label class="small">Printed by / filing location</label><input id="printBy" placeholder="Officer name / secure file location" style="padding:8px;border:1px solid var(--line);border-radius:7px;width:100%;margin-top:6px">
+<button class="secondary no-print" style="margin-top:8px" onclick="savePrintRegister()">Record print metadata</button><div id="printMessage" class="small"></div>
+</div></div>
+</section>
+<section id="history" class="tabpage" style="display:none">
+<div class="panel"><h2>Roster revision history</h2><div class="history" id="historyList"></div><p class="small">Each submission, return, approval and publication should retain actor, timestamp, version and reason in the production audit log.</p></div>
+</section>
+<footer>ILVORA Workforce · Head Office Governance Prototype · Sample data only · Not connected to a live database</footer>
+</main>
+<div class="modal" id="decisionModal"><div class="dialog"><h2 id="modalTitle">Review roster</h2><p id="modalText" class="small"></p><label>Decision note / reason</label><textarea id="decisionNote" placeholder="Enter approval note or reason for return"></textarea><div class="actions" style="margin-top:14px"><button id="confirmDecision">Confirm decision</button><button class="secondary" onclick="closeModal()">Cancel</button></div></div></div>
+<script>
+const branches=["Head Office – Kochi","Neelambari Hospital – Thamarakulam","ILVORA Health Clinic – Kottarakkara"];
+let rosters=[
+{id:"ROST-HO-1126-01",branch:branches[0],period:"November 2026",by:"Branch Admin – Kochi",coverage:"28 / 30 days",exceptions:1,status:"Pending HO Review",version:2},
+{id:"ROST-NH-1126-01",branch:branches[1],period:"November 2026",by:"Branch Admin – Neelambari",coverage:"30 / 30 days",exceptions:1,status:"Pending HO Review",version:3},
+{id:"ROST-KK-1126-01",branch:branches[2],period:"November 2026",by:"Branch Admin – Clinic",coverage:"30 / 30 days",exceptions:1,status:"Returned",version:1},
+{id:"ROST-HO-1026-01",branch:branches[0],period:"October 2026",by:"Branch Admin – Kochi",coverage:"31 / 31 days",exceptions:0,status:"Published",version:4},
+{id:"ROST-NH-1026-01",branch:branches[1],period:"October 2026",by:"Branch Admin – Neelambari",coverage:"31 / 31 days",exceptions:0,status:"Approved",version:2}
+];
+let history=[
+["14 Nov 2026 · 09:42","Head Office Admin","Neelambari Hospital – November 2026","Version 3 submitted for central review."],
+["13 Nov 2026 · 16:20","Head Office Admin","Kottarakkara Clinic – November 2026","Version 1 returned for correction: evening shift gap."],
+["12 Nov 2026 · 11:05","Head Office Admin","Head Office – October 2026","Version 4 published after approval."]
+];
+let current=null,decision=null;
+function statusClass(s){return s==="Published"?"published":s==="Approved"?"approved":s==="Returned"?"returned":"pending"}
+function renderQueue(){
+ const b=document.getElementById("branchFilter").value,s=document.getElementById("statusFilter").value;
+ const rows=rosters.filter(r=>(b==="All"||r.branch===b)&&(s==="All"||r.status===s));
+ document.getElementById("queueBody").innerHTML=rows.map(r=>`<tr><td><b>${r.branch}</b><br>${r.period}<br><span class="small">${r.id} · v${r.version}</span></td><td>${r.by}</td><td>${r.coverage}</td><td>${r.exceptions?`<span style="color:#a04444;font-weight:700">${r.exceptions} flagged</span>`:"None"}</td><td><span class="status ${statusClass(r.status)}">${r.status}</span></td><td class="no-print"><div class="actions"><button class="secondary" onclick="review('${r.id}','details')">View</button>${r.status==="Pending HO Review"?`<button onclick="review('${r.id}','approve')">Approve</button><button class="dark" onclick="review('${r.id}','return')">Return</button>`:""}</div></td></tr>`).join("")||'<tr><td colspan="6">No matching submissions.</td></tr>';
+ updateKPIs();
+}
+function updateKPIs(){document.getElementById("pendingCount").textContent=rosters.filter(r=>r.status==="Pending HO Review").length;document.getElementById("approvedCount").textContent=rosters.filter(r=>["Approved","Published"].includes(r.status)).length;document.getElementById("exceptionCount").textContent=rosters.reduce((a,r)=>a+(r.period==="November 2026"?r.exceptions:0),0)}
+function review(id,act){current=rosters.find(r=>r.id===id);decision=act;document.getElementById("modalTitle").textContent=act==="approve"?"Approve roster version":act==="return"?"Return roster for correction":"Roster submission details";document.getElementById("modalText").textContent=`${current.branch} · ${current.period} · ${current.id} · Version ${current.version}. Coverage: ${current.coverage}. Exception flags: ${current.exceptions}.`;document.getElementById("decisionNote").value="";document.getElementById("confirmDecision").style.display=act==="details"?"none":"inline-block";document.getElementById("decisionModal").classList.add("open")}
+function closeModal(){document.getElementById("decisionModal").classList.remove("open")}
+document.getElementById("confirmDecision").onclick=()=>{if(!current)return;let note=document.getElementById("decisionNote").value.trim();if(decision==="return"&&!note){alert("Please enter a reason for returning the roster.");return}current.status=decision==="approve"?"Approved":"Returned";history.unshift([new Date().toLocaleString(),"Head Office Admin",current.branch+" – "+current.period,`Version ${current.version} ${current.status.toLowerCase()}. ${note||"Approved for publication workflow."}`]);closeModal();renderQueue();renderHistory()};
+function showTab(id,btn){document.querySelectorAll(".tabpage").forEach(x=>x.style.display="none");document.getElementById(id).style.display="block";document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));btn.classList.add("active");if(id==="calendar")renderCalendar();if(id==="history")renderHistory()}
+function renderCalendar(){let branch=document.getElementById("calendarBranch").value;let html=["Sun","Mon","Tue","Wed","Thu","Fri","Sat"].map(d=>`<div class="small" style="font-weight:700;padding:5px">${d}</div>`).join("");let first=new Date(2026,10,1).getDay();for(let i=0;i<first;i++)html+='<div class="day" style="background:#f7f9fa"></div>';for(let d=1;d<=30;d++){let shift=d%3===0?"Night 8p–8a":d%3===1?"Morning 8a–4p":"Evening 4p–10p";let warn=(branch.includes("Neelambari")&&d===18)||(branch.includes("Clinic")&&d===20);html+=`<div class="day"><b>${d}</b><span class="shift ${d%3===0?"night":""} ${warn?"warn":""}">${shift}</span>${warn?'<span class="small" style="color:#a04444">Review flag</span>':""}</div>`}document.getElementById("monthGrid").innerHTML=html}
+function generateReport(){let b=document.getElementById("reportBranch").value,t=document.getElementById("reportType").value;let rows=rosters.filter(r=>b==="All"||r.branch===b);let out=t.startsWith("Detailed")?`<h3>${t}</h3><table><tr><th>Branch</th><th>Period</th><th>Roster ID</th><th>Version</th><th>Coverage</th><th>Flags</th><th>Status</th></tr>${rows.map(r=>`<tr><td>${r.branch}</td><td>${r.period}</td><td>${r.id}</td><td>${r.version}</td><td>${r.coverage}</td><td>${r.exceptions}</td><td>${r.status}</td></tr>`).join("")}</table>`:`<h3>${t}</h3><table><tr><th>Branch</th><th>Submissions</th><th>Pending</th><th>Returned</th><th>Approved / Published</th><th>Exception flags</th></tr>${branches.filter(x=>b==="All"||x===b).map(x=>{let a=rows.filter(r=>r.branch===x);return `<tr><td>${x}</td><td>${a.length}</td><td>${a.filter(r=>r.status==="Pending HO Review").length}</td><td>${a.filter(r=>r.status==="Returned").length}</td><td>${a.filter(r=>["Approved","Published"].includes(r.status)).length}</td><td>${a.reduce((n,r)=>n+r.exceptions,0)}</td></tr>`}).join("")}</table>`;document.getElementById("reportOutput").innerHTML=out}
+function downloadCSV(){let rows=[["Branch","Period","Roster ID","Submitted By","Coverage","Exceptions","Status","Version"],...rosters.map(r=>[r.branch,r.period,r.id,r.by,r.coverage,r.exceptions,r.status,r.version])];let csv=rows.map(r=>r.map(v=>'"'+String(v).replaceAll('"','""')+'"').join(",")).join("\\n");let a=document.createElement("a");a.href=URL.createObjectURL(new Blob([csv],{type:"text/csv"}));a.download="ILVORA_Head_Office_Roster_Report.csv";a.click();URL.revokeObjectURL(a.href)}
+function renderHistory(){document.getElementById("historyList").innerHTML=history.map(h=>`<div><b>${h[0]} · ${h[1]}</b><br>${h[2]}<br><span class="small">${h[3]}</span></div>`).join("")}
+function savePrintRegister(){let ref=document.getElementById("printRef").value.trim(),by=document.getElementById("printBy").value.trim();if(!ref||!by){document.getElementById("printMessage").textContent="Enter a print reference and printed-by / filing-location details.";return}document.getElementById("printMessage").textContent=`Demo register entry recorded: ${ref} · ${by} · ${new Date().toLocaleString()}. Production must persist page count, report version and secure filing location.`}
+renderQueue();renderHistory();
+</script>
+</body></html>
