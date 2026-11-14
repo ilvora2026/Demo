@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ILVORA Workforce | Employee Advances & Loans</title>
+<style>
+:root{--navy:#10283f;--teal:#167c80;--gold:#c7a66a;--bg:#f3f6f8;--ink:#243746;--muted:#6b7c88;--line:#dce4e9;--white:#fff}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);font:14px/1.45 Arial,sans-serif;color:var(--ink)}
+header{background:var(--navy);color:#fff;padding:20px 26px;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+.brand{font-size:19px;font-weight:700;letter-spacing:.5px}.brand span{color:#d9bd88}.sub{color:#d4e0e8;font-size:12px;margin-top:3px}
+.role{background:#1b405b;border:1px solid #45637a;border-radius:20px;padding:8px 13px;font-size:12px}
+main{max-width:1250px;margin:24px auto;padding:0 18px}
+.notice{background:#fff8e9;border:1px solid #ead7ad;border-left:4px solid var(--gold);padding:12px 15px;border-radius:8px;margin-bottom:18px}
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:18px}
+.stat,.panel{background:white;border:1px solid var(--line);border-radius:10px;padding:16px}
+.stat small{color:var(--muted)}.stat strong{display:block;font-size:24px;margin-top:7px;color:var(--navy)}
+.layout{display:grid;grid-template-columns:1.25fr .75fr;gap:16px}.panel h2{font-size:16px;margin:0 0 14px;color:var(--navy)}
+.toolbar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+input,select,textarea{font:inherit;border:1px solid #cbd6dd;border-radius:6px;padding:9px;background:#fff;color:var(--ink);min-width:0}
+input,select{max-width:100%}textarea{width:100%;min-height:70px}
+button{border:0;border-radius:6px;padding:9px 13px;background:var(--teal);color:white;font-weight:600;cursor:pointer}
+button.secondary{background:#eaf0f3;color:var(--navy)}button.gold{background:#9a773e}button.danger{background:#a44444}
+table{width:100%;border-collapse:collapse;font-size:12px}th,td{text-align:left;padding:10px 8px;border-bottom:1px solid var(--line);vertical-align:top}th{color:var(--muted);font-weight:700;background:#f8fafb}
+.pill{display:inline-block;border-radius:20px;padding:3px 8px;font-size:11px;background:#edf2f5;color:#435767}.pending{background:#fff3d9;color:#805d1d}.approved{background:#e4f4ed;color:#216548}.rejected{background:#fae9e9;color:#8b3434}
+.field{display:grid;grid-template-columns:1fr 1fr;gap:10px}.field label{display:flex;flex-direction:column;gap:5px;color:#526573;font-size:12px;margin-bottom:10px}
+.full{grid-column:1/-1}.rule{background:#f4f8f8;border:1px solid #d7e7e6;padding:12px;border-radius:8px;margin:10px 0;font-size:13px}
+.result{font-weight:700;margin-top:8px}.muted{color:var(--muted)}.actions{display:flex;gap:6px;flex-wrap:wrap}
+.small{font-size:11px;color:var(--muted)}.hidden{display:none}
+@media(max-width:850px){.stats{grid-template-columns:repeat(2,1fr)}.layout{grid-template-columns:1fr}}@media(max-width:520px){.field{grid-template-columns:1fr}.stats{grid-template-columns:1fr 1fr}main{padding:0 10px}}
+</style></head>
+<body>
+<header><div><div class="brand">ILVORA <span>WORKFORCE</span></div><div class="sub">Administrator Panel · Employee Advances & Loan Management</div></div><div class="role">DEMO ROLE: ADMINISTRATOR</div></header>
+<main>
+<div class="notice"><b>Approval policy:</b> Administrator may approve an advance up to and including <b>25% of the employee’s monthly salary</b>. Any amount above 25% requires approval by the <b>Managing Director only</b>. Branch Admin/HR may verify and recommend, but cannot approve or disburse.</div>
+<section class="stats">
+<div class="stat"><small>Applications received</small><strong id="count">04</strong></div>
+<div class="stat"><small>Awaiting Administrator</small><strong id="adminCount">02</strong></div>
+<div class="stat"><small>MD approval required</small><strong id="mdCount">01</strong></div>
+<div class="stat"><small>Total outstanding</small><strong>₹ 1,42,000</strong></div>
+</section>
+<div class="layout">
+<section class="panel">
+<h2>Advance / Loan Application Register</h2>
+<div class="toolbar"><input id="search" placeholder="Search Employee ID / name"><select id="filter"><option value="">All statuses</option><option>Pending Admin</option><option>Pending MD</option><option>Approved</option><option>Rejected</option></select><button class="secondary" onclick="render()">Filter</button></div>
+<div style="overflow-x:auto"><table><thead><tr><th>Employee</th><th>Monthly salary</th><th>Requested</th><th>Salary %</th><th>Approval route</th><th>Status</th><th>Action</th></tr></thead><tbody id="rows"></tbody></table></div>
+<p class="small">Illustrative records only. Use fictional data in this prototype.</p>
+</section>
+<section class="panel">
+<h2>Record New Application</h2>
+<div class="field">
+<label>Employee ID<input id="emp" placeholder="e.g. ILV-NH-014"></label>
+<label>Employee name<input id="name" placeholder="Employee name"></label>
+<label>Branch<select id="branch"><option>Head Office – Kochi</option><option>Neelambari Hospital – Thamarakulam</option><option>ILVORA Health Clinic – Kottarakkara</option></select></label>
+<label>Monthly salary (₹)<input id="salary" type="number" min="1" placeholder="25000" oninput="calc()"></label>
+<label>Requested amount (₹)<input id="amount" type="number" min="1" placeholder="5000" oninput="calc()"></label>
+<label>Repayment duration<select id="months"><option>1 month</option><option>2 months</option><option>3 months</option><option>4 months</option><option>5 months</option><option>6 months</option><option>12 months</option></select></label>
+<label class="full">Purpose<textarea id="purpose" placeholder="Reason for advance / loan"></textarea></label>
+</div>
+<div class="rule"><b>Automatic approval routing</b><div id="calcText" class="result">Enter salary and requested amount to calculate route.</div><div class="small">25% threshold is calculated against the employee’s current fixed monthly salary.</div></div>
+<button onclick="add()">Add application</button>
+</section>
+</div>
+<section class="panel" style="margin-top:16px">
+<h2>Approval & Repayment Controls</h2>
+<div class="field">
+<div><b>Administrator authority</b><p class="muted">May approve requests at or below 25% of the employee’s monthly salary, after eligibility and outstanding-balance checks.</p></div>
+<div><b>Managing Director authority</b><p class="muted">Sole approval authority for requests above 25%. Administrator cannot override or approve these requests.</p></div>
+<div><b>Branch Admin / HR</b><p class="muted">May verify employment details, salary record reference and prior advances, then recommend. No approval or disbursement rights.</p></div>
+<div><b>Repayment tracking</b><p class="muted">Record approved amount, disbursement date, instalment amount, deductions, paid instalments and outstanding balance. Payroll deduction starts only after approval and recorded disbursement.</p></div>
+</div>
+<div class="rule"><b>Mandatory controls:</b> employee application and consent; eligibility check; outstanding advance check; approval by the correct authority; recorded disbursement; repayment schedule; employee-visible balance; audit trail. Do not deduct from salary without documented authorisation and applicable legal review.</div>
+</section>
+</main>
+<script>
+let items=[
+{id:'ADV-2026-001',emp:'ILV-NH-014',name:'Demo Employee A',branch:'Neelambari Hospital',salary:30000,amount:6000,route:'Administrator',status:'Pending Admin',purpose:'Medical expense',months:3},
+{id:'ADV-2026-002',emp:'ILV-KK-008',name:'Demo Employee B',branch:'ILVORA Health Clinic',salary:24000,amount:8000,route:'Managing Director',status:'Pending MD',purpose:'Family emergency',months:4},
+{id:'ADV-2026-003',emp:'ILV-HO-003',name:'Demo Employee C',branch:'Head Office',salary:40000,amount:9000,route:'Administrator',status:'Approved',purpose:'Travel',months:3},
+{id:'ADV-2026-004',emp:'ILV-NH-021',name:'Demo Employee D',branch:'Neelambari Hospital',salary:28000,amount:5000,route:'Administrator',status:'Rejected',purpose:'Personal',months:2}
+];
+function routeFor(s,a){return a/s*100<=25?'Administrator':'Managing Director'}
+function calc(){let s=+salary.value,a=+amount.value;if(s>0&&a>0){let p=a/s*100;calcText.textContent=`${p.toFixed(1)}% of monthly salary — ${p<=25?'Administrator approval permitted':'Managing Director approval required (only)'}.`}else calcText.textContent='Enter salary and requested amount to calculate route.'}
+function render(){let q=search.value.toLowerCase(),f=filter.value;rows.innerHTML='';items.filter(x=>(!q||(x.emp+x.name).toLowerCase().includes(q))&&(!f||x.status===f)).forEach(x=>{let tr=document.createElement('tr');let cls=x.status==='Approved'?'approved':x.status==='Rejected'?'rejected':'pending';tr.innerHTML=`<td><b>${x.emp}</b><br>${x.name}<br><span class="small">${x.branch}</span></td><td>₹${x.salary.toLocaleString('en-IN')}</td><td>₹${x.amount.toLocaleString('en-IN')}</td><td>${(x.amount/x.salary*100).toFixed(1)}%</td><td>${x.route}</td><td><span class="pill ${cls}">${x.status}</span></td><td><div class="actions">${x.status.startsWith('Pending')?`<button onclick="decide('${x.id}','Approved')">Approve</button><button class="danger" onclick="decide('${x.id}','Rejected')">Reject</button>`:'—'}</div></td>`;rows.appendChild(tr)});count.textContent=String(items.length).padStart(2,'0');adminCount.textContent=items.filter(x=>x.status==='Pending Admin').length;mdCount.textContent=items.filter(x=>x.status==='Pending MD').length}
+function add(){let e=emp.value.trim(),n=name.value.trim(),s=+salary.value,a=+amount.value;if(!e||!n||s<=0||a<=0||!purpose.value.trim()){alert('Please complete all required fields.');return}let route=routeFor(s,a);items.unshift({id:'ADV-'+Date.now(),emp:e,name:n,branch:branch.value,salary:s,amount:a,route,status:route==='Administrator'?'Pending Admin':'Pending MD',purpose:purpose.value,months:months.value});emp.value=name.value=salary.value=amount.value=purpose.value='';calc();render();alert('Application added. Approval route assigned according to the 25% policy.')}
+function decide(id,status){let x=items.find(i=>i.id===id);if(!x)return;if(x.route==='Managing Director'){alert('This request is above 25% of monthly salary. Only the Managing Director can approve or reject it. Administrator action is not permitted.');return}if(!confirm(`${status} ${x.emp} request? (Demo only)`))return;x.status=status;render()}
+render();
+</script>
+</body></html>
