@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ILVORA Workforce | Attendance Management</title>
+<style>
+:root{--navy:#10243a;--teal:#168b88;--gold:#c9a96e;--bg:#f3f6f8;--ink:#203244;--muted:#718096;--line:#e3eaf0;--red:#b94a48;--amber:#946c1d;--green:#28734f}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);font:14px/1.5 Inter,Segoe UI,Arial,sans-serif;color:var(--ink)}
+header{background:var(--navy);color:#fff;padding:17px max(18px,calc((100% - 1200px)/2));display:flex;justify-content:space-between;align-items:center;gap:15px}
+.brand{font-weight:850;letter-spacing:.08em}.brand span{color:var(--gold)}.brand small{display:block;color:#b8c8d5;font-weight:400;letter-spacing:0;margin-top:2px;font-size:11px}
+.user{font-size:12px;text-align:right;color:#dbe5ed}.user b{display:block;color:white;font-size:13px}
+main{max-width:1200px;margin:24px auto;padding:0 18px}.head{display:flex;justify-content:space-between;align-items:flex-start;gap:14px;flex-wrap:wrap}
+h1{margin:0;color:var(--navy);font-size:25px}.sub{color:var(--muted);margin:5px 0 0}.branch{background:#e5f3f2;color:#126c69;border:1px solid #c8e4e1;border-radius:10px;padding:9px 12px;font-weight:700;font-size:12px}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:18px 0}
+.card,.panel{background:white;border:1px solid var(--line);border-radius:14px}
+.kpi{padding:15px}.kpi .label{font-size:12px;color:var(--muted)}.kpi strong{display:block;color:var(--navy);font-size:27px;margin:3px 0}.kpi small{color:var(--muted);font-size:11px}
+.tabs{display:flex;gap:7px;flex-wrap:wrap;margin:18px 0}.tabs button{border:1px solid var(--line);background:#fff;border-radius:9px;padding:9px 12px;cursor:pointer;font-weight:700;color:var(--ink);font-size:12px}.tabs button.active{background:var(--navy);color:#fff;border-color:var(--navy)}
+.panel{padding:17px;margin-bottom:14px}.panel h2{margin:0 0 13px;color:var(--navy);font-size:17px}.panel h3{font-size:14px;color:var(--navy);margin:18px 0 8px}
+.hidden{display:none!important}.grid2{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.field{display:flex;flex-direction:column;gap:5px}.field label{font-size:11px;font-weight:750;color:#526477}.field input,.field select,.field textarea{border:1px solid #d7e0e8;border-radius:8px;padding:10px;font:inherit;font-size:12px;background:white;color:var(--ink)}.field textarea{min-height:75px;resize:vertical}
+.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:13px}.btn{border:1px solid var(--line);background:#fff;padding:9px 12px;border-radius:8px;cursor:pointer;font-weight:700;font-size:11px;color:var(--ink)}.btn.primary{background:var(--teal);border-color:var(--teal);color:#fff}.btn.dark{background:var(--navy);border-color:var(--navy);color:#fff}.btn:disabled{opacity:.45;cursor:not-allowed}
+.badge{font-size:10px;font-weight:750;border-radius:20px;padding:4px 8px;background:#edf2f7;color:#526477;display:inline-block}.badge.warn{background:#fff4dc;color:var(--amber)}.badge.red{background:#fdebea;color:var(--red)}.badge.green{background:#e5f4eb;color:var(--green)}
+.notice{background:#f2f9f8;border:1px solid #d0e8e5;border-radius:10px;padding:12px;color:#315e5c;font-size:12px;margin:10px 0}
+.warning{background:#fff8e9;border:1px solid #f0dfb7;border-radius:10px;padding:12px;color:#755b21;font-size:12px;margin:10px 0}
+.tablewrap{overflow-x:auto}table{width:100%;border-collapse:collapse}th,td{text-align:left;padding:10px 8px;border-bottom:1px solid var(--line);font-size:11px;white-space:nowrap}th{color:var(--muted);font-weight:750}
+.row{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}.muted{color:var(--muted);font-size:11px}.result{padding:12px;background:#f7fafb;border:1px solid var(--line);border-radius:10px;margin-top:12px;font-size:12px}
+.footer{margin:16px 0;color:var(--muted);font-size:11px}
+@media(max-width:850px){.grid{grid-template-columns:repeat(2,1fr)}}@media(max-width:600px){.grid{grid-template-columns:1fr 1fr}.grid2{grid-template-columns:1fr}header{align-items:flex-start}.user{max-width:45%}}
+</style></head>
+<body>
+<header><div class="brand">ILVORA <span>WORKFORCE</span><small>WHERE CARE BECOMES CONFIDENCE.</small></div><div class="user"><b>Branch Admin / HR</b>Attendance Management · Demo</div></header>
+<main>
+<div class="head"><div><h1>Attendance Management</h1><p class="sub">Monitor branch attendance, operate authorised attendance marking, review exceptions and submit correction requests.</p></div><div class="branch">Branch: Neelambari Hospital – Thamarakulam</div></div>
+<div class="grid">
+<div class="card kpi"><div class="label">Employees assigned</div><strong>86</strong><small>Illustrative branch data</small></div>
+<div class="card kpi"><div class="label">Present today</div><strong>64</strong><small>74% of assigned staff</small></div>
+<div class="card kpi"><div class="label">Attendance exceptions</div><strong>7</strong><small>Late, missed punch or early checkout</small></div>
+<div class="card kpi"><div class="label">Correction requests</div><strong>3</strong><small>Awaiting Branch Admin review</small></div>
+</div>
+<div class="tabs">
+<button class="active" data-tab="overview">Overview</button>
+<button data-tab="register">Daily Register</button>
+<button data-tab="marker">Attendance Marker / Kiosk</button>
+<button data-tab="exceptions">Exceptions & Review</button>
+<button data-tab="corrections">Correction Requests</button>
+<button data-tab="reports">Reports & Closure</button>
+<button data-tab="retention">Retention & Notifications</button>
+</div>
+
+<section class="panel" id="overview">
+<div class="row"><h2>Branch attendance overview</h2><span class="badge green">Branch-scoped access</span></div>
+<div class="grid2">
+<div><h3>Today's attendance status</h3><div class="tablewrap"><table><tr><th>Status</th><th>Employees</th><th>Action</th></tr><tr><td>Present</td><td>64</td><td>View register</td></tr><tr><td>On leave</td><td>8</td><td>View leave</td></tr><tr><td>Absent / no punch</td><td>7</td><td>Review exception</td></tr><tr><td>Weekly off / roster off</td><td>7</td><td>View roster</td></tr></table></div></div>
+<div><h3>Action required</h3><div class="result"><b>3</b> employee attendance correction requests need review.</div><div class="result"><b>2</b> missed check-out punches need investigation.</div><div class="result"><b>2</b> late-arrival exceptions need roster validation.</div><div class="result"><b>1</b> kiosk/device sync warning needs attention.</div></div>
+</div>
+<div class="notice">Branch Admin/HR can review attendance for their own branch, investigate exceptions and submit formal correction requests to Head Office. Verified punches cannot be directly edited at branch level.</div>
+</section>
+
+<section class="panel hidden" id="register">
+<div class="row"><h2>Daily attendance register</h2><span class="badge">Sample records</span></div>
+<div class="grid2">
+<div class="field"><label>Attendance date</label><input type="date" id="registerDate" value="2026-11-14"></div>
+<div class="field"><label>Department</label><select id="department"><option>All departments</option><option>Emergency</option><option>Nursing</option><option>Pharmacy</option><option>Administration</option><option>Housekeeping</option></select></div>
+</div>
+<div class="tablewrap" style="margin-top:12px"><table id="attendanceTable">
+<thead><tr><th>Employee ID</th><th>Employee</th><th>Department</th><th>Shift</th><th>Check-in</th><th>Check-out</th><th>Status</th></tr></thead>
+<tbody>
+<tr data-dept="Emergency"><td>ILV-NH-014</td><td>Arun K.</td><td>Emergency</td><td>08:00–16:00</td><td>07:57</td><td>16:04</td><td><span class="badge green">Present</span></td></tr>
+<tr data-dept="Nursing"><td>ILV-NH-021</td><td>Meera S.</td><td>Nursing</td><td>08:00–16:00</td><td>08:13</td><td>16:02</td><td><span class="badge warn">Late arrival</span></td></tr>
+<tr data-dept="Pharmacy"><td>ILV-NH-032</td><td>Faisal P.</td><td>Pharmacy</td><td>16:00–22:00</td><td>15:58</td><td>—</td><td><span class="badge red">Missed checkout</span></td></tr>
+<tr data-dept="Administration"><td>ILV-NH-040</td><td>Divya R.</td><td>Administration</td><td>09:00–17:00</td><td>08:59</td><td>17:01</td><td><span class="badge green">Present</span></td></tr>
+<tr data-dept="Housekeeping"><td>ILV-NH-055</td><td>Rajan M.</td><td>Housekeeping</td><td>08:00–16:00</td><td>—</td><td>—</td><td><span class="badge red">No punch</span></td></tr>
+</tbody></table></div>
+<div class="actions"><button class="btn" onclick="window.print()">Print current register</button><button class="btn" id="csvBtn">Download CSV</button></div>
+<p class="muted">Demo records only. Production register must be generated from verified server-side punches and approved roster data.</p>
+</section>
+
+<section class="panel hidden" id="marker">
+<div class="row"><h2>Attendance Marker / Kiosk</h2><span class="badge green">Integrated permission</span></div>
+<div class="notice"><b>Attendance Operator permission:</b> authorised marker can assist check-in/check-out and verify employee identity. This does not grant HR access or permission to edit punches, approve corrections or manage employee records.</div>
+<div class="grid2">
+<div class="field"><label>Attendance Operator</label><select id="operator"><option>Authorised Kiosk Operator – Demo</option><option>Branch Admin with Attendance Operator permission</option></select></div>
+<div class="field"><label>Employee ID</label><input id="markerEmployee" placeholder="Enter / scan employee ID"></div>
+<div class="field"><label>Verification method</label><select id="verifyMethod"><option>Rotating QR code</option><option>OTP on registered mobile</option><option>Face verification</option><option>GPS + QR verification</option></select></div>
+<div class="field"><label>Punch action</label><select id="punchType"><option>Check-in</option><option>Check-out</option></select></div>
+</div>
+<div class="actions"><button class="btn primary" id="markPunch">Verify and mark attendance (demo)</button><button class="btn" id="markerReset">Clear</button></div>
+<div id="markerResult" class="result hidden"></div>
+<div class="warning">QR, OTP, face verification and GPS are shown as workflow options only. This prototype does not access a camera, GPS, send OTPs, validate a live rotating QR code or write to a production attendance database.</div>
+<h3>Marker permissions</h3>
+<ul><li>Can assist with employee check-in/check-out using approved verification methods.</li><li>Can view punch confirmation for the current transaction.</li><li>Cannot edit or delete punches, approve corrections, view bank/payroll data or access unrelated HR records.</li><li>Any correction must follow the Branch Admin/HR → Head Office approval workflow.</li></ul>
+</section>
+
+<section class="panel hidden" id="exceptions">
+<div class="row"><h2>Attendance exceptions & review</h2><span class="badge warn">Requires review</span></div>
+<div class="tablewrap"><table><thead><tr><th>Employee</th><th>Issue</th><th>Shift</th><th>Recorded detail</th><th>Review status</th></tr></thead><tbody>
+<tr><td>ILV-NH-021 · Meera S.</td><td>Late arrival</td><td>08:00–16:00</td><td>Check-in 08:13</td><td><span class="badge warn">Review roster</span></td></tr>
+<tr><td>ILV-NH-032 · Faisal P.</td><td>Missed checkout</td><td>16:00–22:00</td><td>Check-in 15:58</td><td><span class="badge red">Pending review</span></td></tr>
+<tr><td>ILV-NH-055 · Rajan M.</td><td>No punch</td><td>08:00–16:00</td><td>No check-in / check-out</td><td><span class="badge red">Pending review</span></td></tr>
+<tr><td>ILV-NH-061 · Nisha V.</td><td>Early checkout</td><td>08:00–16:00</td><td>Check-out 15:32</td><td><span class="badge warn">Review reason</span></td></tr>
+</tbody></table></div>
+<div class="grid2" style="margin-top:14px">
+<div class="field"><label>Employee ID to review</label><input id="reviewId" placeholder="Employee ID"></div>
+<div class="field"><label>Review outcome</label><select id="reviewOutcome"><option>Verified – no correction required</option><option>Employee explanation requested</option><option>Submit formal correction to Head Office</option><option>Roster / leave mismatch – investigate</option></select></div>
+<div class="field" style="grid-column:1/-1"><label>Review notes</label><textarea id="reviewNotes" placeholder="Record evidence checked and findings"></textarea></div>
+</div>
+<div class="actions"><button class="btn primary" id="saveReview">Save review note</button></div>
+<div id="reviewResult" class="result hidden"></div>
+<p class="muted">Review notes do not change the original punch. Formal correction requires a separate request and Head Office decision.</p>
+</section>
+
+<section class="panel hidden" id="corrections">
+<div class="row"><h2>Attendance correction requests</h2><span class="badge">Head Office approval required</span></div>
+<div class="notice">Employee reports a discrepancy → Branch Admin/HR verifies evidence and submits formal request → Head Office approves, rejects or returns it. No attendance record changes before Head Office approval.</div>
+<div class="tablewrap"><table><thead><tr><th>Request ID</th><th>Employee</th><th>Date</th><th>Requested change</th><th>Status</th></tr></thead><tbody id="correctionRows">
+<tr><td>ACR-2026-011</td><td>ILV-NH-021</td><td>12 Nov 2026</td><td>Check-in 08:13 → 08:00</td><td><span class="badge warn">Branch review</span></td></tr>
+<tr><td>ACR-2026-012</td><td>ILV-NH-032</td><td>13 Nov 2026</td><td>Add missing checkout</td><td><span class="badge warn">Branch review</span></td></tr>
+<tr><td>ACR-2026-013</td><td>ILV-NH-055</td><td>13 Nov 2026</td><td>Missing check-in/out</td><td><span class="badge">Submitted to HO</span></td></tr>
+</tbody></table></div>
+<h3>Submit formal correction to Head Office</h3>
+<div class="grid2">
+<div class="field"><label>Employee ID *</label><input id="corrEmp" placeholder="Employee ID"></div>
+<div class="field"><label>Attendance date *</label><input id="corrDate" type="date"></div>
+<div class="field"><label>Existing recorded punch *</label><input id="corrCurrent" placeholder="e.g. Check-in 08:13 / missing checkout"></div>
+<div class="field"><label>Requested correction *</label><input id="corrRequested" placeholder="e.g. Check-in 08:00"></div>
+<div class="field"><label>Evidence reference</label><input id="corrEvidence" placeholder="Document / roster / supervisor statement ref"></div>
+<div class="field"><label>Reason *</label><input id="corrReason" placeholder="Reason for requested correction"></div>
+</div>
+<div class="actions"><button class="btn primary" id="submitCorrection">Submit to Head Office</button></div>
+<div id="corrResult" class="result hidden"></div>
+<div class="warning">Branch Admin/HR may submit but cannot approve the correction. Attendance Marker cannot submit a formal correction. The requester cannot approve their own request. If payroll has closed, an approved change must trigger a payroll adjustment, not a silent historical edit.</div>
+<h3>Head Office decision (read-only at this role)</h3>
+<p class="muted">Head Office Admin reviews the original punch, request, evidence and audit trail, then approves, rejects or returns the request. On approval, the system updates attendance while preserving the original punch and notifies the employee and Branch Admin/HR.</p>
+</section>
+
+<section class="panel hidden" id="reports">
+<h2>Attendance reports & period closure</h2>
+<div class="grid2">
+<div class="field"><label>Reporting period</label><select><option>Current payroll cycle</option><option>Previous payroll cycle</option><option>Current month</option></select></div>
+<div class="field"><label>Report</label><select><option>Daily attendance summary</option><option>Employee-wise attendance</option><option>Late arrival / early checkout</option><option>Missing punches</option><option>Correction audit report</option></select></div>
+</div>
+<div class="actions"><button class="btn primary" id="generateReport">Generate report (demo)</button><button class="btn" onclick="window.print()">Print report</button></div>
+<div id="reportResult" class="result hidden"></div>
+<h3>Payroll attendance closure</h3>
+<div class="notice">Attendance register closes after the 20th of the month as per the configured payroll cycle. Branch Admin/HR reviews and submits branch exceptions before closure. Corrections approved after payroll closure must be handled as payroll adjustments.</div>
+<ul><li>Branch Admin/HR reviews branch attendance and unresolved exceptions.</li><li>Submit formal correction requests to Head Office before final closure where possible.</li><li>Preserve attendance summaries, approvals and audit evidence in accordance with the retention schedule.</li><li>Printing and physical filing must be recorded in the print/filing register.</li></ul>
+</section>
+
+<section class="panel hidden" id="retention">
+<div class="row"><h2>Attendance Record Retention & Due-Date Notifications</h2><span class="badge warn">Monthly controls</span></div>
+<div class="notice"><b>Policy:</b> For each attendance month, the detailed attendance register must be printed by the 15th of the following month. The detailed digital report is scheduled for deletion after the 21st of the following month. A brief attendance summary is retained for 3 years and then automatically deleted, subject to legal holds and approved retention requirements.</div>
+<div class="grid">
+<div class="card kpi"><div class="label">Print detailed register by</div><strong>15th</strong><small>Following month</small></div>
+<div class="card kpi"><div class="label">Detailed report deletion</div><strong>After 21st</strong><small>Following month</small></div>
+<div class="card kpi"><div class="label">Brief summary retention</div><strong>3 years</strong><small>From summary creation / period close</small></div>
+<div class="card kpi"><div class="label">Reminder lead time</div><strong>5 days</strong><small>Before each due date</small></div>
+</div>
+<h3>Monthly record schedule</h3>
+<div class="tablewrap"><table><thead><tr><th>Attendance period</th><th>Print deadline</th><th>Print reminders begin</th><th>Detailed digital deletion</th><th>Deletion reminders begin</th><th>Brief summary deletion</th></tr></thead><tbody id="retentionRows">
+<tr><td>October 2026</td><td>15 Nov 2026</td><td>10 Nov 2026</td><td>After 21 Nov 2026</td><td>16 Nov 2026</td><td>3 years after summary creation</td></tr>
+<tr><td>November 2026</td><td>15 Dec 2026</td><td>10 Dec 2026</td><td>After 21 Dec 2026</td><td>16 Dec 2026</td><td>3 years after summary creation</td></tr>
+</tbody></table></div>
+<h3>Notification rules</h3>
+<ul>
+<li>Print reminder starts 5 calendar days before the 15th deadline (from the 10th) and continues until the print/filing register confirms completion.</li>
+<li>Detailed-report deletion reminder starts 5 calendar days before the 21st (from the 16th) and continues until deletion is completed or an authorised hold is recorded.</li>
+<li>Brief-summary expiry reminders start 5 days before its individual 3-year expiry date.</li>
+<li>Notify the responsible Branch Admin/HR and Head Office records custodian. Escalate overdue printing or deletion to Head Office.</li>
+<li>Notifications must show attendance month, due date, action required and current completion/hold status.</li>
+</ul>
+<h3>Monthly record processing</h3>
+<div class="grid2">
+<div class="field"><label>Attendance month</label><input id="retentionMonth" type="month" value="2026-10"></div>
+<div class="field"><label>Physical print / filing status</label><select id="printStatus"><option value="pending">Pending</option><option value="printed">Printed and filed</option></select></div>
+<div class="field"><label>Print / filing register reference</label><input id="printRef" placeholder="Register / file reference"></div>
+<div class="field"><label>Detailed report deletion status</label><select id="deletionStatus"><option value="scheduled">Scheduled – after 21st</option><option value="deleted">Deleted after due date</option><option value="hold">Legal hold / audit hold</option></select></div>
+<div class="field"><label>Brief summary status</label><select id="summaryStatus"><option>Retained – 3-year period</option><option>Expiry due – review</option><option>Deleted after 3 years</option><option>Legal hold / audit hold</option></select></div>
+<div class="field"><label>Notes / hold reference</label><input id="retentionNotes" placeholder="Reason and authorised reference, if applicable"></div>
+</div>
+<div class="actions"><button class="btn primary" id="saveRetention">Save monthly record status</button><button class="btn" id="previewReminders">Preview reminders</button></div>
+<div id="retentionResult" class="result hidden"></div>
+<div id="reminderPreview" class="result hidden"></div>
+<div class="warning"><b>Legal hold safeguard:</b> Automatic deletion must pause for litigation, investigation, audit, regulatory requirement or other authorised legal hold. A retention rule must never delete a record while a valid hold is active. The physical printed register follows its separately approved physical-record retention and secure-destruction schedule; the 3-year brief-summary rule does not automatically apply to printed detailed records.</div>
+<p class="muted">Prototype only: reminders and deletion dates are displayed as policy workflows. This page does not send notifications or delete production records. Production needs server-side scheduled jobs, notification delivery, deletion logs, legal-hold controls and verified print/filing confirmation.</p>
+</section>
+
+<p class="footer">ILVORA Workforce · Branch Admin / HR · Service 3 prototype v1 · Sample data only</p>
+</main>
+<script>
+const $=id=>document.getElementById(id);
+document.querySelectorAll('.tabs button').forEach(b=>b.onclick=()=>{
+ document.querySelectorAll('.tabs button').forEach(x=>x.classList.toggle('active',x===b));
+ ['overview','register','marker','exceptions','corrections','reports','retention'].forEach(id=>$(id).classList.toggle('hidden',id!==b.dataset.tab));
+});
+$('department').onchange=()=>{
+ const d=$('department').value;
+ document.querySelectorAll('#attendanceTable tbody tr').forEach(r=>r.style.display=(d==='All departments'||r.dataset.dept===d)?'':'none');
+};
+$('markPunch').onclick=()=>{
+ const id=$('markerEmployee').value.trim();
+ if(!id)return alert('Enter or scan an Employee ID.');
+ const method=$('verifyMethod').value, action=$('punchType').value;
+ $('markerResult').innerHTML=`<b>Demo punch recorded for ${id}</b><p>Action: ${action}</p><p>Verification selected: ${method}</p><p>Time: ${new Date().toLocaleString()}</p><span class="badge warn">Simulated only – not stored in a live attendance system</span>`;
+ $('markerResult').classList.remove('hidden');
+};
+$('markerReset').onclick=()=>{$('markerEmployee').value='';$('markerResult').classList.add('hidden');};
+$('saveReview').onclick=()=>{
+ if(!$('reviewId').value.trim())return alert('Enter an Employee ID.');
+ $('reviewResult').textContent=`Review note saved (demo) for ${$('reviewId').value}: ${$('reviewOutcome').value}. Original attendance punches remain unchanged.`;
+ $('reviewResult').classList.remove('hidden');
+};
+$('submitCorrection').onclick=()=>{
+ const ids=['corrEmp','corrDate','corrCurrent','corrRequested','corrReason'];
+ if(ids.some(id=>!$(id).value.trim()))return alert('Complete all mandatory correction fields.');
+ const requestId='ACR-DEMO-'+String(Date.now()).slice(-5);
+ const tr=document.createElement('tr');
+ [requestId,$('corrEmp').value,$('corrDate').value,$('corrRequested').value,'Submitted to HO'].forEach((v,i)=>{
+  const td=document.createElement('td');td.textContent=v;
+  if(i===4){const s=document.createElement('span');s.className='badge';s.textContent=v;td.textContent='';td.appendChild(s);}
+  tr.appendChild(td);
+ });
+ $('correctionRows').appendChild(tr);
+ $('corrResult').textContent=`${requestId} submitted to Head Office for review. The original attendance record has not been changed.`;
+ $('corrResult').classList.remove('hidden');
+};
+$('generateReport').onclick=()=>{
+ $('reportResult').textContent='Demo report generated: 86 assigned employees; 64 present; 8 on leave; 7 absent/no punch; 7 roster off. Export/print data will be generated from verified records in production.';
+ $('reportResult').classList.remove('hidden');
+};
+$('csvBtn').onclick=()=>{
+ const rows=[...document.querySelectorAll('#attendanceTable tr')].filter(r=>r.style.display!=='none').map(r=>[...r.children].map(c=>'"'+c.innerText.replace(/"/g,'""')+'"').join(','));
+ const blob=new Blob([rows.join('\n')],{type:'text/csv'}),url=URL.createObjectURL(blob),a=document.createElement('a');
+ a.href=url;a.download='ilvora-attendance-register-demo.csv';a.click();URL.revokeObjectURL(url);
+};
+
+const retentionMonthEl=$('retentionMonth');
+const fmtDate=d=>d.toLocaleDateString('en-GB',{day:'2-digit',month:'short',year:'numeric'});
+function retentionDates(monthValue){
+ const [y,m]=monthValue.split('-').map(Number);
+ const nextMonth=new Date(y,m,1);
+ const printDue=new Date(y,m,15);
+ const printStart=new Date(y,m,10);
+ const deleteDue=new Date(y,m,21);
+ const deleteStart=new Date(y,m,16);
+ const summaryExpiry=new Date(y+3,m,1);
+ const summaryReminder=new Date(summaryExpiry);summaryReminder.setDate(summaryExpiry.getDate()-5);
+ return {period:new Date(y,m-1,1),printDue,printStart,deleteDue,deleteStart,summaryExpiry,summaryReminder};
+}
+$('saveRetention').onclick=()=>{
+ const d=retentionDates(retentionMonthEl.value);
+ const status=$('printStatus').value;
+ if(status==='printed'&&!$('printRef').value.trim())return alert('Enter the physical print / filing register reference.');
+ $('retentionResult').innerHTML=`<b>Monthly record status saved (demo)</b><p>Attendance period: ${d.period.toLocaleDateString('en-GB',{month:'long',year:'numeric'})}</p><p>Physical print: ${status==='printed'?'Printed and filed':'Pending'} · Reference: ${$('printRef').value||'Not recorded'}</p><p>Detailed report: ${$('deletionStatus').selectedOptions[0].text}</p><p>Brief summary: ${$('summaryStatus').value}</p><p>Notes / hold: ${$('retentionNotes').value||'None recorded'}</p>`;
+ $('retentionResult').classList.remove('hidden');
+};
+$('previewReminders').onclick=()=>{
+ const d=retentionDates(retentionMonthEl.value);
+ $('reminderPreview').innerHTML=`<b>Reminder schedule for ${d.period.toLocaleDateString('en-GB',{month:'long',year:'numeric'})}</b><ul><li><b>${fmtDate(d.printStart)}:</b> start reminders to print and physically file the detailed attendance register by ${fmtDate(d.printDue)}.</li><li><b>${fmtDate(d.deleteStart)}:</b> start reminders that the detailed digital report is due for deletion after ${fmtDate(d.deleteDue)}.</li><li><b>${fmtDate(d.summaryReminder)}:</b> reminder for the brief summary’s 3-year expiry on ${fmtDate(d.summaryExpiry)}.</li></ul><p>Reminders continue until the action is completed or an authorised legal/audit hold is recorded.</p>`;
+ $('reminderPreview').classList.remove('hidden');
+};
+
+</script></body></html>
