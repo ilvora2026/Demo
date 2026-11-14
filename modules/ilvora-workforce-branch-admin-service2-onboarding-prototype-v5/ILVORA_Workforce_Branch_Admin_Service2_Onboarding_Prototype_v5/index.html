@@ -1,0 +1,194 @@
+<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ILVORA Workforce | Employee Onboarding</title>
+<style>
+:root{--n:#10243a;--t:#168b88;--g:#c9a96e;--bg:#f3f6f8;--ink:#203244;--mut:#718096;--line:#e3eaf0}*{box-sizing:border-box}body{margin:0;background:var(--bg);font:14px/1.5 Arial,sans-serif;color:var(--ink)}header{background:var(--n);color:white;padding:18px max(18px,calc((100% - 1120px)/2));display:flex;justify-content:space-between}.brand{font-weight:bold;letter-spacing:2px}.brand span{color:var(--g)}small{color:var(--mut)}main{max-width:1120px;margin:24px auto;padding:0 16px}h1,h2{color:var(--n)}h1{font-size:25px;margin:0}.sub{color:var(--mut)}.notice,.panel,.step{background:white;border:1px solid var(--line);border-radius:12px;padding:15px;margin:12px 0}.notice{background:#fff8e9;color:#6e5728}.steps{display:grid;grid-template-columns:repeat(6,1fr);gap:6px}.step{text-align:center;font-size:11px;padding:9px 4px}.tabs{display:flex;gap:6px;flex-wrap:wrap;margin:14px 0}.tabs button,button{border:1px solid var(--line);background:white;border-radius:8px;padding:9px 12px;cursor:pointer}.tabs .active,button.primary{background:var(--t);color:white;border-color:var(--t)}.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.field{display:flex;flex-direction:column;gap:5px}.full{grid-column:1/-1}label{font-weight:bold;color:var(--n);font-size:12px}input,select,textarea{padding:10px;border:1px solid #d6e0e8;border-radius:7px;font:inherit;width:100%}input[readonly]{background:#f2f5f7}.uploads{display:grid;grid-template-columns:1fr 1fr;gap:8px}.upload{border:1px dashed #bdcbd6;border-radius:8px;padding:9px}.actions{display:flex;justify-content:flex-end;gap:8px;flex-wrap:wrap;margin-top:14px}.hidden{display:none!important}.box{background:#f2f8f7;border:1px solid #cde5e2;padding:12px;border-radius:9px;margin-top:12px}.ref{font-size:20px;font-weight:bold;color:#126c69}.hint,.foot{font-size:11px;color:var(--mut)}.status{display:inline-block;background:#fff0d4;color:#795b20;padding:4px 8px;border-radius:20px;font-size:11px}.good{background:#e4f4e9;color:#286c49}table{width:100%;border-collapse:collapse}td,th{text-align:left;border-bottom:1px solid var(--line);padding:8px;font-size:12px}@media(max-width:700px){.steps{grid-template-columns:repeat(3,1fr)}.grid,.uploads{grid-template-columns:1fr}.full{grid-column:auto}}@media print{header,.tabs,.steps,.notice,.actions,.foot{display:none!important}body{background:white}.panel{border:0}}
+</style></head><body>
+<header><div class="brand">ILVORA <span>WORKFORCE</span><br><small>WHERE CARE BECOMES CONFIDENCE.</small></div><div>Branch Admin / HR<br><small>Demo · Neelambari Hospital</small></div></header>
+<main><h1>Employee Onboarding & Management</h1><p class="sub">Branch application → Head Office approval → employee activation → final record verification.</p>
+<div class="notice"><b>Security:</b> Do not enter real Aadhaar, PAN, bank or employee information in this demo. Production must encrypt identifiers, mask ordinary views, restrict access and maintain audit logs.</div>
+<div class="steps"><div class="step">1 · Branch submission</div><div class="step">2 · Administrator salary setup</div><div class="step">3 · HO verification</div><div class="step">4 · Employee activation</div><div class="step">5 · Bank & emergency</div><div class="step">6 · Signed contract</div><div class="step">7 · Final HO check</div></div>
+<div class="tabs"><button class="active" data-tab="branch">1. Branch submission</button><button data-tab="salary">2. Administrator salary setup</button><button data-tab="ho">3. HO verification</button><button data-tab="activation">4. Activation</button><button data-tab="details">5. Enrolment details</button><button data-tab="contract">6. Contract upload</button><button data-tab="final">7. Final verification</button><button data-tab="enrolment">Employee Enrolment</button><button data-tab="exit">8. Employee exit & access</button></div>
+<section class="panel" id="branch"><h2>Stage 1 – Branch Admin application</h2><p class="hint">All listed employee details are mandatory. Upload up to seven supporting documents.</p>
+<form id="appForm"><div class="grid">
+<div class="field"><label>Full name *</label><input id="name" required></div><div class="field"><label>Position / designation *</label><input id="position" required></div>
+<div class="field full"><label>Full address *</label><textarea id="address" required></textarea></div>
+<div class="field"><label>Mobile number *</label><input id="mobile" required type="tel"></div><div class="field"><label>Email address *</label><input id="email" required type="email"></div>
+<div class="field"><label>Aadhaar number *</label><input id="aadhaar" required pattern="[0-9]{12}" maxlength="12" inputmode="numeric"><span class="hint">12 digits. Handle under applicable UIDAI requirements.</span></div><div class="field"><label>PAN number (optional)</label><input id="pan" pattern="[A-Za-z]{5}[0-9]{4}[A-Za-z]" maxlength="10"></div>
+<div class="field"><label>Branch *</label><select id="branch"><option data-prefix="ILV-NH">Neelambari Hospital – Thamarakulam</option><option data-prefix="ILV-HO">Head Office – Kochi</option><option data-prefix="ILV-KK">ILVORA Health Clinic – Kottarakkara</option></select></div><div class="field"><label>Department *</label><input id="department" required></div>
+<div class="field full"><label>Supporting documents (up to 7; image or PDF)</label><div class="uploads" id="uploads"></div><span class="hint">Each file maximum 5 MB in this prototype. Configure position-specific required document checklist with HR.</span></div>
+<div class="field full"><label><input id="accuracy" type="checkbox" required style="width:auto"> I confirm details are accurate and the employee has been informed of the collection purpose.</label></div></div><div class="actions"><button type="reset">Clear</button><button class="primary">Submit to Head Office</button></div></form>
+<div id="appResult" class="box hidden"><span class="status">Submitted for verification</span><p class="ref">ONB-DEMO-0001</p><p id="appText" class="hint"></p></div></section>
+
+<section class="panel hidden" id="salary"><h2>Stage 2 – Administrator-only fixed salary setup</h2>
+<p class="hint">This stage becomes available after Branch Admin submits the application. Only an authorised Administrator may enter, review, change and save the employee’s fixed salary.</p>
+<div class="notice">Branch Admin and Head Office users have read-only/no access to salary editing. The salary is linked to the application and, after employee approval and onboarding completion, feeds the payroll calculation automatically.</div>
+<div class="grid">
+<div class="field"><label>Onboarding reference</label><input id="salaryRef" readonly value="Awaiting branch submission"></div>
+<div class="field"><label>Employee / applicant</label><input id="salaryEmployee" readonly value="Awaiting branch submission"></div>
+<div class="field"><label>Branch</label><input id="salaryBranch" readonly value="Awaiting branch submission"></div>
+<div class="field"><label>Department / position</label><input id="salaryRole" readonly value="Awaiting branch submission"></div>
+<div class="field"><label>Fixed monthly salary (₹) *</label><input id="fixedSalary" type="number" min="0" step="1" placeholder="Enter fixed monthly salary"></div>
+<div class="field"><label>Effective from *</label><input id="salaryEffective" type="date"></div>
+<div class="field full"><label>Administrator review / salary notes</label><textarea id="salaryNotes" placeholder="Record salary basis, approved revision or relevant notes"></textarea></div>
+</div>
+<div class="actions"><button id="saveSalary" class="primary">Save / update fixed salary</button></div>
+<div id="salaryResult" class="box hidden"></div>
+<p class="hint">Production controls: enforce Administrator role on the server and API (not just by hiding the screen); keep previous salary versions, editor identity, timestamp, effective date and reason in an immutable audit log. Payroll should use the active approved salary version and apply configured attendance, unpaid leave, deductions and payroll-period rules.</p>
+</section>
+<section class="panel hidden" id="ho"><h2>Stage 2 – Head Office credential verification</h2><p id="hoText" class="hint">No application submitted yet.</p><label>Verification notes</label><textarea id="hoNotes"></textarea><div class="actions"><button id="return">Return for correction</button><button id="reject">Reject</button><button class="primary" id="approve">Approve & generate Employee ID</button></div><p class="hint">Record verifier, timestamp, evidence checked and decision reason in production.</p><div id="hoResult" class="box hidden"></div></section>
+<section class="panel hidden" id="activation"><h2>Stage 3 – Employee app activation</h2><p class="hint">Username is always the generated Employee ID. Activation requires OTP and a mandatory password reset.</p><div class="box"><div class="hint">GENERATED EMPLOYEE ID / USERNAME</div><div id="empId" class="ref">Pending Head Office approval</div><p id="deliver" class="hint"></p></div><div class="grid"><div class="field"><label>OTP *</label><input id="otp" maxlength="6"></div><div class="field"><label>New password *</label><input id="newpw" type="password" minlength="10"></div><div class="field"><label>Confirm new password *</label><input id="confirmpw" type="password" minlength="10"></div></div><div class="actions"><button id="sendOtp">Send / resend OTP</button><button class="primary" id="activate">Verify OTP & activate</button></div><div id="demoOtp" class="box hidden"></div><div id="activated" class="box hidden"><span class="status good">Account activated</span></div></section>
+<section class="panel hidden" id="details"><h2>Stage 4 – Bank & emergency details</h2><p class="hint">Complete after account activation. Branch Admin can print the enrolment details for physical signature / file.</p><p id="detailEmployee" class="hint">Employee not yet approved.</p><div class="grid">
+<div class="field"><label>Bank account holder *</label><input id="holder"></div><div class="field"><label>Bank name *</label><input id="bank"></div><div class="field"><label>Account number *</label><input id="account"></div><div class="field"><label>IFSC *</label><input id="ifsc"></div>
+<div class="field"><label>Emergency contact name *</label><input id="emName"></div><div class="field"><label>Relationship *</label><input id="relation"></div><div class="field"><label>Emergency mobile *</label><input id="emMobile"></div><div class="field"><label>Emergency address *</label><input id="emAddress"></div></div><div class="actions"><button id="saveDetails">Save details</button><button class="primary" id="printEnrol">Print enrolment details</button></div></section>
+<section class="panel hidden" id="contract"><h2>Stage 5 – Upload physically signed employment contract</h2><p class="hint">After obtaining the employee's physical signature, upload the contract against the generated Employee ID.</p><div class="grid"><div class="field"><label>Employee ID</label><input id="contractEmp" readonly></div><div class="field"><label>Contract date *</label><input id="contractDate" type="date"></div><div class="field full"><label>Signed contract PDF / image *</label><input id="contractFile" type="file" accept=".pdf,.jpg,.jpeg,.png"></div><div class="field full"><label><input id="signedConfirm" type="checkbox" style="width:auto"> I confirm this file contains the physical signature and is linked to the correct employee.</label></div></div><div class="actions"><button class="primary" id="uploadContract">Upload signed contract</button></div><div id="contractResult" class="box hidden"></div></section>
+<section class="panel hidden" id="final"><h2>Stage 6 – Head Office final verification & print</h2><p id="finalSummary" class="hint">Awaiting completed employee record.</p><label>Final verification notes</label><textarea id="finalNotes"></textarea><div class="actions"><button id="returnFinal">Return to Branch for correction</button><button class="primary" id="finalApprove">Verify final record</button><button id="printFinal">Print final employee record</button></div><div id="finalResult" class="box hidden"><span class="status good">Final record verified</span></div></section>
+<p class="foot">Prototype only: no real authentication, OTP delivery, file transfer, database or approval authority. Demo data resets on refresh. Print controls open the browser print dialog.</p></main>
+
+
+<section class="panel hidden" id="enrolment">
+<h2>Employee Enrolment – Existing Approved Employee</h2>
+<p class="hint">A separate enrolment workspace for completing the records of an employee whose onboarding application has already been approved and whose Employee ID has been generated.</p>
+<div class="notice">This page does not create a new employee or generate an Employee ID. Use New Employee Onboarding for new applicants. Enrolment details are linked to the existing permanent Employee ID.</div>
+<div class="grid">
+<div class="field"><label>Existing Employee ID *</label><input id="enrolId" placeholder="e.g. ILV-NH-001"></div>
+<div class="field"><label>Employee full name *</label><input id="enrolName" placeholder="As per approved employee record"></div>
+<div class="field"><label>Branch *</label><select id="enrolBranch"><option value="">Select branch</option><option>Head Office – Kochi</option><option>Neelambari Hospital – Thamarakulam</option><option>ILVORA Health Clinic – Kottarakkara</option></select></div>
+<div class="field"><label>Department / position *</label><input id="enrolPosition" placeholder="Department and designation"></div>
+<div class="field"><label>Personal mobile number *</label><input id="enrolMobile" type="tel" placeholder="Registered mobile number"></div>
+<div class="field"><label>Email address</label><input id="enrolEmail" type="email" placeholder="Registered email address"></div>
+<div class="field"><label>Residential address *</label><textarea id="enrolAddress" placeholder="Current residential address"></textarea></div>
+<div class="field"><label>Emergency contact name *</label><input id="enrolEmergencyName" placeholder="Emergency contact person"></div>
+<div class="field"><label>Emergency contact relationship *</label><input id="enrolEmergencyRelation" placeholder="Relationship"></div>
+<div class="field"><label>Emergency contact mobile *</label><input id="enrolEmergencyMobile" type="tel" placeholder="Emergency contact number"></div>
+<div class="field"><label>Bank account holder name *</label><input id="enrolBankName" placeholder="As per bank records"></div>
+<div class="field"><label>Bank account number *</label><input id="enrolAccount" type="password" placeholder="Bank account number"></div>
+<div class="field"><label>Confirm bank account number *</label><input id="enrolAccountConfirm" type="password" placeholder="Re-enter account number"></div>
+<div class="field"><label>IFSC code *</label><input id="enrolIfsc" placeholder="Bank IFSC"></div>
+<div class="field"><label>Bank name and branch *</label><input id="enrolBankBranch" placeholder="Bank and branch"></div>
+<div class="field full"><label>Additional enrolment notes</label><textarea id="enrolNotes" placeholder="Optional notes relevant to enrolment"></textarea></div>
+<div class="field full"><label>Upload enrolment documents (image/PDF, up to 7 files)</label><input id="enrolFiles" type="file" accept="image/*,.pdf" multiple><p class="hint">Demo only: files are selected in the browser and are not securely stored or transmitted.</p></div>
+</div>
+<div class="actions"><button id="saveEnrolment" class="primary">Save enrolment details</button><button id="printEnrolment">Print enrolment form</button><button id="submitEnrolment">Submit to Head Office for verification</button></div>
+<div id="enrolResult" class="box hidden"></div>
+<h3>Enrolment workflow</h3>
+<ul>
+<li>Branch Admin/HR retrieves an existing approved employee using the permanent Employee ID.</li>
+<li>Branch Admin/HR completes personal contact, emergency contact and bank/payroll details.</li>
+<li>Branch Admin/HR saves the enrolment record and prints it for physical signature/filing where required.</li>
+<li>Completed details are submitted to Head Office for verification. Corrections are recorded with an audit trail.</li>
+<li>Administrator-only fixed salary management remains in Salary Setup; this enrolment page cannot edit salary.</li>
+</ul>
+<p class="hint">Production safeguards: verify Employee ID and branch assignment server-side; mask bank details except to authorised payroll users; encrypt data in transit and at rest; restrict document access; validate file types and scan uploads; maintain an audit trail; retain physical records under the approved schedule.</p>
+</section>
+
+<section class="panel hidden" id="exit">
+<h2>Employee Exit & System Access Control</h2>
+<p class="hint">Manage resignation and termination access separately. This workflow revokes login access; it does not delete the employee's employment or statutory records.</p>
+<div class="grid">
+  <div class="field"><label>Employee ID *</label><input id="exitEmployeeId" placeholder="e.g. ILV-NH-001"></div>
+  <div class="field"><label>Employee name *</label><input id="exitEmployeeName" placeholder="Employee name"></div>
+  <div class="field"><label>Branch</label><select id="exitBranch"><option>Head Office – Kochi</option><option>Neelambari Hospital – Thamarakulam</option><option>ILVORA Health Clinic – Kottarakkara</option></select></div>
+  <div class="field"><label>Exit type *</label><select id="exitType"><option value="resignation">Resignation</option><option value="termination">Termination</option></select></div>
+  <div class="field"><label>Last working day *</label><input id="lastWorkingDay" type="date"></div>
+  <div class="field"><label>Request / approval reference</label><input id="exitReference" placeholder="HR approval / termination reference"></div>
+  <div class="field full"><label>Reason / authorised notes</label><textarea id="exitReason" placeholder="Record the approved reason and relevant reference. Restrict access to authorised HR/Administrator users."></textarea></div>
+</div>
+<div class="notice" id="exitRule">Resignation: employee login access is scheduled to be disabled automatically at the end of the approved last working day.</div>
+<div class="actions"><button id="saveExit" class="primary">Save exit record / schedule access change</button><button id="adminRevoke" class="danger">Administrator: revoke access now</button></div>
+<div id="exitResult" class="box hidden"></div>
+<h3>Access-control rules</h3>
+<ul>
+<li><b>Termination:</b> only the Administrator can revoke system access. Branch Admin/HR may submit the case, but cannot perform the revocation.</li>
+<li><b>Resignation:</b> once the resignation and last working day are approved and recorded, the system automatically disables employee login access at the end of that date.</li>
+<li><b>Preserve records:</b> employee profile, attendance, payroll, leave, payslips, contracts and audit history remain archived according to the approved retention schedule.</li>
+<li><b>Audit:</b> retain who submitted and approved the exit, the last working day, access-disable timestamp, and Administrator action where applicable.</li>
+</ul>
+<p class="hint">Prototype limitation: this screen simulates the workflow only. Real automatic deactivation requires a server-side scheduled job and identity-provider/session revocation. The production system must enforce Administrator permissions on the server, prevent self-approval, revoke active sessions/tokens, and retain records under the approved legal retention schedule.</p>
+</section>
+
+<script>
+const $=id=>document.getElementById(id);let application=null,empId=null,otpCode=null,activated=false,detailsSaved=false,contractSaved=false,finalDone=false,salarySaved=false,salaryAudit=[];
+for(let i=1;i<=7;i++){let d=document.createElement('div');d.className='upload';d.innerHTML=`<label>Document ${i}</label><input class="doc" type="file" accept=".pdf,.jpg,.jpeg,.png">`;$('uploads').appendChild(d)}
+document.querySelectorAll('.tabs button').forEach(b=>b.onclick=()=>{document.querySelectorAll('.tabs button').forEach(x=>x.classList.toggle('active',x===b));['branch','salary','ho','activation','details','contract','final','enrolment','exit'].forEach(id=>$(id).classList.toggle('hidden',id!==b.dataset.tab))});
+function sync(){if(!application)return;$('empId').textContent=empId||'Pending Head Office approval';$('deliver').textContent=empId?`Activation should be sent to ${application.mobile.slice(0,2)}******${application.mobile.slice(-2)} and ${application.email.replace(/^(.).+(@.+)$/,'$1***$2')}.`:'Awaiting approval.';$('detailEmployee').textContent=application.name+' · '+(empId||'Employee ID pending');$('contractEmp').value=empId||'Pending';$('finalSummary').textContent=`${application.name} | ${empId||'ID pending'} | Fixed salary: ${salarySaved?'₹'+Number($('fixedSalary').value).toLocaleString('en-IN')+'/month':'Pending Administrator setup'} | Activation: ${activated?'Complete':'Pending'} | Bank/emergency: ${detailsSaved?'Saved':'Pending'} | Contract: ${contractSaved?'Uploaded':'Pending'} | Final: ${finalDone?'Verified':'Pending'}`}
+$('appForm').onsubmit=e=>{e.preventDefault();let files=[...document.querySelectorAll('.doc')].map(x=>x.files[0]).filter(Boolean);if(files.length>7||files.some(f=>f.size>5*1024*1024)){alert('Maximum 7 documents, 5 MB each.');return}let opt=$('branch').selectedOptions[0];application={name:$('name').value,position:$('position').value,address:$('address').value,mobile:$('mobile').value,email:$('email').value,aadhaar:$('aadhaar').value,pan:$('pan').value,branch:$('branch').value,prefix:opt.dataset.prefix,department:$('department').value,docs:files.length};$('appText').textContent=`${application.name} · ${application.position} · ${application.branch} · ${files.length} file(s).`;$('appResult').classList.remove('hidden');$('salaryRef').value='ONB-DEMO-0001';$('salaryEmployee').value=application.name;$('salaryBranch').value=application.branch;$('salaryRole').value=application.department+' / '+application.position;$('hoText').textContent=`Application ONB-DEMO-0001: ${application.name}, ${application.position}, ${application.branch}. ${files.length} supporting document(s). Credentials awaiting review.`;sync()};
+
+$('saveSalary').onclick=()=>{
+ if(!application)return alert('Branch Admin must submit the employee application first.');
+ const amount=Number($('fixedSalary').value);
+ if(!Number.isFinite(amount)||amount<=0)return alert('Enter a valid fixed monthly salary greater than zero.');
+ if(!$('salaryEffective').value)return alert('Select the salary effective date.');
+ const previous=salarySaved?Number(salaryAudit[salaryAudit.length-1].amount):null;
+ salaryAudit.push({amount,effective:$('salaryEffective').value,notes:$('salaryNotes').value,previous,editor:'Administrator (demo)',at:new Date().toLocaleString()});
+ salarySaved=true;
+ $('salaryResult').innerHTML=`<span class="status good">Fixed salary saved</span><p class="ref">₹${amount.toLocaleString('en-IN')} / month</p><p class="hint">Effective ${$('salaryEffective').value}. Saved by Administrator (demo). ${previous!==null?'Previous saved salary: ₹'+previous.toLocaleString('en-IN')+'.':''}</p><p class="hint">Payroll link: this saved fixed salary will be the employee’s base salary input for automatic payroll calculation after onboarding is approved.</p><p class="hint">Audit versions saved in this demo: ${salaryAudit.length}</p>`;
+ $('salaryResult').classList.remove('hidden');sync();
+};
+$('approve').onclick=()=>{if(!application)return alert('Submit application first.');if(!salarySaved)return alert('Administrator must save the fixed salary before Head Office approval.');let next=String(Math.floor(100+Math.random()*899));empId=application.prefix+'-'+next;$('hoResult').innerHTML=`<span class="status good">Approved</span><p class="ref">${empId}</p><p class="hint">Branch-specific Employee ID generated after Head Office approval (simulated).</p>`;sync()};
+$('return').onclick=()=>alert('Demo: application returned for correction. No ID generated.');$('reject').onclick=()=>{empId=null;alert('Demo: application rejected. No Employee ID generated.')};
+$('sendOtp').onclick=()=>{if(!empId)return alert('Head Office approval required first.');otpCode=String(Math.floor(100000+Math.random()*900000));$('demoOtp').textContent='DEMO OTP: '+otpCode+' (production OTP is sent securely by SMS and email; never shown in app).';$('demoOtp').classList.remove('hidden')};
+$('activate').onclick=()=>{if(!empId||!otpCode)return alert('Generate activation OTP first.');if($('otp').value!==otpCode)return alert('Incorrect OTP.');if($('newpw').value.length<10||$('newpw').value!==$('confirmpw').value)return alert('Passwords must match and be at least 10 characters.');activated=true;otpCode=null;$('activated').classList.remove('hidden');$('demoOtp').classList.add('hidden');sync()};
+$('saveDetails').onclick=()=>{if(!activated)return alert('Employee account must be activated first.');let ids=['holder','bank','account','ifsc','emName','relation','emMobile','emAddress'];if(ids.some(x=>!$(x).value.trim()))return alert('Complete all bank and emergency fields.');detailsSaved=true;sync();alert('Details saved in demo.')};
+$('printEnrol').onclick=()=>{if(!detailsSaved)return alert('Save bank and emergency details first.');window.print()};
+$('uploadContract').onclick=()=>{if(!detailsSaved)return alert('Complete enrolment details first.');if(!$('contractDate').value||!$('contractFile').files[0]||!$('signedConfirm').checked)return alert('Contract date, signed file and confirmation are required.');contractSaved=true;$('contractResult').textContent='Signed contract linked to '+empId+' (demo only).';$('contractResult').classList.remove('hidden');sync()};
+$('finalApprove').onclick=()=>{if(!empId||!activated||!detailsSaved||!contractSaved)return alert('Complete all previous stages first.');finalDone=true;$('finalResult').classList.remove('hidden');sync();alert('Final Head Office verification completed in demo.')};
+$('returnFinal').onclick=()=>alert('Demo: final record returned to Branch Admin for correction.');$('printFinal').onclick=()=>{if(!empId)return alert('No approved record to print.');window.print()};
+
+
+let enrolmentSaved=false;
+const enrolmentData=()=>{
+ const ids=['enrolId','enrolName','enrolBranch','enrolPosition','enrolMobile','enrolAddress','enrolEmergencyName','enrolEmergencyRelation','enrolEmergencyMobile','enrolBankName','enrolAccount','enrolAccountConfirm','enrolIfsc','enrolBankBranch'];
+ const values={}; ids.forEach(id=>values[id]=$(id).value.trim());
+ if(ids.some(id=>!values[id])){alert('Complete all mandatory enrolment fields.');return null;}
+ if(values.enrolAccount!==values.enrolAccountConfirm){alert('Bank account numbers do not match.');return null;}
+ if(!/^[A-Z]{4}0[A-Z0-9]{6}$/i.test(values.enrolIfsc)){alert('Enter a valid IFSC code.');return null;}
+ if($('enrolFiles').files.length>7){alert('Upload a maximum of 7 documents.');return null;}
+ return values;
+};
+$('saveEnrolment').onclick=()=>{
+ const d=enrolmentData(); if(!d)return;
+ enrolmentSaved=true;
+ $('enrolResult').innerHTML=`<span class="status good">Enrolment details saved (demo)</span><p>Employee: ${d.enrolName} (${d.enrolId})</p><p>Branch: ${d.enrolBranch}</p><p>Bank details: captured for authorised payroll processing (masked in production).</p><p>Documents selected: ${$('enrolFiles').files.length}</p><p>Head Office verification: pending submission.</p>`;
+ $('enrolResult').classList.remove('hidden');
+};
+$('printEnrolment').onclick=()=>{
+ const d=enrolmentData(); if(!d)return;
+ const w=window.open('','_blank'); if(!w)return alert('Allow pop-ups to print the enrolment form.');
+ const safe=s=>String(s||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+ w.document.write(`<html><head><title>Employee Enrolment Form</title><style>body{font:14px Arial;padding:28px}h1{font-size:20px}table{width:100%;border-collapse:collapse}td{padding:9px;border:1px solid #bbb}td:first-child{font-weight:bold;width:34%}.sign{margin-top:55px;display:flex;justify-content:space-between}</style></head><body><h1>ILVORA Workforce – Employee Enrolment Form</h1><table>${[['Employee ID',d.enrolId],['Name',d.enrolName],['Branch',d.enrolBranch],['Department / Position',d.enrolPosition],['Mobile',d.enrolMobile],['Email',$('enrolEmail').value],['Address',d.enrolAddress],['Emergency Contact',d.enrolEmergencyName+' ('+d.enrolEmergencyRelation+') – '+d.enrolEmergencyMobile],['Bank Account Holder',d.enrolBankName],['Bank Account Number',d.enrolAccount],['IFSC',d.enrolIfsc],['Bank / Branch',d.enrolBankBranch],['Notes',$('enrolNotes').value]].map(x=>`<tr><td>${safe(x[0])}</td><td>${safe(x[1])}</td></tr>`).join('')}</table><div class="sign"><span>Employee signature: __________________</span><span>Branch Admin/HR: __________________</span></div></body></html>`);
+ w.document.close(); w.focus(); w.print();
+};
+$('submitEnrolment').onclick=()=>{
+ if(!enrolmentSaved)return alert('Save the enrolment details before submitting to Head Office.');
+ $('enrolResult').innerHTML+='<p><span class="status">Submitted to Head Office for verification (demo)</span></p><p class="hint">Production workflow should record submitter, timestamp, verification outcome and return-for-correction history.</p>';
+};
+
+const exitTypeEl=$('exitType');
+if(exitTypeEl){
+ const ruleText=()=>{
+  $('exitRule').textContent=exitTypeEl.value==='termination'
+   ?'Termination: only the Administrator may revoke this employee’s system access. Branch Admin/HR cannot deactivate the account.'
+   :'Resignation: after approval and recording of the last working day, employee login access is scheduled to be disabled automatically at the end of that day.';
+ };
+ exitTypeEl.onchange=ruleText; ruleText();
+ $('saveExit').onclick=()=>{
+  const id=$('exitEmployeeId').value.trim(), name=$('exitEmployeeName').value.trim(), day=$('lastWorkingDay').value;
+  if(!id||!name||!day)return alert('Enter Employee ID, employee name and last working day.');
+  const type=exitTypeEl.value;
+  if(type==='resignation'){
+   $('exitResult').innerHTML=`<span class="status good">Resignation exit record saved (demo)</span><p>Employee: ${name} (${id})</p><p>Last working day: ${day}</p><p>Access action: scheduled for automatic deactivation at the end of the approved last working day.</p><p>Employee records: retained and archived; not deleted.</p><p class="hint">Production must verify resignation approval and execute the scheduled access revocation server-side.</p>`;
+  }else{
+   $('exitResult').innerHTML=`<span class="status">Termination request recorded (demo)</span><p>Employee: ${name} (${id})</p><p>Access action: pending Administrator-only revocation.</p><p>Branch Admin/HR cannot revoke access through this action.</p><p>Employee records: retained and archived; not deleted.</p>`;
+  }
+  $('exitResult').classList.remove('hidden');
+ };
+ $('adminRevoke').onclick=()=>{
+  if(exitTypeEl.value!=='termination')return alert('Use the resignation schedule for resignation cases. This immediate revocation control is for termination only.');
+  if(!window.confirm('Demo only: confirm that you are acting as an authorised Administrator and revoke this employee’s access?'))return;
+  const id=$('exitEmployeeId').value.trim(), name=$('exitEmployeeName').value.trim();
+  if(!id||!name)return alert('Enter Employee ID and employee name first.');
+  $('exitResult').innerHTML=`<span class="status good">Administrator revocation recorded (demo)</span><p>Employee: ${name} (${id})</p><p>Access status: revoked by Administrator (demo).</p><p>Employee records: retained and archived; not deleted.</p><p class="hint">Production must enforce the Administrator role on the server and revoke active sessions and tokens.</p>`;
+  $('exitResult').classList.remove('hidden');
+ };
+}
+
+</script></body></html>
