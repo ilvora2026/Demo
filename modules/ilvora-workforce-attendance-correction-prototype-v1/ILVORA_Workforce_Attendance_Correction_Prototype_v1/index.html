@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ILVORA Workforce | Attendance</title>
+<style>
+:root{--navy:#10243a;--teal:#087f82;--gold:#c6a66b;--bg:#f4f7fa;--ink:#182638;--muted:#68788a;--line:#dce4eb;--green:#16834a;--red:#b83232;--amber:#a66b12}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);font-family:Inter,Segoe UI,Arial,sans-serif;color:var(--ink)}
+header{background:var(--navy);color:white;padding:18px 22px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.brand{font-weight:800;letter-spacing:.8px}.brand small{display:block;color:#c8d6e2;font-weight:400;letter-spacing:0;font-size:12px;margin-top:4px}
+main{max-width:1120px;margin:24px auto;padding:0 16px}.top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:16px}
+h1{font-size:23px;margin:0}h2{font-size:17px;margin:0 0 14px}p{line-height:1.5}.muted{color:var(--muted);font-size:13px}
+select,input,textarea{font:inherit;padding:10px 11px;border:1px solid var(--line);border-radius:8px;width:100%;background:white;color:var(--ink)}
+textarea{min-height:78px;resize:vertical}label{display:block;font-size:12px;font-weight:700;color:#45576a;margin:10px 0 5px}
+button{border:0;border-radius:8px;padding:10px 14px;font-weight:700;cursor:pointer;background:var(--teal);color:white}button.secondary{background:#e8eef3;color:var(--navy)}button.danger{background:#a93636}button:disabled{opacity:.5;cursor:not-allowed}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0}.tabs button{background:#e5ebf0;color:var(--navy)}.tabs button.active{background:var(--teal);color:white}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.card{background:white;border:1px solid var(--line);border-radius:13px;padding:18px;box-shadow:0 2px 8px #14283b0a}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:14px 0}.stat{background:#f6f9fb;border-radius:10px;padding:13px}.stat strong{font-size:23px;display:block}.stat span{font-size:12px;color:var(--muted)}
+.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.row>*{flex:1}.status{display:inline-block;padding:4px 8px;border-radius:20px;font-size:11px;font-weight:800;background:#eef2f5;color:#526171}.pending{background:#fff3d8;color:var(--amber)}.approved{background:#e4f5eb;color:var(--green)}.rejected{background:#fde8e8;color:var(--red)}.returned{background:#e9efff;color:#3e5b9a}
+table{width:100%;border-collapse:collapse;font-size:13px}th,td{text-align:left;padding:10px 8px;border-bottom:1px solid var(--line);vertical-align:top}th{color:#596a7a;font-size:11px;text-transform:uppercase;letter-spacing:.4px}
+.notice{padding:11px 13px;border-radius:9px;background:#eef6f7;border-left:4px solid var(--teal);font-size:13px;line-height:1.5;margin:12px 0}
+.alert{background:#fff6e7;border-left-color:var(--gold)}.hidden{display:none!important}.actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}.small{font-size:11px;color:var(--muted)}.request{border:1px solid var(--line);border-radius:10px;padding:13px;margin:10px 0}.request h3{font-size:14px;margin:0 0 7px}.fieldgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+footer{text-align:center;color:#8090a0;font-size:11px;padding:25px}
+@media(max-width:700px){.grid{grid-template-columns:1fr}.stats{grid-template-columns:repeat(2,1fr)}.fieldgrid{grid-template-columns:1fr}main{margin:15px auto}header{padding:15px}}
+</style>
+</head>
+<body>
+<header><div class="brand">ILVORA <span style="color:#62c7c1">WORKFORCE</span><small>Attendance marking & correction control</small></div><div class="muted" style="color:#d8e4ed">Prototype v1 · Sample data only</div></header>
+<main>
+<div class="top"><div><h1>Attendance Management</h1><div class="muted">Unified mobile, kiosk and centrally approved correction workflow</div></div>
+<div style="min-width:230px"><label for="role" style="color:#45576a;margin-top:0">Preview role</label><select id="role"><option value="employee">Employee</option><option value="marker">Attendance Marker</option><option value="branch">Branch Admin / HR</option><option value="head">Head Office Admin</option></select></div></div>
+<div class="tabs" id="tabs"></div>
+<section id="employee" class="role">
+<div class="grid">
+<div class="card"><h2>My attendance</h2><div class="stats"><div class="stat"><strong>21</strong><span>Present days</span></div><div class="stat"><strong>1</strong><span>Pending correction</span></div></div>
+<div class="notice">Employees can mark their own attendance using a registered personal phone or an authorised branch device. Employees cannot edit verified attendance records.</div>
+<div class="row"><button onclick="toast('Demo: mobile check-in verification started')">Check In</button><button class="secondary" onclick="toast('Demo: mobile check-out verification started')">Check Out</button></div>
+<p class="small">Verification concept: account + registered device + GPS + rotating branch QR + live face check. This prototype does not access camera or GPS.</p></div>
+<div class="card"><h2>Attendance history</h2><table><tr><th>Date</th><th>In</th><th>Out</th><th>Status</th></tr><tr><td>12 Nov 2026</td><td>08:02</td><td>16:05</td><td><span class="status approved">Verified</span></td></tr><tr><td>11 Nov 2026</td><td>08:00</td><td>16:00</td><td><span class="status approved">Verified</span></td></tr><tr><td>10 Nov 2026</td><td>09:15</td><td>16:00</td><td><span class="status approved">Corrected</span></td></tr></table></div>
+</div>
+<div class="card" style="margin-top:16px"><h2>My correction requests</h2><div id="employeeRequests"></div><p class="small">The employee may report a discrepancy to Branch Admin / HR. Only Branch Admin / HR can submit a formal correction request to Head Office.</p></div>
+</section>
+<section id="marker" class="role hidden">
+<div class="grid">
+<div class="card"><h2>Branch attendance device</h2><div class="stats"><div class="stat"><strong>64</strong><span>Checked in</span></div><div class="stat"><strong>86</strong><span>Expected</span></div></div>
+<div class="notice">Attendance Marker operates the shared kiosk and monitors punch activity. This role cannot edit attendance or submit correction requests.</div>
+<label>Device</label><select><option>NH-KIOSK-01 · Neelambari Hospital</option><option>HO-KIOSK-01 · Head Office</option></select>
+<label>Device status</label><p><span class="status approved">Authorised · Online</span></p><button onclick="toast('Demo: rotating QR refreshed')">Refresh rotating QR</button></div>
+<div class="card"><h2>Recent punch activity</h2><table><tr><th>Employee</th><th>Method</th><th>Time</th><th>Result</th></tr><tr><td>ILV-NH-001</td><td>Mobile</td><td>08:02</td><td><span class="status approved">Success</span></td></tr><tr><td>ILV-NH-014</td><td>Kiosk</td><td>08:06</td><td><span class="status approved">Success</span></td></tr><tr><td>ILV-NH-023</td><td>Mobile</td><td>08:09</td><td><span class="status pending">Review flag</span></td></tr></table></div>
+</div></section>
+<section id="branch" class="role hidden">
+<div class="grid">
+<div class="card"><h2>Submit attendance correction to Head Office</h2><div class="notice alert">Mandatory Head Office approval. Submitting this request does not change the employee's attendance record.</div>
+<form id="requestForm">
+<div class="fieldgrid"><div><label>Employee number *</label><input id="emp" required placeholder="e.g. ILV-NH-001"></div><div><label>Employee name</label><input id="empName" placeholder="Employee name"></div>
+<div><label>Branch *</label><select id="branchName"><option>Neelambari Hospital, Thamarakulam</option><option>Head Office, Kochi</option><option>ILVORA Health Clinic, Kottarakkara</option></select></div><div><label>Attendance date *</label><input id="attDate" type="date" required value="2026-11-10"></div>
+<div><label>Correction type *</label><select id="type"><option>Missing check-in</option><option>Missing check-out</option><option>Incorrect check-in time</option><option>Incorrect check-out time</option><option>Incorrect shift</option><option>Other attendance error</option></select></div><div><label>Requested check-in / status *</label><input id="requested" required placeholder="e.g. 08:00 AM"></div>
+<div><label>Existing attendance</label><input id="existing" placeholder="e.g. 09:15 AM"></div><div><label>Requested check-out (if applicable)</label><input id="requestedOut" placeholder="e.g. 04:00 PM"></div></div>
+<label>Reason for modification *</label><textarea id="reason" required placeholder="Explain the discrepancy and checks completed by Branch Admin / HR"></textarea>
+<label>Supporting evidence reference</label><input id="evidence" placeholder="Roster / duty record / document reference (demo field)">
+<div class="actions"><button type="submit">Submit to Head Office</button><button type="reset" class="secondary">Clear form</button></div></form></div>
+<div class="card"><h2>Branch request tracker</h2><div id="branchRequests"></div></div>
+</div></section>
+<section id="head" class="role hidden">
+<div class="stats"><div class="stat"><strong id="pendingCount">1</strong><span>Pending review</span></div><div class="stat"><strong id="approvedCount">0</strong><span>Approved</span></div><div class="stat"><strong id="rejectedCount">0</strong><span>Rejected</span></div><div class="stat"><strong id="returnedCount">0</strong><span>Returned</span></div></div>
+<div class="card"><h2>Head Office – attendance correction approval queue</h2><div class="notice">Review employee identity, original punch, requested change, reason and supporting evidence. Approval triggers an automatic attendance update and notifications to the employee and Branch Admin / HR.</div><div id="headRequests"></div></div>
+</section>
+<div class="card" style="margin-top:16px"><h2>Non-negotiable controls</h2><ul class="muted"><li>Only Branch Admin / HR can submit formal attendance correction requests.</li><li>Only authorised Head Office Admin can approve or reject.</li><li>No attendance change occurs before approval.</li><li>Original punch and complete audit history are preserved.</li><li>Approved correction updates employee attendance and relevant summaries.</li><li>Employee and Branch Admin / HR are both notified of the decision.</li><li>Payroll already closed must use a payroll adjustment workflow.</li></ul></div>
+</main>
+<footer>ILVORA Workforce · Front-end prototype only · Sample data · No live attendance, authentication, approval, database or notifications</footer>
+<div id="toast" style="position:fixed;bottom:18px;left:50%;transform:translateX(-50%);background:#10243a;color:white;padding:11px 16px;border-radius:8px;display:none;max-width:90%;font-size:13px"></div>
+<script>
+let requests=[{id:'ATC-2026-0001',emp:'ILV-NH-001',name:'Sample Employee',branch:'Neelambari Hospital, Thamarakulam',date:'2026-11-10',type:'Incorrect check-in time',existing:'09:15 AM',requested:'08:00 AM',out:'',reason:'Duty roster and supervisor confirmation show employee commenced duty at 08:00 AM.',evidence:'November duty roster',status:'Pending',requester:'Branch Admin'}];
+let active='employee';
+function toast(t){let e=document.getElementById('toast');e.textContent=t;e.style.display='block';setTimeout(()=>e.style.display='none',2600)}
+function setRole(r){active=r;document.querySelectorAll('.role').forEach(x=>x.classList.add('hidden'));document.getElementById(r).classList.remove('hidden');document.querySelectorAll('.tabs button').forEach(b=>b.classList.toggle('active',b.dataset.role===r));render()}
+document.getElementById('role').addEventListener('change',e=>setRole(e.target.value));
+const tabs=[['employee','Employee'],['marker','Attendance Marker'],['branch','Branch Admin / HR'],['head','Head Office Admin']];
+document.getElementById('tabs').innerHTML=tabs.map(([v,l])=>`<button data-role="${v}" onclick="document.getElementById('role').value='${v}';setRole('${v}')">${l}</button>`).join('');
+function badge(s){let c=s==='Approved'?'approved':s==='Rejected'?'rejected':s==='Returned for clarification'?'returned':'pending';return `<span class="status ${c}">${s}</span>`}
+function card(r,head=false){return `<div class="request"><div class="row"><h3>${r.id} · ${r.emp}</h3>${badge(r.status)}</div><div class="muted">${r.name||'Employee'} · ${r.branch} · ${r.date}</div><p><b>${r.type}</b><br>Existing: ${r.existing||'Not recorded'} → Requested: ${r.requested||'Not specified'} ${r.out?' · Check-out: '+r.out:''}</p><p class="muted"><b>Reason:</b> ${r.reason}<br><b>Evidence:</b> ${r.evidence||'Not supplied'}<br><b>Submitted by:</b> ${r.requester}</p>${head&&r.status==='Pending'?`<div class="actions"><button onclick="decide('${r.id}','Approved')">Approve & update record</button><button class="danger" onclick="decide('${r.id}','Rejected')">Reject</button><button class="secondary" onclick="decide('${r.id}','Returned for clarification')">Return for clarification</button></div>`:''}${r.status==='Approved'?'<p class="small">✓ Attendance record updated · Notifications sent to employee and Branch Admin / HR · Original entry retained in audit history</p>':''}${r.status==='Rejected'?'<p class="small">No attendance change made. Decision notification sent to employee and Branch Admin / HR.</p>':''}${r.status==='Returned for clarification'?'<p class="small">No attendance change made. Branch Admin / HR must provide clarification.</p>':''}</div>`}
+function render(){let pending=requests.filter(r=>r.status==='Pending').length;document.getElementById('pendingCount').textContent=pending;document.getElementById('approvedCount').textContent=requests.filter(r=>r.status==='Approved').length;document.getElementById('rejectedCount').textContent=requests.filter(r=>r.status==='Rejected').length;document.getElementById('returnedCount').textContent=requests.filter(r=>r.status==='Returned for clarification').length;
+document.getElementById('headRequests').innerHTML=requests.length?requests.map(r=>card(r,true)).join(''):'<p class="muted">No requests submitted.</p>';
+document.getElementById('branchRequests').innerHTML=requests.map(r=>card(r)).join('');
+document.getElementById('employeeRequests').innerHTML=requests.map(r=>card(r)).join('')}
+document.getElementById('requestForm').addEventListener('submit',e=>{e.preventDefault();let id='ATC-2026-'+String(requests.length+1).padStart(4,'0');requests.unshift({id,emp:val('emp'),name:val('empName'),branch:val('branchName'),date:val('attDate'),type:val('type'),existing:val('existing'),requested:val('requested'),out:val('requestedOut'),reason:val('reason'),evidence:val('evidence'),status:'Pending',requester:'Branch Admin / HR'});e.target.reset();render();toast('Request submitted to Head Office. Attendance has not been changed.');});
+function val(id){return document.getElementById(id).value}
+function decide(id,status){let r=requests.find(x=>x.id===id);if(!r)return;if(status==='Rejected'&&!confirm('Reject this request? No attendance record will be changed.'))return;if(status==='Approved'&&!confirm('Approve and apply this attendance correction? The original record will be preserved in audit history.'))return;r.status=status;r.decisionBy='Head Office Admin';r.decisionAt=new Date().toLocaleString();render();toast(status==='Approved'?'Approved: employee attendance updated; employee and Branch Admin / HR notified.':status==='Rejected'?'Rejected: both parties notified; no attendance change.':'Returned: Branch Admin / HR notified; no attendance change.')}
+render();setRole('employee');
+</script></body></html>
