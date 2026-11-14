@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ILVORA Workforce | System Settings & Security</title>
+<style>
+:root{--navy:#10283f;--teal:#167c80;--gold:#c7a66a;--bg:#f3f6f8;--ink:#243746;--muted:#6b7c88;--line:#dce4e9}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);font:14px/1.45 Arial,sans-serif;color:var(--ink)}
+header{background:var(--navy);color:white;padding:20px 26px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.brand{font-size:19px;font-weight:700;letter-spacing:.5px}.brand span{color:#d9bd88}.sub{color:#d4e0e8;font-size:12px;margin-top:3px}.role{background:#1b405b;border:1px solid #45637a;border-radius:20px;padding:8px 13px;font-size:12px}
+main{max-width:1280px;margin:24px auto;padding:0 18px}.notice{background:#fff8e9;border:1px solid #ead7ad;border-left:4px solid var(--gold);padding:12px 15px;border-radius:8px;margin-bottom:18px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:18px}.stat,.panel{background:white;border:1px solid var(--line);border-radius:10px;padding:16px}
+.stat small{color:var(--muted)}.stat strong{display:block;font-size:24px;margin-top:7px;color:var(--navy)}
+.layout{display:grid;grid-template-columns:1fr 1fr;gap:16px}.panel h2{font-size:16px;margin:0 0 14px;color:var(--navy)}
+.toolbar,.actions{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+input,select,textarea{font:inherit;border:1px solid #cbd6dd;border-radius:6px;padding:9px;background:white;color:var(--ink);min-width:0;max-width:100%}
+textarea{width:100%;min-height:65px}button{border:0;border-radius:6px;padding:9px 13px;background:var(--teal);color:white;font-weight:600;cursor:pointer}
+button.secondary{background:#eaf0f3;color:var(--navy)}button.gold{background:#9a773e}button.danger{background:#a44444}
+table{width:100%;border-collapse:collapse;font-size:12px}th,td{text-align:left;padding:10px 8px;border-bottom:1px solid var(--line);vertical-align:top}th{color:var(--muted);background:#f8fafb}
+.pill{display:inline-block;border-radius:20px;padding:3px 8px;font-size:11px;background:#edf2f5;color:#435767}.warn{background:#fff3d9;color:#805d1d}.ok{background:#e4f4ed;color:#216548}
+.field{display:grid;grid-template-columns:1fr 1fr;gap:10px}.field label{display:flex;flex-direction:column;gap:5px;color:#526573;font-size:12px;margin-bottom:10px}.full{grid-column:1/-1}
+.rule{background:#f4f8f8;border:1px solid #d7e7e6;padding:12px;border-radius:8px;margin:10px 0;font-size:13px}.muted,.small{color:var(--muted)}.small{font-size:11px}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}.tabs button{background:#eaf0f3;color:var(--navy)}.tabs button.active{background:var(--teal);color:white}
+.check{display:flex;align-items:center;gap:8px;margin:8px 0}.check input{width:auto}.fulltable{overflow-x:auto}
+@media(max-width:900px){.stats{grid-template-columns:repeat(2,1fr)}.layout{grid-template-columns:1fr}}@media(max-width:520px){.field{grid-template-columns:1fr}.stats{grid-template-columns:1fr 1fr}main{padding:0 10px}}
+</style></head><body>
+<header><div><div class="brand">ILVORA <span>WORKFORCE</span></div><div class="sub">Administrator Panel · System Settings & Security Management</div></div><div class="role">DEMO ROLE: ADMINISTRATOR</div></header>
+<main>
+<div class="notice"><b>Security governance:</b> This prototype demonstrates configuration and audit workflows only. Production security settings must be enforced server-side. Administrator manages operational settings; Head Office Admin controls branch-level authorisations; Managing Director has executive oversight.</div>
+<section class="stats">
+<div class="stat"><small>Active sessions (demo)</small><strong id="sessionCount">04</strong></div><div class="stat"><small>Failed login alerts</small><strong id="failedCount">03</strong></div><div class="stat"><small>Security settings</small><strong>12</strong></div><div class="stat"><small>Configuration changes</small><strong id="changeCount">05</strong></div>
+</section>
+<div class="layout">
+<section class="panel"><h2>Password & Login Policy</h2>
+<div class="field">
+<label>Minimum password length<input id="minLength" type="number" min="8" max="32" value="12"></label>
+<label>Password expiry (days)<select id="expiry"><option value="0">No forced expiry (review periodically)</option><option>60</option><option>90</option><option>120</option></select></label>
+<label>Maximum failed attempts<select id="attempts"><option>5</option><option>3</option><option>10</option></select></label>
+<label>Temporary lockout duration<select id="lockout"><option>15 minutes</option><option>30 minutes</option><option>60 minutes</option></select></label>
+</div>
+<div class="check"><input type="checkbox" id="complexity" checked><label for="complexity">Require strong password (length and breach screening)</label></div>
+<div class="check"><input type="checkbox" id="mfa" checked><label for="mfa">Require multi-factor authentication for privileged roles</label></div>
+<button onclick="saveConfig('Password & Login Policy')">Save policy (demo)</button>
+<div class="rule"><b>Recommendation:</b> use long unique passphrases, breached-password screening, MFA for privileged accounts, secure recovery and rate-limiting. Avoid arbitrary frequent password expiry unless risk or law requires it.</div>
+</section>
+<section class="panel"><h2>OTP & Account Recovery</h2>
+<div class="field">
+<label>OTP validity<select id="otpValidity"><option>5 minutes</option><option>3 minutes</option><option>10 minutes</option></select></label>
+<label>OTP retry limit<select id="otpRetries"><option>3 attempts</option><option>5 attempts</option></select></label>
+<label>Recovery channel<select id="recovery"><option>Registered mobile + email verification</option><option>Registered mobile only</option><option>Registered email only</option></select></label>
+<label>Recovery approval<select id="recoveryApproval"><option>Head Office identity verification</option><option>Administrator identity verification</option></select></label>
+</div>
+<div class="check"><input type="checkbox" id="oneTime" checked><label for="oneTime">Temporary credentials are one-time use and expire</label></div>
+<div class="check"><input type="checkbox" id="forceReset" checked><label for="forceReset">Force password reset after account recovery</label></div>
+<button onclick="saveConfig('OTP & Account Recovery')">Save recovery policy (demo)</button>
+<p class="small">No real OTP is generated or sent by this prototype.</p>
+</section>
+<section class="panel"><h2>Session & Device Management</h2>
+<div class="field">
+<label>Session idle timeout<select id="idle"><option>15 minutes</option><option>10 minutes</option><option>30 minutes</option><option>60 minutes</option></select></label>
+<label>Maximum concurrent sessions<select id="concurrent"><option>2 devices</option><option>1 device</option><option>3 devices</option><option>Unlimited (not recommended)</option></select></label>
+</div>
+<div class="fulltable"><table><thead><tr><th>User / Role</th><th>Branch</th><th>Device</th><th>Last activity</th><th>Status</th><th>Action</th></tr></thead><tbody id="sessions"></tbody></table></div>
+<div class="actions" style="margin-top:12px"><button class="danger" onclick="logoutAll()">Force logout all demo sessions</button><button class="secondary" onclick="renderSessions()">Refresh</button></div>
+<p class="small">Production must revoke server-side session tokens and refresh tokens; changing this demo table does not log anyone out.</p>
+</section>
+<section class="panel"><h2>Notification & Security Alerts</h2>
+<div class="check"><input type="checkbox" id="loginAlert" checked><label for="loginAlert">Notify on new login from an unrecognised device</label></div>
+<div class="check"><input type="checkbox" id="failedAlert" checked><label for="failedAlert">Alert on repeated failed login attempts</label></div>
+<div class="check"><input type="checkbox" id="roleAlert" checked><label for="roleAlert">Alert on role or permission changes</label></div>
+<div class="check"><input type="checkbox" id="backupAlert" checked><label for="backupAlert">Alert on backup failure or recovery test failure</label></div>
+<div class="check"><input type="checkbox" id="adminAlert" checked><label for="adminAlert">Send critical security alerts to authorised Administrator and Head Office contacts</label></div>
+<button onclick="saveConfig('Security Notifications')">Save alert preferences (demo)</button>
+<div class="rule">Notifications should avoid exposing passwords, OTPs, salary details or sensitive case content. Deliver only through verified channels.</div>
+</section>
+<section class="panel"><h2>Backup & Recovery Settings</h2>
+<div class="field">
+<label>Backup frequency<select id="frequency"><option>Daily</option><option>Every 12 hours</option><option>Weekly</option></select></label>
+<label>Backup retention<select id="backupRetention"><option>30 days</option><option>14 days</option><option>60 days</option><option>90 days</option></select></label>
+<label>Backup storage<select id="backupStorage"><option>Encrypted separate storage</option><option>Same environment (not recommended)</option></select></label>
+<label>Recovery test frequency<select id="restoreTest"><option>Quarterly</option><option>Monthly</option><option>Half-yearly</option></select></label>
+</div>
+<div class="check"><input type="checkbox" id="encrypt" checked><label for="encrypt">Encrypt backups at rest and in transit</label></div>
+<div class="check"><input type="checkbox" id="separate" checked><label for="separate">Keep backup credentials separate from production credentials</label></div>
+<button onclick="saveConfig('Backup & Recovery')">Save backup policy (demo)</button>
+<p class="small">No database backup or restore is performed here. Production needs tested point-in-time recovery, access restrictions and documented recovery objectives.</p>
+</section>
+<section class="panel"><h2>Role & Permission Oversight</h2>
+<div class="fulltable"><table><thead><tr><th>Role</th><th>Primary authority</th><th>Boundary</th></tr></thead><tbody>
+<tr><td>Administrator</td><td>Operational system settings, payroll administration, security configuration</td><td>Cannot grant Head Office branch authorisations or override MD-only decisions.</td></tr>
+<tr><td>Head Office Admin</td><td>Branch setup, employee approval, Branch Admin/HR authorisation</td><td>Branch-scoped authorisations; no salary-setting or MD-only disciplinary approval.</td></tr>
+<tr><td>Branch Admin / HR</td><td>Branch HR operations</td><td>Limited to assigned branch and delegated permissions.</td></tr>
+<tr><td>Managing Director</td><td>Executive oversight and reserved approvals</td><td>All disciplinary final decisions; advances above 25% of monthly salary.</td></tr>
+<tr><td>Employee</td><td>Own profile and employee self-service</td><td>Own records only; no administrative access.</td></tr>
+</tbody></table></div>
+<p class="small">This panel displays governance boundaries. Actual role assignment remains controlled by Head Office Admin for branch-level authorisations and by the approved role governance.</p>
+</section>
+</div>
+<section class="panel" style="margin-top:16px"><h2>Security Events & Configuration Audit</h2>
+<div class="toolbar"><select id="eventFilter"><option value="">All event types</option><option>Failed login</option><option>Login success</option><option>Permission change</option><option>Configuration change</option><option>Session revoked</option></select><button class="secondary" onclick="renderEvents()">Filter</button><button class="secondary" onclick="exportAudit()">Export audit CSV</button></div>
+<div class="fulltable"><table><thead><tr><th>Date / time</th><th>Event</th><th>Actor</th><th>Details</th><th>Risk</th></tr></thead><tbody id="events"></tbody></table></div>
+</section>
+</main>
+<script>
+let activeSessions=[
+{user:'ILV-HO-001 · Head Office Admin',branch:'Head Office',device:'Windows · Chrome',time:'Today 09:42',status:'Active'},
+{user:'ILV-NH-002 · Branch Admin',branch:'Neelambari Hospital',device:'Android · Chrome',time:'Today 09:38',status:'Active'},
+{user:'ILV-KK-001 · Branch Admin',branch:'Kottarakkara Clinic',device:'iPhone · Safari',time:'Today 09:15',status:'Active'},
+{user:'ILV-HO-003 · Administrator',branch:'Head Office',device:'Windows · Edge',time:'Today 08:50',status:'Active'}
+];
+let events=[
+{time:'2026-11-14 09:42',type:'Login success',actor:'ILV-HO-001',detail:'Successful login from recognised device',risk:'Low'},
+{time:'2026-11-14 09:40',type:'Failed login',actor:'Unknown',detail:'Three unsuccessful attempts recorded (sample)',risk:'Medium'},
+{time:'2026-11-13 16:12',type:'Permission change',actor:'Head Office Admin',detail:'Branch HR permission updated (sample)',risk:'High'},
+{time:'2026-11-13 14:05',type:'Configuration change',actor:'Administrator',detail:'Backup policy reviewed (sample)',risk:'Medium'},
+{time:'2026-11-12 10:30',type:'Session revoked',actor:'Administrator',detail:'Demo session manually revoked',risk:'Medium'}
+];
+function renderSessions(){sessions.innerHTML='';activeSessions.forEach((s,i)=>{let tr=document.createElement('tr');tr.innerHTML=`<td>${s.user}</td><td>${s.branch}</td><td>${s.device}</td><td>${s.time}</td><td><span class="pill ${s.status==='Active'?'ok':'warn'}">${s.status}</span></td><td>${s.status==='Active'?`<button class="danger" onclick="revoke(${i})">Revoke</button>`:'—'}</td>`;sessions.appendChild(tr)});sessionCount.textContent=activeSessions.filter(s=>s.status==='Active').length}
+function renderEvents(){let f=eventFilter.value;events.innerHTML='';window._filteredEvents=events.filter(e=>!f||e.type===f);window._filteredEvents.slice().reverse().forEach(e=>{let tr=document.createElement('tr');tr.innerHTML=`<td>${e.time}</td><td>${e.type}</td><td>${e.actor}</td><td>${e.detail}</td><td><span class="pill ${e.risk==='High'?'warn':'ok'}">${e.risk}</span></td>`;document.getElementById('events').appendChild(tr)})}
+function log(type,detail,risk='Medium'){events.push({time:new Date().toLocaleString(),type,actor:'Administrator (demo)',detail,risk});changeCount.textContent=Number(changeCount.textContent)+1;renderEvents()}
+function saveConfig(section){log('Configuration change',section+' saved in local demonstration only.','Medium');alert(section+' saved in this demo. No production settings have changed.')}
+function revoke(i){if(!confirm('Revoke this demo session?'))return;activeSessions[i].status='Revoked';log('Session revoked',activeSessions[i].user+' session revoked in demo.','Medium');renderSessions()}
+function logoutAll(){if(!confirm('Revoke all active demo sessions?'))return;activeSessions.forEach(s=>s.status='Revoked');log('Session revoked','All listed demo sessions marked revoked.','High');renderSessions()}
+function exportAudit(){let rows=[['Date/time','Event','Actor','Details','Risk'],...window._filteredEvents.map(e=>[e.time,e.type,e.actor,e.detail,e.risk])];let csv=rows.map(r=>r.map(v=>'"'+String(v).replaceAll('"','""')+'"').join(',')).join('\n');let a=document.createElement('a');a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv'}));a.download='ilvora-security-audit-demo.csv';a.click();URL.revokeObjectURL(a.href)}
+renderSessions();renderEvents();
+</script></body></html>
