@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ILVORA Workforce | Compliance & Disciplinary Management</title>
+<style>
+:root{--navy:#10283f;--teal:#167c80;--gold:#c7a66a;--bg:#f3f6f8;--ink:#243746;--muted:#6b7c88;--line:#dce4e9}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);font:14px/1.45 Arial,sans-serif;color:var(--ink)}
+header{background:var(--navy);color:white;padding:20px 26px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.brand{font-size:19px;font-weight:700;letter-spacing:.5px}.brand span{color:#d9bd88}.sub{color:#d4e0e8;font-size:12px;margin-top:3px}.role{background:#1b405b;border:1px solid #45637a;border-radius:20px;padding:8px 13px;font-size:12px}
+main{max-width:1250px;margin:24px auto;padding:0 18px}.notice{background:#fff8e9;border:1px solid #ead7ad;border-left:4px solid var(--gold);padding:12px 15px;border-radius:8px;margin-bottom:18px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:18px}.stat,.panel{background:white;border:1px solid var(--line);border-radius:10px;padding:16px}
+.stat small{color:var(--muted)}.stat strong{display:block;font-size:24px;margin-top:7px;color:var(--navy)}
+.layout{display:grid;grid-template-columns:1.2fr .8fr;gap:16px}.panel h2{font-size:16px;margin:0 0 14px;color:var(--navy)}
+.toolbar,.actions{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+input,select,textarea{font:inherit;border:1px solid #cbd6dd;border-radius:6px;padding:9px;background:white;color:var(--ink);min-width:0;max-width:100%}
+textarea{width:100%;min-height:75px}button{border:0;border-radius:6px;padding:9px 13px;background:var(--teal);color:white;font-weight:600;cursor:pointer}
+button.secondary{background:#eaf0f3;color:var(--navy)}button.gold{background:#9a773e}button.danger{background:#a44444}
+table{width:100%;border-collapse:collapse;font-size:12px}th,td{text-align:left;padding:10px 8px;border-bottom:1px solid var(--line);vertical-align:top}th{color:var(--muted);background:#f8fafb}
+.pill{display:inline-block;border-radius:20px;padding:3px 8px;font-size:11px;background:#edf2f5;color:#435767}.pending{background:#fff3d9;color:#805d1d}.approved{background:#e4f4ed;color:#216548}.rejected{background:#fae9e9;color:#8b3434}
+.field{display:grid;grid-template-columns:1fr 1fr;gap:10px}.field label{display:flex;flex-direction:column;gap:5px;color:#526573;font-size:12px;margin-bottom:10px}.full{grid-column:1/-1}
+.rule{background:#f4f8f8;border:1px solid #d7e7e6;padding:12px;border-radius:8px;margin:10px 0;font-size:13px}.muted,.small{color:var(--muted)}.small{font-size:11px}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}.tabs button{background:#eaf0f3;color:var(--navy)}.tabs button.active{background:var(--teal);color:white}
+.hidden{display:none}.detail{background:#f8fafb;border:1px solid var(--line);border-radius:8px;padding:12px;margin-top:12px}
+@media(max-width:850px){.stats{grid-template-columns:repeat(2,1fr)}.layout{grid-template-columns:1fr}}@media(max-width:520px){.field{grid-template-columns:1fr}.stats{grid-template-columns:1fr 1fr}main{padding:0 10px}}
+</style></head><body>
+<header><div><div class="brand">ILVORA <span>WORKFORCE</span></div><div class="sub">Administrator Panel · Employee Compliance & Disciplinary Management</div></div><div class="role">DEMO ROLE: ADMINISTRATOR</div></header>
+<main>
+<div class="notice"><b>Governance rule:</b> The Administrator may register cases, coordinate investigation and submit recommendations. <b>The Managing Director has final approval authority for every disciplinary action</b>, including warnings, suspension and termination. No disciplinary action is effective before the Managing Director’s recorded decision.</div>
+<section class="stats">
+<div class="stat"><small>Open cases</small><strong id="openCount">03</strong></div><div class="stat"><small>Awaiting MD decision</small><strong id="mdCount">02</strong></div><div class="stat"><small>Investigation in progress</small><strong id="investCount">01</strong></div><div class="stat"><small>Appeals pending</small><strong id="appealCount">01</strong></div>
+</section>
+<div class="layout">
+<section class="panel"><h2>Disciplinary Case Register</h2>
+<div class="toolbar"><input id="search" placeholder="Search case / Employee ID"><select id="statusFilter"><option value="">All statuses</option><option>Reported</option><option>Investigation</option><option>Awaiting MD</option><option>MD Approved</option><option>MD Rejected</option><option>Appeal Pending</option><option>Closed</option></select><button class="secondary" onclick="render()">Filter</button></div>
+<div style="overflow-x:auto"><table><thead><tr><th>Case / Employee</th><th>Branch</th><th>Incident date</th><th>Issue</th><th>Proposed action</th><th>Status</th><th>Open</th></tr></thead><tbody id="rows"></tbody></table></div><p class="small">All names and case details are fictional sample data.</p>
+</section>
+<section class="panel"><h2>Register a Compliance / Incident Case</h2>
+<div class="field">
+<label>Employee ID<input id="emp" placeholder="e.g. ILV-NH-014"></label><label>Branch<select id="branch"><option>Head Office – Kochi</option><option>Neelambari Hospital – Thamarakulam</option><option>ILVORA Health Clinic – Kottarakkara</option></select></label>
+<label>Incident date<input id="date" type="date"></label><label>Category<select id="category"><option>Attendance / timekeeping</option><option>Workplace conduct</option><option>Patient safety / service quality</option><option>Policy non-compliance</option><option>Misconduct</option><option>Confidentiality / data protection</option><option>Other</option></select></label>
+<label class="full">Incident description<textarea id="description" placeholder="Record factual details, dates, witnesses and relevant policy reference."></textarea></label>
+<label>Evidence reference<input id="evidence" placeholder="Document reference / filename"></label><label>Reported by<input id="reporter" placeholder="Authorised officer / Employee ID"></label>
+</div><button onclick="addCase()">Register case</button>
+<div class="rule"><b>Fair process:</b> record allegations as allegations, preserve relevant evidence, notify the employee appropriately, allow a reasonable opportunity to respond, and document impartial investigation findings.</div>
+</section></div>
+<section class="panel" style="margin-top:16px"><h2>Selected Case Workflow</h2>
+<div id="caseDetail" class="muted">Select “Open” on a case to review its workflow.</div>
+</section>
+<section class="panel" style="margin-top:16px"><h2>Authority & Safeguards</h2>
+<div class="field">
+<div><b>Administrator</b><p class="muted">Register case; ensure notices and employee response are documented; assign investigator; monitor timelines; record findings; submit recommended action to the Managing Director. Cannot finally approve or implement a disciplinary sanction.</p></div>
+<div><b>Managing Director</b><p class="muted">Sole final decision-maker for all disciplinary actions, including warning, suspension, demotion, financial penalty where lawful, and termination. Must record decision, reasons and effective date.</p></div>
+<div><b>Branch Admin / HR</b><p class="muted">May report incidents and provide records or factual verification. No authority to decide or impose disciplinary action.</p></div>
+<div><b>Employee rights</b><p class="muted">Employee must receive appropriate notice, an opportunity to respond, access to appeal/review as per policy, and protection from retaliation. Maintain confidentiality and impartiality.</p></div>
+</div>
+<div class="rule"><b>Production controls:</b> restrict case access to authorised persons; any person named in a complaint or conflict must be excluded from access, investigation and decision-making; encrypt evidence; keep an immutable audit trail; define appeal reviewer independent of the original decision-maker where practicable; follow applicable employment law and approved HR policy.</div>
+</section>
+</main>
+<script>
+let cases=[
+{id:'DISC-2026-001',emp:'ILV-NH-014',branch:'Neelambari Hospital',date:'2026-11-03',issue:'Attendance / timekeeping',status:'Awaiting MD',action:'Written warning',description:'Repeated late arrival reported; supporting attendance records referenced.',evidence:'ATT-REF-014',response:'Employee explanation received and attached to case record.',finding:'Investigation found repeated late arrivals after review of records and employee response.',recommendation:'Written warning',decision:'Pending Managing Director decision',appeal:'Not applicable'},
+{id:'DISC-2026-002',emp:'ILV-KK-008',branch:'ILVORA Health Clinic',date:'2026-11-05',issue:'Policy non-compliance',status:'Investigation',action:'To be determined',description:'Possible breach of a workplace procedure. Facts remain under review.',evidence:'DOC-REF-008',response:'Awaiting employee response.',finding:'Investigation ongoing.',recommendation:'Pending',decision:'Not submitted',appeal:'Not applicable'},
+{id:'DISC-2026-003',emp:'ILV-HO-003',branch:'Head Office',date:'2026-10-29',issue:'Workplace conduct',status:'Appeal Pending',action:'Suspension proposed',description:'Conduct concern recorded for formal review.',evidence:'CASE-EV-003',response:'Response received.',finding:'Findings submitted after investigation.',recommendation:'Suspension',decision:'MD decision recorded in demo; appeal requested.',appeal:'Appeal pending'}
+];
+let selected=null;
+function badge(s){return s==='MD Approved'?'approved':s==='MD Rejected'?'rejected':'pending'}
+function render(){let q=search.value.toLowerCase(),f=statusFilter.value;rows.innerHTML='';cases.filter(c=>(!q||(c.id+c.emp).toLowerCase().includes(q))&&(!f||c.status===f)).forEach(c=>{let tr=document.createElement('tr');tr.innerHTML=`<td><b>${c.id}</b><br>${c.emp}</td><td>${c.branch}</td><td>${c.date}</td><td>${c.issue}</td><td>${c.action}</td><td><span class="pill ${badge(c.status)}">${c.status}</span></td><td><button class="secondary" onclick="openCase('${c.id}')">Open</button></td>`;rows.appendChild(tr)});openCount.textContent=cases.filter(c=>!['Closed','MD Rejected'].includes(c.status)).length;mdCount.textContent=cases.filter(c=>c.status==='Awaiting MD').length;investCount.textContent=cases.filter(c=>c.status==='Investigation').length;appealCount.textContent=cases.filter(c=>c.status==='Appeal Pending').length}
+function addCase(){if(!emp.value.trim()||!date.value||!description.value.trim()){alert('Employee ID, incident date and description are required.');return}cases.unshift({id:'DISC-'+Date.now(),emp:emp.value.trim(),branch:branch.value,date:date.value,issue:category.value,status:'Reported',action:'To be determined',description:description.value,evidence:evidence.value||'Not supplied',response:'Not yet recorded',finding:'Pending investigation',recommendation:'Pending',decision:'Not submitted',appeal:'Not applicable'});emp.value=date.value=description.value=evidence.value=reporter.value='';render();alert('Case registered. No disciplinary action has been approved or imposed.')}
+function openCase(id){selected=cases.find(c=>c.id===id);if(!selected)return;let c=selected;caseDetail.innerHTML=`<b>${c.id} · ${c.emp}</b> <span class="pill ${badge(c.status)}">${c.status}</span><p><b>Incident:</b> ${c.issue} · ${c.date} · ${c.branch}</p><p><b>Description:</b> ${c.description}</p><p><b>Evidence reference:</b> ${c.evidence}</p><p><b>Employee response:</b> ${c.response}</p><p><b>Investigation findings:</b> ${c.finding}</p><p><b>Recommended action:</b> ${c.recommendation}</p><p><b>MD decision:</b> ${c.decision}</p><p><b>Appeal:</b> ${c.appeal}</p><div class="detail"><b>Administrator case actions (demo)</b><div class="actions" style="margin-top:8px"><button onclick="updateStage('Investigation','Investigation assigned / in progress')">Mark investigation</button><button class="secondary" onclick="updateStage('Awaiting MD','Recommendation submitted to Managing Director')">Submit recommendation to MD</button><button class="secondary" onclick="recordResponse()">Record employee response</button><button class="secondary" onclick="recordFinding()">Record findings</button></div><p class="small">Administrator actions only update workflow status. They do not approve or impose a sanction.</p></div><div class="detail"><b>Managing Director final decision (demonstration only)</b><p class="small">This panel illustrates the required MD-only approval boundary. In production, it must be visible and actionable only to the authenticated Managing Director.</p><div class="actions"><button class="gold" onclick="mdDecision('MD Approved')">MD approve recommendation</button><button class="danger" onclick="mdDecision('MD Rejected')">MD reject recommendation</button></div></div>`}
+function updateStage(s,msg){if(!selected)return;selected.status=s;selected.decision=msg;render();openCase(selected.id)}
+function recordResponse(){if(!selected)return;let v=prompt('Enter employee response summary (demo):');if(v!==null){selected.response=v;openCase(selected.id)}}
+function recordFinding(){if(!selected)return;let v=prompt('Enter investigation findings summary (demo):');if(v!==null){selected.finding=v;openCase(selected.id)}}
+function mdDecision(s){if(!selected)return;if(selected.status!=='Awaiting MD'){alert('Submit the case and recommendation to the Managing Director first.');return}let note=prompt('MD decision reasons (required):');if(!note||!note.trim())return;selected.status=s;selected.decision='Managing Director: '+s+' — '+note;render();openCase(selected.id);alert('Demo decision recorded. Production must authenticate the Managing Director and capture timestamp, reason and effective date.')}
+render();
+</script></body></html>
