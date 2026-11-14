@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ILVORA Workforce | Head Office Dashboard</title>
+<style>
+:root{--navy:#10243a;--teal:#168b88;--gold:#c8a96b;--bg:#f3f6f8;--ink:#203244;--muted:#6b7b89;--line:#dce4e9}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);font:14px/1.45 Arial,sans-serif;color:var(--ink)}
+header{background:var(--navy);color:white;padding:18px 24px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.brand{font-size:19px;font-weight:800;letter-spacing:.5px}.brand span{color:var(--gold)}.sub{font-size:12px;color:#c7d3dc;margin-top:3px}.role{border:1px solid #607889;padding:7px 12px;border-radius:30px;font-size:12px}
+main{max-width:1250px;margin:24px auto;padding:0 18px}.top{display:flex;justify-content:space-between;align-items:end;gap:12px;flex-wrap:wrap;margin-bottom:18px}
+h1{margin:0;color:var(--navy);font-size:25px}.muted{color:var(--muted)}.card{background:white;border:1px solid var(--line);border-radius:13px;padding:16px;box-shadow:0 2px 8px #18344a08}
+button{border:0;border-radius:8px;padding:10px 14px;background:var(--teal);color:white;font-weight:700;cursor:pointer}button.alt{background:#e9f1f3;color:var(--navy)}button.dark{background:var(--navy)}
+select{padding:10px;border:1px solid var(--line);border-radius:8px;background:white;color:var(--ink)}
+.filters{display:flex;gap:10px;align-items:end;flex-wrap:wrap;margin-bottom:15px}.filters label{display:block;font-size:10px;font-weight:bold;color:var(--muted);margin-bottom:5px;text-transform:uppercase}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:14px 0}.kpi small{font-size:11px;color:var(--muted);font-weight:bold}.kpi strong{display:block;font-size:27px;color:var(--navy);margin:7px 0 2px}.kpi em{font-style:normal;color:var(--teal);font-size:11px}
+.grid{display:grid;grid-template-columns:1.2fr 1fr;gap:14px;margin:14px 0}h2{font-size:16px;color:var(--navy);margin:0 0 13px}
+table{width:100%;border-collapse:collapse;font-size:12px}th,td{text-align:left;padding:10px 8px;border-bottom:1px solid var(--line)}th{font-size:10px;color:var(--muted);text-transform:uppercase}
+.tag{display:inline-block;border-radius:20px;padding:3px 8px;background:#eaf5f4;color:#11716e;font-size:10px;font-weight:bold}.warn{background:#fff4df;color:#87601b}.urgent{background:#fae9e6;color:#a44c3c}
+.links{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.link{border:1px solid var(--line);padding:12px;border-radius:10px}.link b{display:block;color:var(--navy);margin-bottom:4px}.link small{color:var(--muted)}
+.bar{display:flex;align-items:center;gap:9px;margin:12px 0;font-size:12px}.bar span:first-child{width:190px}.track{height:9px;background:#edf1f3;border-radius:20px;flex:1;overflow:hidden}.fill{height:100%;background:var(--teal);border-radius:20px}
+.note{margin:14px 0;background:#fff8e9;border:1px solid #f0dfb9;border-radius:9px;padding:11px 13px;color:#705b2e;font-size:12px}
+footer{max-width:1250px;margin:0 auto 25px;padding:0 18px;color:var(--muted);font-size:11px}
+@media(max-width:850px){.kpis{grid-template-columns:repeat(2,1fr)}.grid{grid-template-columns:1fr}.links{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:480px){.links{grid-template-columns:1fr}.bar span:first-child{width:115px}}
+</style></head>
+<body>
+<header><div><div class="brand">ILVORA <span>WORKFORCE</span></div><div class="sub">WHERE CARE BECOMES CONFIDENCE.</div></div><div class="role">HEAD OFFICE ADMIN PANEL · CENTRAL CONTROL</div></header>
+<main>
+<div class="top"><div><h1>Head Office Dashboard</h1><div class="muted">Central overview of authorised branches, workforce activity and approvals.</div></div><div><button class="alt" onclick="window.print()">Print dashboard</button></div></div>
+<section class="filters card"><div><label>Reporting period</label><select id="period"><option>Today</option><option>This week</option><option>This month</option><option>Current financial year</option></select></div><div><label>Branch scope</label><select id="branch"><option>All authorised branches</option><option>Head Office – Kochi</option><option>Neelambari Hospital – Thamarakulam</option><option>ILVORA Health Clinic – Kottarakkara</option></select></div><button onclick="filterDemo()">Apply view</button></section>
+<div class="kpis">
+<div class="card kpi"><small>TOTAL ACTIVE EMPLOYEES</small><strong>142</strong><em>Across 3 branches</em></div>
+<div class="card kpi"><small>PRESENT TODAY</small><strong>131</strong><em>92.3% attendance</em></div>
+<div class="card kpi"><small>PENDING HO APPROVALS</small><strong>12</strong><em>Employee, leave and record reviews</em></div>
+<div class="card kpi"><small>OPEN ESCALATIONS</small><strong>5</strong><em>Requires authorised review</em></div>
+</div>
+<div class="grid">
+<section class="card"><h2>Branch-wise workforce snapshot</h2>
+<table><thead><tr><th>Branch</th><th>Active staff</th><th>Present</th><th>Attendance</th><th>Open items</th></tr></thead><tbody>
+<tr><td>Head Office – Kochi</td><td>18</td><td>17</td><td>94.4%</td><td>2</td></tr>
+<tr><td>Neelambari Hospital – Thamarakulam</td><td>86</td><td>79</td><td>91.9%</td><td>8</td></tr>
+<tr><td>ILVORA Health Clinic – Kottarakkara</td><td>38</td><td>35</td><td>92.1%</td><td>2</td></tr>
+</tbody></table>
+<p class="muted" style="font-size:11px">Sample figures for interface demonstration only.</p></section>
+<section class="card"><h2>Central approval queue</h2>
+<table><thead><tr><th>Approval category</th><th>Pending</th><th>Priority</th></tr></thead><tbody>
+<tr><td>New employee credential verification</td><td>4</td><td><span class="tag warn">Review</span></td></tr>
+<tr><td>Paid medical leave decisions</td><td>3</td><td><span class="tag warn">Review</span></td></tr>
+<tr><td>Attendance correction requests</td><td>2</td><td><span class="tag">Normal</span></td></tr>
+<tr><td>Employee document verification</td><td>3</td><td><span class="tag">Normal</span></td></tr>
+</tbody></table></section>
+</div>
+<div class="grid">
+<section class="card"><h2>Branch attendance comparison</h2>
+<div class="bar"><span>Head Office – Kochi</span><div class="track"><div class="fill" style="width:94.4%"></div></div><b>94.4%</b></div>
+<div class="bar"><span>Neelambari Hospital</span><div class="track"><div class="fill" style="width:91.9%"></div></div><b>91.9%</b></div>
+<div class="bar"><span>ILVORA Health Clinic</span><div class="track"><div class="fill" style="width:92.1%"></div></div><b>92.1%</b></div></section>
+<section class="card"><h2>Central oversight alerts</h2>
+<table><tbody>
+<tr><td>Attendance correction waiting for decision</td><td><span class="tag warn">2 pending</span></td></tr>
+<tr><td>Records approaching retention action date</td><td><span class="tag warn">3 due soon</span></td></tr>
+<tr><td>Grievance escalation requiring independent officer</td><td><span class="tag urgent">1 restricted</span></td></tr>
+<tr><td>Branch monthly report submissions</td><td><span class="tag">2 of 3 received</span></td></tr>
+</tbody></table></section>
+</div>
+<section class="card" style="margin:14px 0"><h2>Head Office service navigation</h2><div class="links">
+<div class="link"><b>Employee Approval & ID Control</b><small>Verify onboarding records and authorise permanent employee ID generation.</small></div>
+<div class="link"><b>Attendance Governance</b><small>Review branch attendance and decide formal correction requests.</small></div>
+<div class="link"><b>Leave Approval Centre</b><small>Decide paid medical leave and leave requests escalated to Head Office.</small></div>
+<div class="link"><b>Documents & Policy Verification</b><small>Verify employee documents and oversee policy acknowledgement status.</small></div>
+<div class="link"><b>Central Reports & Analytics</b><small>Compare branches and export authorised consolidated reports.</small></div>
+<div class="link"><b>Compliance & Records Oversight</b><small>Monitor print registers, retention schedules, legal holds and audit trails.</small></div>
+<div class="link"><b>Complaints & Independent Escalation</b><small>Manage restricted cases through independent authorised officers.</small></div>
+<div class="link"><b>Requests & Helpdesk Oversight</b><small>Monitor branch ticket backlogs and escalations.</small></div>
+<div class="link"><b>Branch Administration</b><small>View branch status and delegated role/permission summaries.</small></div>
+</div></section>
+<div class="note"><b>Access and workflow boundaries:</b> Head Office actions must be limited to authorised central permissions. Branch Admin/HR remains responsible for branch-level operations. Attendance corrections require Head Office approval and must preserve original punches and audit history. Head Office dashboard access does not automatically grant salary editing, termination access, or unrestricted grievance access. Complaint information must be restricted to designated independent officers.</div>
+<div class="note"><b>Prototype limitation:</b> This is a front-end demonstration with illustrative data. Filters and dashboard values are not connected to Cloudflare D1. Authentication, branch-scoped permissions, approval workflows, notifications, audit logs, report generation and secure document access require backend implementation and testing.</div>
+</main><footer>ILVORA Workforce · Head Office Admin Panel · Service 1 · Prototype v1</footer>
+<script>function filterDemo(){alert('View selection updated for demonstration only. Live branch and period filtering requires the production backend.')}</script>
+</body></html>
