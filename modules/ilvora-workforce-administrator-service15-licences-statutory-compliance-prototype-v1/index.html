@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ILVORA Workforce | Licences & Statutory Compliance</title>
+<style>
+:root{--navy:#10283f;--teal:#167d80;--gold:#c5a66a;--bg:#f3f6f8;--ink:#1c2c39;--muted:#687987;--line:#dce4e9}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);font:14px/1.45 Inter,Segoe UI,Arial,sans-serif;color:var(--ink)}
+header{background:var(--navy);color:white;padding:20px 26px;display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap}
+.brand{font-weight:800;letter-spacing:1.2px}.brand span{color:#d8c18f}.sub{font-size:12px;color:#c9d5dd;margin-top:3px}.tag{border:1px solid #66808f;border-radius:30px;padding:7px 12px;font-size:12px}
+nav{display:flex;gap:5px;padding:12px 20px;background:white;border-bottom:1px solid var(--line);overflow:auto}
+nav button{border:0;background:transparent;color:#526575;padding:9px 12px;border-radius:8px;white-space:nowrap;cursor:pointer}nav button.active,nav button:hover{background:#e7f2f2;color:var(--teal);font-weight:700}
+main{max-width:1300px;margin:22px auto;padding:0 20px}h1{font-size:24px;color:var(--navy);margin:0 0 5px}h2{font-size:17px;color:var(--navy);margin:0 0 12px}p{color:var(--muted)}
+.intro{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;flex-wrap:wrap;margin-bottom:18px}.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:16px}
+.card{background:#fff;border:1px solid var(--line);border-radius:12px;padding:16px;box-shadow:0 2px 8px #10283f08}.metric{font-size:26px;font-weight:800;color:var(--navy)}.metric-label{font-size:12px;color:var(--muted)}
+.layout{display:grid;grid-template-columns:1.2fr .8fr;gap:14px}section.page{display:none}section.page.active{display:block}
+table{width:100%;border-collapse:collapse;font-size:13px}th,td{text-align:left;padding:10px 8px;border-bottom:1px solid var(--line);vertical-align:top}th{font-size:11px;text-transform:uppercase;letter-spacing:.5px;color:#627482}
+.pill{display:inline-block;padding:4px 8px;border-radius:30px;background:#edf3f5;color:#536876;font-size:11px}.green{background:#e7f5ee;color:#28734e}.amber{background:#fff4df;color:#93651b}.red{background:#fdeceb;color:#a43f38}
+button{cursor:pointer;border:0;border-radius:8px;padding:9px 12px;background:var(--teal);color:white;font-weight:650;font-size:12px}button.secondary{background:#eaf0f3;color:#405563}
+.actions,.toolbar{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:12px}.toolbar{margin:0 0 12px}
+input,select,textarea{width:100%;padding:9px;border:1px solid var(--line);border-radius:7px;background:#fff;font:inherit;color:var(--ink)}label{display:block;font-size:12px;font-weight:700;color:#536575;margin:10px 0 5px}
+.formgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}.toolbar input{max-width:270px}
+.note{border-left:3px solid var(--gold);background:#fbf8f1;padding:11px 13px;border-radius:6px;color:#66583e;font-size:12px;margin:12px 0}
+footer{text-align:center;color:#82909a;font-size:11px;padding:26px}
+@media(max-width:850px){.grid{grid-template-columns:repeat(2,1fr)}.layout{grid-template-columns:1fr}}@media(max-width:520px){main{padding:0 12px}.formgrid{grid-template-columns:1fr}header{padding:16px}}
+</style></head>
+<body>
+<header><div><div class="brand">ILVORA <span>HEALTHCARE GROUP</span></div><div class="sub">WORKFORCE · ADMINISTRATOR PANEL</div></div><div class="tag">SERVICE 15 · LICENCES & STATUTORY COMPLIANCE</div></header>
+<nav><button class="active" data-page="overview">Overview</button><button data-page="register">Compliance Register</button><button data-page="renewals">Renewals & Alerts</button><button data-page="inspections">Inspections & Actions</button><button data-page="reports">Reports & Audit</button><button data-page="authority">Authority & Guidance</button></nav>
+<main>
+<section id="overview" class="page active">
+<div class="intro"><div><h1>Licences & Statutory Compliance</h1><p>Central oversight of regulatory registrations, licences, certificates, inspections and corrective actions.</p></div><button onclick="show('register')">＋ Add compliance record</button></div>
+<div class="grid">
+<div class="card"><div class="metric" id="metricTotal">28</div><div class="metric-label">Registered compliance records</div></div>
+<div class="card"><div class="metric">04</div><div class="metric-label">Expiring within 90 days</div></div>
+<div class="card"><div class="metric">02</div><div class="metric-label">Renewal / evidence overdue</div></div>
+<div class="card"><div class="metric">03</div><div class="metric-label">Open corrective actions</div></div>
+</div>
+<div class="layout">
+<div class="card"><h2>Priority compliance deadlines</h2><div style="overflow:auto"><table><thead><tr><th>Record</th><th>Branch</th><th>Expiry / due</th><th>Status</th></tr></thead><tbody id="priorityRows"></tbody></table></div></div>
+<div class="card"><h2>Compliance coverage</h2><table><tbody><tr><td>Facility / clinical operations</td><td>08</td></tr><tr><td>Pharmacy / drug control</td><td>04</td></tr><tr><td>Fire / building safety</td><td>05</td></tr><tr><td>Environment / biomedical waste</td><td>04</td></tr><tr><td>Professional registrations</td><td>05</td></tr><tr><td>Insurance / other</td><td>02</td></tr></tbody></table><div class="note">Sample counts and deadlines are illustrative, not a statement that any ILVORA facility holds or requires a specific licence.</div></div>
+</div>
+</section>
+<section id="register" class="page">
+<div class="intro"><div><h1>Compliance Register</h1><p>Record applicable licences, registrations, certificates, responsible owners and evidence references.</p></div></div>
+<div class="layout">
+<div class="card"><h2>Add compliance record</h2>
+<div class="formgrid">
+<div><label>Record / licence title</label><input id="title" placeholder="e.g. Clinical establishment registration"></div>
+<div><label>Category</label><select id="category"><option>Clinical / facility registration</option><option>Pharmacy / drug licence</option><option>Fire / building safety</option><option>Pollution / biomedical waste</option><option>Laboratory / diagnostic</option><option>Professional registration</option><option>Insurance</option><option>Other statutory approval</option></select></div>
+<div><label>Branch / scope</label><select id="branch"><option>Head Office – Kochi</option><option>Neelambari Hospital – Thamarakulam</option><option>ILVORA Health Clinic – Kottarakkara</option><option>All branches / Central</option></select></div>
+<div><label>Issuing authority</label><input id="authority" placeholder="Regulator / local authority"></div>
+<div><label>Licence / certificate number</label><input id="number" placeholder="Reference number"></div>
+<div><label>Issue date</label><input id="issue" type="date"></div>
+<div><label>Expiry / renewal date</label><input id="expiry" type="date"></div>
+<div><label>Responsible officer</label><input id="owner" placeholder="Name / role / department"></div>
+<div><label>Renewal lead time</label><select id="lead"><option>180 days</option><option selected>90 days</option><option>60 days</option><option>30 days</option></select></div>
+<div><label>Document reference / filename</label><input id="doc" placeholder="Certificate PDF filename / reference"></div>
+</div>
+<label>Conditions, scope and notes</label><textarea id="notes" rows="3" placeholder="Applicable premises, conditions, restrictions, renewal evidence and responsible department"></textarea>
+<div class="actions"><button onclick="addRecord()">Save draft record</button><button class="secondary" onclick="clearForm()">Clear</button></div>
+<div class="note">Only record requirements confirmed as applicable by the relevant authority or qualified compliance adviser. This demo stores document names/references only, not files.</div>
+</div>
+<div class="card"><h2>Register search</h2><div class="toolbar"><input id="search" placeholder="Search title / number / authority" oninput="render()"><select id="filter" onchange="render()"><option value="">All statuses</option><option>Current</option><option>Renewal due</option><option>Expired</option><option>Draft</option><option>Under verification</option></select></div>
+<div style="overflow:auto"><table><thead><tr><th>Record / number</th><th>Branch</th><th>Expiry</th><th>Status</th></tr></thead><tbody id="records"></tbody></table></div></div>
+</div>
+</section>
+<section id="renewals" class="page">
+<div class="intro"><div><h1>Renewals & Alerts</h1><p>Track renewal preparation, application submission, fees, follow-up and final certificate receipt.</p></div><button onclick="alert('Demo reminder configuration. Production requires scheduled server jobs, notification delivery logs and escalation ownership.')">Configure reminders</button></div>
+<div class="card"><h2>Renewal calendar</h2><div class="toolbar"><select><option>All branches</option><option>Head Office – Kochi</option><option>Neelambari Hospital – Thamarakulam</option><option>ILVORA Health Clinic – Kottarakkara</option></select><select><option>All time windows</option><option>Overdue</option><option>Next 30 days</option><option>Next 60 days</option><option>Next 90 days</option><option>Next 180 days</option></select></div>
+<table><thead><tr><th>Compliance record</th><th>Expiry</th><th>Owner</th><th>Next step</th><th>Status</th></tr></thead><tbody>
+<tr><td>Fire safety certificate (sample)</td><td>30 Nov 2026</td><td>Facilities / Branch Admin</td><td>Arrange inspection and submit renewal file</td><td><span class="pill red">Urgent</span></td></tr>
+<tr><td>Biomedical waste authorisation (sample)</td><td>15 Jan 2027</td><td>Compliance Officer</td><td>Check annual returns and supporting records</td><td><span class="pill amber">Prepare</span></td></tr>
+<tr><td>Professional registration (sample)</td><td>28 Feb 2027</td><td>HR</td><td>Obtain updated registration evidence</td><td><span class="pill green">Scheduled</span></td></tr>
+<tr><td>Insurance policy (sample)</td><td>31 Mar 2027</td><td>Administrator</td><td>Review coverage, exclusions and premium</td><td><span class="pill green">Scheduled</span></td></tr>
+</tbody></table></div>
+<div class="card" style="margin-top:14px"><h2>Suggested alert cadence</h2><div class="grid" style="grid-template-columns:repeat(4,1fr)"><div><div class="metric">180</div><div class="metric-label">Days before expiry</div></div><div><div class="metric">90</div><div class="metric-label">Days before expiry</div></div><div><div class="metric">60</div><div class="metric-label">Days before expiry</div></div><div><div class="metric">30</div><div class="metric-label">Days before expiry</div></div></div><p>Send reminders to the record owner and branch contact; escalate missed milestones to Administrator and Head Office. Critical or overdue regulatory matters should be escalated promptly, not left until the next reminder.</p></div>
+</section>
+<section id="inspections" class="page">
+<div class="intro"><div><h1>Inspections & Corrective Actions</h1><p>Maintain inspection visits, observations, evidence, response deadlines and closure verification.</p></div><button onclick="alert('Demo inspection entry. Record authority, visit date, inspectors, scope, observations, notices and response deadlines.')">＋ Record inspection</button></div>
+<div class="layout">
+<div class="card"><h2>Inspection / regulatory visit register</h2><table><thead><tr><th>Visit ref</th><th>Branch</th><th>Authority / purpose</th><th>Date</th><th>Status</th></tr></thead><tbody>
+<tr><td>INS-DEMO-014</td><td>Neelambari Hospital</td><td>Fire safety inspection</td><td>02 Nov 2026</td><td><span class="pill amber">Actions open</span></td></tr>
+<tr><td>INS-DEMO-013</td><td>Kottarakkara Clinic</td><td>Biomedical waste review</td><td>18 Oct 2026</td><td><span class="pill green">Closed</span></td></tr>
+<tr><td>INS-DEMO-012</td><td>Head Office</td><td>Internal compliance audit</td><td>10 Oct 2026</td><td><span class="pill amber">Response due</span></td></tr>
+</tbody></table></div>
+<div class="card"><h2>Corrective-action tracker</h2><table><thead><tr><th>Action</th><th>Owner</th><th>Due date</th><th>Status</th></tr></thead><tbody>
+<tr><td>Update emergency exit signage</td><td>Facilities</td><td>20 Nov 2026</td><td><span class="pill red">Open</span></td></tr>
+<tr><td>Complete waste handover log</td><td>Branch Admin</td><td>24 Nov 2026</td><td><span class="pill amber">In progress</span></td></tr>
+<tr><td>Upload staff registration evidence</td><td>HR</td><td>28 Nov 2026</td><td><span class="pill amber">In progress</span></td></tr>
+</tbody></table></div>
+</div>
+<div class="note">Do not mark an action closed merely because a response was sent. Record evidence of implementation and independent verification where required. Preserve notices, inspection reports, correspondence and closure evidence.</div>
+</section>
+<section id="reports" class="page">
+<div class="intro"><div><h1>Reports & Audit</h1><p>Branch-wise and consolidated compliance status and evidence reporting.</p></div><button onclick="window.print()">Print / Save PDF</button></div>
+<div class="card"><h2>Report catalogue</h2><table><thead><tr><th>Report</th><th>Scope</th><th>Purpose</th><th>Action</th></tr></thead><tbody>
+<tr><td>Licence and registration master</td><td>Branch / consolidated</td><td>Current compliance inventory</td><td><button class="secondary" onclick="download('register')">Download CSV</button></td></tr>
+<tr><td>Expiry and renewal tracker</td><td>Branch / consolidated</td><td>Renewal planning and escalation</td><td><button class="secondary" onclick="download('renewals')">Download CSV</button></td></tr>
+<tr><td>Inspection and corrective actions</td><td>Branch / consolidated</td><td>Regulatory visit follow-up</td><td><button class="secondary" onclick="download('actions')">Download CSV</button></td></tr>
+<tr><td>Evidence verification register</td><td>Restricted</td><td>Document completeness and review</td><td><button class="secondary" onclick="alert('Illustrative only. Production evidence register must link to private stored files and verifier audit events.')">View register</button></td></tr>
+</tbody></table></div>
+<div class="note">Keep original issued certificates, renewal applications, payment receipts, regulator correspondence, inspection reports, returns and corrective-action evidence under an approved retention schedule. Legal, regulatory, audit and investigation holds pause deletion.</div>
+</section>
+<section id="authority" class="page">
+<div class="intro"><div><h1>Authority, Access & Regulatory Guidance</h1><p>Define who maintains, verifies, approves and escalates compliance records.</p></div></div>
+<div class="card"><h2>Responsibility matrix</h2><table><thead><tr><th>Role</th><th>Permitted actions</th><th>Restrictions</th></tr></thead><tbody>
+<tr><td>Branch Admin / HR</td><td>Upload or submit branch evidence, report expiry, coordinate inspections and corrective actions.</td><td>Cannot certify legal compliance or approve regulatory submissions unless specifically authorised.</td></tr>
+<tr><td>Head Office Admin</td><td>Verify document completeness and branch evidence; return missing or unclear records.</td><td>Verification does not replace regulator approval or qualified professional review.</td></tr>
+<tr><td>Administrator</td><td>Maintain central register, assign owners, monitor renewals, coordinate applications and compliance expenditure.</td><td>Cannot represent an expired or unverified record as current; cannot override regulator conditions.</td></tr>
+<tr><td>Managing Director</td><td>Executive oversight, approve major compliance expenditure, critical risk response and reserved matters.</td><td>Operational responsibility remains with designated qualified persons and accountable facility management.</td></tr>
+</tbody></table>
+<h2 style="margin-top:18px">Potential regulatory areas to assess (not a legal determination)</h2>
+<ul><li>Clinical establishment / facility registration and applicable state requirements.</li><li>Drug and pharmacy licences, pharmacist requirements and applicable drug-control conditions.</li><li>Fire safety, building occupancy, electrical safety and local body approvals.</li><li>Biomedical waste authorisation, agreements, records and applicable pollution-control requirements.</li><li>Laboratory, imaging, blood storage or other specialised approvals where those services are actually provided.</li><li>Professional registration and credential validity for regulated staff.</li><li>Insurance coverage, policy conditions and renewal.</li></ul>
+<div class="note"><b>Important:</b> Applicability, issuing authority, validity and renewal process depend on facility type, services, location, ownership, capacity and current law. Have a qualified Kerala healthcare compliance professional verify the actual requirement list for each branch. This prototype is not a legal compliance checklist or legal advice.</div>
+<h2 style="margin-top:18px">Production safeguards</h2><ul>
+<li>Use server-side role-based access and least privilege for sensitive licences and personal credentials.</li><li>Private encrypted document storage, malware scanning, version history and audit of every view/download/change.</li><li>Verify certificate authenticity and scope; record issuing authority, premises, conditions and responsible person.</li><li>Use effective-dated reminders, delivery logs, escalation and substitute owners.</li><li>Never auto-renew, self-certify or assume compliance solely from an uploaded file.</li><li>Preserve original documents and regulator communications under a formally approved retention schedule.</li></ul></div>
+</section>
+</main>
+<footer>ILVORA WORKFORCE · Administrator Service 15 · Front-end demonstration only · Version 1</footer>
+<script>
+const data=[
+{ref:'CMP-026',title:'Fire safety certificate (sample)',branch:'Neelambari Hospital – Thamarakulam',authority:'Fire & Rescue Services',number:'DEMO-FIRE-026',expiry:'2026-11-30',status:'Renewal due'},
+{ref:'CMP-025',title:'Biomedical waste authorisation (sample)',branch:'ILVORA Health Clinic – Kottarakkara',authority:'Pollution Control Board',number:'DEMO-BMW-025',expiry:'2027-01-15',status:'Current'},
+{ref:'CMP-024',title:'Professional registration (sample)',branch:'All branches / Central',authority:'Relevant professional council',number:'DEMO-REG-024',expiry:'2027-02-28',status:'Current'},
+{ref:'CMP-023',title:'Insurance policy (sample)',branch:'Head Office – Kochi',authority:'Insurer',number:'DEMO-INS-023',expiry:'2027-03-31',status:'Current'},
+{ref:'CMP-022',title:'Pharmacy licence (sample)',branch:'Neelambari Hospital – Thamarakulam',authority:'Drug Control Department',number:'DEMO-PH-022',expiry:'2026-08-31',status:'Expired'}
+];
+function show(id){document.querySelectorAll('.page').forEach(p=>p.classList.toggle('active',p.id===id));document.querySelectorAll('nav button').forEach(b=>b.classList.toggle('active',b.dataset.page===id))}
+document.querySelectorAll('nav button').forEach(b=>b.addEventListener('click',()=>show(b.dataset.page)));
+function render(){let q=(document.getElementById('search')?.value||'').toLowerCase(),f=document.getElementById('filter')?.value||'';let list=data.filter(x=>(!q||(x.ref+x.title+x.authority+x.number+x.branch).toLowerCase().includes(q))&&(!f||x.status===f));document.getElementById('records').innerHTML=list.map(x=>`<tr><td><b>${x.ref}</b><br>${x.title}<br><small>${x.number}</small></td><td>${x.branch}</td><td>${x.expiry}</td><td><span class="pill ${x.status==='Current'?'green':x.status==='Expired'?'red':'amber'}">${x.status}</span></td></tr>`).join('')||'<tr><td colspan="4">No matching records</td></tr>';document.getElementById('metricTotal').textContent=String(data.length).padStart(2,'0')}
+function renderPriority(){document.getElementById('priorityRows').innerHTML=data.slice(0,4).map(x=>`<tr><td><b>${x.ref}</b><br>${x.title}</td><td>${x.branch}</td><td>${x.expiry}</td><td><span class="pill ${x.status==='Expired'?'red':'amber'}">${x.status}</span></td></tr>`).join('')}
+function addRecord(){let title=document.getElementById('title').value.trim(),authority=document.getElementById('authority').value.trim(),expiry=document.getElementById('expiry').value;if(!title||!authority||!expiry){alert('Enter record title, issuing authority and expiry date.');return}let ref='CMP-0'+(27+data.length-5);data.unshift({ref,title,branch:document.getElementById('branch').value,authority,number:document.getElementById('number').value||'Not entered',expiry,status:'Draft'});render();renderPriority();alert('Draft record '+ref+' added in this browser session only. No document was uploaded and no regulatory submission occurred.');clearForm()}
+function clearForm(){['title','authority','number','issue','expiry','owner','doc','notes'].forEach(id=>document.getElementById(id).value='')}
+function download(type){let rows=type==='register'?[['Ref','Title','Branch','Authority','Number','Expiry','Status'],...data.map(x=>[x.ref,x.title,x.branch,x.authority,x.number,x.expiry,x.status])]:type==='renewals'?[['Ref','Title','Branch','Expiry','Owner','Status'],...data.map(x=>[x.ref,x.title,x.branch,x.expiry,'Assigned owner',x.status])]:[['Inspection ref','Branch','Inspection','Date','Status'],['INS-DEMO-014','Neelambari Hospital','Fire safety inspection','2026-11-02','Actions open'],['INS-DEMO-013','Kottarakkara Clinic','Biomedical waste review','2026-10-18','Closed']];let csv=rows.map(r=>r.map(v=>'"'+String(v).replaceAll('"','""')+'"').join(',')).join('\n');let a=document.createElement('a');a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv'}));a.download='ilvora_compliance_'+type+'_demo.csv';a.click();URL.revokeObjectURL(a.href)}
+render();renderPriority();
+</script></body></html>
